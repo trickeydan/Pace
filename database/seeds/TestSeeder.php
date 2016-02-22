@@ -53,8 +53,8 @@ class TestSeeder extends Seeder
                     $ln = $faker->lastName();
                     $user->name = $fn . ' ' . $ln;
                     $user->email = (22 - $i) . substr($fn,0,1) .  $ln . '@klbschool.org.uk';
-                    $user->pin = $faker->numberBetween(1000,9999);
-                    $user->password = bcrypt($user->pin);
+                    $user->adno = $faker->numberBetween(1000,9999);
+                    $user->password = bcrypt($user->adno);
                     $user->tutorgroup_id = $tg->id;
                     $user->is_admin = false;
                     $user->currPoints = 0;
@@ -69,7 +69,7 @@ class TestSeeder extends Seeder
                             $faker = Faker\Factory::create();
                             $point->date = $faker->date('Y-m-d');
                             $point->description = 'Description of Point/Reason';
-                            $point->amount = $faker->numberBetween(1,3);;
+                            $point->amount = $faker->numberBetween(1,10);;
                             $point->save();
                         }
                     }

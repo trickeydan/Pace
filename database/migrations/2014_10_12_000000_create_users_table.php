@@ -17,10 +17,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password', 60);
-            $table->string('pin')->nullable();
             $table->boolean('is_admin');
-            $table->integer('tutorgroup_id')->nullable();
             $table->integer('adno')->nullable();
+            $table->integer('tutorgroup_id')->nullable();
             $table->integer('house_id')->nullable();
             $table->integer('currPoints')->nullable();
             $table->rememberToken();

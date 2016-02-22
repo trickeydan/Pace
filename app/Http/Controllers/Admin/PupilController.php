@@ -22,7 +22,7 @@ class PupilController extends Controller
         ]);
     }
 
-    public function changepin(User $user){
+   /* public function changepin(User $user){
         if($user->is_admin) throw new NotFoundHttpException;
         return view('admin.pupils.changepin',[
             'pupil' => $user
@@ -36,5 +36,5 @@ class PupilController extends Controller
         $user->password = bcrypt($request->pin);
         $user->save();
         return redirect(route('admin.pupils.index'))->with('status','Pin Changed');
-    }
+    }*/
 }

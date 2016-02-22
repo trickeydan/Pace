@@ -23,7 +23,7 @@
                     <th>Pin Number</th>
                 @endif
                 <th>Points</th>
-                <th>Options</th>
+                <!--<th>Options</th>-->
             </tr>
         </thead>
         <tbody>
@@ -34,10 +34,10 @@
                     <td>{{$pupil->tutorgroup->name or 'No TG'}}</td>
                     <td>{{$pupil->house->name or 'No House'}}</td>
                     @if($request->get('pin') == "show")
-                        <td>{{$pupil->pin}}</td>
+                        <td>{{$pupil->adno}}</td>
                     @endif
                     <td>{{$pupil->getPoints()}}</td>
-                    <td><a href="{{route('admin.pupils.changepin',['user' => $pupil->email])}}">Change Pin</a></td>
+                    <!--<td><a href="">Change Pin</a></td>-->
                 </tr>
             @endforeach
         </tbody>

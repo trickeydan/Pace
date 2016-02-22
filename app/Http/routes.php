@@ -40,14 +40,14 @@ Route::group(['prefix' => 'manage','namespace' => 'Admin','middleware' => ['auth
             'uses' => 'PupilController@index'
         ]);
 
-        Route::get('changepin/{user}',[ //My PACE Points
+        /*Route::get('changepin/{user}',[ //My PACE Points
             'as' => 'admin.pupils.changepin',
             'uses' => 'PupilController@changepin'
         ]);
         Route::post('changepin/{user}',[ //My PACE Points
             'as' => 'admin.pupils.changepin',
             'uses' => 'PupilController@postChangepin'
-        ]);
+        ]);*/
     });
 
     Route::group(['prefix' => 'admins'],function() { //For Admin Users
