@@ -55,7 +55,7 @@
                     <div class="form-top">
                         <div class="form-top-left">
                             <h3>KLBS PACE Points</h3>
-                            @if(Auth::User()->is_admin)
+                            @if(Auth::User()->user_level == 3)
                                 <p>Hello, {{Auth::User()->name}} ADMINISTRATOR</p>
                             @else
                                 <p>Hello, {{Auth::User()->name}}&nbsp;&nbsp;Tutor Group: {{Auth::User()->tutorgroup->name}}&nbsp;&nbsp;Year: {{Auth::User()->tutorgroup->year->name}}&nbsp;&nbsp;House: {{Auth::User()->house->name}}</p>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <ul class="nav nav-pills nav-justified pill">
-                        @if(Auth::User()->is_admin)
+                        @if(Auth::User()->user_level == 3)
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.home') echo 'class="active"';?>><a href="{{route('admin.home')}}">Dashboard</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.pupils.index') echo 'class="active"';?>><a href="{{route('admin.pupils.index')}}" >Manage Pupils</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.users.index') echo 'class="active"';?>><a href="{{route('admin.users.index')}}" >Manage Admins</a></li>

@@ -15,7 +15,7 @@ class pupilOnly
      */
     public function handle($request, Closure $next)
     {
-        if($request->user()->is_admin){
+        if($request->user()->user_level != 1){
             return(redirect(route('admin.home')));
         }
         return $next($request);

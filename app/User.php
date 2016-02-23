@@ -13,18 +13,18 @@ class User extends Authenticatable
      * @var array
      */
 
-    public function __construct()
+    /*public function __construct()
     {
         $this->is_admin = $this->user_level == 3;
-    }
+    }*/
 
     protected $fillable = [
         'name', 'email', 'password','pin','is_admin','adno'
     ];
 
-    protected $casts = [
+    /*protected $casts = [
         'is_admin' => 'boolean',
-    ];
+    ];*/
 
     protected $encryptable = [
         'name'
@@ -82,8 +82,7 @@ class User extends Authenticatable
             'name' => $name,
             'password' => bcrypt($adno),
             'adno' => $adno,
-            'pin' => $adno,
-            'is_admin' => false,
+            'user_level' => 1,
         ]);
     }
 }

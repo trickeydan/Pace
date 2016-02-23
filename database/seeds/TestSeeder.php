@@ -36,7 +36,7 @@ class TestSeeder extends Seeder
             $year = new Year();
             $year->name = $i;
             $year->save();
-            for ($j = 1; $j <= 8; $j++) {
+            for ($j = 1; $j <= 4; $j++) {
                 $tg = new Tutorgroup();
                 $string = "";
                 for ($letter = 1; $letter <= 3; $letter++) {
@@ -46,7 +46,7 @@ class TestSeeder extends Seeder
                 $tg->name = $i . strtoupper($string);
                 $tg->year_id = $year->id;
                 $tg->save();
-                for ($k = 1; $k <= 30; $k++) {
+                for ($k = 1; $k <= 15; $k++) {
                     $user = new User();
                     $faker = Faker\Factory::create();
                     $fn = $faker->firstName();

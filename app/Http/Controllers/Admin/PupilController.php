@@ -14,7 +14,7 @@ class PupilController extends Controller
 {
     public function index(Request $request){
 
-        $pupils = User::where('is_admin',false)->paginate(30);
+        $pupils = User::where('user_level',3)->paginate(30);
 
         return view('admin.pupils.index',[
             'pupils' => $pupils,
