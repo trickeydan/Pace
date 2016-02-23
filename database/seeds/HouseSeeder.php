@@ -22,7 +22,7 @@ class HouseSeeder extends Seeder
         $user->name = "Initial Admin";
         $user->email = "admininit@example.com";
         $user->password = bcrypt('password');
-        $user->is_admin = true;
+        $user->user_level = 3;
         $user->save();
     }
 }

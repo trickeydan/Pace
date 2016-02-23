@@ -22,13 +22,13 @@ class TestSeeder extends Seeder
 
         PointType::create(['name' => 'Effort']);
         PointType::create(['name' => 'Contribution']);
-        PointType::create(['name' => 'Attainment\Achievement']);
+        PointType::create(['name' => 'Attainment/Achievement']);
 
         $user = new Pace\User();
         $user->name = "Dan Trickey";
         $user->email = "dan@dan.com";
         $user->password = bcrypt('password');
-        $user->is_admin = true;
+        $user->user_level = 3;
         $user->save();
 
         for ($i = 7; $i <= 11; $i++) {
@@ -56,7 +56,7 @@ class TestSeeder extends Seeder
                     $user->adno = $faker->numberBetween(1000,9999);
                     $user->password = bcrypt($user->adno);
                     $user->tutorgroup_id = $tg->id;
-                    $user->is_admin = false;
+                    $user->user_level = 1;
                     $user->currPoints = 0;
                     $user->house_id = House::all()->random(1)->id;
                     if(User::whereEmail($user->email)->count()<=0){
@@ -76,6 +76,8 @@ class TestSeeder extends Seeder
                 }
             }
         }
+
+        \Pace\ImportManager::cache();
 
     }
 }

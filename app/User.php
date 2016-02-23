@@ -6,12 +6,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    //use Encryptable;
+    use Encryptable;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+
+    public function __construct()
+    {
+        $this->is_admin = $this->user_level == 3;
+    }
+
     protected $fillable = [
         'name', 'email', 'password','pin','is_admin','adno'
     ];
@@ -20,9 +26,9 @@ class User extends Authenticatable
         'is_admin' => 'boolean',
     ];
 
-    /*protected $encryptable = [
-        'pin'
-    ];*/
+    protected $encryptable = [
+        'name'
+    ];
 
     protected $hidden = [
         'password', 'remember_token','pin'
