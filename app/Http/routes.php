@@ -48,36 +48,47 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
     ]);
 
     Route::group(['prefix' => 'pupils'],function(){
-        Route::get('/',[ //My PACE Points
+        Route::get('/',[
             'as' => 'admin.pupils.index',
             'uses' => 'PupilController@index'
         ]);
-        Route::post('/',[ //My PACE Points
+
+        Route::get('create',[
+            'as' => 'admin.pupils.create',
+            'uses' => 'PupilController@create'
+        ]);
+
+        Route::post('create',[
+            'as' => 'admin.pupils.store',
+            'uses' => 'PupilController@store'
+        ]);
+
+        Route::post('/',[
             'as' => 'admin.pupils.search',
             'uses' => 'PupilController@search'
         ]);
 
-        Route::get('{user}',[ //My PACE Points
+        Route::get('{user}',[
             'as' => 'admin.pupils.view',
             'uses' => 'PupilController@view'
         ]);
 
-        Route::post('{user}/updatetg',[ //My PACE Points
+        Route::post('{user}/updatetg',[
             'as' => 'admin.pupils.updatetg',
             'uses' => 'PupilController@updatetg'
         ]);
 
-        Route::post('{user}/updatehouse',[ //My PACE Points
+        Route::post('{user}/updatehouse',[
             'as' => 'admin.pupils.updatehouse',
             'uses' => 'PupilController@updatehouse'
         ]);
 
-        Route::get('{user}/edit',[ //My PACE Points
+        Route::get('{user}/edit',[
             'as' => 'admin.pupils.edit',
             'uses' => 'PupilController@edit'
         ]);
 
-        Route::post('{user}/edit',[ //My PACE Points
+        Route::post('{user}/edit',[
             'as' => 'admin.pupils.update',
             'uses' => 'PupilController@update'
         ]);
@@ -85,17 +96,17 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
     });
 
     Route::group(['prefix' => 'admins'],function() { //For Admin Users
-        Route::get('/', [ //My PACE Points
+        Route::get('/', [
             'as' => 'admin.users.index',
             'uses' => 'UserController@index'
         ]);
 
-        Route::get('create', [ //My PACE Points
+        Route::get('create', [
             'as' => 'admin.users.create',
             'uses' => 'UserController@create'
         ]);
 
-        Route::post('create', [ //My PACE Points
+        Route::post('create', [
             'as' => 'admin.users.store',
             'uses' => 'UserController@store'
         ]);

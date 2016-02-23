@@ -26,11 +26,14 @@
             </ul>
         </div>
     @endif
-    @if($request->get('pin') == "show")
-        <p class="text-right"><a href="{{route('admin.pupils.index',['page' => $request->get('page')])}}" class="btn">Hide Pins</a></p>
-    @else
-        <p class="text-right"><a href="{{route('admin.pupils.index',['pin' => 'show','page' => $request->get('page')])}}" class="btn">Show Pins</a></p>
-    @endif
+    <p class="text-right">
+        <a href="{{route('admin.pupils.create')}}" class="btn">New Pupil</a>&nbsp;&nbsp;
+        @if($request->get('pin') == "show")
+            <a href="{{route('admin.pupils.index',['page' => $request->get('page')])}}" class="btn">Hide Pins</a>
+        @else
+            <a href="{{route('admin.pupils.index',['pin' => 'show','page' => $request->get('page')])}}" class="btn">Show Pins</a>
+        @endif
+    </p>
     <table class="table table-striped table-responsive">
         <thead>
             <tr>

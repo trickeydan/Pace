@@ -3,7 +3,6 @@
 namespace Pace\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use Pace\Http\Requests\TutorGroupChangeRequest;
 use Pace\Http\Requests\PupilUpdateRequest;
 use Pace\Http\Requests\HouseChangeRequest;
@@ -11,7 +10,6 @@ use Pace\Http\Requests\HouseChangeRequest;
 use Pace\Http\Requests;
 use Pace\Http\Controllers\Controller;
 use Pace\Tutorgroup;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Pace\User;
 use Pace\House;
 
@@ -24,6 +22,21 @@ class PupilController extends Controller
         return view('admin.pupils.index',[
             'pupils' => $pupils,
             'request' => $request,
+        ]);
+    }
+
+    public function create(){
+        $tgs = array();
+        foreach(Tutorgroup::all() as $tg){
+            $tgs[$tg->id] = $tg->name;
+        }
+        $hs = array();
+        foreach(House::all() as $h){
+            $hs[$h->id] = $h->name;
+        }
+        return view('admin.pupils.create',[
+            'tgs' => $tgs,
+            'houses' => $hs,
         ]);
     }
 
