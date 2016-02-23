@@ -2,9 +2,28 @@
 @section('title','Pupils Index')
 @section('content')
     <h2 class="text-center">Pupils</h2>
+    <div class="row">
+        <div class="col-sm-12 input-group">
+            {!! Form::open(array('route' => 'admin.pupils.search','role' => 'form')) !!}
+            <input type="text" name="query" class="search-query form-control" placeholder="Enter Adno to find Pupil" />
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="submit"><span class=" glyphicon glyphicon-search"></span></button>
+            </span>
+            {!! Form::close() !!}
+        </div>
+    </div>
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
+        </div>
+    @endif
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
     @if($request->get('pin') == "show")
@@ -23,7 +42,7 @@
                     <th>Pin Number</th>
                 @endif
                 <th>Points</th>
-                <!--<th>Options</th>-->
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +56,7 @@
                         <td>{{$pupil->adno}}</td>
                     @endif
                     <td>{{$pupil->getPoints()}}</td>
-                    <!--<td><a href="">Change Pin</a></td>-->
+                    <td><a href="{{route('admin.pupils.view',$pupil->email)}}">View</a></td>
                 </tr>
             @endforeach
         </tbody>
