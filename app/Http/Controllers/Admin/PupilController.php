@@ -5,6 +5,7 @@ namespace Pace\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Pace\Http\Requests\TutorGroupChangeRequest;
+use Pace\Http\Requests\PupilUpdateRequest;
 
 use Pace\Http\Requests;
 use Pace\Http\Controllers\Controller;
@@ -52,5 +53,20 @@ class PupilController extends Controller
         $user->tutorgroup_id = $request->get('newtg');
         $user->save();
         return redirect(route('admin.pupils.index'))->with('status','Tutor Group Changed');
+    }
+
+    public function edit(User $user){
+        if(!$user->is_pupil())return redirect(route('admin.pupils.index'))->withErrors('That user is not a pupil!');
+        return view('admin.pupils.edit',[
+            'pupil' => $user
+        ]);
+    }
+
+    public function update(PupilUpdateRequest $request, User $user){
+        if(!$user->is_pupil())return redirect(route('admin.pupils.index'))->withErrors('That user is not a pupil!');
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+        return redirect(route('admin.pupils.index'))->with('status','Pupil Updated');
     }
 }

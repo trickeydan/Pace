@@ -56,7 +56,7 @@
                         <td>{{$pupil->adno}}</td>
                     @endif
                     <td>{{$pupil->getPoints()}}</td>
-                    <td><a href="{{route('admin.pupils.view',$pupil->email)}}">View</a></td>
+                    <td><a href="{{route('admin.pupils.view',$pupil->email)}}">View</a>&nbsp;&nbsp;<a href="{{route('admin.pupils.edit',$pupil->email)}}">Edit</a></td>
                 </tr>
             @endforeach
         </tbody>

@@ -57,14 +57,24 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
             'uses' => 'PupilController@search'
         ]);
 
-        Route::get('view/{user}',[ //My PACE Points
+        Route::get('{user}',[ //My PACE Points
             'as' => 'admin.pupils.view',
             'uses' => 'PupilController@view'
         ]);
 
-        Route::post('view/{user}/updatetg',[ //My PACE Points
+        Route::post('{user}/updatetg',[ //My PACE Points
             'as' => 'admin.pupils.updatetg',
             'uses' => 'PupilController@updatetg'
+        ]);
+
+        Route::get('{user}/edit',[ //My PACE Points
+            'as' => 'admin.pupils.edit',
+            'uses' => 'PupilController@edit'
+        ]);
+
+        Route::post('{user}/edit',[ //My PACE Points
+            'as' => 'admin.pupils.update',
+            'uses' => 'PupilController@update'
         ]);
 
     });

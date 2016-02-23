@@ -1,6 +1,7 @@
 @extends('layouts.app')
-@section('title','Viewing Pupil: ')
+@section('title','Viewing Pupil')
 @section('content')
+    <a href="{{route('admin.pupils.index')}}">Back to all pupils</a>
     <h2 class="text-center">Pupil: {{$pupil->name}}</h2>
     @if (session('status'))
         <div class="alert alert-success">
@@ -41,6 +42,10 @@
             <tr>
                 <td>Tutor Group</td>
                 <td>{{$pupil->tutorgroup->name}}</td>
+            </tr>
+            <tr>
+                <td>Edit Pupil</td>
+                <td><a href="{{route('admin.pupils.edit',$pupil->email)}}">Edit</a></td>
             </tr>
             <tr>
                 <td>Move Tutor Group</td>
