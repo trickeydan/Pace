@@ -4,7 +4,7 @@ namespace Pace\Http\Requests;
 
 use Pace\Http\Requests\Request;
 
-class PinChangeRequest extends Request
+class PupilUpdateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class PinChangeRequest extends Request
     public function rules()
     {
         return [
-            'pin' => 'required|confirmed|min:4|max:20'
+            'name' => 'required|max:50|min:2',
+            'email' => 'required|email|max:50|min:2|unique:users,email',
         ];
     }
 }

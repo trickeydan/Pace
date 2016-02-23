@@ -67,6 +67,11 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
             'uses' => 'PupilController@updatetg'
         ]);
 
+        Route::post('{user}/updatehouse',[ //My PACE Points
+            'as' => 'admin.pupils.updatehouse',
+            'uses' => 'PupilController@updatehouse'
+        ]);
+
         Route::get('{user}/edit',[ //My PACE Points
             'as' => 'admin.pupils.edit',
             'uses' => 'PupilController@edit'

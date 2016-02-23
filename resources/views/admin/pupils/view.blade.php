@@ -51,8 +51,17 @@
                 <td>Move Tutor Group</td>
                 <td>
                     {!! Form::open(array('route' => array('admin.pupils.updatetg',$pupil->email),'role' => 'form')) !!}
-                    {!!Form::select('newtg', $tgs)!!}
-                    {!! Form::submit('Update') !!}
+                    {!!Form::select('newtg', $tgs,$pupil->tutorgroup->id)!!}
+                    {!! Form::submit('Update Tutor Group') !!}
+                    {!! Form::close() !!}
+                </td>
+            </tr>
+            <tr>
+                <td>Move House</td>
+                <td>
+                    {!! Form::open(array('route' => array('admin.pupils.updatehouse',$pupil->email),'role' => 'form')) !!}
+                    {!!Form::select('newhouse', $houses,$pupil->house->id)!!}
+                    {!! Form::submit('Update House') !!}
                     {!! Form::close() !!}
                 </td>
             </tr>
