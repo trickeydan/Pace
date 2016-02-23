@@ -42,8 +42,8 @@ class Kernel extends HttpKernel
         'auth' => \Pace\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \Pace\Http\Middleware\RedirectIfAuthenticated::class,
-        'admin' => \Pace\Http\Middleware\adminOnly::class,
-        'pupil' => Middleware\pupilOnly::class,
+        'check' => \Pace\Http\Middleware\userTypeCheck::class,
+        'strict' => \Pace\Http\Middleware\userTypeStrict::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

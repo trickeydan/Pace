@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => ['auth','pupil']], function () {
+Route::group(['middleware' => ['auth','strict:pupil']], function () {
     Route::get('/',[ //My PACE Points
         'as' => 'home',
         'uses' => 'MainController@home',
@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth','pupil']], function () {
     ]);
 });
 
-Route::group(['prefix' => 'manage','namespace' => 'Admin','middleware' => ['auth','admin']], function () {
+Route::group(['prefix' => 'manage','namespace' => 'Admin','middleware' => ['auth','check:admin']], function () {
 
     Route::get('/',[ //My PACE Points
         'as' => 'admin.home',
@@ -68,7 +68,7 @@ Route::group(['prefix' => 'manage','namespace' => 'Admin','middleware' => ['auth
     });
 });
 
-Route::group([], function () {
+Route::group(['middleware' => ['throttle:60']], function () {
 
     Route::get('login',[
         'as' => 'login',

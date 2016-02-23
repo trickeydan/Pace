@@ -4,12 +4,8 @@ namespace Pace\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Pace\House;
 use Pace\Http\Requests;
-use Pace\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Khill\Lavacharts\Lavacharts;
-use Khill\Lavacharts\Laravel\LavachartsFacade as Lava;
 
 class MainController extends Controller
 {
@@ -31,6 +27,6 @@ class MainController extends Controller
 
     public function feedbackStore(Request $request){
         Auth::User()->feedbacks()->create($request->all());
-        return redirect(route('home'))->with('status','Feedback Submitted, Thanks.');
+        return redirect(Auth::User()->homeUrl())->with('status','Feedback Submitted, Thanks.');
     }
 }

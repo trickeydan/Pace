@@ -7,24 +7,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Encryptable;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-
-    /*public function __construct()
-    {
-        $this->is_admin = $this->user_level == 3;
-    }*/
 
     protected $fillable = [
         'name', 'email', 'password','pin','is_admin','adno'
     ];
-
-    /*protected $casts = [
-        'is_admin' => 'boolean',
-    ];*/
 
     protected $encryptable = [
         'name'
@@ -59,8 +45,6 @@ class User extends Authenticatable
         return $this->hasMany('Pace\Feedback');
     }
 
-
-
     public function pointsThisWeek(){
         $dt = new \DateTime();
         $dt->sub(new \DateInterval('P7D'));
@@ -76,13 +60,25 @@ class User extends Authenticatable
         return $this->currPoints;
     }
 
-    public static function setup($email,$name,$adno){
-        User::create([
-            'email' => $email,
-            'name' => $name,
-            'password' => bcrypt($adno),
-            'adno' => $adno,
-            'user_level' => 1,
-        ]);
+    public function is_pupil(){
+        return $this->user_level == 1;
     }
+
+    public function is_teacher(){
+        return $this->user_level == 2;
+    }
+
+    public function is_admin(){
+        return $this->user_level == 3;
+    }
+
+    public function homeUrl(){
+        if($this->is_pupil()){
+            return route('home');
+        }else{
+            return route('admin.home');
+        }
+
+    }
+
 }
