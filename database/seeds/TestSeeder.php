@@ -77,7 +77,5 @@ class TestSeeder extends Seeder
             }
         }
 
-        \Pace\ImportManager::cache();
-
     }
 }

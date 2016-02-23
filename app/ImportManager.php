@@ -5,7 +5,8 @@ class ImportManager
 {
 
     public static function cache(){
-        foreach(User::where('user_level',3)->get() as $user){
+
+        foreach(User::all() as $user){
             $user->updatePoints();
         }
 

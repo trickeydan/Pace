@@ -14,7 +14,7 @@ class UserController extends Controller
     // Admin User Controller
 
     public function index(){
-        $users = User::where('is_admin',true)->paginate(30);
+        $users = User::where('user_level',3)->paginate(30);
         return view('admin.users.index',compact('users'));
     }
 

@@ -75,6 +75,8 @@ class User extends Authenticatable
     public function homeUrl(){
         if($this->is_pupil()){
             return route('home');
+        }elseif($this->is_teacher()) {
+            return route('teacher.home');
         }else{
             return route('admin.home');
         }

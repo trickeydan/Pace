@@ -57,6 +57,8 @@
                             <h3>KLBS PACE Points</h3>
                             @if(Auth::User()->is_admin())
                                 <p>Hello, {{Auth::User()->name}} ADMINISTRATOR</p>
+                            @elseif(Auth::User()->is_teacher())
+                                <p>Hello, {{Auth::User()->name}} TEACHER</p>
                             @else
                                 <p>Hello, {{Auth::User()->name}}&nbsp;&nbsp;Tutor Group: {{Auth::User()->tutorgroup->name}}&nbsp;&nbsp;Year: {{Auth::User()->tutorgroup->year->name}}&nbsp;&nbsp;House: {{Auth::User()->house->name}}</p>
                             @endif
@@ -72,6 +74,11 @@
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.users.index') echo 'class="active"';?>><a href="{{route('admin.users.index')}}" >Manage Admins</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.feedback') echo 'class="active"';?>><a href="{{route('admin.feedback')}}">View Feedback</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
+                        @elseif(Auth::User()->is_teacher())
+                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'teacher.home') echo 'class="active"';?>><a href="{{route('teacher.home')}}">Dashboard</a></li>
+                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'events.index') echo 'class="active"';?>><a href="{{route('events.index')}}">Events</a></li>
+                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
+
                         @else
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'home') echo 'class="active"';?>><a href="{{route('home')}}">My Pace Points</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'stats') echo 'class="active"';?>><a href="{{route('stats')}}" >Statistics</a></li>

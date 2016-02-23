@@ -22,9 +22,22 @@ Route::group(['middleware' => ['auth','strict:pupil']], function () {
     ]);
 });
 
-Route::group(['prefix' => 'manage','namespace' => 'Admin','middleware' => ['auth','check:admin']], function () {
+Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['auth','strict:teacher']], function () {
+    Route::get('/',[
+        'as' => 'teacher.home',
+        'uses' => 'AdminController@home'
+    ]);
 
-    Route::get('/',[ //My PACE Points
+    Route::get('events',[
+        'as' => 'events.index',
+        'uses' => 'EventController@index'
+    ]);
+
+});
+
+Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth','check:admin']], function () {
+
+    Route::get('/',[
         'as' => 'admin.home',
         'uses' => 'AdminController@home'
     ]);
@@ -40,14 +53,6 @@ Route::group(['prefix' => 'manage','namespace' => 'Admin','middleware' => ['auth
             'uses' => 'PupilController@index'
         ]);
 
-        /*Route::get('changepin/{user}',[ //My PACE Points
-            'as' => 'admin.pupils.changepin',
-            'uses' => 'PupilController@changepin'
-        ]);
-        Route::post('changepin/{user}',[ //My PACE Points
-            'as' => 'admin.pupils.changepin',
-            'uses' => 'PupilController@postChangepin'
-        ]);*/
     });
 
     Route::group(['prefix' => 'admins'],function() { //For Admin Users
