@@ -81,4 +81,9 @@ class User extends Authenticatable
 
     }
 
+    public function eventpoints()
+    {
+        return $this->morphMany('Pace\EventPoint', 'participant');
+    }
+
 }

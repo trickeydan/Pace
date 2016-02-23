@@ -31,4 +31,9 @@ class Tutorgroup extends Model
     public function getPoints(){
         return $this->currPoints;
     }
+
+    public function eventpoints()
+    {
+        return $this->morphMany('Pace\EventPoint', 'participant');
+    }
 }

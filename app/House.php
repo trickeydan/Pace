@@ -27,4 +27,9 @@ class House extends Model
         $this->save();
     }
 
+    public function eventpoints()
+    {
+        return $this->morphMany('Pace\EventPoint', 'participant');
+    }
+
 }
