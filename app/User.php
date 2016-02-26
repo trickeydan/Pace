@@ -13,7 +13,8 @@ class User extends Authenticatable
     ];
 
     protected $encryptable = [
-        'name'
+        'name',
+        'email'
     ];
 
     protected $hidden = [

@@ -21,6 +21,7 @@ class HouseSeeder extends Seeder
         $user = new Pace\User();
         $user->name = "Initial Admin";
         $user->email = "admininit@example.com";
+        $user->emailhash = hash('sha256',$user->email);
         $user->password = bcrypt('password');
         $user->user_level = 3;
         $user->save();

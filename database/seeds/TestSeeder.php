@@ -27,6 +27,7 @@ class TestSeeder extends Seeder
         $user = new Pace\User();
         $user->name = "Dan Trickey";
         $user->email = "dan@dan.com";
+        $user->emailhash = hash('sha256',$user->email);
         $user->password = bcrypt('password');
         $user->user_level = 3;
         $user->save();
@@ -53,6 +54,7 @@ class TestSeeder extends Seeder
                     $ln = $faker->lastName();
                     $user->name = $fn . ' ' . $ln;
                     $user->email = (22 - $i) . substr($fn,0,1) .  $ln . '@klbschool.org.uk';
+                    $user->emailhash = hash('sha256',$user->email);
                     $user->adno = $faker->numberBetween(1000,9999);
                     $user->password = bcrypt($user->adno);
                     $user->tutorgroup_id = $tg->id;
