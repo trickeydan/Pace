@@ -40,6 +40,20 @@ class PupilController extends Controller
         ]);
     }
 
+    public function store(Requests\PupilCreateRequest $request){
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->adno = $request->adno;
+        $user->password = bcrypt($request->adno);
+        $user->tutorgroup_id = $request->tutorgroup;
+        $user->user_level = 1;
+        $user->currPoints = 0;
+        $user->house_id = $request->house;
+        $user->save();
+        return redirect(route('admin.pupils.index'))->with('status','Pupil Created.');
+    }
+
     public function search(Request $request){
         $query =  $request->get('query');
         if(User::whereAdno($query)->count() > 0){
