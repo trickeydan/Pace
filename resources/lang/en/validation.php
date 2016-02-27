@@ -88,11 +88,7 @@ return [
     |
     */
 
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
-    ],
+    'emailhash' => 'That email is already used.',
 
     /*
     |--------------------------------------------------------------------------

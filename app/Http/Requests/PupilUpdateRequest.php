@@ -25,7 +25,7 @@ class PupilUpdateRequest extends Request
     {
         return [
             'name' => 'required|max:50|min:2',
-            'email' => 'required|email|max:50|min:2|unique:users,email',
+            'email' => 'required|email|max:50|min:2',
         ];
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
+Route::bind('user', function($value) {
+    return \Pace\User::whereEmailhash(hash('sha256',$value))->first();
+});
+
 Route::group(['middleware' => ['auth','strict:pupil']], function () {
     Route::get('/',[ //My PACE Points
         'as' => 'home',
