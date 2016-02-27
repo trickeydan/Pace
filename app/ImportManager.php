@@ -1,6 +1,8 @@
 <?php
 namespace Pace;
 
+use Illuminate\Support\Facades\Mail;
+
 class ImportManager
 {
 
@@ -21,5 +23,15 @@ class ImportManager
         foreach(Year::all() as $y){
             $y->updatePoints();
         }
+    }
+
+    public static function sendEmailReminder()
+    {
+
+        Mail::send('emails.test', [], function ($m) {
+            $m->from('hello@app.com', 'Your Application');
+
+            $m->to('mail@mail.com', 'User')->subject('Your Reminder!');
+        });
     }
 }

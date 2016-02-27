@@ -3,6 +3,7 @@
 namespace Pace;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {
@@ -87,6 +88,14 @@ class User extends Authenticatable
     public function eventpoints()
     {
         return $this->morphMany('Pace\EventPoint', 'participant');
+    }
+
+    public function sendPin(){
+        Mail::send('emails.pin', ['user' => $this], function ($m) {
+            $m->from(env('email'), 'KLBS Pace Points');
+
+            $m->to($this->email, $this->name)->subject('Your Pin');
+        });
     }
 
 }
