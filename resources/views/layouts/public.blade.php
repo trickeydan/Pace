@@ -53,38 +53,10 @@
             <div class="row">
                 <div class="col-sm-12 form-box">
                     <div class="form-top">
-                        <div class="form-top-left">
-                            <h3>KLBS PACE Points</h3>
-                            @if(Auth::User()->is_admin())
-                                <p>Hello, {{Auth::User()->name}} ADMINISTRATOR</p>
-                            @elseif(Auth::User()->is_teacher())
-                                <p>Hello, {{Auth::User()->name}} TEACHER</p>
-                            @else
-                                <p>Hello, {{Auth::User()->name}}&nbsp;&nbsp;Tutor Group: {{Auth::User()->tutorgroup->name}}&nbsp;&nbsp;Year: {{Auth::User()->tutorgroup->year->name}}&nbsp;&nbsp;House: {{Auth::User()->house->name}}</p>
-                            @endif
-                        </div>
                         <div class="form-top-right">
                             <img class="img-responsive logo-img-main" src="{!! asset('assets/img/logo.png') !!}">
                         </div>
                     </div>
-                    <ul class="nav nav-pills nav-justified pill">
-                        @if(Auth::User()->is_admin())
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.home') echo 'class="active"';?>><a href="{{route('admin.home')}}">Dashboard</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.pupils.index') echo 'class="active"';?>><a href="{{route('admin.pupils.index')}}" >Manage Pupils</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.users.index') echo 'class="active"';?>><a href="{{route('admin.users.index')}}" >Manage Admins</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
-                        @elseif(Auth::User()->is_teacher())
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'teacher.home') echo 'class="active"';?>><a href="{{route('teacher.home')}}">Dashboard</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'events.index') echo 'class="active"';?>><a href="{{route('events.index')}}">Events</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
-
-                        @else
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'home') echo 'class="active"';?>><a href="{{route('home')}}">My Pace Points</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'stats') echo 'class="active"';?>><a href="{{route('stats')}}" >Statistics</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'feedback') echo 'class="active"';?>><a href="{{route('feedback')}}">Feedback</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
-                        @endif
-                    </ul>
                     <div class="form-bottom">
                         @yield('content')
                         <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> D.Trickey</small></h6>

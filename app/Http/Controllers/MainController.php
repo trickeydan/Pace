@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Pace\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class MainController extends Controller
 {
@@ -21,12 +22,20 @@ class MainController extends Controller
         return view('stats');
     }
 
+    public function publicstats(){
+        return view('public.stats');
+    }
+
     public function feedback(){
         return view('feedback');
     }
 
     public function feedbackStore(Request $request){
-        Auth::User()->feedbacks()->create($request->all());
+        Mail::send('emails.feedback', ['user' => $this,'request' => $request], function ($m) {
+            $m->from(env('email'), 'KLBS Pace Points (' . Auth::User()->name . ')');
+
+            $m->to(env('feedbackemail'))->subject('Pace Point Feedback');
+        });
         return redirect(Auth::User()->homeUrl())->with('status','Feedback Submitted, Thanks.');
     }
 }

@@ -140,5 +140,10 @@ Route::group(['middleware' => ['throttle:60']], function () {
         'as' => 'forgot.send',
         'uses' => 'PinController@send'
     ]);
+
+    Route::get('graphs',[ //My PACE Points
+        'as' => 'publicstats',
+        'uses' => 'MainController@publicstats'
+    ]);
 });
 

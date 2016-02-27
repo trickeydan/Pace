@@ -5,6 +5,7 @@
         <div class="form-top-left">
             <h3>KLB Pace Points</h3>
             <p>Please enter your username and pin:</p>
+            <p>Points are updated on Mondays.</p>
         </div>
         <div class="form-top-right">
             <img class="img-responsive logo-img" src="assets/img/logo.png">

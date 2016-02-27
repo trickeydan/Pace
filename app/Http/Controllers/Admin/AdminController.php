@@ -15,12 +15,6 @@ class AdminController extends Controller
         return view('stats');
     }
 
-    public function feedback(){
-        return view('admin.feedback',[
-            'feedbacks' => Feedback::orderBy('created_at','DESC')->paginate(8)
-        ]);
-    }
-
     public function cacheupdate(){
         ImportManager::cache();
         return redirect(route('admin.pupils.index'))->with('status','Cache Updated');

@@ -42,11 +42,6 @@ class User extends Authenticatable
         return $this->hasMany('Pace\Point');
     }
 
-    public function feedbacks()
-    {
-        return $this->hasMany('Pace\Feedback');
-    }
-
     public function pointsThisWeek(){
         $dt = new \DateTime();
         $dt->sub(new \DateInterval('P7D'));

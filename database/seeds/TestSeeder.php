@@ -29,7 +29,7 @@ class TestSeeder extends Seeder
         $user->email = "dan@dan.com";
         $user->emailhash = hash('sha256',$user->email);
         $user->password = bcrypt('password');
-        $user->user_level = 3;
+        $user->user_level = 2;
         $user->save();
 
         for ($i = 7; $i <= 11; $i++) {
