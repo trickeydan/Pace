@@ -56,23 +56,25 @@ class TestSeeder extends Seeder
                     $user->email = (22 - $i) . substr($fn,0,1) .  $ln . '@klbschool.org.uk';
                     $user->emailhash = hash('sha256',$user->email);
                     $user->id = $faker->numberBetween(1000,9999);
-                    $user->password = bcrypt($user->id);
-                    $user->tutorgroup_id = $tg->id;
-                    $user->user_level = 1;
-                    $user->currPoints = 0;
-                    $user->house_id = House::all()->random(1)->id;
-                    if(User::whereEmailhash(hash('sha256',$user->email))->count()<=0){
-                        $user->save();
-                        for ($l = 1; $l <= random_int(0,12); $l++) {
-                            $point = new Point();
-                            $point->user_id = $user->id;
-                            $point->teacher_id = Teacher::all()->random(1)->id;
-                            $point->pointtype_id = PointType::all()->random(1)->id;
-                            $faker = Faker\Factory::create();
-                            $point->date = $faker->date('Y-m-d');
-                            $point->description = 'Description of Point/Reason';
-                            $point->amount = $faker->numberBetween(1,10);;
-                            $point->save();
+                    if(User::whereId($user->id)->count()==0) {
+                        $user->password = bcrypt($user->id);
+                        $user->tutorgroup_id = $tg->id;
+                        $user->user_level = 1;
+                        $user->currPoints = 0;
+                        $user->house_id = House::all()->random(1)->id;
+                        if (User::whereEmailhash(hash('sha256', $user->email))->count() <= 0) {
+                            $user->save();
+                            for ($l = 1; $l <= random_int(0, 12); $l++) {
+                                $point = new Point();
+                                $point->user_id = $user->id;
+                                $point->teacher_id = Teacher::all()->random(1)->id;
+                                $point->pointtype_id = PointType::all()->random(1)->id;
+                                $faker = Faker\Factory::create();
+                                $point->date = $faker->date('Y-m-d');
+                                $point->description = 'Description of Point/Reason';
+                                $point->amount = $faker->numberBetween(1, 10);;
+                                $point->save();
+                            }
                         }
                     }
                 }

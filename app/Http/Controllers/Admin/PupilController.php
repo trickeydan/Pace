@@ -57,7 +57,7 @@ class PupilController extends Controller
     public function search(Request $request){
         $query =  $request->get('query');
         if(User::whereId($query)->count() > 0){
-            $pupil = User::Id($query)->first();
+            $pupil = User::whereId($query)->first();
             return redirect(route('admin.pupils.view',$pupil->email));
         }else{
             return redirect(route('admin.pupils.index'))->withErrors('No Results found. Please check spelling');
