@@ -25,13 +25,11 @@ class ImportManager
         }
     }
 
-    public static function sendEmailReminder()
+    public static function initialMail()
     {
 
-        Mail::send('emails.test', [], function ($m) {
-            $m->from('hello@app.com', 'Your Application');
-
-            $m->to('mail@mail.com', 'User')->subject('Your Reminder!');
-        });
+        foreach(User::where('user_level',1)->get() as $user){
+            $user->sendPin();
+        }
     }
 }
