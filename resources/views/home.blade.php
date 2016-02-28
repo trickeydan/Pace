@@ -13,15 +13,22 @@
             <div class="col-sm-4"><h4 class="text-center">{{$pt->name}}: {{Auth::User()->points()->where('pointtype_id',$pt->id)->sum('amount')}}</h4></div>
         @endforeach
     </div>
-    <div class="row">
+    <div class="row row-eq-height">
+        <?php $count = 0; ?>
         @foreach($points as $point)
             <div class="col-sm-4 well">
                 <h4 class="text-center">{{$point->teacher->name}}</h4>
                 <p class="text-center"><strong>{{$point->date->format('jS F Y')}}</strong></p>
-                <p class="text-center">{{$point->pointtype->name}}<br/>
-                <p class="text-center">Amount: {{$point->amount}}<br/>
-                    {{$point->description}}</p>
+                <p class="text-center">{{$point->pointtype->name}}</p>
+                <p class="text-center">Amount: {{$point->amount}}<br/>{{$point->description}}</p>
             </div>
+            <?php
+                $count++;
+                if($count >= 3){
+                    $count = 0;
+                    echo "</div><div class=\"row row-eq-height\">";
+                }
+                ?>
         @endforeach
     </div>
     <nav class="text-center">
