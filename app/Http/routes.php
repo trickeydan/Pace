@@ -3,6 +3,9 @@
 Route::bind('user', function($value) {
     return \Pace\User::whereEmailhash(hash('sha256',$value))->first();
 });
+Route::bind('eventcat', function($value) {
+    return \Pace\EventCat::find($value)->first();
+});
 
 Route::group(['middleware' => ['auth','strict:pupil']], function () {
     Route::get('/',[ //My PACE Points
@@ -32,10 +35,28 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
         'uses' => 'AdminController@home'
     ]);
 
-    Route::get('events',[
-        'as' => 'events.index',
-        'uses' => 'EventController@index'
-    ]);
+    Route::group(['prefix' => 'events'],function(){
+
+        Route::get('/',[
+            'as' => 'events.index',
+            'uses' => 'EventController@index'
+        ]);
+
+        Route::get('{eventcat}/view',[
+            'as' => 'events.view',
+            'uses' => 'EventController@view'
+        ]);
+
+        Route::get('create',[
+            'as' => 'events.create',
+            'uses' => 'EventController@create'
+        ]);
+
+        Route::post('create',[
+            'as' => 'events.store',
+            'uses' => 'EventController@store'
+        ]);
+    });
 
 });
 

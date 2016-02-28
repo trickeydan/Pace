@@ -19,4 +19,8 @@ class Event extends Model
     {
         return $this->hasMany('Pace\EventPoint');
     }
+
+    public function winner(){
+        return "Not Implemented Yet";
+    }
 }

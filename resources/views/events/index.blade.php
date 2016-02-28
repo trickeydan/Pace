@@ -17,16 +17,17 @@
         </div>
     @endif
     <h3>What is an event?</h3>
-    <p>An event is a group of 'subevents' that allow you to assign extra points to Tutor groups or a group of pupils. You can also use them without assigning house points.</p>
+    <p>An event is a group of 'subevents' that allow you to assign extra points to Tutor groups, houses or a group of pupils. You can also use them without assigning house points.</p>
     <h3>What is an event used for?</h3>
-    <p>Example uses of events include Tutor challenges and Inter-house sports matches.</p>
+    <p>Example uses of events include Tutor challenges and Inter-house competitions and Inter-house sports matches.</p>
     <p class="text-right">
-        <a href="{{route('admin.pupils.create')}}" class="btn">New Event</a>&nbsp;&nbsp;
+        <a href="{{route('events.create')}}" class="btn">New Event</a>&nbsp;&nbsp;
     </p>
     <table class="table table-striped table-responsive">
         <thead>
             <tr>
                 <td>Name</td>
+                <td>No of Subevents</td>
                 <td>Options</td>
             </tr>
         </thead>
@@ -34,7 +35,8 @@
             @foreach($events as $event)
                 <tr>
                     <td>{{$event->name}}</td>
-                    <td><a href="">View Subevents</a>&nbsp;&nbsp;&nbsp;<a href="">New Subevent</a></td>
+                    <td>{{$event->events()->count()}}</td>
+                    <td><a href="{{route('events.view',$event->id)}}">View Subevents</a>&nbsp;&nbsp;&nbsp;<a href="">New Subevent</a></td>
                 </tr>
             @endforeach
         </tbody>

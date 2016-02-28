@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title','Creating Pupil')
+@section('title','Create Event')
 @section('content')
-    <a href="{{route('admin.pupils.index')}}">Back to all pupils</a>
-    <h2 class="text-center">Creating Pupil</h2>
+    <a href="{{route('events.index')}}">Back to all events</a>
+    <h2 class="text-center">Create Event</h2>
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
@@ -17,30 +17,15 @@
             </ul>
         </div>
     @endif
-    {!! Form::open(array('route' => 'admin.pupils.store','role' => 'form')) !!}
+    {!! Form::open(array('route' => 'events.store','role' => 'form')) !!}
+    <p class="text-center">Please ensure that you want to make an event before doing so. Also, please be aware that event results are visible to <strong>all</strong> pupils.</p>
     <div class="form-group">
         {!! Form::label('name', 'Name') !!}
         {!! Form::text('name',null,['class' => 'form-control']) !!}
     </div>
-    <div class="form-group">
-        {!! Form::label('email', 'Email') !!}
-        {!! Form::email('email',null,['class' => 'form-control']) !!}
-    </div>
-    <div class="form-group">
-        {!! Form::label('adno', 'Adno (No Zeros in front please!)') !!}
-        {!! Form::text('adno',null,['class' => 'form-control']) !!}
-    </div>
-    <div class="form-group">
-        {!! Form::label('tutorgroup', 'Tutor Group') !!}
-        {!!Form::select('tutorgroup', $tgs)!!}
-    </div>
-    <div class="form-group">
-        {!! Form::label('house', 'House') !!}
-        {!!Form::select('house', $houses)!!}
-    </div>
 
 
-    {!! Form::submit('Create Pupil',['class' => 'btn btn-lg btn-success']) !!}
+    {!! Form::submit('Create Event',['class' => 'btn btn-lg btn-success']) !!}
 
     {!! Form::close() !!}
 @endsection
