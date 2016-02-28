@@ -26,7 +26,7 @@ Route::group(['middleware' => ['auth','strict:pupil']], function () {
     ]);
 });
 
-Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['auth','strict:teacher']], function () {
+Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['auth','check:teacher']], function () {
     Route::get('/',[
         'as' => 'teacher.home',
         'uses' => 'AdminController@home'
@@ -96,6 +96,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
             'as' => 'admin.pupils.update',
             'uses' => 'PupilController@update'
         ]);
+
+
 
     });
 
