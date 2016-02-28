@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
+    protected $casts =[
+      'affectTotals' => 'boolean',
+    ];
+
     public function eventcat()
     {
         return $this->belongsTo('Pace\EventCat');

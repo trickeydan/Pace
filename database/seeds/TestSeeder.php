@@ -8,6 +8,9 @@ use Pace\Tutorgroup;
 use Pace\User;
 use Pace\Point;
 use Pace\Teacher;
+use Pace\EventCat;
+use Pace\EventPoint;
+use Pace\Event;
 class TestSeeder extends Seeder
 {
     /**
@@ -72,14 +75,37 @@ class TestSeeder extends Seeder
                                 $faker = Faker\Factory::create();
                                 $point->date = $faker->date('Y-m-d');
                                 $point->description = 'Description of Point/Reason';
-                                $point->amount = $faker->numberBetween(1, 10);;
+                                $point->amount = $faker->numberBetween(1, 10);
                                 $point->save();
                             }
                         }
                     }
                 }
             }
+
+            $cat = new EventCat();
+            $cat->name = "Tutor Group Challenge - Year " . $year->name;
+            $cat->save();
+            for ($j = 1; $j <= 4; $j++) {
+                $event = new Event();
+                $event->affectTotals = true;
+                $event->name = "Number " . $j;
+                $event->user_id = 1;
+                $cat->events()->save($event);
+                foreach($year->tutorgroups as $tg){
+                    $ep = new EventPoint();
+                    $ep->amount = 1;
+                    $ep->description = "Came First";
+                    $ep->event_id = $event->id;
+                    $ep->participable()->associate($tg);
+                    $ep->save();
+
+                }
+            }
+
         }
+
+        \Pace\ImportManager::cache();
 
     }
 }

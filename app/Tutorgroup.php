@@ -34,6 +34,6 @@ class Tutorgroup extends Model
 
     public function eventpoints()
     {
-        return $this->morphMany('Pace\EventPoint', 'participant');
+        return $this->morphMany('Pace\EventPoint', 'participable');
     }
 }

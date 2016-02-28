@@ -15,8 +15,8 @@ class CreateEventPointsTable extends Migration
         Schema::create('event_points', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('event_id');
-            $table->integer('participant_id');
-            $table->string('participant_type');
+            $table->integer('participable_id')->unsigned();
+            $table->string('participable_type');
             $table->integer('amount');
             $table->text('description')->nullable();
             $table->timestamps();
