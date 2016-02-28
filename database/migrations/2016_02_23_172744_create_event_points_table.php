@@ -19,7 +19,6 @@ class CreateEventPointsTable extends Migration
             $table->string('participant_type');
             $table->integer('amount');
             $table->text('description')->nullable();
-            $table->boolean('affectTotals');
             $table->timestamps();
         });
     }
