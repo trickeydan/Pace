@@ -55,8 +55,8 @@ class TestSeeder extends Seeder
                     $user->name = $fn . ' ' . $ln;
                     $user->email = (22 - $i) . substr($fn,0,1) .  $ln . '@klbschool.org.uk';
                     $user->emailhash = hash('sha256',$user->email);
-                    $user->adno = $faker->numberBetween(1000,9999);
-                    $user->password = bcrypt($user->adno);
+                    $user->id = $faker->numberBetween(1000,9999);
+                    $user->password = bcrypt($user->id);
                     $user->tutorgroup_id = $tg->id;
                     $user->user_level = 1;
                     $user->currPoints = 0;

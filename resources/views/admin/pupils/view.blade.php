@@ -29,7 +29,7 @@
             </tr>
             <tr>
                 <td>Adno</td>
-                <td>{{$pupil->adno}}</td>
+                <td>{{$pupil->id}}</td>
             </tr>
             <tr>
                 <td>Points</td>

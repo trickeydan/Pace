@@ -19,7 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('password', 60);
             $table->integer('user_level');
-            $table->integer('adno')->nullable();
             $table->integer('tutorgroup_id')->nullable();
             $table->integer('house_id')->nullable();
             $table->integer('currPoints')->nullable();

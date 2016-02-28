@@ -44,7 +44,7 @@ class PupilController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->adno = $request->adno;
+        $user->id = $request->adno;
         $user->password = bcrypt($request->adno);
         $user->tutorgroup_id = $request->tutorgroup;
         $user->user_level = 1;
@@ -56,8 +56,8 @@ class PupilController extends Controller
 
     public function search(Request $request){
         $query =  $request->get('query');
-        if(User::whereAdno($query)->count() > 0){
-            $pupil = User::whereAdno($query)->first();
+        if(User::whereId($query)->count() > 0){
+            $pupil = User::Id($query)->first();
             return redirect(route('admin.pupils.view',$pupil->email));
         }else{
             return redirect(route('admin.pupils.index'))->withErrors('No Results found. Please check spelling');

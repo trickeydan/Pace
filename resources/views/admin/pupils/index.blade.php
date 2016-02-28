@@ -56,7 +56,7 @@
                     <td>{{$pupil->tutorgroup->name or 'No TG'}}</td>
                     <td>{{$pupil->house->name or 'No House'}}</td>
                     @if($request->get('pin') == "show")
-                        <td>{{$pupil->adno}}</td>
+                        <td>{{$pupil->id}}</td>
                     @endif
                     <td>{{$pupil->getPoints()}}</td>
                     <td><a href="{{route('admin.pupils.view',$pupil->email)}}">View</a>&nbsp;&nbsp;<a href="{{route('admin.pupils.edit',$pupil->email)}}">Edit</a></td>
