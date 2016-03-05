@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Pace\Series;
 use Pace\Http\Requests;
 use Pace\Http\Controllers\Controller;
-use Pace\Http\Requests\EventCreateRequest;
+use Pace\Http\Requests\SeriesCreateRequest;
 
-class EventController extends Controller
+class SeriesController extends Controller
 {
     public function index(){
         $series = Series::paginate(30);
@@ -25,7 +25,7 @@ class EventController extends Controller
         return redirect(route('series.view',$series->id));
     }
 
-    public function view(Series $event){
+    public function view(Series $series){
         return view('series.view',compact('series'));
     }
 }
