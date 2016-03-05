@@ -3,8 +3,8 @@
 Route::bind('user', function($value) {
     return \Pace\User::whereEmailhash(hash('sha256',$value))->first();
 });
-Route::bind('eventcat', function($value) {
-    return \Pace\EventCat::find($value)->first();
+Route::bind('series', function($value) {
+    return \Pace\Series::find($value)->first();
 });
 
 Route::group(['middleware' => ['auth','strict:pupil']], function () {
@@ -35,26 +35,26 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
         'uses' => 'AdminController@home'
     ]);
 
-    Route::group(['prefix' => 'events'],function(){
+    Route::group(['prefix' => 'eventseries'],function(){
 
         Route::get('/',[
-            'as' => 'events.index',
-            'uses' => 'EventController@index'
+            'as' => 'series.index',
+            'uses' => 'SeriesController@index'
         ]);
 
-        Route::get('{eventcat}/view',[
-            'as' => 'events.view',
-            'uses' => 'EventController@view'
+        Route::get('{series}/view',[
+            'as' => 'series.view',
+            'uses' => 'SeriesController@view'
         ]);
 
         Route::get('create',[
-            'as' => 'events.create',
-            'uses' => 'EventController@create'
+            'as' => 'series.create',
+            'uses' => 'SeriesController@create'
         ]);
 
         Route::post('create',[
-            'as' => 'events.store',
-            'uses' => 'EventController@store'
+            'as' => 'series.store',
+            'uses' => 'SeriesController@store'
         ]);
     });
 

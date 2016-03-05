@@ -10,9 +10,9 @@ class Event extends Model
       'affectTotals' => 'boolean',
     ];
 
-    public function eventcat()
+    public function series()
     {
-        return $this->belongsTo('Pace\EventCat');
+        return $this->belongsTo('Pace\Series');
     }
 
     public function eventpoints()

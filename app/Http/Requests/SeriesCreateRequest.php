@@ -4,7 +4,7 @@ namespace Pace\Http\Requests;
 
 use Pace\Http\Requests\Request;
 
-class EventCreateRequest extends Request
+class SeriesCreateRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
