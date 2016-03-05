@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title',$event->name)
+@section('title',$series->name)
 @section('content')
     <a href="{{route('series.index')}}">Back to all event series'</a>
-    <h2 class="text-center">Event Series: {{$event->name}}</h2>
+    <h2 class="text-center">Event Series: {{$series->name}}</h2>
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
@@ -19,7 +19,7 @@
     @endif
     <h3 class="text-center">Events</h3>
     <p class="text-right">
-        <a href="{{route('series')}}" class="btn">New Event</a>&nbsp;&nbsp;
+        <a href="{{route('series.create')}}" class="btn">New Event</a>&nbsp;&nbsp;
     </p>
     <table class="table table-striped table-responsive">
         <thead>
