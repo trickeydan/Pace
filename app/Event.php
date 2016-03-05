@@ -10,6 +10,12 @@ class Event extends Model
       'affectTotals' => 'boolean',
     ];
 
+    protected $fillable = [
+        'name',
+        'user_id',
+        'affectTotals'
+    ];
+
     public function eventcat()
     {
         return $this->belongsTo('Pace\EventCat');

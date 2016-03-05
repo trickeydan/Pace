@@ -19,7 +19,7 @@
     @endif
     <h3 class="text-center">Sub-Events</h3>
     <p class="text-right">
-        <a href="{{route('events.create')}}" class="btn">New Sub-Event</a>&nbsp;&nbsp;
+        <a href="{{route('events.sub.create',$event->id)}}" class="btn">New Sub-Event</a>&nbsp;&nbsp;
     </p>
     <table class="table table-striped table-responsive">
         <thead>
@@ -34,7 +34,7 @@
                 <tr>
                     <td>{{$subevent->name}}</td>
                     <td>{{$subevent->winner()}}</td>
-                    <td></td>
+                    <td>View&nbsp;&nbsp;Edit</td>
                 </tr>
             @endforeach
         </tbody>

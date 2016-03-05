@@ -36,7 +36,7 @@
                 <tr>
                     <td>{{$event->name}}</td>
                     <td>{{$event->events()->count()}}</td>
-                    <td><a href="{{route('events.view',$event->id)}}">View Subevents</a>&nbsp;&nbsp;&nbsp;<a href="">New Subevent</a></td>
+                    <td><a href="{{route('events.view',$event->id)}}">View Subevents</a>&nbsp;&nbsp;&nbsp;<a href="{{route('events.sub.create',$event->id)}}">New Subevent</a></td>
                 </tr>
             @endforeach
         </tbody>

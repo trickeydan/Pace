@@ -4,7 +4,7 @@ Route::bind('user', function($value) {
     return \Pace\User::whereEmailhash(hash('sha256',$value))->first();
 });
 Route::bind('eventcat', function($value) {
-    return \Pace\EventCat::find($value)->first();
+    return \Pace\EventCat::whereId($value)->first();
 });
 
 Route::group(['middleware' => ['auth','strict:pupil']], function () {
@@ -56,6 +56,19 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
             'as' => 'events.store',
             'uses' => 'EventController@store'
         ]);
+
+        Route::get('{eventcat}/createsub',[
+            'as' => 'events.sub.create',
+            'uses' => 'SubEventController@create'
+        ]);
+
+        Route::post('{eventcat}/createsub/first',[
+            'as' => 'events.sub.storeFirst',
+            'uses' => 'SubEventController@storeFirst'
+        ]);
+
+
+
     });
 
 });
