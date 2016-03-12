@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title',$series->name)
 @section('content')
-    <a href="{{route('series.index')}}">Back to all event series'</a>
+    <a href="{{route('series.index')}}">Back to all event series</a>
     <h2 class="text-center">Event Series: {{$series->name}}</h2>
     @if (session('status'))
         <div class="alert alert-success">

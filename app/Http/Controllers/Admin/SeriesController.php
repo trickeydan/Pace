@@ -22,7 +22,7 @@ class SeriesController extends Controller
 
     public function store(SeriesCreateRequest $request){
         $series = Series::create($request->all());
-        return redirect(route('series.view',$series->id));
+        return redirect(route('series.index'))->with('status','New Event Series created.');
     }
 
     public function view(Series $series){

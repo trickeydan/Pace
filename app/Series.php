@@ -10,7 +10,15 @@ class Series extends Model
     protected $table = 'series';
 
     protected $fillable = [
-      'name'
+        'name',
+        'affectTotals',
+        'binary',
+        'awardedTo'
+    ];
+
+    protected $casts = [
+      'affectTotals' => 'boolean',
+      'binary' => 'boolean',
     ];
 
     public function events()

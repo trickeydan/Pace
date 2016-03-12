@@ -25,6 +25,9 @@ class SeriesCreateRequest extends Request
     {
         return [
             'name' => 'required|min:2|max:50',
+            'awardedTo' => 'required|in:user,tutorgroup,house',
+            'affectTotals' => 'boolean',
+            'binary' => 'boolean'
         ];
     }
 }
