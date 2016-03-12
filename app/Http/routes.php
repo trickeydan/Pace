@@ -3,9 +3,6 @@
 Route::bind('user', function($value) {
     return \Pace\User::whereEmailhash(hash('sha256',$value))->first();
 });
-Route::bind('series', function($value) {
-    return \Pace\Series::find($value)->first();
-});
 
 Route::group(['middleware' => ['auth','strict:pupil']], function () {
     Route::get('/',[ //My PACE Points
@@ -35,7 +32,7 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
         'uses' => 'AdminController@home'
     ]);
 
-    Route::group(['prefix' => 'eventseries'],function(){
+    Route::group(['prefix' => 'series'],function(){
 
         Route::get('/',[
             'as' => 'series.index',
@@ -56,6 +53,15 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
             'as' => 'series.store',
             'uses' => 'SeriesController@store'
         ]);
+
+        Route::group(['prefix' => '{series}/event'],function(){
+
+            Route::get('create',[
+                'as' => 'event.initial',
+                'uses' => 'EventController@initial'
+            ]);
+
+        });
     });
 
 });

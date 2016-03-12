@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Mail;
 
 class MainController extends Controller
 {
-    public function home() //My PACE Points
-    {
+    public function home(){ //My PACE Points
+
         $points = \Pace\Point::where('user_id',Auth::User()->id)->orderBy('date','desc')->paginate(15);
         return view('home',[
             'points' => $points,

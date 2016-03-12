@@ -17,9 +17,21 @@
             </ul>
         </div>
     @endif
+    <h3 class="text-center">Information</h3>
+    <p>This event awards to {{$series->awardToNice()}}.</p>
+    @if($series->affectTotals)
+        <p>This event adds points to the totals for the house.</p>
+    @else
+        <p>This event does not add points to the totals for the house.</p>
+    @endif
+    @if($series->binary)
+        <p>This event uses a Winner/Loser style system.</p>
+    @else
+        <p>This event uses points.</p>
+    @endif
     <h3 class="text-center">Events</h3>
     <p class="text-right">
-        <a href="{{route('series.create')}}" class="btn">New Event</a>&nbsp;&nbsp;
+        <a href="{{route('event.initial',$series->id)}}" class="btn">New Event</a>&nbsp;&nbsp;
     </p>
     <table class="table table-striped table-responsive">
         <thead>

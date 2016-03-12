@@ -38,7 +38,7 @@
                     <td>{{$serie->name}}</td>
                     <td>{{$serie->events()->count()}}</td>
                     <td>{{$serie->awardToNice()}}</td>
-                    <td><a href="{{route('series.view',$serie->id)}}">View Events</a>&nbsp;&nbsp;&nbsp;<a href="">New Event</a></td>
+                    <td><a href="{{route('series.view',$serie->id)}}">View Events</a></td>
                 </tr>
             @endforeach
         </tbody>
