@@ -85,10 +85,10 @@ class TestSeeder extends Seeder
 
             $ser = new Series();
             $ser->name = "Tutor Group Challenge - Year " . $year->name;
+            $ser->affectTotals = true;
             $ser->save();
             for ($j = 1; $j <= 4; $j++) {
                 $event = new Event();
-                $event->affectTotals = true;
                 $event->name = "Number " . $j;
                 $event->user_id = 1;
                 $ser->events()->save($event);

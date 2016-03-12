@@ -27,7 +27,7 @@
         </div>
     @endif
     <p class="text-right">
-        <a href="{{route('admin.pupils.create')}}" class="btn">New Pupil</a>&nbsp;&nbsp;
+        <!--<a href="{{route('admin.pupils.create')}}" class="btn">New Pupil</a>&nbsp;&nbsp;-->
         @if($request->get('pin') == "show")
             <a href="{{route('admin.pupils.index',['page' => $request->get('page')])}}" class="btn">Hide Pins</a>
         @else
@@ -59,7 +59,7 @@
                         <td>{{$pupil->id}}</td>
                     @endif
                     <td>{{$pupil->getPoints()}}</td>
-                    <td><a href="{{route('admin.pupils.view',$pupil->email)}}">View</a>&nbsp;&nbsp;<a href="{{route('admin.pupils.edit',$pupil->email)}}">Edit</a></td>
+                    <td><a href="{{route('admin.pupils.view',$pupil->email)}}">View</a><!--&nbsp;&nbsp;<a href="{{route('admin.pupils.edit',$pupil->email)}}">Edit</a>--></td>
                 </tr>
             @endforeach
         </tbody>

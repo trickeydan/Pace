@@ -43,7 +43,7 @@
                 <td>Tutor Group</td>
                 <td>{{$pupil->tutorgroup->name}}</td>
             </tr>
-            <tr>
+            <!--<tr>
                 <td>Edit Pupil</td>
                 <td><a href="{{route('admin.pupils.edit',$pupil->email)}}">Edit</a></td>
             </tr>
@@ -64,7 +64,7 @@
                     {!! Form::submit('Update House') !!}
                     {!! Form::close() !!}
                 </td>
-            </tr>
+            </tr>-->
         </tbody>
     </table>
 @endsection

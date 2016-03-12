@@ -78,7 +78,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
             'uses' => 'PupilController@index'
         ]);
 
-        Route::get('create',[
+        /*Route::get('create',[
             'as' => 'admin.pupils.create',
             'uses' => 'PupilController@create'
         ]);
@@ -86,7 +86,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
         Route::post('create',[
             'as' => 'admin.pupils.store',
             'uses' => 'PupilController@store'
-        ]);
+        ]);*/
 
         Route::post('/',[
             'as' => 'admin.pupils.search',
@@ -98,7 +98,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
             'uses' => 'PupilController@view'
         ]);
 
-        Route::post('{user}/updatetg',[
+        /*Route::post('{user}/updatetg',[
             'as' => 'admin.pupils.updatetg',
             'uses' => 'PupilController@updatetg'
         ]);
@@ -116,10 +116,8 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
         Route::post('{user}/edit',[
             'as' => 'admin.pupils.update',
             'uses' => 'PupilController@update'
-        ]);
-
-
-
+        ]);*/
+        
     });
 
     Route::group(['prefix' => 'admins'],function() { //For Admin Users
