@@ -19,6 +19,11 @@ class Series extends Model
     }
 
     public function awardToNice(){
-        return $this->awardTo;
+        $conversions = [
+            'user' => 'Pupils',
+            'tutorgroup' => 'Tutor Groups',
+            'house' => 'Houses'
+        ];
+        return $conversions[$this->awardedTo];
     }
 }

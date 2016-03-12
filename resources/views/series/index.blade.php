@@ -19,7 +19,7 @@
     <h3>What is an event series?</h3>
     <p>An event series is a group of events that allow you to assign extra points to Tutor groups, houses or a group of pupils. You can also use them without assigning house points.</p>
     <h3>What is an event series used for?</h3>
-    <p>Example uses of events include Tutor challenges and Inter-house competitions and Inter-house sports matches.</p>
+    <p>Example uses of events include Tutor challenges, Inter-house competitions and Inter-house sports matches.</p>
     <p class="text-right">
         <a href="{{route('series.create')}}" class="btn">New Series</a>&nbsp;&nbsp;
     </p>
