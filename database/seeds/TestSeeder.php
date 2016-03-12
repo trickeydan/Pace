@@ -86,6 +86,8 @@ class TestSeeder extends Seeder
             $ser = new Series();
             $ser->name = "Tutor Group Challenge - Year " . $year->name;
             $ser->affectTotals = true;
+            $ser->binary = $faker->boolean();
+            $ser->awardedTo = $faker->randomElement(['user','tutorgroup','house']);
             $ser->save();
             for ($j = 1; $j <= 4; $j++) {
                 $event = new Event();

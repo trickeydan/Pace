@@ -117,7 +117,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
             'as' => 'admin.pupils.update',
             'uses' => 'PupilController@update'
         ]);*/
-        
+
     });
 
     Route::group(['prefix' => 'admins'],function() { //For Admin Users

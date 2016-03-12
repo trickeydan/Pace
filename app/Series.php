@@ -17,4 +17,8 @@ class Series extends Model
     {
         return $this->hasMany('Pace\Event');
     }
+
+    public function awardToNice(){
+        return $this->awardTo;
+    }
 }
