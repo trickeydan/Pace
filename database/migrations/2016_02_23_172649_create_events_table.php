@@ -16,7 +16,6 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('series_id');
-            $table->boolean('affectTotals');
             $table->integer('user_id');
             $table->timestamps();
         });
