@@ -164,6 +164,33 @@ class EventController extends Controller
     }
 
     private function pointStore(Series $series, Request $request){
+        $this->pointValidate($series,$request);
 
+        dd("Passed");
+    }
+
+    private function pointValidate(Series $series, Request $request){
+        if($series->awardedTo == 'user'){
+            $rules =  [
+                'participant*' => 'required|exists:users,id,user_level,1',
+                'points*' => 'required|integer|min:0|max:100000',
+            ];
+        }
+        elseif($series->awardedTo == 'tutorgroup'){
+            $rules =  [
+                'participant*' => 'required|exists:tutorgroups,id',
+                'points*' => 'required|integer|min:0|max:100000',
+            ];
+        }
+        elseif($series->awardedTo == 'house'){
+            $rules =  [
+                'participant*' => 'required|exists:houses,id',
+                'points*' => 'required|integer|min:0|max:100000',
+            ];
+        }else{
+            throw new \Exception("Unknown Enum Type");
+        }
+
+        $this->validate($request,$rules);
     }
 }
