@@ -92,7 +92,6 @@ class TestSeeder extends Seeder
             for ($j = 1; $j <= 4; $j++) {
                 $event = new Event();
                 $event->name = "Number " . $j;
-                $event->user_id = 1;
                 $ser->events()->save($event);
                 foreach($year->tutorgroups as $tg){
                     $ep = new EventPoint();
