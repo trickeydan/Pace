@@ -82,6 +82,7 @@ class EventController extends Controller
         DB::beginTransaction();
         $event = $series->events()->create(['name' => $request->session()->get('name')]);
         $winnerSet = false;
+        $used = array(); //To Stop participant duplication
         for($i = 1; $i <= $request->session()->get('amount');$i++){
             if(!$request->has('participant' . $i)) {
                 DB::rollBack();
@@ -104,6 +105,11 @@ class EventController extends Controller
                 DB::rollBack();
                 return redirect(route('event.initial',$series->id))->withErrors('Model Error.');
             }
+
+            if(in_array($model->id,$used)){
+                return redirect(route('event.initial',$series->id))->withErrors('Duplicate participant: ' . $model->name);
+            }
+
             if($request->has('binary' . $i)){
                 if($winnerSet){
                     DB::rollBack();
@@ -123,9 +129,15 @@ class EventController extends Controller
                 $ep->participable()->associate($model);
                 $ep->save();
             }
+            $used[count($used)] = $model->id;
         }
-        DB::commit();
-        return redirect(route('series.view',$series->id))->with('status','Event Created');
+        if($winnerSet){
+            DB::commit();
+            return redirect(route('series.view',$series->id))->with('status','Event Created');
+        }else{
+            DB::rollBack();
+            return redirect(route('event.initial',$series->id))->withErrors('No winner selected');
+        }
 
     }
 
