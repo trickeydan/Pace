@@ -23,7 +23,7 @@
     {!! Form::label('amount', 'Number of Participants') !!}
     {!! Form::number('amount',$prediction,['class' => 'form-control']) !!}
     <br/>
-    {!! Form::submit('Create Event',['class' => 'btn btn-lg btn-success']) !!}
+    {!! Form::submit('Next',['class' => 'btn btn-lg btn-success']) !!}
 
     {!! Form::close() !!}
 @endsection
