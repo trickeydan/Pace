@@ -24,16 +24,31 @@ class EventController extends Controller
         $participants = array();
 
        if($series->awardedTo == 'user'){
+
+           if($request->amount > User::where('user_level','1')->count()){
+               return redirect(route('event.initial',$series->id))->withErrors('Participant count exceeds available participants');
+           }
+
            foreach(User::where('user_level','1')->get() as $pupil){
                $participants[$pupil->id] = $pupil->name;
            }
        }
        elseif($series->awardedTo == 'tutorgroup'){
+
+           if($request->amount > Tutorgroup::all()->count()){
+               return redirect(route('event.initial',$series->id))->withErrors('Participant count exceeds available participants');
+           }
+
            foreach(Tutorgroup::all() as $tg){
                $participants[$tg->id] = $tg->name;
            }
        }
        elseif($series->awardedTo == 'house'){
+
+           if($request->amount > House::all()->count()){
+               return redirect(route('event.initial',$series->id))->withErrors('Participant count exceeds available participants');
+           }
+
            foreach(House::all() as $house){
                $participants[$house->id] = $house->name;
            }
