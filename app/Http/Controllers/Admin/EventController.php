@@ -165,8 +165,47 @@ class EventController extends Controller
 
     private function pointStore(Series $series, Request $request){
         $this->pointValidate($series,$request);
+        DB::beginTransaction();
+        $event = $series->events()->create(['name' => $request->session()->get('name')]);
 
-        dd("Passed");
+        $used = array(); //To Stop participant duplication
+        for($i = 1; $i <= $request->session()->get('amount');$i++){
+            if(!$request->has('participant' . $i) || !$request->has('points' . $i)) {
+                DB::rollBack();
+                return redirect(route('event.initial',$series->id))->withErrors('Validation Error');
+            }
+            if($series->awardedTo == 'user'){
+                $model = User::find($request->get('participant' . $i));
+                if(!$model->is_pupil()){
+                    DB::rollBack();
+                    return redirect(route('event.initial',$series->id))->withErrors('Non-Pupils cannot have points assigned.');
+                }
+            }
+            elseif($series->awardedTo == 'tutorgroup'){
+                $model = Tutorgroup::find($request->get('participant' . $i));
+            }
+            elseif($series->awardedTo == 'house'){
+                $model = House::find($request->get('participant' . $i));
+            }
+            if($model == null){
+                DB::rollBack();
+                return redirect(route('event.initial',$series->id))->withErrors('Model Error.');
+            }
+
+            if(in_array($model->id,$used)){
+                return redirect(route('event.initial',$series->id))->withErrors('Duplicate participant: ' . $model->name);
+            }
+
+            $ep = new EventPoint();
+            $ep->event_id = $event->id; //Manual Association needed because polymorphics
+            $ep->amount = $request->get('points' . $i);
+            $ep->participable()->associate($model);
+            $ep->save();
+
+            $used[count($used)] = $model->id;
+        }
+        DB::commit();
+        return redirect(route('series.view',$series->id))->with('status','Event Created');
     }
 
     private function pointValidate(Series $series, Request $request){
