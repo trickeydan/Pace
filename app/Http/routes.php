@@ -61,6 +61,11 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
                 'uses' => 'EventController@initial'
             ]);
 
+            Route::post('create/2',[
+                'as' => 'event.create',
+                'uses' => 'EventController@create'
+            ]);
+
         });
     });
 

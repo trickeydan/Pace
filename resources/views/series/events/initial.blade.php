@@ -17,11 +17,11 @@
             </ul>
         </div>
     @endif
-    {!! Form::open(array('route' => 'series.store','role' => 'form')) !!}
+    {!! Form::open(array('route' => ['event.create',$series->id],'role' => 'form')) !!}
     {!! Form::label('name', 'Name') !!}
     {!! Form::text('name',null,['class' => 'form-control']) !!}
     {!! Form::label('amount', 'Number of Participants') !!}
-    {!! Form::number('amount',4,['class' => 'form-control']) !!}
+    {!! Form::number('amount',$prediction,['class' => 'form-control']) !!}
     <br/>
     {!! Form::submit('Create Event',['class' => 'btn btn-lg btn-success']) !!}
 
