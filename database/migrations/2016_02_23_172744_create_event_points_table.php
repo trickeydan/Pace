@@ -18,7 +18,6 @@ class CreateEventPointsTable extends Migration
             $table->integer('participable_id')->unsigned();
             $table->string('participable_type');
             $table->integer('amount');
-            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

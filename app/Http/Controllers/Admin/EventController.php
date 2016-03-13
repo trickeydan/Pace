@@ -3,7 +3,9 @@
 namespace Pace\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
+use Pace\EventPoint;
 use Pace\House;
 use Pace\Http\Requests;
 use Pace\Series;
@@ -65,5 +67,91 @@ class EventController extends Controller
             'series' => $series,
             'participants' =>$participants,
         ]);
+    }
+
+    public function store(Series $series, Request $request){
+        if($series->binary){
+            return $this->binaryStore($series,$request);
+        }else{
+            return $this->pointStore($series, $request);
+        }
+    }
+
+    private function binaryStore(Series $series, Request $request){
+        $this->binaryValidate($series,$request);
+        DB::beginTransaction();
+        $event = $series->events()->create(['name' => $request->session()->get('name')]);
+        $winnerSet = false;
+        for($i = 1; $i <= $request->session()->get('amount');$i++){
+            if(!$request->has('participant' . $i)) {
+                DB::rollBack();
+                return redirect(route('event.initial',$series->id))->withErrors('Validation Error');
+            }
+            if($series->awardedTo == 'user'){
+                $model = User::find($request->get('participant' . $i));
+                if(!$model->is_pupil()){
+                    DB::rollBack();
+                    return redirect(route('event.initial',$series->id))->withErrors('Non-Pupils cannot have points assigned.');
+                }
+            }
+            elseif($series->awardedTo == 'tutorgroup'){
+                $model = Tutorgroup::find($request->get('participant' . $i));
+            }
+            elseif($series->awardedTo == 'house'){
+                $model = House::find($request->get('participant' . $i));
+            }
+            if($model == null){
+                DB::rollBack();
+                return redirect(route('event.initial',$series->id))->withErrors('Model Error.');
+            }
+            if($request->has('binary' . $i)){
+                if($winnerSet){
+                    DB::rollBack();
+                    return redirect(route('event.initial',$series->id))->withErrors('More than one winner selected!');
+                }else{
+                    $winnerSet = true;
+                }
+                $ep = new EventPoint();
+                $ep->event_id = $event->id; //Manual Association needed because polymorphics
+                $ep->amount = 1;
+                $ep->participable()->associate($model);
+                $ep->save();
+            }else{
+                $ep = new EventPoint();
+                $ep->event_id = $event->id; //Manual Association needed because polymorphics
+                $ep->amount = 0;
+                $ep->participable()->associate($model);
+                $ep->save();
+            }
+        }
+        DB::commit();
+        return redirect(route('series.view',$series->id))->with('status','Event Created');
+
+    }
+
+    private function binaryValidate(Series $series, Request $request){
+        if($series->awardedTo == 'user'){
+            $rules =  [
+                'participant*' => 'required|exists:users,id,user_level,1',
+            ];
+        }
+        elseif($series->awardedTo == 'tutorgroup'){
+            $rules =  [
+                'participant*' => 'required|exists:tutorgroups,id',
+            ];
+        }
+        elseif($series->awardedTo == 'house'){
+            $rules =  [
+                'participant*' => 'required|exists:houses,id',
+            ];
+        }else{
+            throw new \Exception("Unknown Enum Type");
+        }
+
+        $this->validate($request,$rules);
+    }
+
+    private function pointStore(Series $series, Request $request){
+
     }
 }

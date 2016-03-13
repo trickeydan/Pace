@@ -97,7 +97,6 @@ class TestSeeder extends Seeder
                 foreach($year->tutorgroups as $tg){
                     $ep = new EventPoint();
                     $ep->amount = 1;
-                    $ep->description = "Came First";
                     $ep->event_id = $event->id;
                     $ep->participable()->associate($tg);
                     $ep->save();

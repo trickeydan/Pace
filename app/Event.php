@@ -10,6 +10,10 @@ class Event extends Model
       'affectTotals' => 'boolean',
     ];
 
+    protected $fillable = [
+        'name'
+    ];
+
     public function series()
     {
         return $this->belongsTo('Pace\Series');

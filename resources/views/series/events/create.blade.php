@@ -19,7 +19,7 @@
     @endif
     <p class="text-center">Event Name: {{$name}}</p>
     <p class="text-center">Number of Participants: {{$amount}}</p>
-    {!! Form::open(array('route' => ['event.create',$series->id],'role' => 'form')) !!}
+    {!! Form::open(array('route' => ['event.store',$series->id],'role' => 'form')) !!}
     <table class="table table-striped table-responsive">
         <thead>
         <tr>
@@ -34,11 +34,11 @@
         <tbody>
         @for($i = 1;$i <= $amount;$i++)
             <tr>
-                <td>{!! Form::select('awardedTo',$participants,null,['class' => 'form-control']) !!}</td>
+                <td>{!! Form::select('participant' . $i,$participants,null,['class' => 'form-control']) !!}</td>
                 @if(!$series->binary)
-                    <td>{!! Form::number('amount',0,['class' => 'form-control']) !!}</td>
+                    <td>{!! Form::number('points'  . $i,0,['class' => 'form-control']) !!}</td>
                 @else
-                    <td>{!! Form::checkbox('binary',1,0,['class' => 'form-control']) !!}</td>
+                    <td>{!! Form::checkbox('binary'  . $i,1,0,['class' => 'form-control']) !!}</td>
                 @endif
 
             </tr>
