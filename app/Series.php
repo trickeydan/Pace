@@ -34,4 +34,20 @@ class Series extends Model
         ];
         return $conversions[$this->awardedTo];
     }
+
+    public function winner(){
+        $arr = array();
+        foreach($this->events as $e){
+            foreach($e->eventpoints as $ep){
+                if(isset($arr[$ep->participable->name])){
+                    $arr[$ep->participable->name] += $ep->amount;
+                }else{
+                    $arr[$ep->participable->name] = $ep->amount;
+                }
+
+            }
+        }
+        arsort($arr);
+        return each($arr)['key'];
+    }
 }

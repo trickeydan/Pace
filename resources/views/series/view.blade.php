@@ -29,6 +29,7 @@
     @else
         <p>This event uses points.</p>
     @endif
+    <p> {{$series->winner()}} is currently winning this series.</p>
     <h3 class="text-center">Events</h3>
     <p class="text-right">
         <a href="{{route('event.initial',$series->id)}}" class="btn">New Event</a>&nbsp;&nbsp;
