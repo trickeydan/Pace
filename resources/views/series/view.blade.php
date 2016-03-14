@@ -46,7 +46,7 @@
                 <tr>
                     <td>{{$event->name}}</td>
                     <td>{{$event->winner()}}</td>
-                    <td></td>
+                    <td>View&nbsp;&nbsp;Edit&nbsp;&nbsp;Delete</td>
                 </tr>
             @endforeach
         </tbody>
