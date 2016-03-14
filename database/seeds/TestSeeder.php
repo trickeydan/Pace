@@ -86,7 +86,7 @@ class TestSeeder extends Seeder
             $ser = new Series();
             $ser->name = "Tutor Group Challenge - Year " . $year->name;
             $ser->affectTotals = true;
-            $ser->binary = $faker->boolean();
+            $ser->binary = false;
             $ser->awardedTo = 'tutorgroup';
             $ser->save();
             for ($j = 1; $j <= 4; $j++) {
@@ -95,7 +95,7 @@ class TestSeeder extends Seeder
                 $ser->events()->save($event);
                 foreach($year->tutorgroups as $tg){
                     $ep = new EventPoint();
-                    $ep->amount = 1;
+                    $ep->amount = $faker->numberBetween(0,20);
                     $ep->event_id = $event->id;
                     $ep->participable()->associate($tg);
                     $ep->save();
