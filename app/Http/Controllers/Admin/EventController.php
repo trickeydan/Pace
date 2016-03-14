@@ -13,6 +13,7 @@ use Pace\Http\Controllers\Controller;
 use Pace\Http\Requests\InitialEventCreateRequest;
 use Pace\User;
 use Pace\Tutorgroup;
+use Pace\Event;
 
 class EventController extends Controller
 {
@@ -231,5 +232,10 @@ class EventController extends Controller
         }
 
         $this->validate($request,$rules);
+    }
+
+    public function edit(Series $series, Event $event){
+        if($event->series->id != $series->id) return redirect(route('series.view',$series->id))->withErrors('No such event in this series.');
+        return view('series.events.edit',compact('event','series'));
     }
 }

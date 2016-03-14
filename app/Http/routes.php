@@ -86,6 +86,11 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
                 'uses' => 'EventController@store'
             ]);
 
+            Route::get('{event}/edit',[
+                'as' => 'event.edit',
+                'uses' => 'EventController@edit'
+            ]);
+
         });
     });
 

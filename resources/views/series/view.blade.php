@@ -47,7 +47,7 @@
                 <tr>
                     <td>{{$event->name}}</td>
                     <td>{{$event->winner()}}</td>
-                    <td>View&nbsp;&nbsp;Edit&nbsp;&nbsp;Delete</td>
+                    <td><a href="{{route('event.edit',[$series->id,$event->id])}}">Edit</a>&nbsp;&nbsp;<a href="">Delete</a></td>
                 </tr>
             @endforeach
         </tbody>
