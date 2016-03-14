@@ -25,6 +25,6 @@ class Event extends Model
     }
 
     public function winner(){
-        return "Not Implemented Yet";
+        return $this->eventpoints()->orderBy('amount','desc')->first()->participable->name;
     }
 }
