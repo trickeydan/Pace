@@ -79,8 +79,9 @@
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'series.index') echo 'class="active"';?>><a href="{{route('series.index')}}">Events</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
                         @else
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'home') echo 'class="active"';?>><a href="{{route('home')}}">My Pace Points</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'stats') echo 'class="active"';?>><a href="{{route('stats')}}" >Statistics</a></li>
+                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'home') echo 'class="active"';?>><a href="{{route('home')}}">My PACE Points</a></li>
+                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'stats') echo 'class="active"';?>><a href="{{route('stats')}}" >House Points</a></li>
+                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'eventstats') echo 'class="active"';?>><a href="{{route('eventstats')}}" >Competitions</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'feedback') echo 'class="active"';?>><a href="{{route('feedback')}}">Feedback</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
                         @endif

@@ -10,9 +10,24 @@ Route::group(['middleware' => ['auth','strict:pupil']], function () {
         'uses' => 'MainController@home',
     ]);
 
-    Route::get('stats',[ //My PACE Points
+    Route::get('housepoints',[ //My PACE Points
         'as' => 'stats',
         'uses' => 'MainController@stats'
+    ]);
+
+    Route::get('competitions',[ //My PACE Points
+        'as' => 'eventstats',
+        'uses' => 'MainController@eventstats'
+    ]);
+
+    Route::get('competitions/{series}',[ //My PACE Points
+        'as' => 'eventstats.series',
+        'uses' => 'MainController@eventstatsseries'
+    ]);
+
+    Route::get('competitions/event/{event}',[ //My PACE Points
+        'as' => 'eventstats.series.event',
+        'uses' => 'MainController@eventstatsseriesevent'
     ]);
 
     Route::get('feedback',[ //Pupil Feedback
