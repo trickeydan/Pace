@@ -36,6 +36,7 @@ class Series extends Model
     }
 
     public function winner(){
+        if($this->events()->count() == 0) return "N/A";
         $arr = array();
         foreach($this->events as $e){
             foreach($e->eventpoints as $ep){

@@ -18,13 +18,18 @@ use Pace\Event;
 class EventController extends Controller
 {
     public function initial(Series $series){
-        $prediction = 0;
+        if($series->events()->count() > 0){
+            $prediction = $series->events()->first()->eventpoints()->count();
+        }else{
+            $prediction = 0;
+        }
         return view('series.events.initial',compact('series','prediction'));
     }
 
     public function create(Series $series, InitialEventCreateRequest $request){
 
         $participants = array();
+        $predictions = array();
 
        if($series->awardedTo == 'user'){
 
@@ -35,6 +40,7 @@ class EventController extends Controller
            foreach(User::where('user_level','1')->get() as $pupil){
                $participants[$pupil->id] = $pupil->name;
            }
+
        }
        elseif($series->awardedTo == 'tutorgroup'){
 
@@ -57,6 +63,12 @@ class EventController extends Controller
            }
        }
 
+        if($series->events()->first()->eventpoints()->count() == $request->amount){
+            foreach($series->events()->first()->eventpoints as $ep){
+                $predictions[count($predictions)] = $ep->participable->id;
+            }
+        }
+
 
         session([
             'amount' => $request->amount,
@@ -67,6 +79,7 @@ class EventController extends Controller
             'name' => $request->name,
             'series' => $series,
             'participants' =>$participants,
+            'predictions' => $predictions,
         ]);
     }
 

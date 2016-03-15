@@ -34,7 +34,11 @@
         <tbody>
         @for($i = 1;$i <= $amount;$i++)
             <tr>
-                <td>{!! Form::select('participant' . $i,$participants,null,['class' => 'form-control']) !!}</td>
+                @if(count($predictions) > 0)
+                    <td>{!! Form::select('participant' . $i,$participants,$predictions[$i-1],['class' => 'form-control']) !!}</td>
+                @else
+                    <td>{!! Form::select('participant' . $i,$participants,null,['class' => 'form-control']) !!}</td>
+                @endif
                 @if(!$series->binary)
                     <td>{!! Form::number('points'  . $i,0,['class' => 'form-control']) !!}</td>
                 @else
