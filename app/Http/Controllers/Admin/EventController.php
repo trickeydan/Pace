@@ -239,7 +239,43 @@ class EventController extends Controller
         return view('series.events.edit',compact('event','series'));
     }
 
-    public function update(Series $series, Event $event){
-        
+    public function update(Series $series, Event $event,Request $request){
+        if($series->binary){
+            $this->binaryValidate($series,$request);
+
+            DB::beginTransaction();
+            $found = false;
+            foreach($event->eventpoints as $ep){
+                if($request->has('binary' . $ep->participable->id)){
+                    if($found) return redirect(route('event.edit',[$series->id,$event->id]))->withErrors('More than one winner selected!');
+                    $found = true;
+                    $ep->amount = 1;
+                }else{
+                    $ep->amount = 0;
+                }
+                $ep->save();
+            }
+            if($found){
+                DB::commit();
+                return redirect(route('series.view',$series->id))->with('status','Event updated.');
+            }else{
+                DB::rollback();
+                return redirect(route('event.edit',[$series->id,$event->id]))->withErrors('No Winner selected!');
+            }
+
+        }else{
+            $this->pointValidate($series,$request);
+            DB::beginTransaction();
+            foreach($event->eventpoints as $ep){
+                if($request->has('points' . $ep->participable->id)){
+                    $ep->amount = $request->get('points' . $ep->participable->id);
+                }else{
+                    return redirect(route('event.edit',[$series->id,$event->id]))->withErrors('Points Entry missing.');
+                }
+                $ep->save();
+            }
+            DB::commit();
+            return redirect(route('series.view',$series->id))->with('status','Event updated.');
+        }
     }
 }

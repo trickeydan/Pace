@@ -17,7 +17,7 @@
             </ul>
         </div>
     @endif
-    {!! Form::open(array('route' => ['event.update',$series->id],'role' => 'form')) !!}
+    {!! Form::open(array('route' => ['event.update',$series->id,$event->id],'role' => 'form')) !!}
     <table class="table table-striped table-responsive">
         <thead>
         <tr>
