@@ -69,11 +69,8 @@ class EventController extends Controller
             }
         }
 
-
-        session([
-            'amount' => $request->amount,
-            'name' => $request->name
-        ]);
+        $request->session()->flash('amount',$request->amount);
+        $request->session()->flash('name',$request->name);
         return view('series.events.create',[
             'amount' => $request->amount,
             'name' => $request->name,
