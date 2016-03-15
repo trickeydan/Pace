@@ -47,9 +47,12 @@
                 <tr>
                     <td>{{$event->name}}</td>
                     <td>{{$event->winner()}}</td>
-                    <td><a href="{{route('event.edit',[$series->id,$event->id])}}">Edit</a>&nbsp;&nbsp;<a href="">Delete</a></td>
+                    <td><a href="{{route('event.edit',[$series->id,$event->id])}}">Edit</a>&nbsp;&nbsp;<a href="{{route('event.delete',[$series->id,$event->id])}}">Delete</a></td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <br/>
+    <br/>
+    <a href="{{route('series.delete',$series->id)}}"><p class="btn btn-sm btn-danger text-center">Delete Series</p></a>
 @endsection

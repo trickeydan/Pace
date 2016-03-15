@@ -28,4 +28,9 @@ class SeriesController extends Controller
     public function view(Series $series){
         return view('series.view',compact('series'));
     }
+
+    public function delete(Series $series){
+        $series->delete();
+        return redirect(route('series.index'))->with('status','Series deleted.');
+    }
 }

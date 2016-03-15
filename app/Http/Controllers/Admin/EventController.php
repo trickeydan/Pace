@@ -278,4 +278,9 @@ class EventController extends Controller
             return redirect(route('series.view',$series->id))->with('status','Event updated.');
         }
     }
+
+    public function delete(Series $series, Event $event){
+        $event->delete();
+        return redirect(route('series.view',$series->id))->with('status','Event deleted.');
+    }
 }

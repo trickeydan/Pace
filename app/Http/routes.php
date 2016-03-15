@@ -59,6 +59,11 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
             'uses' => 'SeriesController@view'
         ]);
 
+        Route::get('{series}/delete',[
+            'as' => 'series.delete',
+            'uses' => 'SeriesController@delete'
+        ]);
+
         Route::get('create',[
             'as' => 'series.create',
             'uses' => 'SeriesController@create'
@@ -94,6 +99,11 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
             Route::post('{event}/edit',[
                 'as' => 'event.update',
                 'uses' => 'EventController@update'
+            ]);
+
+            Route::get('{event}/delete',[
+                'as' => 'event.delete',
+                'uses' => 'EventController@delete'
             ]);
 
         });
