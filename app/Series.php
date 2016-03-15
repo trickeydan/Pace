@@ -48,6 +48,16 @@ class Series extends Model
             }
         }
         arsort($arr);
-        return each($arr)['key'];
+        $count = 1;
+        $curr =  each($arr);
+        $text = $curr[0];
+        $next = each($arr);
+        while($next[1] == $curr[1]){
+            $text = $text . " " . $next[0];
+            $next = each($arr);
+            $count++;
+        }
+        if($count > 1) $text = "Draw: " . $text;
+        return $text;
     }
 }

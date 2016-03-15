@@ -25,6 +25,16 @@ class Event extends Model
     }
 
     public function winner(){
-        return $this->eventpoints()->orderBy('amount','desc')->first()->participable->name;
+        $top =  $this->eventpoints()->orderBy('amount','desc')->first();
+        $all = $this->eventpoints()->whereAmount($top->amount);
+        if($all->count() > 1){
+            $text = "Draw: ";
+            foreach($all->get() as $ep){
+                $text = $text . $ep->participable->name . " ";
+            }
+            return $text;
+        }else{
+            return $top->participable->name;
+        }
     }
 }

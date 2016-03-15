@@ -112,12 +112,7 @@ class EventController extends Controller
             }
 
             if($request->has('binary' . $i)){
-                if($winnerSet){
-                    DB::rollBack();
-                    return redirect(route('event.initial',$series->id))->withErrors('More than one winner selected!');
-                }else{
-                    $winnerSet = true;
-                }
+                $winnerSet = true;
                 $ep = new EventPoint();
                 $ep->event_id = $event->id; //Manual Association needed because polymorphics
                 $ep->amount = 1;

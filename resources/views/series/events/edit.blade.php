@@ -25,7 +25,7 @@
             @if(!$series->binary)
                 <td>No of Points</td>
             @else
-                <td>Winner? (Only select one)</td>
+                <td>Winner?(Will draw if multiple selected)</td>
             @endif
         </tr>
         </thead>
