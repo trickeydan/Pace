@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title',$event->series->name)
 @section('content')
-    <a href="{{route('eventstats.series',$event->series->id)}}">Back to {{$event->series->name}}</a>
+    <a href="{{route('events.series',$event->series->id)}}">Back to {{$event->series->name}}</a>
     <h2 class="text-center">Editing : {{$event->name}}</h2>
     @if (session('status'))
         <div class="alert alert-success">
