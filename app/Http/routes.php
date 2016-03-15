@@ -91,6 +91,11 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
                 'uses' => 'EventController@edit'
             ]);
 
+            Route::post('{event}/edit',[
+                'as' => 'event.update',
+                'uses' => 'EventController@update'
+            ]);
+
         });
     });
 

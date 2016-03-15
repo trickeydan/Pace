@@ -238,4 +238,8 @@ class EventController extends Controller
         if($event->series->id != $series->id) return redirect(route('series.view',$series->id))->withErrors('No such event in this series.');
         return view('series.events.edit',compact('event','series'));
     }
+
+    public function update(Series $series, Event $event){
+        
+    }
 }

@@ -17,7 +17,7 @@
             </ul>
         </div>
     @endif
-    {!! Form::open(array('route' => ['event.store',$series->id],'role' => 'form')) !!}
+    {!! Form::open(array('route' => ['event.update',$series->id],'role' => 'form')) !!}
     <table class="table table-striped table-responsive">
         <thead>
         <tr>
@@ -44,6 +44,6 @@
         </tbody>
     </table>
     <br/>
-    {!! Form::submit('Create Event',['class' => 'btn btn-lg btn-success']) !!}
+    {!! Form::submit('Update Event',['class' => 'btn btn-lg btn-success']) !!}
     {!! Form::close() !!}
 @endsection
