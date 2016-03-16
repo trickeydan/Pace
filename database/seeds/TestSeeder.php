@@ -8,7 +8,7 @@ use Pace\Tutorgroup;
 use Pace\User;
 use Pace\Point;
 use Pace\Teacher;
-use Pace\EventCat;
+use Pace\Series;
 use Pace\EventPoint;
 use Pace\Event;
 class TestSeeder extends Seeder
@@ -83,19 +83,19 @@ class TestSeeder extends Seeder
                 }
             }
 
-            $cat = new EventCat();
-            $cat->name = "Tutor Group Challenge - Year " . $year->name;
-            $cat->save();
+            $ser = new Series();
+            $ser->name = "Tutor Group Challenge - Year " . $year->name;
+            $ser->affectTotals = true;
+            $ser->binary = false;
+            $ser->awardedTo = 'tutorgroup';
+            $ser->save();
             for ($j = 1; $j <= 4; $j++) {
                 $event = new Event();
-                $event->affectTotals = true;
                 $event->name = "Number " . $j;
-                $event->user_id = 1;
-                $cat->events()->save($event);
+                $ser->events()->save($event);
                 foreach($year->tutorgroups as $tg){
                     $ep = new EventPoint();
-                    $ep->amount = 1;
-                    $ep->description = "Came First";
+                    $ep->amount = $faker->numberBetween(0,20);
                     $ep->event_id = $event->id;
                     $ep->participable()->associate($tg);
                     $ep->save();

@@ -14,9 +14,4 @@ class AdminController extends Controller
     public function home(){
         return view('stats');
     }
-
-    public function cacheupdate(){
-        ImportManager::cache();
-        return redirect(route('admin.pupils.index'))->with('status','Cache Updated');
-    }
 }

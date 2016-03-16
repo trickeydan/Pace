@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title','Statistics')
+@section('title','House Points')
 @section('content')
-    <h2 class="text-center">Statistics</h2>
+    <h2 class="text-center">House Points</h2>
     <div class="row">
         <div class="col-sm-6">
             <div id="house_chart"></div>

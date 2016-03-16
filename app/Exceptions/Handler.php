@@ -45,6 +45,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
+        /*if ($e instanceof ModelNotFoundException){
+            abort(404);
+        }*/
+
         if($this->isHttpException($e))
         {
             switch ($e->getStatusCode()) {
@@ -63,7 +68,13 @@ class Handler extends ExceptionHandler
         }
         else
         {
-            return parent::render($request, $e);
+            if(env('APP_DEBUG')){
+                return parent::render($request, $e);
+            }else{
+                return \Response::view('errors.general',array());
+            }
+
+
         }
     }
 }

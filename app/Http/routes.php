@@ -7,15 +7,31 @@ Route::bind('eventcat', function($value) {
     return \Pace\EventCat::whereId($value)->first();
 });
 
+
 Route::group(['middleware' => ['auth','strict:pupil']], function () {
     Route::get('/',[ //My PACE Points
         'as' => 'home',
         'uses' => 'MainController@home',
     ]);
 
-    Route::get('stats',[ //My PACE Points
+    Route::get('housepoints',[ //My PACE Points
         'as' => 'stats',
         'uses' => 'MainController@stats'
+    ]);
+
+    Route::get('competitions',[ //My PACE Points
+        'as' => 'eventstats',
+        'uses' => 'MainController@eventstats'
+    ]);
+
+    Route::get('competitions/{series}',[ //My PACE Points
+        'as' => 'eventstats.series',
+        'uses' => 'MainController@eventstatsseries'
+    ]);
+
+    Route::get('competitions/event/{event}',[ //My PACE Points
+        'as' => 'eventstats.series.event',
+        'uses' => 'MainController@eventstatsseriesevent'
     ]);
 
     Route::get('feedback',[ //Pupil Feedback
@@ -35,40 +51,32 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
         'uses' => 'AdminController@home'
     ]);
 
-    Route::group(['prefix' => 'events'],function(){
+    Route::group(['prefix' => 'series'],function(){
 
         Route::get('/',[
-            'as' => 'events.index',
-            'uses' => 'EventController@index'
+            'as' => 'series.index',
+            'uses' => 'SeriesController@index'
         ]);
 
-        Route::get('{eventcat}/view',[
-            'as' => 'events.view',
-            'uses' => 'EventController@view'
+        Route::get('{series}/view',[
+            'as' => 'series.view',
+            'uses' => 'SeriesController@view'
+        ]);
+
+        Route::get('{series}/delete',[
+            'as' => 'series.delete',
+            'uses' => 'SeriesController@delete'
         ]);
 
         Route::get('create',[
-            'as' => 'events.create',
-            'uses' => 'EventController@create'
+            'as' => 'series.create',
+            'uses' => 'SeriesController@create'
         ]);
 
         Route::post('create',[
-            'as' => 'events.store',
-            'uses' => 'EventController@store'
+            'as' => 'series.store',
+            'uses' => 'SeriesController@store'
         ]);
-
-        Route::get('{eventcat}/createsub',[
-            'as' => 'events.sub.create',
-            'uses' => 'SubEventController@create'
-        ]);
-
-        Route::post('{eventcat}/createsub/first',[
-            'as' => 'events.sub.storeFirst',
-            'uses' => 'SubEventController@storeFirst'
-        ]);
-
-
-
     });
 
 });
@@ -91,7 +99,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
             'uses' => 'PupilController@index'
         ]);
 
-        Route::get('create',[
+        /*Route::get('create',[
             'as' => 'admin.pupils.create',
             'uses' => 'PupilController@create'
         ]);
@@ -99,7 +107,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
         Route::post('create',[
             'as' => 'admin.pupils.store',
             'uses' => 'PupilController@store'
-        ]);
+        ]);*/
 
         Route::post('/',[
             'as' => 'admin.pupils.search',
@@ -111,7 +119,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
             'uses' => 'PupilController@view'
         ]);
 
-        Route::post('{user}/updatetg',[
+        /*Route::post('{user}/updatetg',[
             'as' => 'admin.pupils.updatetg',
             'uses' => 'PupilController@updatetg'
         ]);
@@ -129,9 +137,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
         Route::post('{user}/edit',[
             'as' => 'admin.pupils.update',
             'uses' => 'PupilController@update'
-        ]);
-
-
+        ]);*/
 
     });
 

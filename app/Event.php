@@ -16,9 +16,9 @@ class Event extends Model
         'affectTotals'
     ];
 
-    public function eventcat()
+    public function series()
     {
-        return $this->belongsTo('Pace\EventCat');
+        return $this->belongsTo('Pace\Series');
     }
 
     public function eventpoints()
@@ -27,6 +27,16 @@ class Event extends Model
     }
 
     public function winner(){
-        return "Not Implemented Yet";
+        $top =  $this->eventpoints()->orderBy('amount','desc')->first();
+        $all = $this->eventpoints()->whereAmount($top->amount);
+        if($all->count() > 1){
+            $text = "Draw: ";
+            foreach($all->get() as $ep){
+                $text = $text . $ep->participable->name . " ";
+            }
+            return $text;
+        }else{
+            return $top->participable->name;
+        }
     }
 }

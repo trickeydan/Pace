@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title',$event->name)
+@section('title',$series->name)
 @section('content')
-    <a href="{{route('events.index')}}">Back to all events</a>
-    <h2 class="text-center">Event: {{$event->name}}</h2>
+    <a href="{{route('eventstats')}}">Back to all competitions</a>
+    <h2 class="text-center">{{$series->name}}</h2>
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
@@ -17,10 +17,7 @@
             </ul>
         </div>
     @endif
-    <h3 class="text-center">Sub-Events</h3>
-    <p class="text-right">
-        <a href="{{route('events.sub.create',$event->id)}}" class="btn">New Sub-Event</a>&nbsp;&nbsp;
-    </p>
+    <h3 class="text-center">Events</h3>
     <table class="table table-striped table-responsive">
         <thead>
             <tr>
@@ -30,11 +27,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($event->events as $subevent)
+            @foreach($series->events as $event)
                 <tr>
-                    <td>{{$subevent->name}}</td>
-                    <td>{{$subevent->winner()}}</td>
-                    <td>View&nbsp;&nbsp;Edit</td>
+                    <td>{{$event->name}}</td>
+                    <td>{{$event->winner()}}</td>
+                    <td><a href="{{route('eventstats.series.event',$event->id)}}">Details</a></td>
                 </tr>
             @endforeach
         </tbody>

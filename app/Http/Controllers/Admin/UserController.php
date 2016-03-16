@@ -27,7 +27,7 @@ class UserController extends Controller
             'email' => $request->email,
             'name' => $request->name,
             'password' => bcrypt($request->password),
-            'is_admin' => true,
+            'user_level' => 3,
         ]);
         return redirect(route('admin.users.index'))->with('status','New Admin User Created');
     }
