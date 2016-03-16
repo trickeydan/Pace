@@ -3,10 +3,6 @@
 Route::bind('user', function($value) {
     return \Pace\User::whereEmailhash(hash('sha256',$value))->first();
 });
-Route::bind('eventcat', function($value) {
-    return \Pace\EventCat::whereId($value)->first();
-});
-
 
 Route::group(['middleware' => ['auth','strict:pupil']], function () {
     Route::get('/',[ //My PACE Points
@@ -77,6 +73,40 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
             'as' => 'series.store',
             'uses' => 'SeriesController@store'
         ]);
+
+        Route::group(['prefix' => '{series}/event'],function(){
+
+            Route::get('create',[
+                'as' => 'event.initial',
+                'uses' => 'EventController@initial'
+            ]);
+
+            Route::post('create/2',[
+                'as' => 'event.create',
+                'uses' => 'EventController@create'
+            ]);
+
+            Route::post('create/3',[
+                'as' => 'event.store',
+                'uses' => 'EventController@store'
+            ]);
+
+            Route::get('{event}/edit',[
+                'as' => 'event.edit',
+                'uses' => 'EventController@edit'
+            ]);
+
+            Route::post('{event}/edit',[
+                'as' => 'event.update',
+                'uses' => 'EventController@update'
+            ]);
+
+            Route::get('{event}/delete',[
+                'as' => 'event.delete',
+                'uses' => 'EventController@delete'
+            ]);
+
+        });
     });
 
 });
@@ -188,4 +218,3 @@ Route::group(['middleware' => ['throttle:60']], function () {
         'uses' => 'MainController@publicstats'
     ]);
 });
-
