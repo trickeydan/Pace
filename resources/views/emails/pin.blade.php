@@ -1,5 +1,6 @@
 @extends('layouts.email')
 @section('content')
-    <p>Hello, {{$user->name}}<br/>
-    Your pin number is: {{$user->id}}</p>
+    <h1>Hi, {{$user->name}}</h1>
+    <p class="lead">Your Pin Number for KLBS Pace Point System is: {{$user->id}}</p>
+    <p>You should have already been given instructions on how to access the system.</p>
 @endsection
