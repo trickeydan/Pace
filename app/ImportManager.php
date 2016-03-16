@@ -24,7 +24,7 @@ class ImportManager
 
     public static function initialMail()
     {
-        foreach(User::where('user_level',1)->get() as $user){
+        foreach(User::whereUserLevel(1)->get() as $user){
             $user->sendPin();
         }
     }
