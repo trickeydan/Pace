@@ -50,6 +50,9 @@ class User extends Authenticatable
 
     public function updatePoints(){
         $this->currPoints = $this->points->sum('amount');
+        foreach($this->eventpoints as $ep){
+            if($ep->affectTotals) $this->currpoints += $ep->amount;
+        }
         $this->save();
     }
 
