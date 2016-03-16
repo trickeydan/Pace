@@ -36,4 +36,26 @@
             @endforeach
         </tbody>
     </table>
+    <h3 class="text-center">Participants</h3>
+    <table class="table table-striped table-responsive">
+        <thead>
+        <tr>
+            <td>Name</td>
+            @if($series->binary)
+                <td>Wins</td>
+            @else
+                <td>Points</td>
+            @endif
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($series->getParts() as $name => $amount)
+            <tr>
+                <td>{{$name}}</td>
+                <td>{{$amount}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
 @endsection

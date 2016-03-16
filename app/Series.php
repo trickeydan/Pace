@@ -35,8 +35,7 @@ class Series extends Model
         return $conversions[$this->awardedTo];
     }
 
-    public function winner(){
-        if($this->events()->count() == 0) return "N/A";
+    public function getParts(){
         $arr = array();
         foreach($this->events as $e){
             foreach($e->eventpoints as $ep){
@@ -48,6 +47,12 @@ class Series extends Model
 
             }
         }
+        return $arr;
+    }
+
+    public function winner(){
+        if($this->events()->count() == 0) return "N/A";
+        $arr = $this->getParts();
         arsort($arr);
         $count = 1;
         $curr =  each($arr);
