@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth','strict:pupil']], function () {
         'uses' => 'MainController@eventstatsseriesevent'
     ]);
 
-    Route::get('feedback',[ //Pupil Feedback
+    /*Route::get('feedback',[ //Pupil Feedback
         'as' => 'feedback',
         'uses' => 'MainController@feedback'
     ]);
@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth','strict:pupil']], function () {
     Route::post('feedback',[ //Pupil Feedback
         'as' => 'feedback.store',
         'uses' => 'MainController@feedbackStore'
-    ]);
+    ]);*/
 });
 
 Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['auth','check:teacher']], function () {

@@ -82,13 +82,12 @@
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'home') echo 'class="active"';?>><a href="{{route('home')}}">My PACE Points</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'stats') echo 'class="active"';?>><a href="{{route('stats')}}" >House Points</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'eventstats') echo 'class="active"';?>><a href="{{route('eventstats')}}" >Competitions</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'feedback') echo 'class="active"';?>><a href="{{route('feedback')}}">Feedback</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
                         @endif
                     </ul>
                     <div class="form-bottom">
                         @yield('content')
-                        <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> D.Trickey</small></h6>
+                        <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> D.Trickey</small>&nbsp;<small><a href="{{env('BUGTRACKER')}}">Bug Tracker</a></small></h6>
                     </div>
                 </div>
             </div>

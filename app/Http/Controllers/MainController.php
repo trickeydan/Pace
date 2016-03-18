@@ -41,7 +41,7 @@ class MainController extends Controller
         return view('eventstatsseriesevent',compact('event'));
     }
 
-    public function feedback(){
+    /*public function feedback(){
         return view('feedback');
     }
 
@@ -52,5 +52,5 @@ class MainController extends Controller
             $m->to(env('feedbackemail'))->subject('Pace Point Feedback');
         });
         return redirect(Auth::User()->homeUrl())->with('status','Feedback Submitted, Thanks.');
-    }
+    }*/
 }

@@ -39,6 +39,6 @@
         </form>
         <p class="text-center"><a href="{{route('forgot')}}" class="text-danger">Forgot your pin?</a></p>
 
-        <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> D.Trickey</small></h6>
+        <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> D.Trickey</small>&nbsp;<small><a href="{{env('BUGTRACKER')}}">Bug Tracker</a></small></h6>
     </div>
 @endsection
