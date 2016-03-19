@@ -62,12 +62,14 @@ class EventController extends Controller
                $participants[$house->id] = $house->name;
            }
        }
-
-        if($series->events()->first()->eventpoints()->count() == $request->amount){
-            foreach($series->events()->first()->eventpoints as $ep){
-                $predictions[count($predictions)] = $ep->participable->id;
+        if($series->events()->count() > 0){
+            if($series->events()->first()->eventpoints()->count() == $request->amount){
+                foreach($series->events()->first()->eventpoints as $ep){
+                    $predictions[count($predictions)] = $ep->participable->id;
+                }
             }
         }
+
 
         $request->session()->flash('amount',$request->amount);
         $request->session()->flash('name',$request->name);
