@@ -59,7 +59,7 @@
                     </div>
                     <div class="form-bottom">
                         @yield('content')
-                        <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> D.Trickey</small>&nbsp;<small><a href="{{env('BUGTRACKER')}}">Bug Tracker</a></small></h6>
+                        <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> <a href="https://trickey.xyz">D.Trickey</a></small>&nbsp;<small><a href="{{env('BUGTRACKER')}}">Bug Tracker</a></small></h6>
                     </div>
                 </div>
             </div>
