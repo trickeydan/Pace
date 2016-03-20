@@ -7,6 +7,15 @@
             {{ session('status') }}
         </div>
     @endif
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <p class="text-center btn"><a href="{{route('admin.users.create')}}">New Admin</a></p>
     <p class="text-right btn"><a href="{{route('admin.users.changepassword')}}">Change My Password</a></p>
     <table class="table table-striped table-responsive">
@@ -22,7 +31,7 @@
                 <tr>
                     <td>{{$user->email}}</td>
                     <td>{{$user->name}}</td>
-                    <td>Delete</td>
+                    <td><a href="{{route('admin.users.delete',$user->email)}}">Delete</a></td>
                 </tr>
             @endforeach
         </tbody>
