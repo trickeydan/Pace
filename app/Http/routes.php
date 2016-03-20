@@ -186,6 +186,20 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
             'as' => 'admin.users.store',
             'uses' => 'UserController@store'
         ]);
+
+        Route::get('changepassword', [
+            'as' => 'admin.users.changepassword',
+            'uses' => 'UserController@changepassword'
+        ]);
+        Route::post('changepassword', [
+            'as' => 'admin.users.passwordStore',
+            'uses' => 'UserController@passwordStore'
+        ]);
+
+        Route::get('{user}/delete', [
+            'as' => 'admin.users.delete',
+            'uses' => 'UserController@delete'
+        ]);
     });
 });
 
