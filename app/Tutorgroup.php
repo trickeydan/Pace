@@ -26,7 +26,7 @@ class Tutorgroup extends Model
         }
         $this->currPoints =  $total;
         foreach($this->eventpoints as $ep){
-            if($ep->affectTotals) $this->currpoints += $ep->amount;
+            if($ep->event->affectTotals) $this->currpoints += $ep->amount;
         }
         $this->save();
     }
