@@ -137,6 +137,13 @@ class EventController extends Controller
                 $ep->participable()->associate($model);
                 $ep->save();
             }
+            $model->updatePoints();
+            if(isset($model->tutorgroup)){
+                $model->tutorgroup->updatePoints();
+            }
+            if(isset($model->year)){
+                $model->year->updatePoints();
+            }
             $used[count($used)] = $model->id;
         }
         if($winnerSet){
