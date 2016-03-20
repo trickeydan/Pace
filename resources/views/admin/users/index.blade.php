@@ -7,12 +7,14 @@
             {{ session('status') }}
         </div>
     @endif
-    <p class="text-center btn btn-primary"><a href="{{route('admin.users.create')}}">New Admin</a></p>
+    <p class="text-center btn"><a href="{{route('admin.users.create')}}">New Admin</a></p>
+    <p class="text-right btn"><a href="{{route('admin.users.changepassword')}}">Change My Password</a></p>
     <table class="table table-striped table-responsive">
         <thead>
             <tr>
                 <th>Email</th>
                 <th>Name</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +22,7 @@
                 <tr>
                     <td>{{$user->email}}</td>
                     <td>{{$user->name}}</td>
+                    <td>Delete</td>
                 </tr>
             @endforeach
         </tbody>
