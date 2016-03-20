@@ -194,7 +194,7 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
 
         Route::get('{user}/delete', [
             'as' => 'admin.users.delete',
-            'uses' => 'UserController@create'
+            'uses' => 'UserController@delete'
         ]);
     });
 });
