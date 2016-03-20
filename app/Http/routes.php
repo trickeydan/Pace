@@ -189,7 +189,11 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
 
         Route::get('changepassword', [
             'as' => 'admin.users.changepassword',
-            'uses' => 'UserController@create'
+            'uses' => 'UserController@changepassword'
+        ]);
+        Route::post('changepassword', [
+            'as' => 'admin.users.passwordStore',
+            'uses' => 'UserController@passwordStore'
         ]);
 
         Route::get('{user}/delete', [

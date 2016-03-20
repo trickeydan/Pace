@@ -4,11 +4,12 @@ namespace Pace\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Hash;
 use Pace\Http\Requests;
 use Pace\Http\Controllers\Controller;
 use Pace\User;
 use Pace\Http\Requests\MakeUserRequest;
-use Pace\Http\Requests\DeleteUserRequest;
+use Pace\Http\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -41,4 +42,14 @@ class UserController extends Controller
         return redirect(route('admin.users.index'))->with('status','User Deleted');
     }
 
+    public function changepassword(){
+        return view('admin.users.changepassword');
+    }
+
+    public function passwordStore(ChangePasswordRequest $request){
+        if(!Hash::check($request->old_password,Auth::User()->password))return redirect(route('admin.users.changepassword'))->withErrors('Your Password Was incorrect.');
+        Auth::User()->password = bcrypt($request->password);
+        Auth::User()->save();
+        return redirect(route('admin.users.index'))->with('status','Password Changed');
+    }
 }
