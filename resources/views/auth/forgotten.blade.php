@@ -27,7 +27,6 @@
             <button type="submit" class="btn">Send Pin</button>
         </form>
         <p class="text-center"><a href="{{route('login')}}" class="text-success">Back to Login</a></p>
-
-        <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> <a href="https://trickey.xyz">D.Trickey</a></small>&nbsp;<small><a href="{{env('BUGTRACKER')}}">Bug Tracker</a></small></h6>
+        @include('layouts.footer')
     </div>
 @endsection
