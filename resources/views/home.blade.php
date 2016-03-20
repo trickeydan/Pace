@@ -10,7 +10,9 @@
         <div class="col-sm-6"><h3 class="text-center">Total PACE Points: {{Auth::User()->getPoints()}}</h3></div>
         <div class="col-sm-6"><h3 class="text-center">PACE Points this week: {{Auth::User()->pointsThisWeek()}}</h3></div>
         @foreach(\Pace\PointType::all() as $pt)
-            <div class="col-sm-4"><h4 class="text-center">{{$pt->name}}: {{Auth::User()->points()->where('pointtype_id',$pt->id)->sum('amount')}}</h4></div>
+            @if(Auth::User()->points()->where('pointtype_id',$pt->id)->sum('amount') >0)
+                <div class="col-sm-4"><h4 class="text-center">{{$pt->name}}: {{Auth::User()->points()->where('pointtype_id',$pt->id)->sum('amount')}}</h4></div>
+            @endif
         @endforeach
     </div>
     <div class="row row-eq-height">

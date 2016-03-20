@@ -87,7 +87,7 @@
                     </ul>
                     <div class="form-bottom">
                         @yield('content')
-                        <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> D.Trickey</small>&nbsp;<small><a href="{{env('BUGTRACKER')}}">Bug Tracker</a></small></h6>
+                        @include('layouts.footer')
                     </div>
                 </div>
             </div>

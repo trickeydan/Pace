@@ -9,7 +9,7 @@
         <div class="col-sm-6">
             <div id="year_chart"></div>
         </div>
-        @foreach(\Pace\Year::all() as $year)
+        @foreach(\Pace\Year::orderBy('name','ASC')->get() as $year)
             <div class="col-sm-6">
                 <div id="year{{$year->id}}_chart"></div>
             </div>
