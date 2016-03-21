@@ -88,7 +88,7 @@ return [
     |
     */
 
-    'emailhash' => 'That email is already used.',
+   // 'emailhash' => 'That email is already used.',
 
     /*
     |--------------------------------------------------------------------------

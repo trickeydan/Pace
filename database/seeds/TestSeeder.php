@@ -30,7 +30,6 @@ class TestSeeder extends Seeder
         $user = new Pace\User();
         $user->name = "Dan Trickey";
         $user->email = "dan@dan.com";
-        $user->emailhash = hash('sha256',$user->email);
         $user->password = bcrypt('password');
         $user->user_level = 2;
         $user->save();
@@ -57,7 +56,6 @@ class TestSeeder extends Seeder
                     $ln = $faker->lastName();
                     $user->name = $fn . ' ' . $ln;
                     $user->email = (22 - $i) . substr($fn,0,1) .  $ln . '@klbschool.org.uk';
-                    $user->emailhash = hash('sha256',$user->email);
                     $user->id = $faker->numberBetween(1000,9999);
                     if(User::whereId($user->id)->count()==0) {
                         $user->password = bcrypt($user->id);
@@ -65,7 +63,7 @@ class TestSeeder extends Seeder
                         $user->user_level = 1;
                         $user->currPoints = 0;
                         $user->house_id = House::all()->random(1)->id;
-                        if (User::whereEmailhash(hash('sha256', $user->email))->count() <= 0) {
+                        if (User::whereEmail($user->email)->count() <= 0) {
                             $user->save();
                             for ($l = 1; $l <= random_int(0, 12); $l++) {
                                 $point = new Point();
