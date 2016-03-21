@@ -30,7 +30,6 @@ class TestSeeder extends Seeder
         $user = new Pace\User();
         $user->name = "Dan Trickey";
         $user->email = "dan@dan.com";
-        $user->emailhash = hash('sha256',$user->email);
         $user->password = bcrypt('password');
         $user->user_level = 2;
         $user->save();
@@ -64,7 +63,7 @@ class TestSeeder extends Seeder
                         $user->user_level = 1;
                         $user->currPoints = 0;
                         $user->house_id = House::all()->random(1)->id;
-                        if (User::whereEmailhash(hash('sha256', $user->email))->count() <= 0) {
+                        if (User::whereEmail($user->email)->count() <= 0) {
                             $user->save();
                             for ($l = 1; $l <= random_int(0, 12); $l++) {
                                 $point = new Point();
