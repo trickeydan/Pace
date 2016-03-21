@@ -94,13 +94,12 @@ class CustomUserProvider implements UserProvider
         // Eloquent User "model" that will be utilized by the Guard instances.
         $query = $this->createModel()->newQuery();
 
-        /*foreach ($credentials as $key => $value) {
+        foreach ($credentials as $key => $value) {
             if (! Str::contains($key, 'password')) {
                 $query->where($key, $value);
             }
-        }*/
+        }
 
-        $query->where('emailhash',hash('sha256',$credentials['email']));
 
         return $query->first();
     }
