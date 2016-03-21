@@ -1,7 +1,7 @@
 <?php
 
 Route::bind('user', function($value) {
-    return \Pace\User::whereEmailhash(hash('sha256',$value))->first();
+    return \Pace\User::whereEmail($value)->first();
 });
 
 Route::group(['middleware' => ['auth','strict:pupil']], function () {

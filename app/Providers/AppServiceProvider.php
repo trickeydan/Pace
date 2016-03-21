@@ -15,10 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Validator::extend('emailhash', function($attribute, $value, $parameters, $validator) {
+       /* Validator::extend('emailhash', function($attribute, $value, $parameters, $validator) {
             $hash = hash('sha256',$value);
             return User::whereEmailhash($hash)->count() == 0;
-        });
+        });*/
     }
 
     /**
