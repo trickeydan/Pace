@@ -24,7 +24,7 @@ class PupilCreateRequest extends Request
     public function rules()
     {
         return [
-            'email' => 'required|max:50|min:2|email|unique,users,email',
+            'email' => 'required|max:50|min:2|email|unique:users,email',
             'name' => 'required|max:50|min:2',
             'adno' => 'required|integer|unique:users,id',
             'tutorgroup' => 'required|exists:tutorgroups,id',
