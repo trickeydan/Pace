@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'pacepoints@klb.com', 'name' => 'KLBS Pace Points'],
+    'from' => ['address' => env('mail'), 'name' => 'Pace Points'],
 
     /*
     |--------------------------------------------------------------------------

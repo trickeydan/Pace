@@ -54,13 +54,13 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => 'localhost',
-            'database'  => 'pace',
-            'username'  => 'root',
-            'password'  => '',
+            'host'      => env('DB_HOST'),
+            'database'  => env('DB_DATBASE'),
+            'username'  => env('DB_USERNAME'),
+            'password'  => env('DB_PASSWORD'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
+            'prefix'    => env('DB_PREFIX'),
             'strict'    => false,
             'engine'    => null,
         ],
