@@ -1,9 +1,9 @@
 <?php
 
-namespace Pace\Http\Controllers;
+namespace Pace\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
+use Pace\Http\Controllers\Controller;
 use Pace\Http\Requests;
 use Pace\Tutorgroup;
 
