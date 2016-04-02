@@ -60,7 +60,7 @@
                             @elseif(Auth::User()->is_teacher())
                                 <p>Hello, {{Auth::User()->name}} TEACHER</p>
                             @else
-                                <p>Hello, {{Auth::User()->name}}&nbsp;&nbsp;Tutor Group: {{Auth::User()->tutorgroup->name}}&nbsp;&nbsp;Year: {{Auth::User()->tutorgroup->year->name}}&nbsp;&nbsp;House: {{Auth::User()->house->name}}</p>
+                                <p>Hello, {{Auth::User()->name}}&nbsp;&nbsp;{{Auth::User()->tutorgroup->name}}&nbsp;&nbsp;{{Auth::User()->house->name}}</p>
                             @endif
                         </div>
                         <div class="form-top-right">
