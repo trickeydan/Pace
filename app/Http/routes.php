@@ -5,7 +5,7 @@ Route::bind('user', function($value) {
 });
 
 Route::bind('tutorgroup', function($value) {
-    return \Pace\Tutorgroup::whereId($value)->first();
+    return \Pace\Tutorgroup::whereName($value)->first();
 });
 
 Route::group(['middleware' => ['auth','strict:pupil']], function () {

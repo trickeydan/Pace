@@ -55,7 +55,7 @@
                     <td>{{$pupil->name}}</td>
                     <td>
                         @if(isset($pupil->tutorgroup->name) && $pupil->tutorgroup->name != null)
-                            <a href="{{route('admin.tutorgroups.view',$pupil->tutorgroup->id)}}">
+                            <a href="{{route('admin.tutorgroups.view',$pupil->tutorgroup->name)}}">
                                 {{$pupil->tutorgroup->name}}
                             </a>
                         @else
