@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-sm-12 input-group">
             {!! Form::open(array('route' => 'admin.pupils.search','role' => 'form')) !!}
-            <input type="text" name="query" class="search-query form-control" placeholder="Enter Adno to find Pupil" />
+            <input type="text" name="query" class="search-query form-control" placeholder="Enter Adno or Email to find Pupil" value="{{session('lastquery')}}"/>
             <span class="input-group-btn">
                 <button class="btn btn-danger" type="submit"><span class=" glyphicon glyphicon-search"></span></button>
             </span>
