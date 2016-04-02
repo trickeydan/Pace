@@ -64,7 +64,7 @@ class PupilController extends Controller
             return redirect(route('admin.pupils.view',$pupil->email));
         }
         else {
-            return redirect(route('admin.pupils.index'))->withErrors('No Results found. Please check spelling');
+            return redirect(route('admin.pupils.index'))->withErrors('No Results found. Please check spelling')->with('lastquery',$query);
         }
     }
 
