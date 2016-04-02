@@ -53,7 +53,15 @@
                 <tr>
                     <td>{{$pupil->email}}</td>
                     <td>{{$pupil->name}}</td>
-                    <td>{{$pupil->tutorgroup->name or 'No TG'}}</td>
+                    <td>
+                        @if(isset($pupil->tutorgroup->name) && $pupil->tutorgroup->name != null)
+                            <a href="{{route('admin.tutorgroups.view',$pupil->tutorgroup->name)}}">
+                                {{$pupil->tutorgroup->name}}
+                            </a>
+                        @else
+                            No TG
+                        @endif
+                    </td>
                     <td>{{$pupil->house->name or 'No House'}}</td>
                     @if($request->get('pin') == "show")
                         <td>{{$pupil->id}}</td>
