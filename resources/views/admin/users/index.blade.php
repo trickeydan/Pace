@@ -31,7 +31,13 @@
                 <tr>
                     <td>{{$user->email}}</td>
                     <td>{{$user->name}}</td>
-                    <td><a href="{{route('admin.users.delete',$user->email)}}">Delete</a></td>
+                    <td>
+                        @if($user->id != \Illuminate\Support\Facades\Auth::User()->id)
+                            <a href="{{route('admin.users.delete',$user->email)}}">Delete</a>
+                        @else
+                            Delete
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>

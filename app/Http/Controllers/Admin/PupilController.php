@@ -17,7 +17,7 @@ class PupilController extends Controller
 {
     public function index(Request $request){
 
-        $pupils = User::where('user_level',1)->orderBy('name','ASC')->paginate(30);
+        $pupils = User::where('user_level',1)->orderBy('email','ASC')->paginate(30);
 
         return view('admin.pupils.index',[
             'pupils' => $pupils,
@@ -59,8 +59,15 @@ class PupilController extends Controller
         if(User::whereId($query)->count() > 0){
             $pupil = User::whereId($query)->first();
             return redirect(route('admin.pupils.view',$pupil->email));
-        }else{
-            return redirect(route('admin.pupils.index'))->withErrors('No Results found. Please check spelling');
+        }elseif(User::whereEmail($query)->count() > 0){
+            $pupil = User::whereEmail($query)->first();
+            return redirect(route('admin.pupils.view',$pupil->email));
+        }elseif(User::whereEmail($query . '@klbschool.org.uk')->count() > 0){
+            $pupil = User::whereEmail($query . '@klbschool.org.uk')->first();
+            return redirect(route('admin.pupils.view',$pupil->email));
+        }
+        else {
+            return redirect(route('admin.pupils.index'))->withErrors('No Results found. Please check spelling')->with('lastquery',$query);
         }
     }
 
@@ -75,10 +82,13 @@ class PupilController extends Controller
             $hs[$h->id] = $h->name;
         }
 
+        $points = \Pace\Point::where('user_id',$user->id)->orderBy('date','desc')->paginate(15);
+
         return view('admin.pupils.view',[
             'pupil' => $user,
             'tgs' => $tgs,
             'houses' => $hs,
+            'points' => $points,
         ]);
     }
 

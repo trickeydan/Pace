@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-sm-12 input-group">
             {!! Form::open(array('route' => 'admin.pupils.search','role' => 'form')) !!}
-            <input type="text" name="query" class="search-query form-control" placeholder="Enter Adno to find Pupil" />
+            <input type="text" name="query" class="search-query form-control" placeholder="Enter Adno, Username or Email to find Pupil" value="{{session('lastquery')}}"/>
             <span class="input-group-btn">
                 <button class="btn btn-danger" type="submit"><span class=" glyphicon glyphicon-search"></span></button>
             </span>
@@ -53,7 +53,15 @@
                 <tr>
                     <td>{{$pupil->email}}</td>
                     <td>{{$pupil->name}}</td>
-                    <td>{{$pupil->tutorgroup->name or 'No TG'}}</td>
+                    <td>
+                        @if(isset($pupil->tutorgroup->name) && $pupil->tutorgroup->name != null)
+                            <a href="{{route('admin.tutorgroups.view',$pupil->tutorgroup->name)}}">
+                                {{$pupil->tutorgroup->name}}
+                            </a>
+                        @else
+                            No TG
+                        @endif
+                    </td>
                     <td>{{$pupil->house->name or 'No House'}}</td>
                     @if($request->get('pin') == "show")
                         <td>{{$pupil->id}}</td>
