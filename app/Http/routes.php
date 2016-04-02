@@ -171,6 +171,15 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
 
     });
 
+    Route::group(['prefix' => 'tutorgroups'],function(){
+
+        Route::get('view',[
+            'as' => 'admin.tutorgroups.view',
+            'uses' => 'TGController@view'
+        ]);
+
+    });
+
     Route::group(['prefix' => 'admins'],function() { //For Admin Users
         Route::get('/', [
             'as' => 'admin.users.index',
