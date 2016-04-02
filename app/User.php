@@ -10,7 +10,7 @@ class User extends Authenticatable
     use Encryptable;
 
     protected $fillable = [
-        'name', 'email', 'password','pin','is_admin','id'
+        'name', 'email', 'password','pin','user_level','id'
     ];
 
     protected $encryptable = [
