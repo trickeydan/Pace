@@ -29,7 +29,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($tg->users as $pupil)
+        @foreach($tg->users()->orderBy('email')->get() as $pupil)
             <tr>
                 <td>{{$pupil->email}}</td>
                 <td>{{$pupil->name}}</td>
