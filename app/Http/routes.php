@@ -4,6 +4,10 @@ Route::bind('user', function($value) {
     return \Pace\User::whereEmail($value)->first();
 });
 
+Route::bind('tutorgroup', function($value) {
+    return \Pace\Tutorgroup::whereId($value)->first();
+});
+
 Route::group(['middleware' => ['auth','strict:pupil']], function () {
     Route::get('/',[ //My PACE Points
         'as' => 'home',
