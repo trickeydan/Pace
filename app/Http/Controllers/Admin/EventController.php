@@ -37,8 +37,8 @@ class EventController extends Controller
                return redirect(route('event.initial',$series->id))->withErrors('Participant count exceeds available participants');
            }
 
-           foreach(User::where('user_level','1')->get() as $pupil){
-               $participants[$pupil->id] = $pupil->name;
+           foreach(User::where('user_level','1')->orderBy('email')->get() as $pupil){
+               $participants[$pupil->id] = $pupil->tutorgroup->year->name . ' ' . $pupil->name;
            }
 
        }
