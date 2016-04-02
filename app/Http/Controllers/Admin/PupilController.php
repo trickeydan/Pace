@@ -79,10 +79,13 @@ class PupilController extends Controller
             $hs[$h->id] = $h->name;
         }
 
+        $points = \Pace\Point::where('user_id',$user->id)->orderBy('date','desc')->paginate(15);
+
         return view('admin.pupils.view',[
             'pupil' => $user,
             'tgs' => $tgs,
             'houses' => $hs,
+            'points' => $points,
         ]);
     }
 
