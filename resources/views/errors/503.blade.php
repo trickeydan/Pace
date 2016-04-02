@@ -55,7 +55,7 @@
                     <div class="form-top">
                         <div class="form-top-left">
                             <h3>KLB Pace Points</h3>
-                            <p>Update in progress, please come back later.</p>
+                            <p>The system is not available at the moment. Please check back later.</p>
                         </div>
                         <div class="form-top-right">
                             <img class="img-responsive logo-img" src="assets/img/logo.png">
