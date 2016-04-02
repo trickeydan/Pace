@@ -12,6 +12,6 @@
     </div>
     <div class="form-bottom">
         <p class="text-center"><a class="btn btn-lg btn-danger" href="{{route('login')}}">Login Page</a></p>
-        <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> D.Trickey</small></h6>
+        @include('layouts.footer')
     </div>
 @endsection

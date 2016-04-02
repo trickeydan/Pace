@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <h6 class="text-muted text-center"><small>&copy;<?php echo date('Y');?> D.Trickey</small></h6>
+                        @include('layouts.footer')
                     </div>
                 </div>
             </div>
