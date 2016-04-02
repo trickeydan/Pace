@@ -17,7 +17,7 @@ class PupilController extends Controller
 {
     public function index(Request $request){
 
-        $pupils = User::where('user_level',1)->orderBy('name','ASC')->paginate(30);
+        $pupils = User::where('user_level',1)->orderBy('email','ASC')->paginate(30);
 
         return view('admin.pupils.index',[
             'pupils' => $pupils,
