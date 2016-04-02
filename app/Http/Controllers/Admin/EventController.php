@@ -48,8 +48,11 @@ class EventController extends Controller
                return redirect(route('event.initial',$series->id))->withErrors('Participant count exceeds available participants');
            }
 
-           foreach(Tutorgroup::all() as $tg){
-               $participants[$tg->id] = $tg->name;
+           foreach(Tutorgroup::all()->groupBy('year_id') as $year){
+               foreach($year as $tg){
+                   $participants[$tg->id] = $tg->name;
+                   asort($participants);
+               }
            }
        }
        elseif($series->awardedTo == 'house'){
