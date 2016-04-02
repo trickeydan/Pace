@@ -59,7 +59,11 @@ class PupilController extends Controller
         if(User::whereId($query)->count() > 0){
             $pupil = User::whereId($query)->first();
             return redirect(route('admin.pupils.view',$pupil->email));
-        }else{
+        }elseif(User::whereEmail($query)->count() > 0){
+            $pupil = User::whereEmail($query)->first();
+            return redirect(route('admin.pupils.view',$pupil->email));
+        }
+        else {
             return redirect(route('admin.pupils.index'))->withErrors('No Results found. Please check spelling');
         }
     }
