@@ -71,7 +71,7 @@
             @foreach(\Pace\Year::orderBy('name')->get() as $year)
                 var data = google.visualization.arrayToDataTable([
                     ["House", "Points", { role: "style" } ],
-                    @foreach($year->tutorgroups as $tg)
+                    @foreach($year->tutorgroups()->orderBy('name')->get() as $tg)
                         ["{{$tg->name}}",{{$tg->getPoints()}}, "#{{$tg->users->first()->house->colour}}"],
                     @endforeach
                 ]);
