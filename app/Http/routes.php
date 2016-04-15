@@ -231,14 +231,14 @@ Route::group(['middleware' => ['throttle:60']], function () {
         'uses' => 'Auth\AuthController@login'
     ]);
 
-    Route::get('forgottenpin',[
+    /*Route::get('forgottenpin',[
         'as' => 'forgot',
         'uses' => 'PinController@forgotten'
     ]);
     Route::post('forgottenpin',[
         'as' => 'forgot.send',
         'uses' => 'PinController@send'
-    ]);
+    ]);*/
 
     Route::get('graphs',[ //My PACE Points
         'as' => 'publicstats',
