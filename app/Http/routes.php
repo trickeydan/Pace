@@ -4,9 +4,9 @@ Route::bind('user', function($value) {
     return \Pace\User::whereEmail($value)->first();
 });
 
-Route::bind('tutorgroup', function($value) {
+/*Route::bind('tutorgroup', function($value) {
     return \Pace\Tutorgroup::whereName($value)->first();
-});
+});*/
 
 Route::group(['middleware' => ['auth','strict:pupil']], function () {
     Route::get('/',[ //My PACE Points
@@ -175,14 +175,14 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
 
     });
 
-    Route::group(['prefix' => 'tutorgroups'],function(){
+    /*Route::group(['prefix' => 'tutorgroups'],function(){
 
         Route::get('view/{tutorgroup}',[
             'as' => 'admin.tutorgroups.view',
             'uses' => 'TGController@view'
         ]);
 
-    });
+    });*/
 
     Route::group(['prefix' => 'admins'],function() { //For Admin Users
         Route::get('/', [

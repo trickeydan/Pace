@@ -55,9 +55,7 @@
                     <td>{{$pupil->name}}</td>
                     <td>
                         @if(isset($pupil->tutorgroup->name) && $pupil->tutorgroup->name != null)
-                            <a href="{{route('admin.tutorgroups.view',$pupil->tutorgroup->name)}}">
-                                {{$pupil->tutorgroup->name}}
-                            </a>
+                            {{$pupil->tutorgroup->name}}
                         @else
                             No TG
                         @endif
