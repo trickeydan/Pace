@@ -12,7 +12,7 @@ use Pace\Http\Requests\SeriesCreateRequest;
 class SeriesController extends Controller
 {
     public function index(){
-        $series = Series::paginate(30);
+        $series = Series::orderBy('name')->paginate(30);
         return view('series.index',compact('series'));
     }
 
