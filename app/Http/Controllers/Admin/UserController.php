@@ -26,9 +26,15 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
+    private function getID(){
+        $u = User::where('user_level','<>',1)->orderBy('id','DESC')->first();
+        return $u->id +1;
+    }
+
     public function store(MakeUserRequest $request){
         $userPerms = ['teacher' => 2,'admin' => 1];
         User::create([
+            'id' => $this->getID(),
             'email' => $request->email,
             'name' => $request->name,
             'password' => bcrypt($request->password),
