@@ -52,10 +52,19 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
-Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['auth','check:teacher']], function () {
+Route::group(['prefix' => 'secure','namespace' => 'Admin','middleware' => ['auth','check:teacher']], function () {
     Route::get('/',[
         'as' => 'teacher.home',
         'uses' => 'AdminController@home'
+    ]);
+
+    Route::get('changepassword', [
+        'as' => 'admin.users.changepassword',
+        'uses' => 'UserController@changepassword'
+    ]);
+    Route::post('changepassword', [
+        'as' => 'admin.users.passwordStore',
+        'uses' => 'UserController@passwordStore'
     ]);
 
 });
@@ -210,15 +219,6 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
         Route::post('create', [
             'as' => 'admin.users.store',
             'uses' => 'UserController@store'
-        ]);
-
-        Route::get('changepassword', [
-            'as' => 'admin.users.changepassword',
-            'uses' => 'UserController@changepassword'
-        ]);
-        Route::post('changepassword', [
-            'as' => 'admin.users.passwordStore',
-            'uses' => 'UserController@passwordStore'
         ]);
 
         Route::get('{user}/delete', [
