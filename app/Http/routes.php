@@ -4,114 +4,68 @@ Route::bind('user', function($value) {
     return \Pace\User::whereEmail($value)->first();
 });
 
-Route::bind('tutorgroup', function($value) {
+/*Route::bind('tutorgroup', function($value) {
     return \Pace\Tutorgroup::whereName($value)->first();
+});*/
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::group(['middleware' => ['strict:pupil']], function(){
+        Route::get('/',[ //My PACE Points
+            'as' => 'home',
+            'uses' => 'MainController@home',
+        ]);
+
+        Route::get('housepoints',[ //My PACE Points
+            'as' => 'stats',
+            'uses' => 'MainController@stats'
+        ]);
+
+        /*Route::get('feedback',[ //Pupil Feedback
+       'as' => 'feedback',
+       'uses' => 'MainController@feedback'
+   ]);
+
+   Route::post('feedback',[ //Pupil Feedback
+       'as' => 'feedback.store',
+       'uses' => 'MainController@feedbackStore'
+   ]);*/
+    });
+
+    Route::group(['middleware' => ['check:pupil']], function(){
+        Route::get('competitions',[ //My PACE Points
+            'as' => 'eventstats',
+            'uses' => 'MainController@eventstats'
+        ]);
+
+        Route::get('competitions/{series}',[ //My PACE Points
+            'as' => 'eventstats.series',
+            'uses' => 'MainController@eventstatsseries'
+        ]);
+
+        Route::get('competitions/event/{event}',[ //My PACE Points
+            'as' => 'eventstats.series.event',
+            'uses' => 'MainController@eventstatsseriesevent'
+        ]);
+    });
+
+
 });
 
-Route::group(['middleware' => ['auth','strict:pupil']], function () {
-    Route::get('/',[ //My PACE Points
-        'as' => 'home',
-        'uses' => 'MainController@home',
-    ]);
-
-    Route::get('housepoints',[ //My PACE Points
-        'as' => 'stats',
-        'uses' => 'MainController@stats'
-    ]);
-
-    Route::get('competitions',[ //My PACE Points
-        'as' => 'eventstats',
-        'uses' => 'MainController@eventstats'
-    ]);
-
-    Route::get('competitions/{series}',[ //My PACE Points
-        'as' => 'eventstats.series',
-        'uses' => 'MainController@eventstatsseries'
-    ]);
-
-    Route::get('competitions/event/{event}',[ //My PACE Points
-        'as' => 'eventstats.series.event',
-        'uses' => 'MainController@eventstatsseriesevent'
-    ]);
-
-    /*Route::get('feedback',[ //Pupil Feedback
-        'as' => 'feedback',
-        'uses' => 'MainController@feedback'
-    ]);
-
-    Route::post('feedback',[ //Pupil Feedback
-        'as' => 'feedback.store',
-        'uses' => 'MainController@feedbackStore'
-    ]);*/
-});
-
-Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['auth','check:teacher']], function () {
+Route::group(['prefix' => 'secure','namespace' => 'Admin','middleware' => ['auth','check:teacher']], function () {
     Route::get('/',[
         'as' => 'teacher.home',
         'uses' => 'AdminController@home'
     ]);
 
-    Route::group(['prefix' => 'series'],function(){
-
-        Route::get('/',[
-            'as' => 'series.index',
-            'uses' => 'SeriesController@index'
-        ]);
-
-        Route::get('{series}/view',[
-            'as' => 'series.view',
-            'uses' => 'SeriesController@view'
-        ]);
-
-        Route::get('{series}/delete',[
-            'as' => 'series.delete',
-            'uses' => 'SeriesController@delete'
-        ]);
-
-        Route::get('create',[
-            'as' => 'series.create',
-            'uses' => 'SeriesController@create'
-        ]);
-
-        Route::post('create',[
-            'as' => 'series.store',
-            'uses' => 'SeriesController@store'
-        ]);
-
-        Route::group(['prefix' => '{series}/event'],function(){
-
-            Route::get('create',[
-                'as' => 'event.initial',
-                'uses' => 'EventController@initial'
-            ]);
-
-            Route::post('create/2',[
-                'as' => 'event.create',
-                'uses' => 'EventController@create'
-            ]);
-
-            Route::post('create/3',[
-                'as' => 'event.store',
-                'uses' => 'EventController@store'
-            ]);
-
-            Route::get('{event}/edit',[
-                'as' => 'event.edit',
-                'uses' => 'EventController@edit'
-            ]);
-
-            Route::post('{event}/edit',[
-                'as' => 'event.update',
-                'uses' => 'EventController@update'
-            ]);
-
-            Route::get('{event}/delete',[
-                'as' => 'event.delete',
-                'uses' => 'EventController@delete'
-            ]);
-
-        });
-    });
+    Route::get('changepassword', [
+        'as' => 'admin.users.changepassword',
+        'uses' => 'UserController@changepassword'
+    ]);
+    Route::post('changepassword', [
+        'as' => 'admin.users.passwordStore',
+        'uses' => 'UserController@passwordStore'
+    ]);
 
 });
 
@@ -175,13 +129,80 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
 
     });
 
-    Route::group(['prefix' => 'tutorgroups'],function(){
+    /*Route::group(['prefix' => 'tutorgroups'],function(){
 
         Route::get('view/{tutorgroup}',[
             'as' => 'admin.tutorgroups.view',
             'uses' => 'TGController@view'
         ]);
 
+    });*/
+
+    Route::group(['prefix' => 'series'],function(){
+
+        Route::get('/',[
+            'as' => 'series.index',
+            'uses' => 'SeriesController@index'
+        ]);
+
+        Route::get('cache',[
+            'as' => 'series.cache',
+            'uses' => 'SeriesController@cache'
+        ]);
+
+        Route::get('{series}/view',[
+            'as' => 'series.view',
+            'uses' => 'SeriesController@view'
+        ]);
+
+        Route::get('{series}/delete',[
+            'as' => 'series.delete',
+            'uses' => 'SeriesController@delete'
+        ]);
+
+        Route::get('create',[
+            'as' => 'series.create',
+            'uses' => 'SeriesController@create'
+        ]);
+
+        Route::post('create',[
+            'as' => 'series.store',
+            'uses' => 'SeriesController@store'
+        ]);
+
+        Route::group(['prefix' => '{series}/event'],function(){
+
+            Route::get('create',[
+                'as' => 'event.initial',
+                'uses' => 'EventController@initial'
+            ]);
+
+            Route::post('create/2',[
+                'as' => 'event.create',
+                'uses' => 'EventController@create'
+            ]);
+
+            Route::post('create/3',[
+                'as' => 'event.store',
+                'uses' => 'EventController@store'
+            ]);
+
+            Route::get('{event}/edit',[
+                'as' => 'event.edit',
+                'uses' => 'EventController@edit'
+            ]);
+
+            Route::post('{event}/edit',[
+                'as' => 'event.update',
+                'uses' => 'EventController@update'
+            ]);
+
+            Route::get('{event}/delete',[
+                'as' => 'event.delete',
+                'uses' => 'EventController@delete'
+            ]);
+
+        });
     });
 
     Route::group(['prefix' => 'admins'],function() { //For Admin Users
@@ -198,15 +219,6 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
         Route::post('create', [
             'as' => 'admin.users.store',
             'uses' => 'UserController@store'
-        ]);
-
-        Route::get('changepassword', [
-            'as' => 'admin.users.changepassword',
-            'uses' => 'UserController@changepassword'
-        ]);
-        Route::post('changepassword', [
-            'as' => 'admin.users.passwordStore',
-            'uses' => 'UserController@passwordStore'
         ]);
 
         Route::get('{user}/delete', [

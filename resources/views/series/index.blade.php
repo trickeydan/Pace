@@ -22,6 +22,7 @@
     <p>Example uses of events include Tutor challenges, Inter-house competitions and Inter-house sports matches.</p>
     <p class="text-right">
         <a href="{{route('series.create')}}" class="btn">New Series</a>&nbsp;&nbsp;
+        <a href="{{route('series.cache')}}" class="btn">Update Cache</a>&nbsp;&nbsp;
     </p>
     <table class="table table-striped table-responsive">
         <thead>

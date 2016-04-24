@@ -26,7 +26,8 @@ class MakeUserRequest extends Request
         return [
             'email' => 'required|max:50|min:2|email|unique:users,email',
             'name' => 'required|max:50|min:2',
-            'password' => 'required|confirmed|max:50|min:6'
+            'password' => 'required|confirmed|max:50|min:6',
+            'account'   => 'required|in:teacher,admin'
         ];
     }
 }

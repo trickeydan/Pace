@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title','Admins Index')
+@section('title','Users Index')
 @section('content')
-    <h2 class="text-center">Admins</h2>
+    <h2 class="text-center">Users</h2>
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
@@ -16,13 +16,13 @@
             </ul>
         </div>
     @endif
-    <p class="text-center btn"><a href="{{route('admin.users.create')}}">New Admin</a></p>
-    <p class="text-right btn"><a href="{{route('admin.users.changepassword')}}">Change My Password</a></p>
+    <p class="text-center btn"><a href="{{route('admin.users.create')}}">New User</a></p>
     <table class="table table-striped table-responsive">
         <thead>
             <tr>
                 <th>Email</th>
                 <th>Name</th>
+                <th>Account Type</th>
                 <th>Options</th>
             </tr>
         </thead>
@@ -31,6 +31,7 @@
                 <tr>
                     <td>{{$user->email}}</td>
                     <td>{{$user->name}}</td>
+                    <td>{{$userPerm[$user->user_level]}}</td>
                     <td>
                         @if($user->id != \Illuminate\Support\Facades\Auth::User()->id)
                             <a href="{{route('admin.users.delete',$user->email)}}">Delete</a>

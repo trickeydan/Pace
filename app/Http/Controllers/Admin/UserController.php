@@ -17,26 +17,34 @@ class UserController extends Controller
     // Admin User Controller
 
     public function index(){
-        $users = User::where('user_level',3)->paginate(30);
-        return view('admin.users.index',compact('users'));
+        $users = User::where('user_level','<>',1)->paginate(30);
+        $userPerm = ['','','Teacher','Admin'];
+        return view('admin.users.index',['users' => $users,'userPerm' => $userPerm]);
     }
 
     public function create(){
         return view('admin.users.create');
     }
 
+    private function getID(){
+        $u = User::where('user_level','<>',1)->orderBy('id','DESC')->first();
+        return $u->id +1;
+    }
+
     public function store(MakeUserRequest $request){
+        $userPerms = ['teacher' => 2,'admin' => 1];
         User::create([
+            'id' => $this->getID(),
             'email' => $request->email,
             'name' => $request->name,
             'password' => bcrypt($request->password),
-            'user_level' => 3,
+            'user_level' => $userPerms[$request->account],
         ]);
         return redirect(route('admin.users.index'))->with('status','New Admin User Created');
     }
 
     public function delete(Request $request,User $user){
-        if(!$user->is_admin()) return redirect(route('admin.users.index'))->withErrors('That User is not an admin.');
+        if($user->is_pupil()) return redirect(route('admin.users.index'))->withErrors('That User is not an admin.');
         if($user->id == Auth::User()->id) return redirect(route('admin.users.index'))->withErrors('You cannot delete yourself');
         $user->delete();
         return redirect(route('admin.users.index'))->with('status','User Deleted');
