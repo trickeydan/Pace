@@ -56,9 +56,9 @@
                         <div class="form-top-left">
                             <h3>KLBS PACE Points</h3>
                             @if(Auth::User()->is_admin())
-                                <p>Hello, {{Auth::User()->name}} ADMINISTRATOR</p>
+                                <p>Hello, {{Auth::User()->name}} ADMINISTRATOR <small><a href="{{route('admin.users.changepassword')}}"><i class="fa fa-key"></i></a></small></p>
                             @elseif(Auth::User()->is_teacher())
-                                <p>Hello, {{Auth::User()->name}} TEACHER</p>
+                                <p>Hello, {{Auth::User()->name}} TEACHER <small><a href="{{route('admin.users.changepassword')}}"><i class="fa fa-key"></i></a></small></p>
                             @else
                                 <p>Hello, {{Auth::User()->name}}&nbsp;&nbsp;{{Auth::User()->tutorgroup->name}}&nbsp;&nbsp;{{Auth::User()->house->name}}</p>
                             @endif
