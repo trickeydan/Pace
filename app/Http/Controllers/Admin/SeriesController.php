@@ -8,12 +8,30 @@ use Pace\Series;
 use Pace\Http\Requests;
 use Pace\Http\Controllers\Controller;
 use Pace\Http\Requests\SeriesCreateRequest;
-
+use Pace\House;
+use Pace\Tutorgroup;
+use Pace\Year;
 class SeriesController extends Controller
 {
     public function index(){
         $series = Series::orderBy('name')->paginate(30);
         return view('series.index',compact('series'));
+    }
+
+    public function cache(){
+        foreach(House::all() as $house){
+            $house->updatePoints();
+        }
+
+        foreach(Tutorgroup::all() as $tg){
+            $tg->updatePoints();
+        }
+
+        foreach(Year::all() as $y){
+            $y->updatePoints();
+        }
+
+        return redirect(route('series.index'))->with('status','Cache updated.');
     }
 
     public function create(){

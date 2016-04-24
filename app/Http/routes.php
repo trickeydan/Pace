@@ -58,6 +58,11 @@ Route::group(['prefix' => 'teacher','namespace' => 'Admin','middleware' => ['aut
             'uses' => 'SeriesController@index'
         ]);
 
+        Route::get('cache',[
+            'as' => 'series.cache',
+            'uses' => 'SeriesController@cache'
+        ]);
+
         Route::get('{series}/view',[
             'as' => 'series.view',
             'uses' => 'SeriesController@view'
