@@ -28,7 +28,7 @@ class UserController extends Controller
 
     private function getID(){
         $u = User::where('user_level','<>',1)->orderBy('id','DESC')->first();
-        return $u->id +1;
+        return $u->id +1;php
     }
 
     public function store(MakeUserRequest $request){

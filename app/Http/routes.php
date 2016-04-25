@@ -8,7 +8,7 @@ Route::bind('user', function($value) {
     return \Pace\Tutorgroup::whereName($value)->first();
 });*/
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth','logger']], function () {
 
     Route::group(['middleware' => ['strict:pupil']], function(){
         Route::get('/',[ //My PACE Points
@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 });
 
-Route::group(['prefix' => 'secure','namespace' => 'Admin','middleware' => ['auth','check:teacher']], function () {
+Route::group(['prefix' => 'secure','namespace' => 'Admin','middleware' => ['auth','check:teacher','logger']], function () {
     Route::get('/',[
         'as' => 'teacher.home',
         'uses' => 'AdminController@home'
@@ -69,7 +69,7 @@ Route::group(['prefix' => 'secure','namespace' => 'Admin','middleware' => ['auth
 
 });
 
-Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth','check:admin']], function () {
+Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth','check:admin','logger']], function () {
 
     Route::get('/',[
         'as' => 'admin.home',

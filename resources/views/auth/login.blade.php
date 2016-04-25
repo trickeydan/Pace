@@ -3,7 +3,7 @@
 @section('content')
     <div class="form-top">
         <div class="form-top-left">
-            <h3>KLB Pace Points</h3>
+            <h3>KLBS Pace Points</h3>
             <p>Please enter your username and pin:</p>
             <p>Points are updated on Mondays.</p>
         </div>

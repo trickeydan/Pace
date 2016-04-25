@@ -45,5 +45,6 @@ class Kernel extends HttpKernel
         'check' => \Pace\Http\Middleware\userTypeCheck::class,
         'strict' => \Pace\Http\Middleware\userTypeStrict::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'logger' => \Pace\Http\Middleware\Logger::class,
     ];
 }

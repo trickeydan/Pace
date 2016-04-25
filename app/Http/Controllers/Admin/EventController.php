@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Pace\EventPoint;
 use Pace\House;
 use Pace\Http\Requests;
+use Pace\Log;
 use Pace\Series;
 use Pace\Http\Controllers\Controller;
 use Pace\Http\Requests\InitialEventCreateRequest;
@@ -72,6 +73,7 @@ class EventController extends Controller
                 }
             }
         }
+
 
 
         $request->session()->flash('amount',$request->amount);
@@ -223,6 +225,7 @@ class EventController extends Controller
             $used[count($used)] = $model->id;
         }
         DB::commit();
+        Log::log('Created points series');
         return redirect(route('series.view',$series->id))->with('status','Event Created');
     }
 
@@ -274,6 +277,7 @@ class EventController extends Controller
             }
             if($found){
                 DB::commit();
+                Log::log('Updated Series');
                 return redirect(route('series.view',$series->id))->with('status','Event updated.');
             }else{
                 DB::rollback();
@@ -292,12 +296,14 @@ class EventController extends Controller
                 $ep->save();
             }
             DB::commit();
+            Log::log('Updated Series');
             return redirect(route('series.view',$series->id))->with('status','Event updated.');
         }
     }
 
     public function delete(Series $series, Event $event){
         $event->delete();
+        Log::log('Deleted Series');
         return redirect(route('series.view',$series->id))->with('status','Event deleted.');
     }
 }
