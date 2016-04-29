@@ -88,12 +88,11 @@ class User extends Authenticatable
     }
 
     public function sendPin(){
-        $email = env('email');
-        
-        Mail::send('emails.pin', ['user' => $this], function ($m) use ($email) {
-            $m->from($email, 'KLBS Pace Points');
 
-            $m->to($this->email, $this->name)->subject('Your Pin');
+        Mail::send('emails.pin', ['user' => $this], function ($m) use ($email) {
+            $m->from('pace@klbschool.net', 'KLBS Pace Points');
+
+            $m->to($this->email, $this->name)->subject('KLBS PACE Points');
         });
     }
 
