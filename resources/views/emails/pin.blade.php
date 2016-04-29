@@ -236,7 +236,7 @@
         <tbody><tr>
             <td style="padding: 0;width: 600px;">
                 <div class="header__logo emb-logo-margin-box" style="font-size: 26px;line-height: 32px;Margin-top: 6px;Margin-bottom: 20px;color: #c3ced9;font-family: Roboto,Tahoma,sans-serif;Margin-left: 20px;Margin-right: 20px;">
-                    <div class="logo-center" style="font-size:0px !important;line-height:0 !important;" align="center" id="emb-email-header"><img style="height: auto;width: 100%;border: 0;max-width: 251px;" src="images/logo.png" alt="" width="251" height="80" /></div>
+                    <div class="logo-center" style="font-size:0px !important;line-height:0 !important;" align="center" id="emb-email-header"><img style="height: auto;width: 100%;border: 0;max-width: 251px;" src="{{$message->embed('public/assets/img/email/logo.png')}}" alt="" width="251" height="80" /></div>
                 </div>
             </td>
         </tr>
@@ -250,7 +250,7 @@
                 </div>
 
                 <div class="image" style="font-size: 12px;font-style: normal;font-weight: 400;" align="center">
-                    <img style="display: block;border: 0;max-width: 900px;" src="images/page.png" alt="" width="600" height="343" />
+                    <img style="display: block;border: 0;max-width: 900px;" src="{{$message->embed('public/assets/img/email/page.png')}}" alt="" width="600" height="343" />
                 </div>
 
                 <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 20px;">
@@ -266,7 +266,7 @@
                 </div>
 
                 <div class="image" style="font-size: 12px;font-style: normal;font-weight: 400;" align="center">
-                    <img style="display: block;border: 0;max-width: 900px;" src="images/points.png" alt="" width="600" height="337" />
+                    <img style="display: block;border: 0;max-width: 900px;" src="{{$message->embed('public/assets/img/email/points.png')}}" alt="" width="600" height="337" />
                 </div>
 
                 <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 20px;">
@@ -274,7 +274,7 @@
                 </div>
 
                 <div class="image" style="font-size: 12px;font-style: normal;font-weight: 400;" align="center">
-                    <img style="display: block;border: 0;max-width: 900px;" src="images/competitions.png" alt="" width="600" height="337" />
+                    <img style="display: block;border: 0;max-width: 900px;" src="{{$message->embed('public/assets/img/email/competitions.png')}}" alt="" width="600" height="337" />
                 </div>
 
                 <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 20px;">
@@ -282,7 +282,7 @@
                 </div>
 
                 <div class="image" style="font-size: 12px;font-style: normal;font-weight: 400;" align="center">
-                    <img style="display: block;border: 0;max-width: 400px;" src="images/5e75e3cadbf04aecadd7c2fc1328c486.png" alt="" width="400" height="305" />
+                    <img style="display: block;border: 0;max-width: 400px;" src="{{$message->embed('public/assets/img/email/login.png')}}" alt="" width="400" height="305" />
                 </div>
 
                 <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 20px;">
@@ -328,7 +328,7 @@
 
                             </div>
                             <div>
-                                <unsubscribe>Unsubscribe</unsubscribe>
+                                <p>&copy; 2016 D.Trickey</p>
                             </div>
                         </td>
                     </tr>
