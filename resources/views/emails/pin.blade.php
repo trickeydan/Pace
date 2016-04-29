@@ -246,7 +246,7 @@
             <td class="column" style="padding: 0;text-align: left;vertical-align: top;color: #595959;font-size: 14px;line-height: 21px;font-family: Lato,Tahoma,sans-serif;width: 600px;">
 
                 <div style="Margin-left: 20px;Margin-right: 20px;Margin-top: 24px;">
-                    <h1 class="size-32" style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #b8bdc9;font-size: 32px;line-height: 40px;text-align: center;">New PACE Points System</h1><p class="size-17" style="Margin-top: 20px;Margin-bottom: 20px;font-size: 17px;line-height: 26px;">Hello, {{$user->name}}. This email marks the launch of the new PACE points system for KLB.&nbsp; Your PIN number can be found the following outline of the new features</p>
+                    <h1 class="size-32" style="Margin-top: 0;Margin-bottom: 0;font-style: normal;font-weight: normal;color: #b8bdc9;font-size: 32px;line-height: 40px;text-align: center;">New PACE Points System</h1><p class="size-17" style="Margin-top: 20px;Margin-bottom: 20px;font-size: 17px;line-height: 26px;">Hello, {{$user->name}}. This email marks the launch of the new PACE points system for KLB.&nbsp; Your PIN number can be found below the following outline of the new features.</p>
                 </div>
 
                 <div class="image" style="font-size: 12px;font-style: normal;font-weight: 400;" align="center">
