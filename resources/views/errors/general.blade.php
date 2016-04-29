@@ -4,7 +4,7 @@
     <div class="form-top">
         <div class="form-top-left">
             <h3>KLB Pace Points</h3>
-            <p>A Fatal Error Occurred.</p>
+            <p>A <strong>Fatal</strong> Error Occurred. Do <b>not</b> refresh your page.</p>
             <p>Please report to the System Administrator immediately.</p>
         </div>
         <div class="form-top-right">
