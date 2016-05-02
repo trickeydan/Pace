@@ -23,10 +23,12 @@ class House extends Model
         foreach($this->users as $user){
             $total = $total + $user->currPoints;
         }
-        $this->currPoints = $total;
         foreach($this->eventpoints as $ep){
-            if($ep->affectTotals) $this->currpoints += $ep->amount;
+            if($ep->affectTotals) $total += $ep->amount;
         }
+        $mean = $total / $this->users()->count();
+        $adjusted = $mean * (User::whereUserLevel(1)->count()/House::all()->count());
+        $this->currpoints = $adjusted;
         $this->save();
     }
 

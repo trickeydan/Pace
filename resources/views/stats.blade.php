@@ -36,7 +36,7 @@
                 2]);
 
             var options = {
-                title: "Total Points By House",
+                title: "Total Points By House (Adjusted)",
                 height: 400,
                 bar: {groupWidth: "95%"},
                 legend: { position: "none" },
