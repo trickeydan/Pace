@@ -92,8 +92,12 @@ class User extends Authenticatable
         Mail::send('emails.pin', ['user' => $this], function ($m) {
             $m->from('pace@klbschool.net', 'KLBS Pace Points');
 
-            $m->to($this->email, $this->name)->subject('KLBS PACE Points');
+            $m->to($this->email, $this->name)->subject('You haven\' logged in yet!');
         });
+    }
+
+    public function hasLoggedIn(){
+        return Log::whereUserID($this->id)->count() != 0;
     }
 
 }
