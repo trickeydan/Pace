@@ -124,7 +124,7 @@
     </p>
     <p>
         Support: Software is provided with limited support, as detailed in the Software’s SLA detailed under the License Grant. Licensor shall provide support via
-        the Binpress issue tracker and / or electronic mail and on regular business days and hours.
+        the Bitbucket issue tracker and / or electronic mail and on regular business days and hours.
     </p>
     <p>
         Bug Notification: Licensee may provide Licensor of details regarding any bug, defect or failure in The Software promptly and with no delay from such event;
