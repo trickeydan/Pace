@@ -54,7 +54,7 @@
                 <div class="col-sm-12 form-box">
                     <div class="form-top">
                         <div class="form-top-left">
-                            <h3>KLBS PACE Points</h3>
+                            <h3>KLBS PACE Points @if(!Auth::User()->is_pupil())&nbsp;<small></small><a href="{{route('admin.info')}}"><i class="fa fa-info-circle"></i></a></small>@endif</h3>
                             @if(Auth::User()->is_admin())
                                 <p>Hello, {{Auth::User()->name}} ADMINISTRATOR <small><a href="{{route('admin.users.changepassword')}}"><i class="fa fa-key"></i></a></small></p>
                             @elseif(Auth::User()->is_teacher())
@@ -70,6 +70,7 @@
                     <ul class="nav nav-pills nav-justified pill">
                         @if(Auth::User()->is_admin())
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.home') echo 'class="active"';?>><a href="{{route('admin.home')}}">Dashboard</a></li>
+                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.usage') echo 'class="active"';?>><a href="{{route('admin.usage')}}">Usage</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.pupils.index') echo 'class="active"';?>><a href="{{route('admin.pupils.index')}}" >Manage Pupils</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'series.index') echo 'class="active"';?>><a href="{{route('series.index')}}" >Manage Events</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.users.index') echo 'class="active"';?>><a href="{{route('admin.users.index')}}" >Manage Users</a></li>
