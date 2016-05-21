@@ -19,7 +19,7 @@ class AdminController extends Controller
     }
 
     public function usage(){
-        $amountunique = DB::select('SELECT count( DISTINCT (`user_id`) ) AS `amount` FROM LOGS ')[0]->amount;
+        $amountunique = DB::select('SELECT count( DISTINCT (`user_id`) ) AS `amount` FROM logs ')[0]->amount;
         return view('admin.usage',[
             'amountunique' => $amountunique,
             'percentageunique' => round( ($amountunique *100) / User::whereUserLevel(1)->count(),3),
