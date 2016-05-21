@@ -70,6 +70,7 @@
                     <ul class="nav nav-pills nav-justified pill">
                         @if(Auth::User()->is_admin())
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.home') echo 'class="active"';?>><a href="{{route('admin.home')}}">Dashboard</a></li>
+                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.usage') echo 'class="active"';?>><a href="{{route('admin.usage')}}">Usage</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.pupils.index') echo 'class="active"';?>><a href="{{route('admin.pupils.index')}}" >Manage Pupils</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'series.index') echo 'class="active"';?>><a href="{{route('series.index')}}" >Manage Events</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'admin.users.index') echo 'class="active"';?>><a href="{{route('admin.users.index')}}" >Manage Users</a></li>
