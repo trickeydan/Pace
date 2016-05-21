@@ -27,4 +27,8 @@ class AdminController extends Controller
             'hitstoday' => DB::table('logs')->select(DB::raw('*'))->whereRaw('Date(created_at) = CURDATE()')->count(),
         ]);
     }
+
+    public function info(){
+        return view('admin.info');
+    }
 }
