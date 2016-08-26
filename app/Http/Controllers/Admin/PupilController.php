@@ -12,12 +12,13 @@ use Pace\Http\Controllers\Controller;
 use Pace\Tutorgroup;
 use Pace\User;
 use Pace\House;
+use Pace\UserType;
 
 class PupilController extends Controller
 {
     public function index(Request $request){
 
-        $pupils = User::where('user_level',1)->orderBy('email','ASC')->paginate(30);
+        $pupils = UserType::pupil()->users()->orderBy('email','ASC')->paginate(30);
 
         return view('admin.pupils.index',[
             'pupils' => $pupils,

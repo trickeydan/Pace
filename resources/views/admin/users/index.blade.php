@@ -31,7 +31,7 @@
                 <tr>
                     <td>{{$user->email}}</td>
                     <td>{{$user->name}}</td>
-                    <td>{{$userPerm[$user->user_level]}}</td>
+                    <td>{{$user->type->name}}</td>
                     <td>
                         @if($user->id != \Illuminate\Support\Facades\Auth::User()->id)
                             <a href="{{route('admin.users.delete',$user->email)}}">Delete</a>

@@ -31,7 +31,7 @@ class TestSeeder extends Seeder
         $user->name = "Dan Trickey";
         $user->email = "dan@dan.com";
         $user->password = bcrypt('password');
-        $user->user_level = 2;
+        $user->type_id = \Pace\UserType::teacherID();
         $user->save();
 
         for ($i = 7; $i <= 11; $i++) {
@@ -60,7 +60,7 @@ class TestSeeder extends Seeder
                     if(User::whereId($user->id)->count()==0) {
                         $user->password = bcrypt($user->id);
                         $user->tutorgroup_id = $tg->id;
-                        $user->user_level = 1;
+                        $user->type_id = \Pace\UserType::pupilID();
                         $user->currPoints = 0;
                         $user->house_id = House::all()->random(1)->id;
                         if (User::whereEmail($user->email)->count() <= 0) {

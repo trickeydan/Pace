@@ -17,7 +17,7 @@ class UserController extends Controller
     // Admin User Controller
 
     public function index(){
-        $users = User::where('user_level','<>',1)->paginate(30);
+        $users = User::where('type_id','<>',1)->paginate(30);
         $userPerm = ['','','Teacher','Admin'];
         return view('admin.users.index',['users' => $users,'userPerm' => $userPerm]);
     }
@@ -27,7 +27,7 @@ class UserController extends Controller
     }
 
     private function getID(){
-        $u = User::where('user_level','<>',1)->orderBy('id','DESC')->first();
+        $u = User::where('type_id','<>',1)->orderBy('id','DESC')->first();
         return $u->id +1;
     }
 
@@ -38,7 +38,7 @@ class UserController extends Controller
             'email' => $request->email,
             'name' => $request->name,
             'password' => bcrypt($request->password),
-            'user_level' => $userPerms[$request->account],
+            'type_id' => $userPerms[$request->account],
         ]);
         return redirect(route('admin.users.index'))->with('status','New Admin User Created');
     }

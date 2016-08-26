@@ -22,7 +22,7 @@ class AdminController extends Controller
         $amountunique = DB::select('SELECT count( DISTINCT (`user_id`) ) AS `amount` FROM logs ')[0]->amount;
         return view('admin.usage',[
             'amountunique' => $amountunique,
-            'percentageunique' => round( ($amountunique *100) / User::whereUserLevel(1)->count(),3),
+            'percentageunique' => round( ($amountunique *100) / UserType::pupil()->users()->count(),3),
             'totalhits' => Log::all()->count(),
             'hitstoday' => DB::table('logs')->select(DB::raw('*'))->whereRaw('Date(created_at) = CURDATE()')->count(),
         ]);

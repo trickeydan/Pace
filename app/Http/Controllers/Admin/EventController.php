@@ -15,6 +15,7 @@ use Pace\Http\Requests\InitialEventCreateRequest;
 use Pace\User;
 use Pace\Tutorgroup;
 use Pace\Event;
+use Pace\UserType;
 
 class EventController extends Controller
 {
@@ -34,11 +35,11 @@ class EventController extends Controller
 
        if($series->awardedTo == 'user'){
 
-           if($request->amount > User::where('user_level','1')->count()){
+           if($request->amount > UserType::pupil()->users()->count()){
                return redirect(route('event.initial',$series->id))->withErrors('Participant count exceeds available participants');
            }
 
-           foreach(User::where('user_level','1')->orderBy('email')->get() as $pupil){
+           foreach(UserType::pupil()->users()->orderBy('email')->get() as $pupil){
                $participants[$pupil->id] = $pupil->tutorgroup->year->name . ' ' . $pupil->name;
            }
 
@@ -164,7 +165,7 @@ class EventController extends Controller
     private function binaryValidate(Series $series, Request $request){
         if($series->awardedTo == 'user'){
             $rules =  [
-                'participant*' => 'required|exists:users,id,user_level,1',
+                'participant*' => 'required|exists:users,id,type_id,1',
             ];
         }
         elseif($series->awardedTo == 'tutorgroup'){
@@ -232,7 +233,7 @@ class EventController extends Controller
     private function pointValidate(Series $series, Request $request){
         if($series->awardedTo == 'user'){
             $rules =  [
-                'participant*' => 'required|exists:users,id,user_level,1',
+                'participant*' => 'required|exists:users,id,type_id,1',
                 'points*' => 'required|integer|min:0|max:100000',
             ];
         }
