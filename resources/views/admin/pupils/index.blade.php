@@ -54,13 +54,9 @@
                     <td>{{$pupil->email}}</td>
                     <td>{{$pupil->name}}</td>
                     <td>
-                        @if(isset($pupil->tutorgroup->name) && $pupil->tutorgroup->name != null)
-                            {{$pupil->tutorgroup->name}}
-                        @else
-                            No TG
-                        @endif
+                        {{$pupil->tutorgroup->name}}
                     </td>
-                    <td>{{$pupil->house->name or 'No House'}}</td>
+                    <td>{{$pupil->house->name}}</td>
                     @if($request->get('pin') == "show")
                         <td>{{$pupil->id}}</td>
                     @endif
