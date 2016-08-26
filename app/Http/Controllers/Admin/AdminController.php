@@ -11,6 +11,7 @@ use Pace\Feedback;
 use Pace\ImportManager;
 use Pace\User;
 use Pace\Log;
+use Pace\UserType;
 
 class AdminController extends Controller
 {
