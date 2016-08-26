@@ -41,6 +41,15 @@ class User extends Authenticatable
         return $this->hasMany('Pace\Point');
     }
 
+    public function eventpoints()
+    {
+        return $this->morphMany('Pace\EventPoint', 'participable');
+    }
+
+    public function type(){
+        return $this->belongsTo('Pace\UserType');
+    }
+
     public function pointsThisWeek(){
         $dt = new \DateTime();
         $dt->sub(new \DateInterval('P7D'));
@@ -82,10 +91,6 @@ class User extends Authenticatable
 
     }
 
-    public function eventpoints()
-    {
-        return $this->morphMany('Pace\EventPoint', 'participable');
-    }
 
     public function sendPin(){
 
