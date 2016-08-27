@@ -1,14 +1,8 @@
 @extends('layouts.app')
-@section('title','House Points')
+@section('title','TG Points')
 @section('content')
-    <h2 class="text-center">House Points</h2>
+    <h2 class="text-center">Tutor Group Points</h2>
     <div class="row">
-        <div class="col-sm-6">
-            <div id="house_chart"></div>
-        </div>
-        <div class="col-sm-6">
-            <div id="year_chart"></div>
-        </div>
         @foreach(\Pace\Year::orderBy('name','ASC')->get() as $year)
             <div class="col-sm-6">
                 <div id="year{{$year->id}}_chart"></div>
@@ -20,54 +14,6 @@
         google.charts.load("current", {packages:['corechart']});
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ["House", "Points", { role: "style" } ],
-                @foreach(\Pace\House::all() as $house)
-                    ["{{$house->name}}",{{$house->getPoints()}}, "#{{$house->colour}}"],
-                @endforeach
-            ]);
-
-            var view = new google.visualization.DataView(data);
-            view.setColumns([0, 1,
-                { calc: "stringify",
-                    sourceColumn: 1,
-                    type: "string",
-                    role: "annotation" },
-                2]);
-
-            var options = {
-                title: "Total Points By House (Adjusted)",
-                height: 400,
-                bar: {groupWidth: "95%"},
-                legend: { position: "none" },
-            };
-            var chart = new google.visualization.ColumnChart(document.getElementById("house_chart"));
-            chart.draw(view, options);
-
-            var data = google.visualization.arrayToDataTable([
-                ["House", "Points", { role: "style" } ],
-                @foreach(\Pace\Year::orderBy('name','ASC')->get() as $year)
-                    ["{{$year->name}}",{{$year->getPoints()}}, "silver"],
-                @endforeach
-            ]);
-
-            var view = new google.visualization.DataView(data);
-            view.setColumns([0, 1,
-                { calc: "stringify",
-                    sourceColumn: 1,
-                    type: "string",
-                    role: "annotation" },
-                2]);
-
-            var options = {
-                title: "Total Points By Year",
-                height: 400,
-                bar: {groupWidth: "95%"},
-                legend: { position: "none" },
-            };
-            var chart = new google.visualization.ColumnChart(document.getElementById("year_chart"));
-            chart.draw(view, options);
-
             @foreach(\Pace\Year::orderBy('name')->get() as $year)
                 var data = google.visualization.arrayToDataTable([
                     ["House", "Points", { role: "style" } ],

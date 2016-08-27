@@ -16,7 +16,7 @@ Route::group(['middleware' => ['auth','logger']], function () {
             'uses' => 'MainController@home',
         ]);
 
-        Route::get('housepoints',[ //My PACE Points
+        Route::get('tgpoints',[ //My PACE Points
             'as' => 'stats',
             'uses' => 'MainController@stats'
         ]);
