@@ -11,6 +11,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="{!! asset('assets/bootstrap/css/bootstrap.min.css') !!}">
+    @if(Auth::User()->is_pupil())
+        <link rel="stylesheet" href="{!! asset('assets/bootstrap/css/' . Auth::User()->house->name . '.min.css') !!}">
+    @endif
     <link rel="stylesheet" href="{!! asset('assets/font-awesome/css/font-awesome.min.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/css/form-elements.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/css/style.css') !!}">
@@ -47,7 +50,6 @@
 
 <!-- Top content -->
 <div class="top-content">
-
     <div class="inner-bg-less">
         <div class="container">
             <div class="row">
