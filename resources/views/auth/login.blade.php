@@ -10,7 +10,7 @@
             @endif
         </div>
         <div class="form-top-right">
-            <img class="img-responsive logo-img" src="assets/img/logo.png">
+            <img class="img-responsive logo-img-main" src="assets/img/logo.png">
         </div>
     </div>
     <div class="form-bottom">
@@ -39,7 +39,6 @@
             @endif
             <button type="submit" class="btn">Log in</button>
         </form>
-        <!--<p class="text-center"><a href="COMING SOON" class="text-danger">Forgot your pin?</a></p>-->
 
         @include('layouts.footer')
     </div>
