@@ -29,7 +29,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function info(){
+    /*public function info(){
         return view('admin.info');
-    }
+    }*/
 }

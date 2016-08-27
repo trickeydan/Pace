@@ -81,15 +81,11 @@ Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => ['auth'
         'uses' => 'AdminController@usage'
     ]);
 
-    Route::get('info',[
+    /*Route::get('info',[
         'as' => 'admin.info',
         'uses' => 'AdminController@info'
-    ]);
-
-    /*Route::get('feedback',[ //View Pupil Feedback
-        'as' => 'admin.feedback',
-        'uses' => 'AdminController@feedback'
     ]);*/
+
 
     Route::group(['prefix' => 'pupils'],function(){
         Route::get('/',[
