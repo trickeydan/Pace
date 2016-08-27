@@ -5,7 +5,9 @@
         <div class="form-top-left">
             <h3>KLBS Pace Points</h3>
             <p>Please enter your username and pin:</p>
-            <p>Points are updated on Mondays.</p>
+            @if(config('settings.login.showtext'))
+                <p>{{config('settings.login.text')}}</p>
+            @endif
         </div>
         <div class="form-top-right">
             <img class="img-responsive logo-img" src="assets/img/logo.png">

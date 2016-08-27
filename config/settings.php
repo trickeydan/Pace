@@ -1,7 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dan
- * Date: 27/08/16
- * Time: 14:49
- */
+
+
+return [
+
+    'login' => [
+        'text' => 'Currently offline for the summer',
+        'showtext' => false,
+    ],
+];
