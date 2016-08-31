@@ -86,10 +86,11 @@ class UpdatePupils extends Command
 
             User::create([
                 'id' => $row["Adno"],
+                'type_id' => UserType::pupilID(),
                 'name' => $row["Forename"] . ' ' . $row["Surname"],
                 'email' => $row["Email"],
                 'password' => bcrypt($row["Adno"]),
-                'type_id' => UserType::pupilID(),
+
                 'tutorgroup_id' => $tg->id,
                 'house_id'  => House::whereName($row["House"])->first()->id,
                 'currPoints' => 0,
