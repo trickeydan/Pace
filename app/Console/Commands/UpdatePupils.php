@@ -26,7 +26,7 @@ class UpdatePupils extends Command
      *
      * @var string
      */
-    protected $description = 'Update the pupil data from pupils-old.csv';
+    protected $description = 'Update the pupil data from pupils.csv';
 
     /**
      * Create a new command instance.
