@@ -40,8 +40,8 @@ class InitDb extends Command
     {
 
         $this->info('PACE System Updater: Initialiser');
-        Artisan::call('pace:staff');
         Artisan::call('pace:pupils');
+        Artisan::call('pace:staff');
         Artisan::call('pace:points');
         Artisan::call('pace:cache');
         $this->info('Database initialised.');
