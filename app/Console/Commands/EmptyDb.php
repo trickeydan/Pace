@@ -12,7 +12,7 @@ class EmptyDb extends Command
      *
      * @var string
      */
-    protected $signature = 'pace:empty';
+    protected $signature = 'pace:reset';
 
     /**
      * The console command description.
