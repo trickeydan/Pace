@@ -17,7 +17,7 @@ class UserController extends Controller
     // Admin User Controller
 
     public function index(){
-        $users = User::where('type_id','<>',1)->paginate(30);
+        $users = User::where('type_id','=',3)->paginate(30);
         $userPerm = ['','','Teacher','Admin'];
         return view('admin.users.index',['users' => $users,'userPerm' => $userPerm]);
     }
@@ -44,7 +44,7 @@ class UserController extends Controller
     }
 
     public function delete(Request $request,User $user){
-        if($user->is_pupil()) return redirect(route('admin.users.index'))->withErrors('That User is not an admin.');
+        if($user->is_pupil() || $user->is_teacher()) return redirect(route('admin.users.index'))->withErrors('That User is not an admin.');
         if($user->id == Auth::User()->id) return redirect(route('admin.users.index'))->withErrors('You cannot delete yourself');
         $user->delete();
         return redirect(route('admin.users.index'))->with('status','User Deleted');
