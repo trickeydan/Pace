@@ -30,4 +30,18 @@ class ImportManager
             }
         }
     }
+
+    public static function background(){
+        $date = date('j-n');
+        dd(easter_date());
+        if($date == '4-11' || $date == '5-11'){
+            return 'bonfire.jpg';
+        }
+        elseif (date('n') == 12 && date('j') >= 10 && date('j') < 26){
+            return 'xmas.jpg';
+        }
+        else{
+            return 'normal.jpg';
+        }
+    }
 }
