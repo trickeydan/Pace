@@ -11,6 +11,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="{!! asset('assets/bootstrap/css/bootstrap.min.css') !!}">
+    @if(Auth::User()->is_pupil())
+        <link rel="stylesheet" href="{!! asset('assets/bootstrap/css/' . Auth::User()->house->name . '.min.css') !!}">
+    @endif
     <link rel="stylesheet" href="{!! asset('assets/font-awesome/css/font-awesome.min.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/css/form-elements.css') !!}">
     <link rel="stylesheet" href="{!! asset('assets/css/style.css') !!}">
@@ -47,20 +50,17 @@
 
 <!-- Top content -->
 <div class="top-content">
-
     <div class="inner-bg-less">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 form-box">
                     <div class="form-top">
                         <div class="form-top-left">
-                            <h3>KLBS PACE Points @if(!Auth::User()->is_pupil())&nbsp;<small></small><a href="{{route('admin.info')}}"><i class="fa fa-info-circle"></i></a></small>@endif</h3>
-                            @if(Auth::User()->is_admin())
-                                <p>Hello, {{Auth::User()->name}} ADMINISTRATOR <small><a href="{{route('admin.users.changepassword')}}"><i class="fa fa-key"></i></a></small></p>
-                            @elseif(Auth::User()->is_teacher())
-                                <p>Hello, {{Auth::User()->name}} TEACHER <small><a href="{{route('admin.users.changepassword')}}"><i class="fa fa-key"></i></a></small></p>
-                            @else
+                            <h3>KLBS PACE Points</h3>
+                            @if(Auth::User()->is_pupil())
                                 <p>Hello, {{Auth::User()->name}}&nbsp;&nbsp;{{Auth::User()->tutorgroup->name}}&nbsp;&nbsp;{{Auth::User()->house->name}}</p>
+                            @else
+                                <p>Hello, {{Auth::User()->name}} {{strtoupper(Auth::User()->type->name)}} <small><a href="{{route('admin.users.changepassword')}}"><i class="fa fa-key"></i></a></small></p>
                             @endif
                         </div>
                         <div class="form-top-right">
@@ -81,7 +81,7 @@
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
                         @else
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'home') echo 'class="active"';?>><a href="{{route('home')}}">My PACE Points</a></li>
-                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'stats') echo 'class="active"';?>><a href="{{route('stats')}}" >House Points</a></li>
+                            <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'stats') echo 'class="active"';?>><a href="{{route('stats')}}" >TG Points</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'eventstats') echo 'class="active"';?>><a href="{{route('eventstats')}}" >Competitions</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
                         @endif

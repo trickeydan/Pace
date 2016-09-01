@@ -17,7 +17,7 @@ class userTypeStrict
     {
         $typelist = ['pupil' => 1,'teacher' => 2,'admin' => 3];
 
-        if($request->user()->user_level != $typelist[$type]){
+        if($request->user()->type->id != $typelist[$type]){
             return redirect($request->user()->homeUrl());
 
         }

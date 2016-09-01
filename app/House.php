@@ -27,7 +27,7 @@ class House extends Model
             if($ep->affectTotals) $total += $ep->amount;
         }
         $mean = $total / $this->users()->count();
-        $adjusted = $mean * (User::whereUserLevel(1)->count()/House::all()->count());
+        $adjusted = $mean * (UserType::pupil()->users()->count()/House::all()->count());
         $this->currpoints = $adjusted;
         $this->save();
     }

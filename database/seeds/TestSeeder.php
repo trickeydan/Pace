@@ -7,10 +7,10 @@ use Pace\Year;
 use Pace\Tutorgroup;
 use Pace\User;
 use Pace\Point;
-use Pace\Teacher;
 use Pace\Series;
 use Pace\EventPoint;
 use Pace\Event;
+use Pace\UserType;
 class TestSeeder extends Seeder
 {
     /**
@@ -20,19 +20,31 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
-
-        factory(Pace\Teacher::class,80)->create();
-
         PointType::create(['name' => 'Effort']);
         PointType::create(['name' => 'Contribution']);
         PointType::create(['name' => 'Attainment/Achievement']);
 
-        $user = new Pace\User();
+
+        for($i = 0;$i<= 80;$i++){
+            $user = new User();
+            $faker = Faker\Factory::create();
+            $fn = $faker->firstName();
+            $ln = $faker->lastName();
+            $user->name = $fn . ' ' . $ln;
+            $user->email = substr($fn,0,1) .  $ln . '@klbschool.org.uk';
+            $user->password = bcrypt('password');
+            $user->type_id = UserType::teacherID();
+            $user->save();
+        }
+
+        $user = new User();
         $user->name = "Dan Trickey";
         $user->email = "dan@dan.com";
         $user->password = bcrypt('password');
-        $user->user_level = 2;
+        $user->type_id = \Pace\UserType::teacherID();
         $user->save();
+
+
 
         for ($i = 7; $i <= 11; $i++) {
             echo $i . PHP_EOL;
@@ -60,7 +72,7 @@ class TestSeeder extends Seeder
                     if(User::whereId($user->id)->count()==0) {
                         $user->password = bcrypt($user->id);
                         $user->tutorgroup_id = $tg->id;
-                        $user->user_level = 1;
+                        $user->type_id = \Pace\UserType::pupilID();
                         $user->currPoints = 0;
                         $user->house_id = House::all()->random(1)->id;
                         if (User::whereEmail($user->email)->count() <= 0) {
@@ -68,7 +80,7 @@ class TestSeeder extends Seeder
                             for ($l = 1; $l <= random_int(0, 12); $l++) {
                                 $point = new Point();
                                 $point->user_id = $user->id;
-                                $point->teacher_id = Teacher::all()->random(1)->id;
+                                $point->teacher_id = UserType::teacher()->users->random(1)->id;
                                 $point->pointtype_id = PointType::all()->random(1)->id;
                                 $faker = Faker\Factory::create();
                                 $point->date = $faker->date('Y-m-d');

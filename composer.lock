@@ -376,6 +376,7 @@
                     "email": "taylorotwell@gmail.com"
                 }
             ],
+            "abandoned": "laravelcollective/html",
             "time": "2015-01-01 16:31:18"
         },
         {
@@ -707,16 +708,16 @@
         },
         {
             "name": "league/csv",
-            "version": "8.0.0",
+            "version": "8.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/csv.git",
-                "reference": "0a1b535df48507f58ed3c7ab44e72272b11163ac"
+                "reference": "63f2fc3598a4dbbc906c9db9d6f04bc7f72b0645"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/csv/zipball/0a1b535df48507f58ed3c7ab44e72272b11163ac",
-                "reference": "0a1b535df48507f58ed3c7ab44e72272b11163ac",
+                "url": "https://api.github.com/repos/thephpleague/csv/zipball/63f2fc3598a4dbbc906c9db9d6f04bc7f72b0645",
+                "reference": "63f2fc3598a4dbbc906c9db9d6f04bc7f72b0645",
                 "shasum": ""
             },
             "require": {
@@ -760,7 +761,7 @@
                 "read",
                 "write"
             ],
-            "time": "2015-12-11 09:28:14"
+            "time": "2016-05-30 09:35:50"
         },
         {
             "name": "league/flysystem",

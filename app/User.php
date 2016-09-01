@@ -10,7 +10,7 @@ class User extends Authenticatable
     use Encryptable;
 
     protected $fillable = [
-        'name', 'email', 'password','pin','user_level','id'
+        'name', 'email', 'password','pin','type_id','id'
     ];
 
     protected $encryptable = [
@@ -41,6 +41,15 @@ class User extends Authenticatable
         return $this->hasMany('Pace\Point');
     }
 
+    public function eventpoints()
+    {
+        return $this->morphMany('Pace\EventPoint', 'participable');
+    }
+
+    public function type(){
+        return $this->belongsTo('Pace\UserType','type_id','id');
+    }
+
     public function pointsThisWeek(){
         $dt = new \DateTime();
         $dt->sub(new \DateInterval('P7D'));
@@ -60,15 +69,15 @@ class User extends Authenticatable
     }
 
     public function is_pupil(){
-        return $this->user_level == 1;
+        return $this->type->id == UserType::pupilID();
     }
 
     public function is_teacher(){
-        return $this->user_level == 2;
+        return $this->type->id == UserType::teacherID();
     }
 
     public function is_admin(){
-        return $this->user_level == 3;
+        return $this->type->id == UserType::adminID();
     }
 
     public function homeUrl(){
@@ -82,10 +91,6 @@ class User extends Authenticatable
 
     }
 
-    public function eventpoints()
-    {
-        return $this->morphMany('Pace\EventPoint', 'participable');
-    }
 
     public function sendPin(){
 

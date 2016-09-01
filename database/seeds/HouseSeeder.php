@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 
 use Pace\House;
+use Pace\UserType;
 
 class HouseSeeder extends Seeder
 {
@@ -18,11 +19,16 @@ class HouseSeeder extends Seeder
         House::create(['name' => 'Logan','colour' => 'eead03']);
         House::create(['name' => 'Wellicome','colour' => 'ff0f07']);
 
+        UserType::create(['id' => 1,'name' => 'Pupil']);
+        UserType::create(['id' => 2,'name' => 'Teacher']);
+        UserType::create(['id' => 3,'name' => 'Administrator']);
+
+
         $user = new Pace\User();
         $user->name = "Initial Admin";
         $user->email = "admininit@example.com";
         $user->password = bcrypt('password');
-        $user->user_level = 3;
+        $user->type_id = UserType::adminID();
         $user->save();
     }
 }

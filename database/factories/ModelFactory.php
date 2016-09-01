@@ -11,9 +11,9 @@
 |
 */
 
-$factory->define(Pace\Teacher::class, function (Faker\Generator $faker) {
+/*$factory->define(Pace\Teacher::class, function (Faker\Generator $faker) {
     return [
         'name' => strtoupper($faker->randomLetter) . ' ' . $faker->lastName
     ];
-});
+});*/
 

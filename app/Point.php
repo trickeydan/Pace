@@ -12,14 +12,19 @@ class Point extends Model
     ];
     public function user()
     {
-        return $this->belongsTo('Pace\User');
+        return $this->belongsTo('Pace\User','user_id');
     }
     public function teacher()
     {
-        return $this->belongsTo('Pace\Teacher');
+        return $this->belongsTo('Pace\User','teacher_id');
     }
     public function pointtype()
     {
         return $this->belongsTo('Pace\PointType');
+    }
+
+    public static function recent(){
+        //Returns the most recent PACE Point instance
+        return Point::orderBy('date','DESC')->first();
     }
 }
