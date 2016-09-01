@@ -110,7 +110,7 @@
 
 <script>
     jQuery(document).ready(function() {
-        $.backstretch("{!! asset('assets/img/backgrounds/easter.jpg') !!}");
+        $.backstretch("{!! asset('assets/img/backgrounds/1.jpg') !!}");
     });
 </script>
 
