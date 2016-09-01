@@ -2,6 +2,7 @@
 @section('title','TG Points')
 @section('content')
     <h2 class="text-center">Tutor Group Points</h2>
+
     <div class="row">
         @foreach(\Pace\Year::orderBy('name','ASC')->get() as $year)
             <div class="col-sm-6">
@@ -41,4 +42,5 @@
             @endforeach
         }
     </script>
+    <p class="text-center">Data last updated: {{\Pace\Point::recent()->date->format('jS F Y')}}</p>
 @endsection

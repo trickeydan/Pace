@@ -22,4 +22,9 @@ class Point extends Model
     {
         return $this->belongsTo('Pace\PointType');
     }
+
+    public static function recent(){
+        //Returns the most recent PACE Point instance
+        return Point::orderBy('date','DESC')->first();
+    }
 }

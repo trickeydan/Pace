@@ -36,4 +36,5 @@
     <nav class="text-center">
         {!! $points->links() !!}
     </nav>
+    <p class="text-center">Data last updated: {{\Pace\Point::recent()->date->format('jS F Y')}}</p>
 @endsection
