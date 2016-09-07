@@ -105,4 +105,25 @@ class User extends Authenticatable
         return Log::whereUserID($this->id)->count() != 0;
     }
 
+
+    public function hasTG(){ //Teacher
+        if($this->is_teacher()){
+            if($this->tutorgroup != null){
+                return true;
+            }
+            else{
+                $tg = Tutorgroup::getTG($this->initials);
+                if($tg == false){
+                    return false;
+                }else{
+                    $this->tutorgroup_id = $tg->id;
+                    $this->save();
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
 }
