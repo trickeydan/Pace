@@ -60,7 +60,7 @@
                             @if(Auth::User()->is_pupil())
                                 <p>Hello, {{Auth::User()->name}}&nbsp;&nbsp;{{Auth::User()->tutorgroup->name}}&nbsp;&nbsp;{{Auth::User()->house->name}}</p>
                             @else
-                                <p>Hello, {{Auth::User()->name}} {{strtoupper(Auth::User()->type->name)}} <small><a href="{{route('admin.users.changepassword')}}"><i class="fa fa-key"></i></a></small></p>
+                                <p>Hello, {{Auth::User()->name}} @if(Auth::User()->initials != null)({{Auth::User()->initials}}) @endif {{strtoupper(Auth::User()->type->name)}}  <small><a href="{{route('admin.users.changepassword')}}"><i class="fa fa-key"></i></a></small></p>
                             @endif
                         </div>
                         <div class="form-top-right">

@@ -63,6 +63,7 @@ class UpdateStaff extends Command
                 'email' => $row["Staff Email"],
                 'type_id' => UserType::teacherID(),
                 'password' => bcrypt('klbteacher' . $row["Initials"]),
+                'initials' => $row["Initials"],
             ]);
 
 
