@@ -61,7 +61,17 @@ class UpdatePoints extends Command
         foreach ($results as $row) {
             $pupil = User::find($row["Adno"]);
 
-            $teacher = UserType::teacher()->users()->whereName($row["Staff Name"])->first();
+
+
+            if(UserType::teacher()->users()->whereName($row["Staff Name"])->count() <=0){
+                $teacher = User::create([
+                    'name' => $row["Staff Name"],
+                    'type_id' => UserType::teacherID(),
+                ]);
+                $this->comment('Made new Teacher: ' . $row["Staff Name"]);
+            }else{
+                $teacher = UserType::teacher()->users()->whereName($row["Staff Name"])->first();
+            }
 
             if(PointType::whereName($row["Type"])->count() <=0){
                 $type = PointType::create([
