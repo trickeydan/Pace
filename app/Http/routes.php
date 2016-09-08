@@ -58,6 +58,11 @@ Route::group(['prefix' => 'secure','namespace' => 'Admin','middleware' => ['auth
         'uses' => 'AdminController@home'
     ]);
 
+    Route::get('my-tutorgroup',[
+       'as' => 'teacher.tg',
+        'uses' => 'TeacherController@index'
+    ]);
+
     Route::get('changepassword', [
         'as' => 'admin.users.changepassword',
         'uses' => 'UserController@changepassword'

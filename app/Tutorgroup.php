@@ -32,6 +32,10 @@ class Tutorgroup extends Model
         return $this->belongsTo('Pace\Year');
     }
 
+    public function pupils(){
+        return $this->users()->whereTypeId(UserType::pupilID())->get();
+    }
+
     public function updatePoints(){
         $total = 0;
         foreach($this->users as $user){

@@ -77,6 +77,9 @@
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
                         @elseif(Auth::User()->is_teacher())
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'teacher.home') echo 'class="active"';?>><a href="{{route('teacher.home')}}">Dashboard</a></li>
+                            @if(Auth::User()->is_teacher() && Auth::User()->hasTG())
+                                <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'teacher.tg') echo 'class="active"';?>><a href="{{route('teacher.tg')}}">My Tutor Group</a></li>
+                            @endif
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'eventstats') echo 'class="active"';?>><a href="{{route('eventstats')}}">Competitions</a></li>
                             <li role="presentation" <?php if(!isset($error) && \Request::route()->getName() == 'logout') echo 'class="active"';?>><a href="{{route('logout')}}">Logout</a></li>
                         @else
