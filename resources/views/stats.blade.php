@@ -32,7 +32,7 @@
                     2]);
 
                 var options = {
-                    title: "Points By Tutor Group: Year {{$year->name}}",
+                    title: "Points By Tutor Group: {{$year->name}}",
                     height: 400,
                     bar: {groupWidth: "95%"},
                     legend: { position: "none" },

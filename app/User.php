@@ -118,6 +118,7 @@ class User extends Authenticatable
                 }else{
                     $this->tutorgroup_id = $tg->id;
                     $this->save();
+                    $this->tutorgroup = $tg;
                     return true;
                 }
             }
