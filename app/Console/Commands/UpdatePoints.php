@@ -2,6 +2,7 @@
 
 namespace Pace\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Eloquent\Model;
@@ -81,13 +82,16 @@ class UpdatePoints extends Command
             }else{
                 $type = PointType::whereName($row["Type"])->first();
             }
+
+            $date = Carbon::now();
+
             Point::create([
                 'user_id' => $pupil->id,
                 'teacher_id' => $teacher->id,
                 'pointtype_id'  => $type->id,
                 'amount'    => $row["Points"],
                 'description'   => $row["Description"],
-                'date'  => $row["Date"],
+                'date'  => $date,
             ]);
 
             $counter++;
