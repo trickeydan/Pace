@@ -63,6 +63,11 @@ Route::group(['prefix' => 'secure','namespace' => 'Admin','middleware' => ['auth
         'uses' => 'TeacherController@index'
     ]);
 
+    Route::get('pupils/{user}',[
+        'as' => 'teacher.pupils.view',
+        'uses' => 'TeacherController@pupil'
+    ]);
+
     Route::get('changepassword', [
         'as' => 'admin.users.changepassword',
         'uses' => 'UserController@changepassword'

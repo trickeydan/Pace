@@ -41,7 +41,7 @@
                         <td>{{$pupil->id}}</td>
                     @endif
                     <td>{{$pupil->getPoints()}}</td>
-                    <td>View</td>
+                    <td><a href="{{route('teacher.pupils.view',$pupil->email)}}">View</a></td>
                 </tr>
             @endforeach
         </tbody>
