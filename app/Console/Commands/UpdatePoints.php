@@ -83,7 +83,7 @@ class UpdatePoints extends Command
                 $type = PointType::whereName($row["Type"])->first();
             }
 
-            $date = Carbon::now();
+            $date = Carbon::parse($row["Date"]);
 
             Point::create([
                 'user_id' => $pupil->id,
