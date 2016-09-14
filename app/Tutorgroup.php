@@ -3,9 +3,22 @@
 namespace Pace;
 
 use Illuminate\Database\Eloquent\Model;
+use Pace\Year;
 
 class Tutorgroup extends Model
 {
+
+    public static function getTG($initials){ //i.e GTH
+        foreach (Year::all() as $year){
+            foreach ($year->tutorgroups as $tg){
+                if (substr($tg->name,-3,3) == $initials){
+                    return $tg;
+                }
+            }
+        }
+        return false;
+    }
+
 
     protected $table='tutorgroups';
 
@@ -17,6 +30,10 @@ class Tutorgroup extends Model
     public function year()
     {
         return $this->belongsTo('Pace\Year');
+    }
+
+    public function pupils(){
+        return $this->users()->whereTypeId(UserType::pupilID())->get();
     }
 
     public function updatePoints(){

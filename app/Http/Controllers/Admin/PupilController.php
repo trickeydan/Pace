@@ -45,21 +45,11 @@ class PupilController extends Controller
 
     public function view(User $user){
         if(!$user->is_pupil())return redirect(route('admin.pupils.index'))->withErrors('That user is not a pupil!');
-        $tgs = array();
-        foreach(Tutorgroup::where('year_id',$user->tutorgroup->year->id)->get() as $tg){
-            $tgs[$tg->id] = $tg->name;
-        }
-        $hs = array();
-        foreach(House::all() as $h){
-            $hs[$h->id] = $h->name;
-        }
 
         $points = \Pace\Point::where('user_id',$user->id)->orderBy('date','desc')->paginate(15);
 
         return view('admin.pupils.view',[
             'pupil' => $user,
-            'tgs' => $tgs,
-            'houses' => $hs,
             'points' => $points,
         ]);
     }

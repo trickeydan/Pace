@@ -2,7 +2,7 @@
 
 return [
 
-    'version' => '1.5.1',
+    'version' => '1.6.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -158,7 +158,7 @@ return [
         Pace\Providers\AuthServiceProvider::class,
         Pace\Providers\EventServiceProvider::class,
         Pace\Providers\RouteServiceProvider::class,
-
+        Themsaid\MailPreview\MailPreviewServiceProvider::class,
     ],
 
     /*

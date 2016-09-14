@@ -21,15 +21,9 @@ Route::group(['middleware' => ['auth','logger']], function () {
             'uses' => 'MainController@stats'
         ]);
 
-        /*Route::get('feedback',[ //Pupil Feedback
-       'as' => 'feedback',
-       'uses' => 'MainController@feedback'
-   ]);
-
-   Route::post('feedback',[ //Pupil Feedback
-       'as' => 'feedback.store',
-       'uses' => 'MainController@feedbackStore'
-   ]);*/
+        Route::get('email',[
+            'uses' => 'MainController@temp'
+        ]);
     });
 
     Route::group(['middleware' => ['check:pupil']], function(){
@@ -56,6 +50,16 @@ Route::group(['prefix' => 'secure','namespace' => 'Admin','middleware' => ['auth
     Route::get('/',[
         'as' => 'teacher.home',
         'uses' => 'AdminController@home'
+    ]);
+
+    Route::get('my-tutorgroup',[
+       'as' => 'teacher.tg',
+        'uses' => 'TeacherController@index'
+    ]);
+
+    Route::get('pupils/{user}',[
+        'as' => 'teacher.pupils.view',
+        'uses' => 'TeacherController@pupil'
     ]);
 
     Route::get('changepassword', [
