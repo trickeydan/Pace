@@ -21,15 +21,9 @@ Route::group(['middleware' => ['auth','logger']], function () {
             'uses' => 'MainController@stats'
         ]);
 
-        /*Route::get('feedback',[ //Pupil Feedback
-       'as' => 'feedback',
-       'uses' => 'MainController@feedback'
-   ]);
-
-   Route::post('feedback',[ //Pupil Feedback
-       'as' => 'feedback.store',
-       'uses' => 'MainController@feedbackStore'
-   ]);*/
+        Route::get('email',[
+            'uses' => 'MainController@temp'
+        ]);
     });
 
     Route::group(['middleware' => ['check:pupil']], function(){

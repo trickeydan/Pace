@@ -158,7 +158,7 @@ return [
         Pace\Providers\AuthServiceProvider::class,
         Pace\Providers\EventServiceProvider::class,
         Pace\Providers\RouteServiceProvider::class,
-
+        Themsaid\MailPreview\MailPreviewServiceProvider::class,
     ],
 
     /*

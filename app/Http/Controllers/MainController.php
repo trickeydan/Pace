@@ -41,16 +41,12 @@ class MainController extends Controller
         return view('eventstatsseriesevent',compact('event'));
     }
 
-    /*public function feedback(){
-        return view('feedback');
+    public function temp(){
+        return view('emails.pupil',[
+            'user' => Auth::User()
+        ]);
     }
 
-    public function feedbackStore(Request $request){
-        Mail::send('emails.feedback', ['user' => $this,'request' => $request], function ($m) {
-            $m->from(env('email'), 'KLBS Pace Points (' . Auth::User()->name . ')');
 
-            $m->to(env('feedbackemail'))->subject('Pace Point Feedback');
-        });
-        return redirect(Auth::User()->homeUrl())->with('status','Feedback Submitted, Thanks.');
-    }*/
+
 }
