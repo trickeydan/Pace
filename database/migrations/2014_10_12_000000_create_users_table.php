@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('tutorgroup_id')->nullable();
             $table->integer('house_id')->nullable();
             $table->integer('currPoints')->nullable();
+            $table->string('initials')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

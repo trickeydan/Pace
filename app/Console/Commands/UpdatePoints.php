@@ -2,6 +2,7 @@
 
 namespace Pace\Console\Commands;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Eloquent\Model;
@@ -61,7 +62,17 @@ class UpdatePoints extends Command
         foreach ($results as $row) {
             $pupil = User::find($row["Adno"]);
 
-            $teacher = UserType::teacher()->users()->whereName($row["Staff Name"])->first();
+
+
+            if(UserType::teacher()->users()->whereName($row["Staff Name"])->count() <=0){
+                $teacher = User::create([
+                    'name' => $row["Staff Name"],
+                    'type_id' => UserType::teacherID(),
+                ]);
+                $this->comment('Made new Teacher: ' . $row["Staff Name"]);
+            }else{
+                $teacher = UserType::teacher()->users()->whereName($row["Staff Name"])->first();
+            }
 
             if(PointType::whereName($row["Type"])->count() <=0){
                 $type = PointType::create([
@@ -71,13 +82,16 @@ class UpdatePoints extends Command
             }else{
                 $type = PointType::whereName($row["Type"])->first();
             }
+
+            $date = Carbon::parse($row["Date"]);
+
             Point::create([
                 'user_id' => $pupil->id,
                 'teacher_id' => $teacher->id,
                 'pointtype_id'  => $type->id,
                 'amount'    => $row["Points"],
                 'description'   => $row["Description"],
-                'date'  => $row["Date"],
+                'date'  => $date,
             ]);
 
             $counter++;

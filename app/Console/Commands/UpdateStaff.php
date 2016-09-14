@@ -59,10 +59,11 @@ class UpdateStaff extends Command
         foreach ($results as $row) {
 
             User::create([
-                'name' => $row["Staff Name"],
-                'email' => $row["Staff Email"],
+                'name' => $row["Full Name"],
+                'email' => $row["Work Email"],
                 'type_id' => UserType::teacherID(),
-                'password' => bcrypt('klbteacher' . $row["Initials"]),
+                'password' => bcrypt('klbteacher' . trim($row["Initials"])),
+                'initials' => trim($row["Initials"]),
             ]);
 
 

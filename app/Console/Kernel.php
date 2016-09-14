@@ -4,6 +4,7 @@ namespace Pace\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Pace\Console\Commands\EmailAll;
 use Pace\Console\Commands\EmptyDb;
 use Pace\Console\Commands\InitDb;
 use Pace\Console\Commands\UpdateCache;
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
         UpdateCache::class,
         EmptyDb::class,
         InitDb::class,
+        EmailAll::class,
     ];
 
     /**

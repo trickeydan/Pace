@@ -92,17 +92,51 @@ class User extends Authenticatable
     }
 
 
-    public function sendPin(){
+    public function sendEmail(){
+        echo $this->email;
+        if ($this->is_pupil()){
+            Mail::send('emails.pupil', ['user' => $this], function ($m) {
+                $m->from('pace@klbschool.net', 'KLBS Pace Points');
 
-        Mail::send('emails.pin', ['user' => $this], function ($m) {
-            $m->from('pace@klbschool.net', 'KLBS Pace Points');
+                $m->to($this->email, $this->name)->subject('PACE Points Login 2016/17');
+            });
+        }elseif ($this->is_teacher()){
+            echo $this->email;
+            Mail::send('emails.teacher', ['user' => $this], function ($m) {
+                $m->from('pace@klbschool.net', 'KLBS Pace Points');
 
-            $m->to($this->email, $this->name)->subject('You haven\' logged in yet!');
-        });
+                $m->to($this->email, $this->name)->subject('PACE Points Login 2016/17');
+            });
+        }else{
+            echo "Not Emailed.";
+        }
+
     }
 
     public function hasLoggedIn(){
         return Log::whereUserID($this->id)->count() != 0;
+    }
+
+
+    public function hasTG(){ //Teacher
+        if($this->is_teacher()){
+            if($this->tutorgroup != null){
+                return true;
+            }
+            else{
+                $tg = Tutorgroup::getTG($this->initials);
+                if($tg == false){
+                    return false;
+                }else{
+                    $this->tutorgroup_id = $tg->id;
+                    $this->save();
+                    $this->tutorgroup = $tg;
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
 }
