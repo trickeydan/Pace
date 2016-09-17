@@ -89,7 +89,8 @@ class UpdatePupils extends Command
                 'type_id' => UserType::pupilID(),
                 'name' => $row["Forename"] . ' ' . $row["Surname"],
                 'email' => $row["Email"],
-                'password' => bcrypt(substr($row["Adno"],2,4)),
+                //'password' => bcrypt(substr($row["Adno"],2,4)),
+                'password' => bcrypt($row["Adno"]),
 
                 'tutorgroup_id' => $tg->id,
                 'house_id'  => House::whereName($row["House"])->first()->id,
