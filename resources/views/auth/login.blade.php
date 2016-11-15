@@ -4,7 +4,7 @@
     <div class="form-top">
         <div class="form-top-left">
             <h3>KLBS Pace Points</h3>
-            <p>Please enter your username and pin:</p>
+            <p>Please enter your email and pin:</p>
             @if(config('settings.login.showtext'))
                 <p>{{config('settings.login.text')}}</p>
             @endif
