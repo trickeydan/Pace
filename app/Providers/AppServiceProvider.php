@@ -1,10 +1,8 @@
 <?php
 
-namespace Pace\Providers;
+namespace App\Providers;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-use Pace\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,10 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       /* Validator::extend('emailhash', function($attribute, $value, $parameters, $validator) {
-            $hash = hash('sha256',$value);
-            return User::whereEmailhash($hash)->count() == 0;
-        });*/
+        //
     }
 
     /**
