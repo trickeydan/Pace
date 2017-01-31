@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\sendPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -26,4 +27,27 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /*
+     * Send the user their password if they have requested a reset.
+     *
+     * Whilst it says reset, the token functionality has been disabled to prevent pupils from changing their passwords.
+     *
+     */
+
+    public function sendPasswordResetNotification($token) // In this case $token is always blank to maintain the inheritance from the framework.
+    {
+        $this->notify(new sendPassword($this->getPasswordToEmail()));
+    }
+
+    /**
+     * Get the password to send to the email address in the event of a password reset.
+     *
+     * @return string
+     */
+
+    public function getPasswordToEmail(){
+        // Todo: Add a check to see if teacher or pupil. Then return adno or ****
+        return '*****';
+    }
 }

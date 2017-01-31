@@ -22,6 +22,18 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
+    /*public function showRegistrationForm()
+    {
+        // Prevent new user registration.
+        abort(404);
+    }
+
+    public function register()
+    {
+        // Prevent new user registration.
+        abort(404);
+    }*/
+
     /**
      * Where to redirect users after registration.
      *

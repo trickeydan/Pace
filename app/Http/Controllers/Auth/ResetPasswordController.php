@@ -20,6 +20,17 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
+    // Disable laravel password reset mechanism
+
+    public function showResetForm()
+    {
+        abort(404);
+    }
+
+    public function reset(){
+        abort(404);
+    }
+
     /**
      * Where to redirect users after resetting their password.
      *
