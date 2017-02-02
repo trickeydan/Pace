@@ -2,7 +2,7 @@
     "name": "trickeydan/pace",
     "description": "KLBS Pace Points",
     "keywords": ["points", "laravel"],
-    "license": "GPLv3,
+    "license": "GPLv3",
     "type": "project",
     "require": {
         "php": ">=5.6.4",
