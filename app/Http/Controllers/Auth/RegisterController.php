@@ -22,7 +22,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    /*public function showRegistrationForm()
+    public function showRegistrationForm()
     {
         // Prevent new user registration.
         abort(404);
@@ -32,14 +32,14 @@ class RegisterController extends Controller
     {
         // Prevent new user registration.
         abort(404);
-    }*/
+    }
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.

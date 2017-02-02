@@ -34,8 +34,8 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" type="submit">Log In</button>
-                </div><a href="{{ url('/password/reset') }}" class="forgot">Forgot your email or password?</a></form>
+                    <button class="btn btn-primary btn-block" name="submit" type="submit">Log In</button>
+                </div><a href="{{ route('auth.password') }}" class="forgot">Forgot your password?</a></form>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>

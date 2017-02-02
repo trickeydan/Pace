@@ -35,8 +35,7 @@ class LoginTest extends TestCase
 
     public function testCanVisitLoginPage(){
         $response = $this->get(route('auth.login'));
-        $response->assertStatus(200,'Could not visit login page').
-        $response->assertSee('Log In');
+        $response->assertStatus(200,'Could not visit login page');
     }
     
 }
