@@ -6,25 +6,22 @@ php:
   - '7.0'
   - '7.1'
 
-sudo: required
+install:
+  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
+  - cp .env.example .env          # Create a new .env file
+  - php artisan key:generate      # Generate application key
 
 before_script:
   - cp .env.travis .env
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
-  - composer self-update
-  - composer install --no-interaction --dev
   - php artisan migrate
   - php artisan db:seed
-  - export CHROME_BIN=/usr/bin/google-chrome
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sudo apt-get update
-  - sudo apt-get install -y libappindicator1 fonts-liberation
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome*.deb
 
-script:
-- php artisan dusk
+  - phantomjs --webdriver=127.0.0.1:9515 &  # Start PhantomJS driver
+  - php artisan serve &                     # Start server
+  - sleep 5  #Give time to start server
+
+script: php artisan dusk
 
 notifications:
 email: false

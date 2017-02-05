@@ -63,6 +63,8 @@ class LoginTest extends DuskTestCase
                 ->type('password','incorrect!')
                 ->press('Log In')
                 ->assertSee('These credentials do not match our records.');
+
+            $user->delete();
         });
 
     }
@@ -81,7 +83,7 @@ class LoginTest extends DuskTestCase
             $browser->visit(new Login())
                 ->assertSeeLink('Forgot your password?')
                 ->clickLink('Forgot your password?')
-                ->assertSee('Reset Password');
+                ->assertSee('Forgot Password');
         });
 
     }
@@ -106,6 +108,7 @@ class LoginTest extends DuskTestCase
                 ->press('Log In')
                 ->assertPathIs('/')
                 ->assertSee('Dashboard');
+            $user->delete();
         });
 
     }

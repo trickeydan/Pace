@@ -11,7 +11,8 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');;
 
 // Password Reset Route
-Route::get('password/email', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('auth.password');;
+Route::get('password/email', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('auth.password');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 
 
 // Main Routes
