@@ -12,7 +12,9 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'PACE Points',
+    'name' => 'KLBS PACE Points',
+
+    'version' => '2.0.0',
 
     /*
     |--------------------------------------------------------------------------

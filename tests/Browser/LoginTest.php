@@ -107,7 +107,7 @@ class LoginTest extends DuskTestCase
                 ->type('password','secret')
                 ->press('Log In')
                 ->assertPathIs('/')
-                ->assertSee('Dashboard');
+                ->assertSee('PACE');
             $user->delete();
         });
 

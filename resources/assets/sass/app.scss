@@ -1,0 +1,58 @@
+//colors
+$white: #ffffff;
+$color_gravel_approx: #4b4c4d;
+$color_celeste_approx: #ccc;
+$color_silver_chalice_approx: #aaa;
+
+.footer-basic {
+  padding: 40px 0;
+  background-color: $white;
+  color: $color_gravel_approx;
+  ul {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 0;
+    a {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.8;
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  li {
+    padding: 0 10px;
+  }
+  .social {
+    text-align: center;
+    padding-bottom: 25px;
+    > a {
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      display: inline-block;
+      text-align: center;
+      //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+      border-radius: 50%;
+      border: 1px solid $color_celeste_approx;
+      margin: 0 8px;
+      color: inherit;
+      opacity: 0.75;
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+  .copyright {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 13px;
+    color: $color_silver_chalice_approx;
+    margin-bottom: 0;
+  }
+}

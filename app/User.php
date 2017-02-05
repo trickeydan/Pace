@@ -50,4 +50,14 @@ class User extends Authenticatable
         // Todo: Add a check to see if teacher or pupil. Then return adno or ****
         return '*****';
     }
+
+    /**
+     * Get the name to display
+     *
+     * @return string
+     *
+     */
+    public function getName(){
+        return $this->name;
+    }
 }
