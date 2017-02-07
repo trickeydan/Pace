@@ -12,26 +12,13 @@ use Faker\Factory as Faker;
 class ModelHouseTest extends TestCase
 {
     /**
-     * Creates a House for testing
-     *
-     * @return House
-     */
-
-    public static function createHouse(){
-        $faker = Faker::create();
-
-        return House::create();
-    }
-
-
-    /**
      * Test to see if Houses can be created
      *
      * @return void
      */
     public function testHouseCreation()
     {
-        $result = self::createHouse();
+        $result = factory(House::class)->make();
 
         $this->assertNotFalse($result);
         $result->delete();
@@ -45,7 +32,7 @@ class ModelHouseTest extends TestCase
      */
 
     public function testHouseSaveDelete(){
-        $h = self::createHouse();
+        $h = factory(House::class)->make();
         $this->assertNotFalse($h->save());
         $this->assertNotFalse($h->delete());
     }

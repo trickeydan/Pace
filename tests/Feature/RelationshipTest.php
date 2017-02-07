@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Account;
+use App\Pupil;
+use App\Tutorgroup;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -17,11 +19,9 @@ class RelationshipTest extends TestCase
      *
      * @return void
      */
-    public function testPupilUserPolyMorphic(){
-        $user = ModelUserTest::createUser();
-        $pupil = ModelPupilTest::createPupil();
-        $user->save();
-        $pupil->save();
+    public function testPupilUser(){
+        $user = factory(User::class)->create();
+        $pupil = factory(Pupil::class)->create();
         $res = $user->accountable()->associate($pupil);
         $this->assertNotFalse($res);
         $user->save();
@@ -29,5 +29,20 @@ class RelationshipTest extends TestCase
         $this->assertEquals($user->accountable->getType(),Account::PUPIL);
         $user->delete();
         $pupil->delete();
+    }
+
+    /**
+     * Test relationship of pupils and tutorgroups.
+     *
+     * @return void
+     */
+    public function testPupilTutorgroup(){
+        $pupil = factory(Pupil::class)->make();
+        $tutorgroup = factory(Tutorgroup::class)->create();
+        $res = $tutorgroup->pupils()->save($pupil);
+        $this->assertNotFalse($res);
+        $this->assertEquals($pupil->id,$tutorgroup->pupils()->first()->id);
+        $this->assertGreaterThanOrEqual(1,$tutorgroup->pupils()->count());
+        $tutorgroup->delete();
     }
 }

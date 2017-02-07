@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Account;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Dusk\DuskServiceProvider;
@@ -31,7 +32,11 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             if(Auth::check()){
-                $view->with('user',Auth::User());
+                $view->with('user',Auth::User()); // Send the user variable to all logged in pages.
+            }
+
+            if(Auth::user()->accountable->getType() == Account::PUPIL){
+                $view->with('pupil',Auth::User()->accountable);
             }
         });
     }

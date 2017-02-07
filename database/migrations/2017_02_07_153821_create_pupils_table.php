@@ -17,6 +17,7 @@ class CreatePupilsTable extends Migration
             $table->increments('id');
             $table->string('name'); // Name of the pupil.
             $table->integer('currPoints'); //Cached points for this pupil
+            $table->integer('tutorgroup_id')->nullable(); //
             $table->timestamps();
         });
     }

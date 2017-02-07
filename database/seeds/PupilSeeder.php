@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Account;
+use App\User;
 
 class PupilSeeder extends Seeder
 {
@@ -11,19 +13,20 @@ class PupilSeeder extends Seeder
      */
     public function run()
     {
-        // Firstly, create 50 pupil accounts.
-        factory(App\User::class, 50)->create()->each(function ($u) {
-            $u->accountable()->associate(factory(App\Pupil::class)->create());
-            $u->save();
+        // Firstly, create 5 tutorgroups.
+        factory(App\Tutorgroup::class, 5)->create()->each(function ($tg) {
+            factory(App\Pupil::class, 20)->create(['tutorgroup_id' => $tg->id]) // Now make 20 pupils
+            ->each(function($pupil){
+                // Now create a user for each pupil.
+                factory(App\User::class)->create(['accountable_type' => Account::PUPIL,'accountable_id' => $pupil->id]);
+            });
         });
 
-        // Now create a pupil account with a known login.
-        factory(App\User::class)->create([
-            'email' => 'pupil@example.com',
-            'password' => bcrypt('password'),
-        ])->each(function ($u) {
-            $u->accountable()->associate(factory(App\Pupil::class)->create());
-            $u->save();
-        });
+
+        // Now make the testing user.
+        $u = User::inRandomOrder()->first();
+        $u->email = "pupil@example.com";
+        $u->password = bcrypt('password');
+        $u->save();
     }
 }

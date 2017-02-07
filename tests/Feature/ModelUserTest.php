@@ -12,24 +12,13 @@ use Faker\Factory as Faker;
 class ModelUserTest extends TestCase
 {
     /**
-     * Creates a User for testing
-     *
-     * @return User
-     */
-
-    public static function createUser(){
-        return factory(User::class)->make();
-    }
-
-
-    /**
      * Test to see if Users can be created
      *
      * @return void
      */
     public function testUserCreation()
     {
-        $result = self::createUser();
+        $result = factory(User::class)->make();
 
         $this->assertNotFalse($result);
         $result->delete();
@@ -43,7 +32,7 @@ class ModelUserTest extends TestCase
      */
 
     public function testUserSaveDelete(){
-        $h = self::createUser();
+        $h = factory(User::class)->make();
         $this->assertNotFalse($h->save());
         $this->assertNotFalse($h->delete());
     }

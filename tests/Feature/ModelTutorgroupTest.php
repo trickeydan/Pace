@@ -12,26 +12,13 @@ use Faker\Factory as Faker;
 class ModelTutorgroupTest extends TestCase
 {
     /**
-     * Creates a Tutorgroup for testing
-     *
-     * @return Tutorgroup
-     */
-
-    public static function createTutorgroup(){
-        $faker = Faker::create();
-
-        return Tutorgroup::create();
-    }
-
-
-    /**
      * Test to see if Tutorgroups can be created
      *
      * @return void
      */
     public function testTutorgroupCreation()
     {
-        $result = self::createTutorgroup();
+        $result = factory(Tutorgroup::class)->make();
 
         $this->assertNotFalse($result);
         $result->delete();
@@ -45,7 +32,7 @@ class ModelTutorgroupTest extends TestCase
      */
 
     public function testTutorgroupSaveDelete(){
-        $h = self::createTutorgroup();
+        $h = factory(Tutorgroup::class)->make();
         $this->assertNotFalse($h->save());
         $this->assertNotFalse($h->delete());
     }

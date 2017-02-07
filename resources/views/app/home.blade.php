@@ -3,7 +3,7 @@
 @section('title',$user->getName())
 @section('content')
     <div class="container">
-        <h1 class="text-center">Hello, {{$user->getName()}} <small>10CDH </small></h1></div>
+        <h1 class="text-center">Hello, {{$user->getName()}} <small>{{$pupil->tutorgroup}} </small></h1></div>
     <div>
         <div class="container">
             <div class="row">
@@ -11,7 +11,7 @@
                     <div class="well">
                         <h1 class="text-center">Statistics </h1>
                         <ul class="list-group">
-                            <li class="list-group-item"><span>Total number of points: 102</span></li>
+                            <li class="list-group-item"><span>Total number of points: {{$pupil->currPoints}}</span></li>
                             <li class="list-group-item"><span>Number of points this week: 12</span></li>
                             <li class="list-group-item"><span>Best Category: Punctuality</span></li>
                         </ul>
@@ -21,7 +21,7 @@
                     <div class="well">
                         <h1 class="text-center">My Tutorgroup</h1>
                         <ul class="list-group">
-                            <li class="list-group-item"><span>Total number of points: 1002</span></li>
+                            <li class="list-group-item"><span>Total number of points: {{$pupil->tutorgroup->currPoints}}</span></li>
                             <li class="list-group-item"><span>Number of points this week: 102</span></li>
                             <li class="list-group-item"><span>Position in year: 4th</span></li>
                         </ul>

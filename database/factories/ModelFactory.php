@@ -30,4 +30,31 @@ $factory->define(App\Pupil::class, function (Faker\Generator $faker) {
     ];
 });
 
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Tutorgroup::class, function (Faker\Generator $faker) {
+    $string = "";
+    for ($letter = 1; $letter <= 3; $letter++) {
+        $faker = Faker\Factory::create();
+        $string = $string . $faker->randomLetter();
+    }
+    return [
+        'name' => $faker->numberBetween(7,13) . strtoupper($string),
+        'currPoints' => $faker->numberBetween(0,200),
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\House::class, function (Faker\Generator $faker) {
+    return [
+
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Year::class, function (Faker\Generator $faker) {
+    return [
+
+    ];
+});
+
 

@@ -15,6 +15,8 @@ class CreateTutorgroupsTable extends Migration
     {
         Schema::create('tutorgroups', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name'); //Name of the tutorgroup
+            $table->integer('currPoints'); // Cached number of points
             $table->timestamps();
         });
     }

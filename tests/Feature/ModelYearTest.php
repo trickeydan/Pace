@@ -12,26 +12,13 @@ use Faker\Factory as Faker;
 class ModelYearTest extends TestCase
 {
     /**
-     * Creates a Year for testing
-     *
-     * @return Year
-     */
-
-    public static function createYear(){
-        $faker = Faker::create();
-
-        return Year::create();
-    }
-
-
-    /**
      * Test to see if Years can be created
      *
      * @return void
      */
     public function testYearCreation()
     {
-        $result = self::createYear();
+        $result = factory(Year::class)->make();
 
         $this->assertNotFalse($result);
         $result->delete();
@@ -45,7 +32,7 @@ class ModelYearTest extends TestCase
      */
 
     public function testYearSaveDelete(){
-        $h = self::createYear();
+        $h = factory(Year::class)->make();
         $this->assertNotFalse($h->save());
         $this->assertNotFalse($h->delete());
     }

@@ -12,24 +12,13 @@ use Faker\Factory as Faker;
 class ModelPupilTest extends TestCase
 {
     /**
-     * Creates a Pupil for testing
-     *
-     * @return Pupil
-     */
-
-    public static function createPupil(){
-        return factory(Pupil::class)->make();
-    }
-
-
-    /**
      * Test to see if Pupils can be created
      *
      * @return void
      */
     public function testPupilCreation()
     {
-        $result = self::createPupil();
+        $result = factory(Pupil::class)->make();
 
         $this->assertNotFalse($result);
     }
@@ -42,7 +31,7 @@ class ModelPupilTest extends TestCase
      */
 
     public function testPupilSaveDelete(){
-        $p = self::createPupil();
+        $p = factory(Pupil::class)->make();
         $this->assertNotFalse($p->save());
         $this->assertNotFalse($p->delete());
     }
