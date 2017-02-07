@@ -6,22 +6,16 @@ php:
   - '7.0'
   - '7.1'
 
-install:
-  - travis_retry composer install --no-interaction --prefer-dist --no-suggest
-  - cp .env.example .env          # Create a new .env file
-  - php artisan key:generate      # Generate application key
-
 before_script:
   - cp .env.travis .env
   - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+  - composer self-update
+  - composer install --no-interaction --dev
   - php artisan migrate
   - php artisan db:seed
 
-  - phantomjs --webdriver=127.0.0.1:9515 &  # Start PhantomJS driver
-  - php artisan serve &                     # Start server
-  - sleep 5  #Give time to start server
-
-script: php artisan dusk
+script:
+- vendor/bin/phpunit
 
 notifications:
 email: false

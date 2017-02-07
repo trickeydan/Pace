@@ -1,7 +1,6 @@
 # Pace
 
-[![Build Status](https://travis-ci.org/trickeydan/Pace.svg?branch=develop)](https://travis-ci.org/trickeydan/Pointer)
-[![Coverage Status](https://coveralls.io/repos/github/trickeydan/Pace/badge.svg?branch=develop)](https://coveralls.io/github/trickeydan/Pointer?branch=master)
+[![Build Status](https://travis-ci.org/trickeydan/Pace.svg?branch=develop)](https://travis-ci.org/trickeydan/Pace)
 
 A system to manage 'PACE' points and House competitions for KLBS. Replaces v1.x.x
 
@@ -11,6 +10,15 @@ Features include:
 * Pupils can login to view their points
 * Graphs for House and Tutor Group Points
 * Teachers can login to view their Tutor Groups
+
+Test Account Details
+* Run `php artisan db:seed` to load test data.
+* Pupil login: pupil@example.com:password
+* Ensure these are removed before production.
+
+To contribute:
+* Please test Browser functionality before opening PR using `php artisan dusk`
+* Standard code tests will be run by Travis CI
 
 Released under GPLv3
 

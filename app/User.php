@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function getPasswordToEmail(){
         // Todo: Add a check to see if teacher or pupil. Then return adno or ****
-        return '*****';
+        return 'Not implemented';
     }
 
     /**
@@ -58,6 +58,21 @@ class User extends Authenticatable
      *
      */
     public function getName(){
-        return $this->name;
+        //Todo: Get name from account
+        return $this->accountable->getName();
     }
+
+    /**
+     * Retrieve this user's account. i.e a pupil, teacher.
+     *
+     * @return Pupil
+     * @return Teacher
+     * @return Administrator
+     *
+     */
+    public function accountable(){
+        return $this->morphTo();
+    }
+
+
 }
