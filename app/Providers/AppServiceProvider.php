@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
                 $view->with('user',Auth::User()); // Send the user variable to all logged in pages.
             }
 
-            if(Auth::user()->accountable->getType() == Account::PUPIL){
+            if(Auth::check() && Auth::user()->accountable->getType() == Account::PUPIL){
                 $view->with('pupil',Auth::User()->accountable);
             }
         });
