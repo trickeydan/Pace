@@ -3,7 +3,7 @@
 @section('title',$user->getName())
 @section('content')
     <div class="container">
-        <h1 class="text-center">Hello, {{$user->getName()}} <small>{{$pupil->tutorgroup}} </small></h1></div>
+        <h1 class="text-center">Hello, {{$user->getName()}} <small>{{$pupil->tutorgroup->house}}/{{$pupil->tutorgroup}} </small></h1></div>
     <div>
         <div class="container">
             <div class="row">

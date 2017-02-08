@@ -58,7 +58,6 @@ class User extends Authenticatable
      *
      */
     public function getName(){
-        //Todo: Get name from account
         return $this->accountable->getName();
     }
 

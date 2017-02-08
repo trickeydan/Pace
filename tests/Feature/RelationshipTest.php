@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Account;
+use App\House;
 use App\Pupil;
 use App\Tutorgroup;
 use Tests\TestCase;
@@ -14,6 +15,24 @@ use Faker\Factory as Faker;
 
 class RelationshipTest extends TestCase
 {
+
+    //Relationships with Pupils
+
+    /**
+     * Test relationship of pupils and tutorgroups.
+     *
+     * @return void
+     */
+    public function testPupilTutorgroup(){
+        $pupil = factory(Pupil::class)->make();
+        $tutorgroup = factory(Tutorgroup::class)->create();
+        $res = $tutorgroup->pupils()->save($pupil);
+        $this->assertNotFalse($res);
+        $this->assertEquals($pupil->id,$tutorgroup->pupils()->first()->id);
+        $this->assertGreaterThanOrEqual(1,$tutorgroup->pupils()->count());
+        $tutorgroup->delete();
+    }
+
     /**
      * Test attachment of a Pupil to a user.
      *
@@ -31,18 +50,17 @@ class RelationshipTest extends TestCase
         $pupil->delete();
     }
 
-    /**
-     * Test relationship of pupils and tutorgroups.
-     *
-     * @return void
-     */
-    public function testPupilTutorgroup(){
-        $pupil = factory(Pupil::class)->make();
-        $tutorgroup = factory(Tutorgroup::class)->create();
-        $res = $tutorgroup->pupils()->save($pupil);
+    //Relationships with Houses
+
+    public function testHouseTutorgroup(){
+        $house = factory(House::class)->create();
+        $tutorgroup = factory(Tutorgroup::class)->make();
+        $res = $house->tutorgroups()->save($tutorgroup);
         $this->assertNotFalse($res);
-        $this->assertEquals($pupil->id,$tutorgroup->pupils()->first()->id);
-        $this->assertGreaterThanOrEqual(1,$tutorgroup->pupils()->count());
+        $this->assertEquals($tutorgroup->id,$house->tutorgroups()->first()->id);
+        $this->assertGreaterThanOrEqual(1,$house->tutorgroups()->count());
         $tutorgroup->delete();
     }
+
+
 }

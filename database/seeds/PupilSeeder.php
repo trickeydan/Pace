@@ -13,14 +13,20 @@ class PupilSeeder extends Seeder
      */
     public function run()
     {
-        // Firstly, create 5 tutorgroups.
-        factory(App\Tutorgroup::class, 5)->create()->each(function ($tg) {
-            factory(App\Pupil::class, 20)->create(['tutorgroup_id' => $tg->id]) // Now make 20 pupils
-            ->each(function($pupil){
-                // Now create a user for each pupil.
-                factory(App\User::class)->create(['accountable_type' => Account::PUPIL,'accountable_id' => $pupil->id]);
+        // Firstly, create 4 houses.
+        factory(App\House::class,4)->create()->each(function($house){
+            // Create 5 tutorgroups.
+            factory(App\Tutorgroup::class, 5)->create(['house_id' => $house->id])->each(function ($tg) {
+                // Now make 20 pupils
+                factory(App\Pupil::class, 20)->create(['tutorgroup_id' => $tg->id])
+                ->each(function($pupil){
+                    // Now create a user for each pupil.
+                    factory(App\User::class)->create(['accountable_type' => Account::PUPIL,'accountable_id' => $pupil->id]);
+                });
             });
         });
+
+
 
 
         // Now make the testing user.

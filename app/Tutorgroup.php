@@ -38,7 +38,6 @@ class Tutorgroup extends Model
      * @return House
      */
     public function house(){
-        // Todo: Implement this properly.
-        return 'House';
+        return $this->belongsTo('App\House');
     }
 }

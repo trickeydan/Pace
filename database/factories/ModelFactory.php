@@ -38,6 +38,7 @@ $factory->define(App\Tutorgroup::class, function (Faker\Generator $faker) {
         $string = $string . $faker->randomLetter();
     }
     return [
+        'house_id' => 1,
         'name' => $faker->numberBetween(7,13) . strtoupper($string),
         'currPoints' => $faker->numberBetween(0,200),
     ];
@@ -46,7 +47,8 @@ $factory->define(App\Tutorgroup::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\House::class, function (Faker\Generator $faker) {
     return [
-
+        'name' => strtoupper($faker->word),
+        'colour' => $faker->safeHexColor,
     ];
 });
 

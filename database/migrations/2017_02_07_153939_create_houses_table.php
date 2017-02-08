@@ -15,6 +15,8 @@ class CreateHousesTable extends Migration
     {
         Schema::create('houses', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name'); //Name of the House
+            $table->string('colour'); //Colour of the house.
             $table->timestamps();
         });
     }

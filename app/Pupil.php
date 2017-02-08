@@ -26,11 +26,14 @@ class Pupil extends Account
     /**
      * Get this pupil's house.
      *
+     * DEPRECATED. Access via tutorgroup model instead.
+     *
      * @return House
      */
 
     public function house(){
-        //Todo: Use a many-through relationship here
-        return 'House';
+        //Todo: Remove this code.
+        trigger_error('Should access House via Tutorgroup model',E_USER_WARNING);
+        return $this->tutorgroup->house;
     }
 }
