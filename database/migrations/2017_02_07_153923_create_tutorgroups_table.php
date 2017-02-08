@@ -18,6 +18,7 @@ class CreateTutorgroupsTable extends Migration
             $table->string('name'); //Name of the tutorgroup
             $table->integer('currPoints'); // Cached number of points
             $table->integer('house_id')->nullable(); // The id of the house.
+            $table->integer('year_id')->nullable(); // The id of the house.
             $table->timestamps();
         });
     }

@@ -6,6 +6,7 @@ use App\Account;
 use App\House;
 use App\Pupil;
 use App\Tutorgroup;
+use App\Year;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -52,6 +53,10 @@ class RelationshipTest extends TestCase
 
     //Relationships with Houses
 
+    /**
+     * Test attachement of a Tutorgroup to a house.
+     *
+     */
     public function testHouseTutorgroup(){
         $house = factory(House::class)->create();
         $tutorgroup = factory(Tutorgroup::class)->make();
@@ -60,6 +65,22 @@ class RelationshipTest extends TestCase
         $this->assertEquals($tutorgroup->id,$house->tutorgroups()->first()->id);
         $this->assertGreaterThanOrEqual(1,$house->tutorgroups()->count());
         $tutorgroup->delete();
+        $house->delete();
+    }
+
+    /**
+     * Test attachment of a Tutorgroup to a year.
+     *
+     */
+    public function testYearTutorgroup(){
+        $year = factory(Year::class)->create();
+        $tutorgroup = factory(Tutorgroup::class)->make();
+        $res = $year->tutorgroups()->save($tutorgroup);
+        $this->assertNotFalse($res);
+        $this->assertEquals($tutorgroup->id,$year->tutorgroups()->first()->id);
+        $this->assertGreaterThanOrEqual(1,$year->tutorgroups()->count());
+        $tutorgroup->delete();
+        $year->delete();
     }
 
 

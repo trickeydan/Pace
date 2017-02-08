@@ -55,7 +55,7 @@ $factory->define(App\House::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Year::class, function (Faker\Generator $faker) {
     return [
-
+        'name' => $faker->numberBetween(7,13)
     ];
 });
 

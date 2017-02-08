@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Account;
+use App\System;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Dusk\DuskServiceProvider;
@@ -36,7 +37,24 @@ class AppServiceProvider extends ServiceProvider
             }
 
             if(Auth::check() && Auth::user()->accountable->getType() == Account::PUPIL){
-                $view->with('pupil',Auth::User()->accountable);
+
+                // Firstly, check for null models.
+
+                $pupil = Auth::User()->accountable;
+
+                if(is_null($pupil->tutorgroup)) {
+                    System::logEvent(System::ERROR_NULLMODEL,'Tutorgroup Missing');
+                }else{
+                    if(is_null($pupil->tutorgroup->year)) {
+                        System::logEvent(System::ERROR_NULLMODEL,'Year Missing');
+                    }
+
+                    if(is_null($pupil->tutorgroup->house)) {
+                        System::logEvent(System::ERROR_NULLMODEL,'House Missing');
+                    }
+                }
+
+                $view->with('pupil',$pupil);
             }
         });
     }

@@ -40,4 +40,14 @@ class Tutorgroup extends Model
     public function house(){
         return $this->belongsTo('App\House');
     }
+
+    /**
+     * Get the Year of this tutorgroup.
+     *
+     * @return Year
+     */
+
+    public function year(){
+        return $this->belongsTo('App\Year');
+    }
 }
