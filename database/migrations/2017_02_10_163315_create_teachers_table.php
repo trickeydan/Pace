@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePupilPointsTable extends Migration
+class CreateTeachersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreatePupilPointsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pupil_points', function (Blueprint $table) {
+        Schema::create('teachers', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('date');
-            $table->integer('pupil_id');
-            $table->integer('teacher_id')->nullable();
-            //$table->integer('pointtype_id');
-            $table->integer('amount');
-            $table->text('description');
+            $table->string('name'); // Name of the teacher.
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreatePupilPointsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pupil_points');
+        Schema::dropIfExists('teachers');
     }
 }

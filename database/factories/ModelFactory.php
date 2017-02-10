@@ -30,6 +30,12 @@ $factory->define(App\Pupil::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Teacher::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+    ];
+});
+
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Tutorgroup::class, function (Faker\Generator $faker) {
     $string = "";

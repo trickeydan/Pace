@@ -6,6 +6,7 @@ use App\Account;
 use App\House;
 use App\Pupil;
 use App\PupilPoint;
+use App\Teacher;
 use App\Tutorgroup;
 use App\Year;
 use Tests\TestCase;
@@ -102,5 +103,20 @@ class RelationshipTest extends TestCase
         $pupil->delete();
     }
 
+    /**
+     * Test the relationship between teachers and pupilpoints
+     *
+     * @return void
+     */
 
+    public function testTeacherPupilPoint(){
+        $teacher = factory(Teacher::class)->create();
+        $point = factory(PupilPoint::class)->make();
+        $res = $teacher->points()->save($point);
+        $this->assertNotFalse($res);
+        $this->assertEquals($point->id,$teacher->points()->first()->id);
+        $this->assertGreaterThanOrEqual(1,$teacher->points()->count());
+        $point->delete();
+        $teacher->delete();
+    }
 }

@@ -37,10 +37,12 @@ class PupilPoint extends Model
 
     /**
      * Get the teacher that issued this point
+     *
+     * @return Teacher
      */
 
     public function teacher(){
-        //Todo: Relationship
-        return 'Mr E. Example';
+
+        return $this->belongsTo('App\Teacher');
     }
 }

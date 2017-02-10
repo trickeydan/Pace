@@ -48,7 +48,7 @@
                                 @foreach($points as $point)
                                     <tr>
                                         <td>{{$point->date}}</td>
-                                        <td>{{$point->teacher()}}</td>
+                                        <td>{{$point->teacher}}</td>
                                         <td>{{$point->type()}}</td>
                                         <td>{{$point->amount}}</td>
                                         <td>{{$point->description}}</td>

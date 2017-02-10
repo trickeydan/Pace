@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::User();
-        $points = $user->accountable->points()->paginate(15);
+        $points = $user->accountable->points()->orderBy('date','DESC')->paginate(15);
         return view('app.home',compact('points'));
     }
 }
