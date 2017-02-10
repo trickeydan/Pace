@@ -20,8 +20,8 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active" role="presentation"><a href="{{route('home')}}">{{$user->getName()}}</a></li>
-                    <li role="presentation"><a href="#">{{$pupil->tutorgroup}}</a></li>
-                    <li role="presentation"><a href="#">{{$pupil->tutorgroup->house}} </a></li>
+                    <li role="presentation"><a href="{{route('tutorgroup')}}">{{$pupil->tutorgroup}}</a></li>
+                    <li role="presentation"><a href="{{route('house')}}">{{$pupil->tutorgroup->house}} </a></li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Settings <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li role="presentation"><a href="{{route('auth.logout')}}">Logout</a></li>

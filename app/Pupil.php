@@ -36,4 +36,13 @@ class Pupil extends Account
         trigger_error('Should access House via Tutorgroup model',E_USER_WARNING);
         return $this->tutorgroup->house;
     }
+
+    /**
+     * Get this pupils PupilPoints
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function points(){
+        return $this->hasMany('App\PupilPoint');
+    }
 }

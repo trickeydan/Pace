@@ -35,57 +35,40 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th>Date Awarded</th>
-                            <th>Awarded by</th>
-                            <th>Category </th>
-                            <th>Amount </th>
-                            <th>Description </th>
-                        </tr>
+                            <tr>
+                                <th>Date Awarded</th>
+                                <th>Awarded by</th>
+                                <th>Category </th>
+                                <th>Amount </th>
+                                <th>Description </th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>04/12/16 </td>
-                            <td>Mr E Example</td>
-                            <td>Attainment </td>
-                            <td>2 </td>
-                            <td>Good attainment</td>
-                        </tr>
-                        <tr>
-                            <td>04/12/16 </td>
-                            <td>Mr E Example</td>
-                            <td>Attainment </td>
-                            <td>2 </td>
-                            <td>Good attainment</td>
-                        </tr>
-                        <tr>
-                            <td>04/12/16 </td>
-                            <td>Mr E Example</td>
-                            <td>Attainment </td>
-                            <td>2 </td>
-                            <td>Good attainment</td>
-                        </tr>
-                        <tr>
-                            <td>04/12/16 </td>
-                            <td>Mr E Example</td>
-                            <td>Attainment </td>
-                            <td>2 </td>
-                            <td>Good attainment</td>
-                        </tr>
+                            @if($points->count() > 0)
+                                @foreach($points as $point)
+                                    <tr>
+                                        <td>{{$point->date}}</td>
+                                        <td>{{$point->teacher()}}</td>
+                                        <td>{{$point->type()}}</td>
+                                        <td>{{$point->amount}}</td>
+                                        <td>{{$point->description}}</td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td>
+                                        <p>There are no points to display</p>
+                                    </td>
+                                </tr>
+
+                            @endif
                         </tbody>
                     </table>
                 </div>
-                <nav>
-                    <ul class="pagination text-center">
-                        <li><a aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                        <li><a>1</a></li>
-                        <li><a>2</a></li>
-                        <li><a>3</a></li>
-                        <li><a>4</a></li>
-                        <li><a>5</a></li>
-                        <li><a aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                    </ul>
+                <nav class="text-center">
+                    {{$points->links()}}
                 </nav>
+                <p class="text-muted text-center small">Last Updated on {{\App\System::lastUpdated()}}</p>
             </div>
         </div>
     </div>

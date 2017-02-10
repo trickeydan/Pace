@@ -17,6 +17,8 @@ class PupilSeeder extends Seeder
         // Firstly, create 4 houses.
         factory(App\House::class,4)->create();
 
+        //Make teachers here.
+
         // Now create 4 years
         factory(App\Year::class,4)->create()->each(function($year){
 
@@ -28,6 +30,12 @@ class PupilSeeder extends Seeder
                         ->each(function($pupil){
                             // Now create a user for each pupil.
                             factory(App\User::class)->create(['accountable_type' => Account::PUPIL,'accountable_id' => $pupil->id]);
+
+                            //Now give the pupil some points.
+
+                            for($i = 0;$i < random_int(0,100);$i++){
+                                factory(App\PupilPoint::class)->create(['pupil_id' => $pupil->id]);
+                            }
                         });
                 });
             }

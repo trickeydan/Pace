@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Account;
 use App\House;
 use App\Pupil;
+use App\PupilPoint;
 use App\Tutorgroup;
 use App\Year;
 use Tests\TestCase;
@@ -54,8 +55,9 @@ class RelationshipTest extends TestCase
     //Relationships with Houses
 
     /**
-     * Test attachement of a Tutorgroup to a house.
+     * Test attachment of a Tutorgroup to a house.
      *
+     * @return void
      */
     public function testHouseTutorgroup(){
         $house = factory(House::class)->create();
@@ -71,6 +73,7 @@ class RelationshipTest extends TestCase
     /**
      * Test attachment of a Tutorgroup to a year.
      *
+     * @return void
      */
     public function testYearTutorgroup(){
         $year = factory(Year::class)->create();
@@ -81,6 +84,22 @@ class RelationshipTest extends TestCase
         $this->assertGreaterThanOrEqual(1,$year->tutorgroups()->count());
         $tutorgroup->delete();
         $year->delete();
+    }
+
+    /**
+     * Test the relationship between pupils and pupilpoints.
+     *
+     * @return void
+     */
+    public function testPupilPupilPoint(){
+        $pupil = factory(Pupil::class)->create();
+        $point = factory(PupilPoint::class)->make();
+        $res = $pupil->points()->save($point);
+        $this->assertNotFalse($res);
+        $this->assertEquals($point->id,$pupil->points()->first()->id);
+        $this->assertGreaterThanOrEqual(1,$pupil->points()->count());
+        $point->delete();
+        $pupil->delete();
     }
 
 
