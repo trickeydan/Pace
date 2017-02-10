@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 
-class HomeController extends Controller
+class PupilController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,6 +26,15 @@ class HomeController extends Controller
     {
         $user = Auth::User();
         $points = $user->accountable->points()->orderBy('date','DESC')->paginate(15);
-        return view('app.home',compact('points'));
+        return view('app.index',compact('points'));
+    }
+
+    /**
+     * Show the tutorgroup.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function tutorgroup(){
+        return view('app.tutorgroup');
     }
 }

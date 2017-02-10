@@ -17,6 +17,6 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 
 // Main Routes - Pupils
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/tutorgroup', 'HomeController@tutorgroup')->name('tutorgroup');
-Route::get('/house', 'HomeController@house')->name('house');
+Route::get('/', 'PupilController@index')->name('home');
+Route::get('/tutorgroup', 'PupilController@tutorgroup')->name('tutorgroup');
+Route::get('/house', 'PupilController@house')->name('house');
