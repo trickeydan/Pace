@@ -6,6 +6,7 @@ use App\Account;
 use App\House;
 use App\Pupil;
 use App\PupilPoint;
+use App\PupilPointType;
 use App\Teacher;
 use App\Tutorgroup;
 use App\Year;
@@ -118,5 +119,19 @@ class RelationshipTest extends TestCase
         $this->assertGreaterThanOrEqual(1,$teacher->points()->count());
         $point->delete();
         $teacher->delete();
+    }
+
+    /**
+     * Test the relationship between PupilPoints and PupilPointTypes
+     */
+    public function testPupilPointPupilPointType(){
+        $type = factory(PupilPointType::class)->create();
+        $point = factory(PupilPoint::class)->make();
+        $res = $type->points()->save($point);
+        $this->assertNotFalse($res);
+        $this->assertEquals($point->id,$type->points()->first()->id);
+        $this->assertGreaterThanOrEqual(1,$type->points()->count());
+        $point->delete();
+        $type->delete();
     }
 }

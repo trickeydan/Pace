@@ -12,8 +12,8 @@
                         <h1 class="text-center">Statistics </h1>
                         <ul class="list-group">
                             <li class="list-group-item"><span>Total number of points: {{$pupil->currPoints}}</span></li>
-                            <li class="list-group-item"><span>Number of points this week: 12</span></li>
-                            <li class="list-group-item"><span>Best Category: Punctuality</span></li>
+                            <li class="list-group-item"><span>Number of points this week: {{$pupil->pointsThisWeek()}}</span></li>
+                            <li class="list-group-item"><span>Best Category: {{$pupil->bestCategory()}}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -22,8 +22,8 @@
                         <h1 class="text-center">My Tutorgroup</h1>
                         <ul class="list-group">
                             <li class="list-group-item"><span>Total number of points: {{$pupil->tutorgroup->currPoints}}</span></li>
-                            <li class="list-group-item"><span>Number of points this week: 102</span></li>
-                            <li class="list-group-item"><span>Position in year: 4th</span></li>
+                            <li class="list-group-item"><span>Number of points this week: {{$pupil->tutorgroup->pointsThisWeek()}}</span></li>
+                            <li class="list-group-item"><span>Position in year: {{$pupil->tutorgroup->getOrdinalPosition()}}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                                     <tr>
                                         <td>{{$point->date}}</td>
                                         <td>{{$point->teacher}}</td>
-                                        <td>{{$point->type()}}</td>
+                                        <td>{{$point->type}}</td>
                                         <td>{{$point->amount}}</td>
                                         <td>{{$point->description}}</td>
                                     </tr>

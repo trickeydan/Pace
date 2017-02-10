@@ -4,12 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Teacher extends Model
+class PupilPointType extends Model
 {
     /*
      * Fields in this model:
-     * (+ All fields on App\Account)
-     * + name - String - stores the name of the teacher.
+     * + name - String - the name to display
+     */
+
+    /**
+     * Return a string representation of this model
      */
 
     public function __toString()
@@ -17,12 +20,12 @@ class Teacher extends Model
         return $this->name;
     }
 
-
     /**
-     * Get the points that this teacher has issued.
+     * Get the points of this type.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return Illuminate\Database\Eloquent\Relations\HasMany
      */
+
     public function points(){
         return $this->hasMany('App\PupilPoint');
     }

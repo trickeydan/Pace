@@ -45,4 +45,24 @@ class Pupil extends Account
     public function points(){
         return $this->hasMany('App\PupilPoint');
     }
+
+    /**
+     * Get the number of points obtained this week.
+     *
+     * @return int
+     */
+    public function pointsThisWeek(){
+        //Todo: Add query to do this.
+        return 1;
+    }
+
+    /**
+     * Get the best category for this pupil.
+     *
+     * @return string
+     */
+    public function bestCategory(){
+        //Todo: Add a query to do this. Or perhaps do in caching?
+        return 'N/I';
+    }
 }

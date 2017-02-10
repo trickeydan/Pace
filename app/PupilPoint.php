@@ -12,7 +12,8 @@ class PupilPoint extends Model
      * + pupil_id - ID of the pupil
      * + amount - Amount of points
      * + description - Point text.
-     * + (teacher_id - ID of the issuing teacher)
+     * + teacher_id - ID of the issuing teacher
+     * + pupil_point_type_id
      */
 
     /**
@@ -31,8 +32,7 @@ class PupilPoint extends Model
      * @return PointType
      */
     public function type(){
-        //Todo: Make this class and implement.
-        return 'N/I';
+        return $this->belongsTo('App\PupilPointType','pupil_point_type_id');
     }
 
     /**

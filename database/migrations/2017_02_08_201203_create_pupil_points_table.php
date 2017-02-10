@@ -16,9 +16,9 @@ class CreatePupilPointsTable extends Migration
         Schema::create('pupil_points', function (Blueprint $table) {
             $table->increments('id');
             $table->date('date');
-            $table->integer('pupil_id');
+            $table->integer('pupil_id')->nullable();
             $table->integer('teacher_id')->nullable();
-            //$table->integer('pointtype_id');
+            $table->integer('pupil_point_type_id')->nullable();
             $table->integer('amount');
             $table->text('description');
             $table->timestamps();

@@ -68,11 +68,16 @@ $factory->define(App\Year::class, function (Faker\Generator $faker) {
 $factory->define(App\PupilPoint::class,function (Faker\Generator $faker){
    return [
        'date' => $faker->date(),
-       'pupil_id' => $faker->randomNumber(2),
+       'pupil_id' => null,
        'amount' => $faker->numberBetween(1,5),
        'description' => $faker->sentence,
+       'pupil_point_type_id' => null
 
    ];
 });
 
-
+$factory->define(App\PupilPointType::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+    ];
+});

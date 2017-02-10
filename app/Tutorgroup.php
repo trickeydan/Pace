@@ -50,4 +50,42 @@ class Tutorgroup extends Model
     public function year(){
         return $this->belongsTo('App\Year');
     }
+
+    /**
+     * Get the number of points obtained this week.
+     *
+     * @return int
+     */
+    public function pointsThisWeek(){
+        //Todo: Add query to do this.
+        return 1;
+    }
+
+    /**
+     * Get the position in the year as an integer
+     *
+     * @return int
+     */
+    public function getPosition(){
+        //Todo: Add this
+        return 1;
+    }
+
+    /**
+     * Get the position in the year as an ordinal string.
+     *
+     * @return string
+     */
+    public function getOrdinalPosition(){
+        $num = $this->getPosition();
+        if (!in_array(($num % 100),array(11,12,13))){
+            switch ($num % 10) {
+                // Handle 1st, 2nd, 3rd
+                case 1:  return $num.'st';
+                case 2:  return $num.'nd';
+                case 3:  return $num.'rd';
+            }
+        }
+        return $num.'th';
+    }
 }

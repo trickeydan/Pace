@@ -21,6 +21,10 @@ class PupilSeeder extends Seeder
 
         factory(App\Teacher::class,50)->create();
 
+        //Make some PupilPointTypes
+
+        factory(App\PupilPointType::class,6)->create();
+
         // Now create 4 years
         factory(App\Year::class,4)->create()->each(function($year){
 
@@ -37,7 +41,8 @@ class PupilSeeder extends Seeder
 
                             for($i = 0;$i < random_int(0,100);$i++){
                                 $teacher = \App\Teacher::inRandomOrder()->first();
-                                factory(App\PupilPoint::class)->create(['pupil_id' => $pupil->id,'teacher_id' => $teacher->id]);
+                                $type = \App\PupilPointType::inRandomOrder()->first();
+                                factory(App\PupilPoint::class)->create(['pupil_id' => $pupil->id,'teacher_id' => $teacher->id,'pupil_point_type_id' => $type->id]);
                             }
                         });
                 });
