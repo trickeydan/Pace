@@ -7,9 +7,12 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav navbar-right">
 
-                    @include('app.partials.menuitem',['route' => 'home','title' => $user->getName()])
-                    @include('app.partials.menuitem',['route' => 'tutorgroup','title' => $pupil->tutorgroup])
-                    @include('app.partials.menuitem',['route' => 'house','title' => $pupil->tutorgroup->house])
+                    @if($user->accountable->getType() == \App\Account::PUPIL)
+                        @include('app.pupils.partials.menuitems')
+
+                    @elseif($user->accountable->getType() == \App\Account::TEACHER)
+                        @include('app.teachers.partials.menuitems')
+                    @endif
 
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Settings <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">

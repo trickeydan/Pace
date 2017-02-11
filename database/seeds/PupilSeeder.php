@@ -8,7 +8,7 @@ use App\House;
 class PupilSeeder extends Seeder
 {
     /**
-     * This seeder creates pupil accounts.
+     * This seeder creates test data
      *
      * @return void
      */
@@ -19,7 +19,9 @@ class PupilSeeder extends Seeder
 
         //Make teachers here.
 
-        factory(App\Teacher::class,50)->create();
+        factory(App\Teacher::class,50)->create()->each(function($teacher){
+            factory(App\User::class)->create(['accountable_type' => Account::TEACHER,'accountable_id' => $teacher->id]);
+        });
 
         //Make some PupilPointTypes
 
@@ -50,13 +52,14 @@ class PupilSeeder extends Seeder
         });
 
 
-
-
-
-
-        // Now make the testing user.
-        $u = User::inRandomOrder()->first();
+        // Now make the testing users.
+        $u = User::whereAccountableType(Account::PUPIL)->inRandomOrder()->first();
         $u->email = "pupil@example.com";
+        $u->password = bcrypt('password');
+        $u->save();
+
+        $u = User::whereAccountableType(Account::TEACHER)->inRandomOrder()->first();
+        $u->email = "teacher@example.com";
         $u->password = bcrypt('password');
         $u->save();
     }

@@ -7,26 +7,17 @@ use Illuminate\Support\Facades\Auth;
 
 class PupilController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
-     * Show the application dashboard.
+     * Show the pupil dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $user = Auth::User();
-        $points = $user->accountable->points()->orderBy('date','DESC')->paginate(15);
-        return view('app.index',compact('points'));
+        $points = $user->accountable->points()->orderBy('date','DESC')->paginate(15); // Order the points and get the 15 appropriate for this page.
+        return view('app.pupils.index',compact('points'));
     }
 
     /**
@@ -35,7 +26,7 @@ class PupilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function tutorgroup(){
-        return view('app.tutorgroup');
+        return view('app.pupils.tutorgroup');
     }
 
     /**
@@ -44,6 +35,6 @@ class PupilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function house(){
-        return view('app.house');
+        return view('app.pupils.house');
     }
 }

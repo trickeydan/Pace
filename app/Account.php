@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     const PUPIL = 'App\Pupil';
+    const TEACHER = 'App\Teacher';
 
     public function account(){
         return $this->morphOne('App\User','accountable');
@@ -18,5 +19,9 @@ class Account extends Model
 
     public function getName(){
         return $this->name;
+    }
+
+    public function getHome(){
+        return '/';
     }
 }

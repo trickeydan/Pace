@@ -43,14 +43,14 @@ class AppServiceProvider extends ServiceProvider
                 $pupil = Auth::User()->accountable;
 
                 if(is_null($pupil->tutorgroup)) {
-                    System::logEvent(System::ERROR_NULLMODEL,'Tutorgroup Missing');
+                    System::logError(System::ERROR_NULLMODEL,'Tutorgroup Missing');
                 }else{
                     if(is_null($pupil->tutorgroup->year)) {
-                        System::logEvent(System::ERROR_NULLMODEL,'Year Missing');
+                        System::logError(System::ERROR_NULLMODEL,'Year Missing');
                     }
 
                     if(is_null($pupil->tutorgroup->house)) {
-                        System::logEvent(System::ERROR_NULLMODEL,'House Missing');
+                        System::logError(System::ERROR_NULLMODEL,'House Missing');
                     }
                 }
 

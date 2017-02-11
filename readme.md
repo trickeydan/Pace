@@ -15,6 +15,7 @@ Features include:
 Test Account Details
 * Run `php artisan db:seed` to load test data.
 * Pupil login: pupil@example.com:password
+* Teacher login: teacher@example.com:password
 * Ensure these are removed before production.
 
 To contribute:

@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AccountRedirect;
+use App\Http\Middleware\UserHasAccount;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -56,5 +58,9 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
+        // Custom middleware
+        'account' => UserHasAccount::class,
+        'type' => AccountRedirect::class,
     ];
 }

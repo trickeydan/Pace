@@ -47,7 +47,7 @@ class User extends Authenticatable
      */
 
     public function getPasswordToEmail(){
-        // Todo: Add a check to see if teacher or pupil. Then return adno or ****
+        // Todo: Add a check to see if teacher or pupil. Then return adno or abort safe
         return 'Not implemented';
     }
 

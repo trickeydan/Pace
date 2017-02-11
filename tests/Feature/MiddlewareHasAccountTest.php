@@ -2,30 +2,26 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\User;
-use App\Account;
 
-class HTTPPupilHomeTest extends TestCase
+class MiddlewareHasAccountTest extends TestCase
 {
     /**
-     * This test checks to see if we can visit the pupil home page.
+     * Test for error when a user with no account accesses the system
      *
      * @return void
      */
-
-    public function testCanVisitPupilHomePage(){
-        $user = User::whereAccountableType(Account::PUPIL)->first();
-
-
+    public function testCheck(){
+        $user = factory(User::class)->create(); // Create a user with no account.
         $response = $this->actingAs($user)
             ->get(route('pupil.home'));
 
+        $response->assertStatus(500,'No error thrown.'); //500 due to abort.
 
-        $response->assertStatus(200,'Could not visit pupil home page');
         $user->delete();
     }
 }

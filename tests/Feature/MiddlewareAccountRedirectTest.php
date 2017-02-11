@@ -9,21 +9,20 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 use App\Account;
 
-class HTTPPupilHouseTest extends TestCase
+class MiddlewareAccountRedirectTest extends TestCase
 {
     /**
-     * This test checks to see if we can visit the pupil house page.
+     * Test if a pupil is redirected when attempting to access a teacher resource
      *
      * @return void
      */
-
-    public function testCanVisitPupilHousePage(){
+    public function testRedirect(){
         $user = User::whereAccountableType(Account::PUPIL)->first();
-
         $response = $this->actingAs($user)
-            ->get(route('pupil.house'));
+            ->get(route('teacher.home'));
 
-        $response->assertStatus(200,'Could not visit pupil house page');
+        $response->assertStatus(302,'No redirect when pupil accesses teacher resource'); //302 due to redirect.
+        $response->assertHeader('location',route('pupil.home')); //
         $user->delete();
     }
 }

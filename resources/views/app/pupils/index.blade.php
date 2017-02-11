@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    @include('app.partials.pupilstats')
+                    @include('app.pupils.partials.stats')
                 </div>
                 <div class="col-md-6">
                     <div class="well">
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        @include('app.partials.pupilpoints')
+        @include('app.pupils.partials.points')
 
     </div>
 @endsection

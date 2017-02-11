@@ -1,15 +1,16 @@
 <?php
 
-namespace app;
+namespace App;
 
 
 class System
 {
     const ERROR_NULLMODEL = 'A null model was found.'; // Report a null model event.
+    const ERROR_NOACCOUNT = 'User has no account associated with it.'; // User doesn't have an account associated.
 
-    public static function logEvent($type,$data){
+    public static function logError($type,$data,$die = true){
         //Todo: Make this store in database.
-        abort(500,$type);
+        if($die) abort(500,$type);
     }
 
     public static function lastUpdated(){

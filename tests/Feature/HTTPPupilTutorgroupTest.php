@@ -21,10 +21,10 @@ class HTTPPupilTutorgroupTest extends TestCase
 
     public function testCanVisitPupilTutorgroupPage(){
 
-        $user = User::all()->first(); //Todo: Ensure that it is a pupil user.
+        $user = User::whereAccountableType(Account::PUPIL)->first();
 
         $response = $this->actingAs($user)
-            ->get(route('tutorgroup'));
+            ->get(route('pupil.tutorgroup'));
 
 
         $response->assertStatus(200,'Could not visit pupil tutorgroup page');
