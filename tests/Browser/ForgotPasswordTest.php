@@ -78,6 +78,4 @@ class ForgotPasswordTest extends DuskTestCase
             $user->delete();
         });
     }
-
-    // Todo: good email address
 }

@@ -37,4 +37,13 @@ class PupilController extends Controller
     public function tutorgroup(){
         return view('app.tutorgroup');
     }
+
+    /**
+     * Show the house.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function house(){
+        return view('app.house');
+    }
 }

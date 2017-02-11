@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 use App\User;
 
-class LoginTest extends TestCase
+class MiscellaneousTest extends TestCase
 {
     /**
      *  This test checks if the user is redirected when visiting the home page without being logged in.
@@ -27,15 +27,4 @@ class LoginTest extends TestCase
 
     }
 
-    /**
-     * This test checks to see if we can visit the login page.
-     *
-     * @return void
-     */
-
-    public function testCanVisitLoginPage(){
-        $response = $this->get(route('auth.login'));
-        $response->assertStatus(200,'Could not visit login page');
-    }
-    
 }

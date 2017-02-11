@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" href="{{asset('css/login.css')}}">
+        <link rel="stylesheet" href="{{asset('css/font.css')}}">
     </head>
 
     <body>
@@ -16,7 +17,7 @@
             <form role="form" method="POST" action="{{ url('/login') }}">
                 <h2 class="sr-only">Login Form</h2>
                 {{ csrf_field() }}
-                <div class="illustration"><i class="icon ion-ios-locked-outline"></i></div>
+                <div class="illustration"><i class="pace-logo upsidedown"></i></div>
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <input class="form-control" id="email" required autofocus type="email" name="email" placeholder="Email" value="{{ old('email') }}" >
                     @if ($errors->has('email'))
