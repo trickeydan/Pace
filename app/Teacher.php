@@ -2,23 +2,28 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Teacher extends Account
 {
     /*
      * Fields in this model:
      * + All fields on App\Account
-     * + name - String - stores the name of the teacher.
+     * + name - string - stores the name of the teacher.
      */
 
+    /**
+     * Get a string representation of the teacher.
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;
     }
 
     /**
-     * Get the home for the teacher
+     * Get the home url for the teacher
+     *
+     * @return string
      */
     public function getHome()
     {

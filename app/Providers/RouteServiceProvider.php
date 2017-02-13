@@ -35,7 +35,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
+        //$this->mapApiRoutes();
+
+        //Todo: Make an API for use with an android app.
 
         $this->mapWebRoutes();
 

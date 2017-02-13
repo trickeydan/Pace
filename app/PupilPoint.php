@@ -29,7 +29,7 @@ class PupilPoint extends Model
     /**
      * Get the point type of this points
      *
-     * @return PointType
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function type(){
         return $this->belongsTo('App\PupilPointType','pupil_point_type_id');
@@ -38,7 +38,7 @@ class PupilPoint extends Model
     /**
      * Get the teacher that issued this point
      *
-     * @return Teacher
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
 
     public function teacher(){

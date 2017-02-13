@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Account;
 
 class Pupil extends Account
 {
@@ -15,7 +13,9 @@ class Pupil extends Account
      */
 
     /**
-     * Get the home of the pupil
+     * Get the home url of the pupil
+     *
+     * @return string
      */
     public function getHome()
     {

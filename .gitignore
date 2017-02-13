@@ -7,3 +7,7 @@
 Homestead.json
 Homestead.yaml
 .env
+documentation.aux
+documentation.log
+documentation.synctex.gz
+documentation.toc

@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Administrator extends Account
 {
     /*
@@ -18,7 +16,9 @@ class Administrator extends Account
     }
 
     /**
-     * Get the home for the administrator
+     * Get the home url for the administrator.
+     *
+     * @return string
      */
     public function getHome()
     {

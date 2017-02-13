@@ -28,11 +28,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /*
+    /**
      * Send the user their password if they have requested a reset.
      *
      * Whilst it says reset, the token functionality has been disabled to prevent pupils from changing their passwords.
      *
+     * @var $token
+     *
+     * @return void
      */
 
     public function sendPasswordResetNotification($token) // In this case $token is always blank to maintain the inheritance from the framework.
@@ -58,6 +61,7 @@ class User extends Authenticatable
      *
      */
     public function getName(){
+
         return $this->accountable->getName();
     }
 
@@ -67,6 +71,8 @@ class User extends Authenticatable
      * @return Pupil
      * @return Teacher
      * @return Administrator
+     *
+     * //Todo: Use a magic method so that $user->pupil etc can be used
      *
      */
     public function accountable(){

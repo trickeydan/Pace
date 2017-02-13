@@ -6,10 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Year extends Model
 {
+    /*
+     * Fields in this model:
+     * + name - string - stores the name of the year.
+     */
+
+
     /**
      *  Get the string representation of a Year.
      *
-     * @return mixed
+     * @return string
      */
     public function __toString()
     {
@@ -20,7 +26,7 @@ class Year extends Model
     /**
      * Return the Tutorgroups in this year
      *
-     * @return Tutorgroup
+     * @return hasMany
      */
 
     public function tutorgroups(){

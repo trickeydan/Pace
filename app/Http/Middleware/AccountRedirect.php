@@ -7,7 +7,9 @@ use Closure;
 class AccountRedirect
 {
     /**
-     * Handle an incoming request.
+     *  Handle the current request.
+     *
+     *  Redirect the user if they are not permitted to access a resource.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

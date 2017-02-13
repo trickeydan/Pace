@@ -44,6 +44,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        //Todo: Add custom logic here.
+        //Todo: Separate layouts for logged in / logged out.
         return parent::render($request, $exception);
     }
 

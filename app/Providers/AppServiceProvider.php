@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             if(Auth::check()){
-                $view->with('user',Auth::User()); // Send the user variable to all logged in pages.
+                $view->with('user',Auth::User()); // Make the user instance available to all views.
             }
 
             if(Auth::check() && Auth::user()->accountable->getType() == Account::PUPIL){
@@ -42,19 +42,25 @@ class AppServiceProvider extends ServiceProvider
 
                 $pupil = Auth::User()->accountable;
 
+                // Todo: Move this somewhere else. Perhaps middleware. This will increase Teacher / Admin response times.
                 if(is_null($pupil->tutorgroup)) {
+                    //Throw an error, the pupil has no tutorgroup.
                     System::logError(System::ERROR_NULLMODEL,'Tutorgroup Missing');
-                }else{
-                    if(is_null($pupil->tutorgroup->year)) {
-                        System::logError(System::ERROR_NULLMODEL,'Year Missing');
-                    }
-
-                    if(is_null($pupil->tutorgroup->house)) {
-                        System::logError(System::ERROR_NULLMODEL,'House Missing');
-                    }
                 }
 
-                $view->with('pupil',$pupil);
+                if(is_null($pupil->tutorgroup->year)) {
+                    //Throw an error, the pupil has no year.
+                    System::logError(System::ERROR_NULLMODEL,'Year Missing');
+                }
+
+                if(is_null($pupil->tutorgroup->house)) {
+                    //Throw an error, the pupil has no year.
+                    System::logError(System::ERROR_NULLMODEL,'House Missing');
+                }
+
+
+                $view->with('pupil',$pupil); // Make the pupil instance available to all views.
+                //Todo: remove this, it is messy. Use $user->accountable instead.
             }
         });
     }

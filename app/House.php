@@ -9,7 +9,7 @@ class House extends Model
     /*
      * Fields in this model:
      * + name - String - stores the name of the House. e.g Berkeley
-     * + colour - String - Hexadecimal representation of the house colour.
+     * + colour - String - Hexadecimal representation of the house colour. Include #. i.e #556e40
      */
 
 
@@ -18,7 +18,7 @@ class House extends Model
      *
      * Get the string representation of a House.
      *
-     * @return mixed
+     * @return string
      */
     public function __toString()
     {

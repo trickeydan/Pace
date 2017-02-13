@@ -10,6 +10,9 @@ class UserHasAccount
     /**
      * Handle an incoming request.
      *
+     * Throw an error if the logged in user doesn't have an associated account.
+     * This should never happen.
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed

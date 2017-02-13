@@ -20,7 +20,7 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
-    // Disable laravel password reset mechanism
+    // Disable laravel password reset mechanism by always returning a 404 (Not Found) Error.
 
     public function showResetForm()
     {

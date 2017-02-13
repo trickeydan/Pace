@@ -21,7 +21,7 @@ class PupilController extends Controller
     }
 
     /**
-     * Show the tutorgroup.
+     * Show the pupil's tutorgroup information..
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,7 +30,7 @@ class PupilController extends Controller
     }
 
     /**
-     * Show the house.
+     * Show the pupil's house information.
      *
      * @return \Illuminate\Http\Response
      */

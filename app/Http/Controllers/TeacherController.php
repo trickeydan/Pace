@@ -10,7 +10,7 @@ class TeacherController extends Controller
     /**
      * Show the teacher dashboard.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\View\View
      */
     public function index()
     {
