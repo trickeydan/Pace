@@ -81,3 +81,9 @@ $factory->define(App\PupilPointType::class, function (Faker\Generator $faker) {
         'name' => $faker->word,
     ];
 });
+
+$factory->define(App\Administrator::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+    ];
+});

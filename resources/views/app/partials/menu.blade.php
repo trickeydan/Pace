@@ -12,6 +12,8 @@
 
                     @elseif($user->accountable->getType() == \App\Account::TEACHER)
                         @include('app.teachers.partials.menuitems')
+                    @elseif($user->accountable->getType() == \App\Account::ADMINISTRATOR)
+                        @include('app.admin.partials.menuitems')
                     @endif
 
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Settings <span class="caret"></span></a>

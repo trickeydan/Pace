@@ -1,0 +1,1 @@
+@include('app.partials.menuitem',['route' => 'admin.home','title' => 'Home'])

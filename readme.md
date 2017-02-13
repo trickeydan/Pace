@@ -16,6 +16,7 @@ Test Account Details
 * Run `php artisan db:seed` to load test data.
 * Pupil login: pupil@example.com:password
 * Teacher login: teacher@example.com:password
+* Admin login: admin@example.com:password
 * Ensure these are removed before production.
 
 To contribute:

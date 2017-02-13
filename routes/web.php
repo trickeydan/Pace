@@ -31,6 +31,9 @@ Route::group(['middleware' => ['auth','account']],function (){
 
     });
 
+    Route::group(['middleware' => ['type:App\Administrator'],'prefix' => 'admin'],function(){
+        Route::get('/', 'TeacherController@index')->name('admin.home');
 
+    });
 
 });

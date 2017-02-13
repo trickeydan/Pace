@@ -8,6 +8,7 @@ class Account extends Model
 {
     const PUPIL = 'App\Pupil';
     const TEACHER = 'App\Teacher';
+    const ADMINISTRATOR = 'App\Administrator';
 
     public function account(){
         return $this->morphOne('App\User','accountable');

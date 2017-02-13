@@ -17,6 +17,12 @@ class PupilSeeder extends Seeder
         // Firstly, create 4 houses.
         factory(App\House::class,4)->create();
 
+        //Make a couple of admins
+
+        factory(App\Administrator::class,5)->create()->each(function($admin){
+            factory(App\User::class)->create(['accountable_type' => Account::ADMINISTRATOR,'accountable_id' => $admin->id]);
+        });
+
         //Make teachers here.
 
         factory(App\Teacher::class,50)->create()->each(function($teacher){
@@ -60,6 +66,11 @@ class PupilSeeder extends Seeder
 
         $u = User::whereAccountableType(Account::TEACHER)->inRandomOrder()->first();
         $u->email = "teacher@example.com";
+        $u->password = bcrypt('password');
+        $u->save();
+
+        $u = User::whereAccountableType(Account::ADMINISTRATOR)->inRandomOrder()->first();
+        $u->email = "admin@example.com";
         $u->password = bcrypt('password');
         $u->save();
     }

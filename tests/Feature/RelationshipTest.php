@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Account;
+use App\Administrator;
 use App\House;
 use App\Pupil;
 use App\PupilPoint;
@@ -133,5 +134,39 @@ class RelationshipTest extends TestCase
         $this->assertGreaterThanOrEqual(1,$type->points()->count());
         $point->delete();
         $type->delete();
+    }
+
+    /**
+     * Test attachment of a Teacher to a user.
+     *
+     * @return void
+     */
+    public function testTeacherUser(){
+        $user = factory(User::class)->create();
+        $teacher = factory(Teacher::class)->create();
+        $res = $user->accountable()->associate($teacher);
+        $this->assertNotFalse($res);
+        $user->save();
+        $this->assertEquals($teacher->id,$user->accountable->id);
+        $this->assertEquals($user->accountable->getType(),Account::TEACHER);
+        $user->delete();
+        $teacher->delete();
+    }
+
+    /**
+     * Test attachment of an Administrator to a user.
+     *
+     * @return void
+     */
+    public function testAdministratorUser(){
+        $user = factory(User::class)->create();
+        $admin = factory(Administrator::class)->create();
+        $res = $user->accountable()->associate($admin);
+        $this->assertNotFalse($res);
+        $user->save();
+        $this->assertEquals($admin->id,$user->accountable->id);
+        $this->assertEquals($user->accountable->getType(),Account::ADMINISTRATOR);
+        $user->delete();
+        $admin->delete();
     }
 }
