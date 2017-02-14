@@ -15,7 +15,9 @@ class CreatePupilsTable extends Migration
     {
         Schema::create('pupils', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name'); // Name of the pupil.
+            $table->string('forename'); // Forename of the pupil.
+            $table->string('surname'); // Forename of the pupil.
+            $table->integer('adno'); // Adno of the pupil.
             $table->integer('currPoints'); //Cached points for this pupil
             $table->integer('tutorgroup_id')->nullable(); //
             $table->timestamps();

@@ -31,8 +31,10 @@ Route::group(['middleware' => ['auth','account']],function (){
 
     });
 
-    Route::group(['middleware' => ['type:App\Administrator'],'prefix' => 'admin'],function(){
-        Route::get('/', 'TeacherController@index')->name('admin.home');
+    Route::group(['middleware' => ['type:App\Administrator'], 'namespace' => 'Admin','prefix' => 'admin'],function(){
+        Route::get('/', 'AdminController@index')->name('admin.home');
+
+        Route::get('pupils', 'PupilController@index')->name('admin.pupils.index');
 
     });
 

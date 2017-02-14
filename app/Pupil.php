@@ -41,6 +41,15 @@ class Pupil extends Account
     }
 
     /**
+     * Return the name of this account.
+     *
+     * @return string
+     */
+    public function getName(){
+        return $this->forename . ' ' . $this->surname;
+    }
+
+    /**
      * Get the number of points obtained this week.
      *
      * @return int

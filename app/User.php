@@ -38,7 +38,7 @@ class User extends Authenticatable
      * @return void
      */
 
-    public function sendPasswordResetNotification($token) // In this case $token is always blank to maintain the inheritance from the framework.
+    public function sendPasswordResetNotification($token) // In this case $token is always null to maintain the inheritance from the framework.
     {
         $this->notify(new sendPassword($this->getPasswordToEmail()));
     }

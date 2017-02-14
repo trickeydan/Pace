@@ -4,6 +4,22 @@ $color_gravel_approx: #4b4c4d;
 $color_celeste_approx: #ccc;
 $color_silver_chalice_approx: #aaa;
 
+.stylish-input-group {
+  .input-group-addon {
+    background: $white !important;
+  }
+  .form-control {
+    border-right: 0;
+    box-shadow: 0 0 0;
+    border-color: $color_celeste_approx;
+  }
+  button {
+    border: 0;
+    background: transparent;
+  }
+}
+
+
 .footer-basic {
   padding: 40px 0;
   background-color: $white;

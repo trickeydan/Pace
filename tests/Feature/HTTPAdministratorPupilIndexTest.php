@@ -6,18 +6,18 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Account;
 use App\User;
+use App\Account;
 
-class HTTPAdministratorHomeTest extends TestCase
+class HTTPAdministratorPupilIndexTest extends TestCase
 {
     /**
-     * This test checks to see if we can visit the admin home page.
+     * This test checks to see if we can visit the admin pupil index page.
      *
      * @return void
      */
 
-    public function testCanVisitAdminHomePage(){
+    public function testCanVisitPupilIndex(){
         $user = User::whereAccountableType(Account::ADMINISTRATOR)->first();
 
 
@@ -25,7 +25,7 @@ class HTTPAdministratorHomeTest extends TestCase
             ->get(route('admin.home'));
 
 
-        $response->assertStatus(200,'Could not visit admin home page');
+        $response->assertStatus(200,'Could not visit admin pupil index.');
         $user->delete();
     }
 }

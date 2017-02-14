@@ -50,6 +50,17 @@ class Account extends Model
         return $this->name;
     }
 
+    /**
+     * Get a human-readable string for the account type
+     *
+     * This is to be overrided, so will return the type.
+     *
+     * @return string
+     */
+    public function getTypeHuman(){
+        return $this->getType();
+    }
+
 
     /**
      * Return the name of the home for this account.

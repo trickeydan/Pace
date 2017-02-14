@@ -25,4 +25,22 @@ class Administrator extends Account
         return route('admin.home');
     }
 
+    /**
+     * Get a human-readable string for the account type
+     *
+     * @return string
+     */
+    public function getTypeHuman(){
+        return 'Administrator';
+    }
+
+    /**
+     * Does this account receive email alerts?
+     *
+     * @return boolean
+     */
+    public function receivesAlerts(){
+        //Todo: Do this in the database.
+        return false;
+    }
 }

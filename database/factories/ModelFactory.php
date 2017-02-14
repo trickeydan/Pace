@@ -25,7 +25,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\Pupil::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'forename' => $faker->firstName,
+        'surname' => $faker->lastName,
+        'adno' => $faker->numberBetween(1000,9999),
         'currPoints' => $faker->numberBetween(0,200),
     ];
 });
