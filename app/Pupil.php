@@ -41,6 +41,16 @@ class Pupil extends Account
     }
 
     /**
+     * Tell the implicit route model binding logic to use the adno column to identify a model
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'adno';
+    }
+
+    /**
      * Return the name of this account.
      *
      * @return string

@@ -27,4 +27,14 @@ class PupilController extends Controller
         $pupils = $builder->orderBy('surname')->orderBy('forename')->paginate(20);
         return view('app.admin.pupils.index',compact('pupils'));
     }
+
+    /**
+     * Show the individual listing for the pupil.
+     *
+     * @return View
+     */
+    public function view(Pupil $pupil){
+        $points = $pupil->points()->orderBy('date','DESC')->paginate(15); // Order the points and get the 15 appropriate to the page.
+        return view('app.admin.pupils.view',compact('pupil','points'));
+    }
 }

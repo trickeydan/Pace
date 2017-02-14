@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth','account']],function (){
         Route::get('/', 'AdminController@index')->name('admin.home');
 
         Route::get('pupils', 'PupilController@index')->name('admin.pupils.index');
+        Route::get('pupils/{pupil}', 'PupilController@view')->name('admin.pupils.view');
 
     });
 

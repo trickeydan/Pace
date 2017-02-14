@@ -18,6 +18,9 @@
 
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Settings <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+                            @if($user->accountable->getType() == \App\Account::ADMINISTRATOR)
+                                @include('app.admin.partials.settingsitems')
+                            @endif
                             <li role="presentation"><a href="{{route('auth.logout')}}">Logout</a></li>
                         </ul>
                     </li>

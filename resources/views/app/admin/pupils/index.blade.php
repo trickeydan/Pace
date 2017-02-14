@@ -39,7 +39,7 @@
                             <td>{{$pupil->forename}}</td>
                             <td>{{$pupil->surname}}</td>
                             <td>{{$pupil->tutorgroup}}</td>
-                            <td>View</td>
+                            <td><a href="{{route('admin.pupils.view',$pupil->adno)}}">View</a></td>
                         </tr>
                     @endforeach
                 @else
