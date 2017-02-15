@@ -37,6 +37,9 @@ Route::group(['middleware' => ['auth','account']],function (){
         Route::get('pupils', 'PupilController@index')->name('admin.pupils.index');
         Route::get('pupils/{pupil}', 'PupilController@view')->name('admin.pupils.view');
 
+        Route::get('teachers', 'TeacherController@index')->name('admin.teachers.index');
+        Route::get('teachers/{teacher}', 'TeacherController@view')->name('admin.teachers.view');
+
         Route::group(['prefix' => 'settings'],function(){
            Route::get('status','SettingsController@status')->name('admin.settings.status');
         });

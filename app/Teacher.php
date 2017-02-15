@@ -2,12 +2,16 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class Teacher extends Account
 {
     /*
      * Fields in this model:
      * + All fields on App\Account
      * + name - string - stores the name of the teacher.
+     * + initials - string
+     * + tutorgroup_id - integer
      */
 
     /**
@@ -38,5 +42,14 @@ class Teacher extends Account
      */
     public function points(){
         return $this->hasMany('App\PupilPoint');
+    }
+
+    /**
+     * Get the tutorgroup that this teacher is part of.
+     *
+     * @return belongsTo
+     */
+    public function tutorgroup(){
+        return $this->belongsTo('App\Tutorgroup');
     }
 }

@@ -16,6 +16,8 @@ class CreateTeachersTable extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name'); // Name of the teacher.
+            $table->string('initials',3)->nullable(); // Initials of the teacher.
+            $table->string('tutorgroup_id')->nullable(); // Tutorgroup of the teacher
             $table->timestamps();
         });
     }

@@ -33,8 +33,15 @@ $factory->define(App\Pupil::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Teacher::class, function (Faker\Generator $faker) {
+    $string = "";
+    for ($letter = 1; $letter <= 3; $letter++) {
+        $faker = Faker\Factory::create();
+        $string = $string . $faker->randomLetter();
+    }
+    //Todo: Stop re-using this piece of code. Make a function randomInitials() somewhere
     return [
         'name' => $faker->name,
+        'initials' => strtoupper($string),
     ];
 });
 

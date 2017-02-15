@@ -26,7 +26,7 @@ class Account extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
-    public function account(){
+    public function user(){
         return $this->morphOne('App\User','accountable');
     }
 
