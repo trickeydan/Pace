@@ -8,7 +8,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-
+                    Your tutorgroup is {{$user->accountable->tutorgroup}}
                 </div>
                 <div class="col-md-6">
 

@@ -72,4 +72,22 @@ class Account extends Model
     public function getHome(){
         return '/';
     }
+
+    /**
+     * Has this account been setup?
+     *
+     * @return boolean
+     */
+    public function isSetup(){
+        return true;
+    }
+
+    /**
+     * Get the setup page for this account
+     *
+     * @return string
+     */
+    public function getSetupUrl(){
+        return $this->getHome();
+    }
 }

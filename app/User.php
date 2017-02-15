@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    //Todo: All emails sent add to the log (except bulk for which only one is added).
 
     /**
      * The attributes that are mass assignable.

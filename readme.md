@@ -23,6 +23,10 @@ To contribute:
 * Please test Browser functionality before opening PR using `php artisan dusk`
 * Standard code tests will be run by Travis CI
 
+Features to be introduced after initial release
+* Upgrade to Bootstrap 4 once released.
+* Upgrade to Laravel 5.5 LTS once released in approx June 2017
+
 Released under GPLv3
 
 &copy;2017 D.Trickey

@@ -18,6 +18,7 @@ class CreateTeachersTable extends Migration
             $table->string('name'); // Name of the teacher.
             $table->string('initials',3)->nullable(); // Initials of the teacher.
             $table->string('tutorgroup_id')->nullable(); // Tutorgroup of the teacher
+            $table->boolean('hasSetup')->default(false);
             $table->timestamps();
         });
     }

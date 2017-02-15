@@ -2,7 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AccountNotSetupCheck;
 use App\Http\Middleware\AccountRedirect;
+use App\Http\Middleware\AccountSetupCheck;
 use App\Http\Middleware\UserHasAccount;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -62,5 +64,7 @@ class Kernel extends HttpKernel
         // Custom middleware
         'account' => UserHasAccount::class,
         'type' => AccountRedirect::class,
+        'setupcheck' => AccountSetupCheck::class,
+        'notsetupcheck' => AccountNotSetupCheck::class,
     ];
 }

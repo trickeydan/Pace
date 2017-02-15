@@ -27,8 +27,17 @@ Route::group(['middleware' => ['auth','account']],function (){
     });
 
     Route::group(['middleware' => ['type:App\Teacher'],'prefix' => 'teacher'],function(){
-        Route::get('/', 'TeacherController@index')->name('teacher.home');
+        Route::group(['middleware' => ['setupcheck']],function (){
+            Route::get('/', 'TeacherController@index')->name('teacher.home');
+        });
 
+        Route::group(['middleware' => ['notsetupcheck']],function (){
+            Route::get('setup', 'TeacherController@setupOne')->name('teacher.setup');
+            Route::post('setup', 'TeacherController@setupOnePost')->name('teacher.setup');
+
+            Route::get('setup/2', 'TeacherController@setupTwo')->name('teacher.setup.two');
+            Route::post('setup/2', 'TeacherController@setupTwoPost')->name('teacher.setup.two');
+        });
     });
 
     Route::group(['middleware' => ['type:App\Administrator'], 'namespace' => 'Admin','prefix' => 'admin'],function(){

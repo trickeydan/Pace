@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Dusk\DuskServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('local', 'testing')) {
             $this->app->register(DuskServiceProvider::class);
         }
+
+        Validator::extend('pwdcorrect', function($attribute, $value, $parameters, $validator) {
+            return Auth::validate(['email' => Auth::User()->email,'password' => $value]);
+        });
     }
 
     /**
@@ -43,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
                 $pupil = Auth::User()->accountable;
 
                 // Todo: Move this somewhere else. Perhaps middleware. This will increase Teacher / Admin response times.
+                //Todo: Also add similar check for teachers and tutorgroups
                 if(is_null($pupil->tutorgroup)) {
                     //Throw an error, the pupil has no tutorgroup.
                     System::logError(System::ERROR_NULLMODEL,'Tutorgroup Missing');

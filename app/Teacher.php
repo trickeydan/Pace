@@ -12,7 +12,12 @@ class Teacher extends Account
      * + name - string - stores the name of the teacher.
      * + initials - string
      * + tutorgroup_id - integer
+     * + hasSetup - boolean
      */
+
+    protected $casts = [
+      'hasSetup' => 'boolean'
+    ];
 
     /**
      * Get a string representation of the teacher.
@@ -51,5 +56,23 @@ class Teacher extends Account
      */
     public function tutorgroup(){
         return $this->belongsTo('App\Tutorgroup');
+    }
+
+    /**
+     * Has this account been setup?
+     *
+     * @return boolean
+     */
+    public function isSetup(){
+        return $this->hasSetup;
+    }
+
+    /**
+     * Get the setup page for this account
+     *
+     * @return string
+     */
+    public function getSetupUrl(){
+        return route('teacher.setup');
     }
 }
