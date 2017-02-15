@@ -37,6 +37,10 @@ Route::group(['middleware' => ['auth','account']],function (){
         Route::get('pupils', 'PupilController@index')->name('admin.pupils.index');
         Route::get('pupils/{pupil}', 'PupilController@view')->name('admin.pupils.view');
 
+        Route::group(['prefix' => 'settings'],function(){
+           Route::get('status','SettingsController@status')->name('admin.settings.status');
+        });
+
     });
 
 });

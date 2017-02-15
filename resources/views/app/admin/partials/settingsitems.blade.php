@@ -1,5 +1,5 @@
 @include('app.partials.menuitem',['route' => 'admin.home','title' => 'Administrators'])
 @include('app.partials.menuitem',['route' => 'admin.home','title' => 'Change Password'])
 @include('app.partials.menuitem',['route' => 'admin.home','title' => 'Data'])
-@include('app.partials.menuitem',['route' => 'admin.home','title' => 'Statistics'])
-@include('app.partials.menuitem',['route' => 'admin.home','title' => 'System Status'])
+@include('app.partials.menuitem',['route' => 'admin.home','title' => 'System Logs'])
+@include('app.partials.menuitem',['route' => 'admin.settings.status','title' => 'System Status'])

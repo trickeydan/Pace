@@ -39,4 +39,19 @@ class System
         //Todo: Make this work using Uploads table
         return '30/1/80';
     }
+
+    public static function getRam(){
+        $fh = fopen('/proc/meminfo','r');
+        while ($line = fgets($fh)) {
+            $pieces = array();
+            if (preg_match('/^MemTotal:\s+(\d+)\skB$/', $line, $pieces)) {
+                $total = $pieces[1];
+            }
+            if (preg_match('/^MemFree:\s+(\d+)\skB$/', $line, $pieces)) {
+                $free = $pieces[1];
+            }
+        }
+        fclose($fh);
+        return [$total,$free];
+    }
 }
