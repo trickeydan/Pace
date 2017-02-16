@@ -24,8 +24,9 @@
                 <div class="well">
                     <h1 class="text-center">Actions</h1>
                     <ul class="list-group">
-                        <li class="list-group-item"><span>Link Tutorgroup</span></li>
-                        <li class="list-group-item"><span>Link User Account</span></li>
+                        <li class="list-group-item disabled"><span>Link Tutorgroup</span></li>
+                        <li class="list-group-item disabled"><span>Link User Account</span></li>
+                        <li class="list-group-item disabled"><span>Change Password</span></li>
                     </ul>
                 </div>
             </div>

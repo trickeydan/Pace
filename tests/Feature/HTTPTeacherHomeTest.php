@@ -18,9 +18,10 @@ class HTTPTeacherHomeTest extends TestCase
      * @return void
      */
 
-    public function testCanVisitPupilHomePage(){
+    public function testCanVisitTeacherHomePage(){
         $user = User::whereAccountableType(Account::TEACHER)->first();
-
+        $user->accountable->hasSetup = true;
+        $user->accountable->save();
 
         $response = $this->actingAs($user)
             ->get(route('teacher.home'));
@@ -28,5 +29,24 @@ class HTTPTeacherHomeTest extends TestCase
 
         $response->assertStatus(200,'Could not visit teacher home page');
         $user->delete();
+    }
+
+    /**
+     * This test checks to see if we are redirected to the teacher setup.
+     *
+     * @return void
+     */
+
+    public function testRedirectedToSetup(){
+        $user = User::whereAccountableType(Account::TEACHER)->first();
+        $user->accountable->hasSetup = false;
+        $user->accountable->save();
+
+        $response = $this->actingAs($user)
+            ->get(route('teacher.home'));
+
+
+        $response->assertStatus(302,'Not redirected to setup');
+        $response->assertHeader('location',route('teacher.setup'));
     }
 }

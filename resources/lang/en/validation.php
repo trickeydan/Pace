@@ -116,4 +116,6 @@ return [
 
     'attributes' => [],
 
+    'pwdcorrect' => 'Incorrect password.'
+
 ];
