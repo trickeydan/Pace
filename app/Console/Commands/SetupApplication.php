@@ -103,7 +103,8 @@ class SetupApplication extends PaceCommand
 
         //Todo: Rollback on failure.
 
-        //Todo: Caching
+        $this->info('Caching data via script.');
+        $this->call('pace:cache');
 
         $this->info('Opening the system to web access.');
         Configuration::set('isSetup','true');

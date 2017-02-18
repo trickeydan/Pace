@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Import\DataCache;
 use App\Console\Commands\Import\PointImport;
 use App\Console\Commands\Import\PupilImporter;
 use App\Console\Commands\Import\TeacherImport;
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
         PupilImporter::class,
         TeacherImport::class,
         PointImport::class,
+        DataCache::class,
     ];
 
     /**

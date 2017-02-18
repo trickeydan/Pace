@@ -91,6 +91,11 @@ class Tutorgroup extends Model
         return $num.'th';
     }
 
+    public function cachePoints(){
+        $this->currPoints = $this->pupils()->sum('currPoints');
+        $this->save();
+    }
+
     public static function createFromData($name,$house,$year){
 
         if(Year::whereName($year)->count() == 0){

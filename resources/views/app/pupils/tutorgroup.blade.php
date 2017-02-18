@@ -42,7 +42,7 @@
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
                         ["House", "Points", { role: "style" } ],
-                        @foreach($pupil->tutorgroup->year->tutorgroups as $tg)
+                        @foreach($pupil->tutorgroup->year->tutorgroups()->orderBy('house_id')->orderBy('name')->get() as $tg)
                             ["{{$tg->name}}",{{$tg->currPoints}}, "{{$tg->house->colour}}"],
                         @endforeach
                     ]);
@@ -56,7 +56,7 @@
                 2]);
 
             var options = {
-                title: "Points By Tutor Group: Year {{$pupil->tutorgroup->year->name}}",
+                title: "Points By Tutor Group: {{$pupil->tutorgroup->year->name}}",
                 height: 400,
                 bar: {groupWidth: "95%"},
                 legend: { position: "none" },

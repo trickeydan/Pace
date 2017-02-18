@@ -84,11 +84,16 @@ class Pupil extends Account
         return 'N/I';
     }
 
+    public function cachePoints(){
+        $this->currPoints = $this->points()->sum('amount');
+        $this->save();
+    }
+
 
     // Data import
 
     public static function validateData($row){
-        //Validate email etc
+        //Todo: Validate email etc
 
 
         //Format data

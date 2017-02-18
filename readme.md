@@ -11,6 +11,7 @@ Features include:
 * Graphs for House and Tutor Group Points.
 * Teachers can login to view their Tutor Groups.
 * Teachers can view points that they've issued.
+* Print view of all points
 
 Test Account Details
 * Run `php artisan db:seed` to load test data.
@@ -26,6 +27,9 @@ To contribute:
 Features to be introduced after initial release
 * Upgrade to Bootstrap 4 once released.
 * Upgrade to Laravel 5.5 LTS once released in approx June 2017
+
+Suggested Features
+* Point History graphs
 
 Released under GPLv3
 
