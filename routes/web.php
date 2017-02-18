@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth','account']],function (){
     Route::group(['middleware' => ['type:App\Models\Teacher'],'prefix' => 'teacher'],function(){
         Route::group(['middleware' => ['setupcheck']],function (){
             Route::get('/', 'TeacherController@index')->name('teacher.home');
+            Route::get('pupils/{pupil}', 'TeacherController@viewPupil')->name('teacher.pupils.view');
         });
 
         Route::group(['middleware' => ['notsetupcheck']],function (){

@@ -20,6 +20,8 @@
                         <ul class="dropdown-menu" role="menu">
                             @if($user->accountable->getType() == \App\Models\Account::ADMINISTRATOR)
                                 @include('app.admin.partials.settingsitems')
+                            @elseif($user->accountable->getType() == \App\Models\Account::TEACHER)
+                                @include('app.teachers.partials.settingsitems')
                             @endif
                             <li role="presentation"><a href="{{route('auth.logout')}}">Logout</a></li>
                         </ul>

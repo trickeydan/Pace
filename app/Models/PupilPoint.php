@@ -95,7 +95,6 @@ class PupilPoint extends Model
         if(Teacher::whereName($row[5])->count() == 0){
             //Todo: Report error
             //$skip = true;
-            $row[5] = strtoupper(preg_replace("/[^a-zA-Z]+/", "", $row[5]));
             $teacher = Teacher::createFromData([$row[5],'',''],false);
         }else{
             $teacher = Teacher::whereName($row[5])->first();

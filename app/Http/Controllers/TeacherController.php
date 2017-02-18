@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pupil;
 use App\Models\Tutorgroup;
 use App\Models\Year;
 use Illuminate\Http\Request;
@@ -17,11 +18,27 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //Todo: Display tutorgroup
-        return view('app.teachers.index');
+        $teacher = Auth::User()->accountable;
+        $pupils = $teacher->tutorgroup->pupils()->orderBy('surname')->orderBy('forename')->paginate(20);
+        return view('app.teachers.index',compact('pupils'));
     }
 
-    //Todo: Add a pupil view
+    /**
+     * Display the individual pupil
+     *
+     * @param Pupil $pupil
+     *
+     * @return View
+     */
+    public function viewPupil(Pupil $pupil){
+
+        if($pupil->tutorgroup != Auth::User()->accountable->tutorgroup){
+            return redirect(route('teacher.home'))->withErrors(['That pupil is not in your tutorgroup.']);
+        }
+
+        $points = $pupil->points()->orderBy('date','DESC')->paginate(15);
+        return view('app.teachers.pupil',compact('pupil','points'));
+    }
 
     /**
      * Show the first setup page.

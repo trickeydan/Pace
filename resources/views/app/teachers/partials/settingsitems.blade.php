@@ -1,0 +1,1 @@
+@include('app.partials.menuitem',['route' => 'teacher.home','title' => 'Change Password'])
