@@ -12,6 +12,8 @@ class Tutorgroup extends Model
      * + currPoints - integer - stores the total cached points of this tutorgroup.
      */
 
+    protected $fillable = ['name','currPoints'];
+
     /**
      * Magic Method for casting as a string.
      *
@@ -87,5 +89,32 @@ class Tutorgroup extends Model
             }
         }
         return $num.'th';
+    }
+
+    public static function createFromData($name,$house,$year){
+
+        if(Year::whereName($year)->count() == 0){
+            $year = Year::create(['name' => $year]);
+            //Todo: check if saved.
+        }else{
+            $year = Year::whereName($year)->first();
+        }
+
+        if(House::whereName($house)->count() == 0){
+            throw \Exception;
+            //Todo: Report failure
+        }else{
+            $house = House::whereName($house)->first();
+        }
+
+        $tg = self::create([
+            'name' => $name,
+            'currPoints' => 0
+        ]);
+        $tg->year_id = $year->id;
+        $tg->house_id = $house->id;
+        $tg->save();
+        //Todo: Check if saved.
+        return $tg;
     }
 }

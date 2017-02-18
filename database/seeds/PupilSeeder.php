@@ -14,6 +14,8 @@ class PupilSeeder extends Seeder
      */
     public function run()
     {
+        \App\Configuration::setup(true);
+
         // Firstly, create 4 houses.
         factory(App\House::class,4)->create();
 

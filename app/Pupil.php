@@ -8,9 +8,14 @@ class Pupil extends Account
     /*
      * Fields in this model:
      * + All fields on App\Account
-     * + name - String - stores the name of the pupil
+     * + forename - String - stores the name of the pupil
+     * + surname - String - stores the name of the pupil
      * + currPoints - integer - stores the cached points of this pupil.
+     * + adno
+     * + tutorgroup_id
      */
+
+    protected $fillable = ['forename','surname','currPoints','adno','tutorgroup_id'];
 
     /**
      * Get the home url of the pupil
@@ -77,5 +82,61 @@ class Pupil extends Account
     public function bestCategory(){
         //Todo: Add a query to do this. Or perhaps do in caching?
         return 'N/I';
+    }
+
+
+    // Data import
+
+    public static function validateData($row){
+        //Validate email etc
+
+
+        //Format data
+
+        $row[0] = (string)$row[0];
+        $row[1] = strtolower($row[1]);
+        $row[2] = preg_replace("/[^a-zA-Z]+/", "", $row[2]);
+        $row[3] = preg_replace("/[^a-zA-Z]+/", "", $row[3]);
+        $row[4] = strtoupper($row[4]);
+        $row[5] = strtoupper($row[5]);
+        $row[6] = strtoupper($row[6]);
+        return $row;
+    }
+
+    public static function createFromData($row){
+        //"Adno","Email","Forename","Surname","Reg","House","Year"
+
+        if(Tutorgroup::whereName($row[4])->count() == 0){
+            $tutorgroup = Tutorgroup::createFromData($row[4],$row[5],$row[6]);
+        }else{
+            $tutorgroup = Tutorgroup::whereName($row[4])->first();
+        }
+
+        $pupil = self::create([
+            'forename' => $row[2],
+            'surname'  => $row[3],
+            'adno'     => $row[0],
+            'currPoints' => 0,
+            'tutorgroup_id' => $tutorgroup->id,
+        ]);
+
+        if(User::whereEmail($row[1])->count() == 0){
+            $pupil->makeUser($row[1],$row[0]);
+        }else{
+            $user = User::whereEmail($row[1])->first();
+
+            if($user->accountable_type != Account::PUPIL){
+                throw \Exception;
+                //Todo: Report failure
+            }else{
+                $user->accountable_id = $pupil->id;
+                $user->save();
+                //Todo: Check
+            }
+        }
+
+
+        //Todo: Create user
+        //Todo: Create tutorgroup, year, etc
     }
 }

@@ -90,4 +90,22 @@ class Account extends Model
     public function getSetupUrl(){
         return $this->getHome();
     }
+
+
+    /**
+     * Creates and saves a user that is associated with this account.
+     *
+     * @param $email
+     * @param $password
+     *
+     * @return User
+     */
+    public function makeUser($email,$password){
+        $user = new User();
+        $user->email = $email;
+        $user->password = bcrypt($password);
+        $user->accountable_type = $this->getType();
+        $user->accountable_id = $this->id;
+        return $user->save();
+    }
 }

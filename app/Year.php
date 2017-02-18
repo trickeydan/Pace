@@ -11,6 +11,8 @@ class Year extends Model
      * + name - string - stores the name of the year.
      */
 
+    protected $fillable = ['name'];
+
 
     /**
      *  Get the string representation of a Year.

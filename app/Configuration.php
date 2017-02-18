@@ -11,8 +11,12 @@ class Configuration extends Model
     /**
      * Setup the default values
      */
-    public static function setup(){
-        self::set('isSetup','false');
+    public static function setup($isSetup = false){
+        if($isSetup){
+            self::set('isSetup','true');
+        }else{
+            self::set('isSetup','false');
+        }
         self::set('general_password',bcrypt('password'));
     }
 
