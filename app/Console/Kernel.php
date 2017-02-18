@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Import\PupilImporter;
+use App\Console\Commands\ResetApplication;
+use App\Console\Commands\SetupApplication;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +16,10 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        ResetApplication::class,
+        SetupApplication::class,
+
+        PupilImporter::class,
     ];
 
     /**

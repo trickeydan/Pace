@@ -3,6 +3,8 @@
 namespace App;
 
 
+use Illuminate\Support\Facades\Hash;
+
 class System
 {
     /**
@@ -53,5 +55,15 @@ class System
         }
         fclose($fh);
         return [$total,$free];
+    }
+
+    /**
+     * Check whether the given password is the general system password.
+     *
+     * @param $attempt
+     * @return bool
+     */
+    public static function checkGeneralSystemPassword($attempt){
+        return Hash::check($attempt,Configuration::get('general_password'));
     }
 }

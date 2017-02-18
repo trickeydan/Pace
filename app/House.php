@@ -12,6 +12,7 @@ class House extends Model
      * + colour - String - Hexadecimal representation of the house colour. Include #. i.e #556e40
      */
 
+    protected $fillable = ['name','colour'];
 
     /**
      * Magic Method
