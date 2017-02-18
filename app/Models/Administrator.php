@@ -1,15 +1,20 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 class Administrator extends Account
 {
     /*
      * Fields in this model:
-     * + All fields on App\Account
+     * + All fields on App\Models\Account
      * + name - String - stores the name of the administrator.
      */
 
+    /**
+     * An array of fields that are fillable.
+     *
+     * @var array
+     */
     protected $fillable = ['name'];
 
     public function __toString()

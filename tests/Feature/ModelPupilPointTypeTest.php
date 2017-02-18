@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-use App\PupilPointType;
+use App\Models\PupilPointType;
 
 class ModelPupilPointTypeTest extends TestCase
 {

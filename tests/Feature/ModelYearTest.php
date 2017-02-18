@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Year;
+use App\Models\Year;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

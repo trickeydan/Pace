@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +17,11 @@ class PupilPoint extends Model
      * + pupil_point_type_id
      */
 
+    /**
+     * The fillable fields for this model. See Laravel docs.
+     *
+     * @var array
+     */
     protected $fillable = ['date','pupil_id','amount','description','teacher_id','pupil_point_type_id'];
 
     /**
@@ -25,7 +30,7 @@ class PupilPoint extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function pupil(){
-        return $this->belongsTo('App\Pupil');
+        return $this->belongsTo('App\Models\Pupil');
     }
 
 
@@ -35,7 +40,7 @@ class PupilPoint extends Model
      * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function type(){
-        return $this->belongsTo('App\PupilPointType','pupil_point_type_id');
+        return $this->belongsTo('App\Models\PupilPointType','pupil_point_type_id');
     }
 
     /**
@@ -46,10 +51,20 @@ class PupilPoint extends Model
 
     public function teacher(){
 
-        return $this->belongsTo('App\Teacher');
+        return $this->belongsTo('App\Models\Teacher');
     }
 
+    /**
+     * Validate and Format the data for import.
+     *
+     * @param $row
+     * @return mixed
+     */
     public static function validateData($row){
+        //Todo: Add validation
+
+        //Format
+        //
         $row[1] = preg_replace("/[^a-zA-Z ]+/", "", $row[1]);
         $row[2] = (int)$row[2];
         $row[3] = Carbon::parse($row[3]);
@@ -58,6 +73,14 @@ class PupilPoint extends Model
         return $row;
     }
 
+    /**
+     * Create a point from data from import.
+     *
+     * Will create PointType, Teacher if not existing.
+     *
+     * @param $row
+     * @return int
+     */
     public static function createFromData($row){
         //"Adno","Type","Points","Date","Description","Staff Name"
 

@@ -2,14 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Administrator;
-use App\Configuration;
+use App\Models\Administrator;
+use App\Models\Configuration;
 use App\Console\PaceCommand;
-use App\House;
-use App\User;
-use App\Account;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\File;
+use App\Models\House;
+use App\Models\User;
+use App\Models\Account;
 
 class SetupApplication extends PaceCommand
 {
@@ -68,6 +66,7 @@ class SetupApplication extends PaceCommand
         $email = $this->ask('Admin Email: ');
         $password = $this->secret('Admin Password: ');
 
+        //Create a new administrator
         $admin = Administrator::create(['name' => $name]);
         User::create([
             'accountable_type' => Account::ADMINISTRATOR,
@@ -75,6 +74,8 @@ class SetupApplication extends PaceCommand
             'email' => $email,
             'password' => bcrypt($password),
         ]);
+
+        //Todo: Email administrator with welcome email.
 
         $this->info('We now need to setup the database.');
 

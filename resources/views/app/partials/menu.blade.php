@@ -7,18 +7,18 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav navbar-right">
 
-                    @if($user->accountable->getType() == \App\Account::PUPIL)
+                    @if($user->accountable->getType() == \App\Models\Account::PUPIL)
                         @include('app.pupils.partials.menuitems')
 
-                    @elseif($user->accountable->getType() == \App\Account::TEACHER)
+                    @elseif($user->accountable->getType() == \App\Models\Account::TEACHER)
                         @include('app.teachers.partials.menuitems')
-                    @elseif($user->accountable->getType() == \App\Account::ADMINISTRATOR)
+                    @elseif($user->accountable->getType() == \App\Models\Account::ADMINISTRATOR)
                         @include('app.admin.partials.menuitems')
                     @endif
 
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Settings <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            @if($user->accountable->getType() == \App\Account::ADMINISTRATOR)
+                            @if($user->accountable->getType() == \App\Models\Account::ADMINISTRATOR)
                                 @include('app.admin.partials.settingsitems')
                             @endif
                             <li role="presentation"><a href="{{route('auth.logout')}}">Logout</a></li>

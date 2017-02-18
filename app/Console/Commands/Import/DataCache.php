@@ -3,8 +3,8 @@
 namespace App\Console\Commands\Import;
 
 use App\Console\PaceCommand;
-use App\Pupil;
-use App\Tutorgroup;
+use App\Models\Pupil;
+use App\Models\Tutorgroup;
 
 class DataCache extends PaceCommand
 {

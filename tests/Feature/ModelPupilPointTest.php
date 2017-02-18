@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\PupilPoint;
+use App\Models\PupilPoint;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

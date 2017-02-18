@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Tutorgroup;
-use App\Year;
+use App\Models\Tutorgroup;
+use App\Models\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,8 +17,11 @@ class TeacherController extends Controller
      */
     public function index()
     {
+        //Todo: Display tutorgroup
         return view('app.teachers.index');
     }
+
+    //Todo: Add a pupil view
 
     /**
      * Show the first setup page.
@@ -104,5 +107,4 @@ class TeacherController extends Controller
         $teacher->save();
         return redirect($teacher->getHome());
     }
-
 }

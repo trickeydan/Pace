@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,9 +29,18 @@ class PupilPointType extends Model
      */
 
     public function points(){
-        return $this->hasMany('App\PupilPoint');
+        return $this->hasMany('App\Models\PupilPoint');
     }
 
+    /**
+     * Create a type from data
+     *
+     * NB: Assume validated data.
+     * Todo: Add validation.
+     *
+     * @param $name
+     * @return mixed
+     */
     public static function createFromData($name){
         return self::create(['name' => $name]);
     }

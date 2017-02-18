@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
@@ -23,7 +23,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Pupil::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Pupil::class, function (Faker\Generator $faker) {
     return [
         'forename' => $faker->firstName,
         'surname' => $faker->lastName,
@@ -32,7 +32,7 @@ $factory->define(App\Pupil::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Teacher::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Teacher::class, function (Faker\Generator $faker) {
     $string = "";
     for ($letter = 1; $letter <= 3; $letter++) {
         $faker = Faker\Factory::create();
@@ -46,7 +46,7 @@ $factory->define(App\Teacher::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Tutorgroup::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Tutorgroup::class, function (Faker\Generator $faker) {
     $string = "";
     for ($letter = 1; $letter <= 3; $letter++) {
         $faker = Faker\Factory::create();
@@ -60,7 +60,7 @@ $factory->define(App\Tutorgroup::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\House::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\House::class, function (Faker\Generator $faker) {
     return [
         'name' => strtoupper($faker->word),
         'colour' => $faker->safeHexColor,
@@ -68,13 +68,13 @@ $factory->define(App\House::class, function (Faker\Generator $faker) {
 });
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\Year::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Year::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->numberBetween(7,13)
     ];
 });
 
-$factory->define(App\PupilPoint::class,function (Faker\Generator $faker){
+$factory->define(App\Models\PupilPoint::class,function (Faker\Generator $faker){
    return [
        'date' => $faker->date(),
        'pupil_id' => null,
@@ -85,13 +85,13 @@ $factory->define(App\PupilPoint::class,function (Faker\Generator $faker){
    ];
 });
 
-$factory->define(App\PupilPointType::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\PupilPointType::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->word,
     ];
 });
 
-$factory->define(App\Administrator::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Administrator::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
     ];

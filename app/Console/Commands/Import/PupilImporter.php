@@ -3,10 +3,9 @@
 namespace App\Console\Commands\Import;
 
 use App\Console\PaceCommand;
-use App\Pupil;
-use Illuminate\Support\Facades\DB;
+use App\Models\Pupil;
 use Illuminate\Support\Facades\File;
-use League\Csv\Reader;
+use App\CSVReader as Reader;
 
 class PupilImporter extends PaceCommand
 {
@@ -54,6 +53,7 @@ class PupilImporter extends PaceCommand
      */
     public function handle()
     {
+        //Check that the file exists
         if(!File::exists(storage_path('data/' . $this->file))) {
             $this->kill($this->file . ' does not exist. Please upload your .csv files to the storage/data directory.');
             //Todo: Report error
@@ -62,12 +62,13 @@ class PupilImporter extends PaceCommand
         //Todo Make checksum of file and compare against old.
         //Todo: Save checksum to db.
 
+        //Delete old pupils
         $res = Pupil::getQuery()->delete();
         $this->info('Deleted ' . $res . ' pupils');
 
         $this->info('Beginning import.');
         $reader = Reader::createFromPath(storage_path('data/' . $this->file));
-        $count = $this->countRows($reader);
+        $count = Reader::countRows($reader);
         $this->info('Found ' . $count . ' rows');
         $header = ["Adno","Email","Forename","Surname","Reg","House","Year"];
 
@@ -96,14 +97,5 @@ class PupilImporter extends PaceCommand
         echo PHP_EOL;
         //Todo: Check pupil count matches file.
         //Todo: Report Success
-    }
-
-    private function countRows($reader){
-        //Todo: move this somewhere more appropriate. Perhaps extend reader.
-        $count = 0;
-        foreach($reader->fetchAll() as $index => $row){
-            $count++;
-        }
-        return $count;
     }
 }

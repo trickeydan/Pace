@@ -12,11 +12,15 @@ class PaceCommand extends Command
 {
     /**
      * Title of the application
+     *
+     * @var $title
      */
     protected $title = 'PACE Command';
 
     /**
+     * Confirm if the user would like to continue.
      *
+     * @return void
      */
     protected function confirmContinue(){
         if(!$this->confirm('Are you sure you want to continue?')){
@@ -26,18 +30,23 @@ class PaceCommand extends Command
     }
 
     /**
+     * Ask for and check the general system password.
      *
+     * @return void
      */
     protected function requireGSP(){
         $attempt = $this->secret('Please provide the general system password to continue.');
         if(!System::checkGeneralSystemPassword($attempt)){
             $this->error('Incorrect general system password');
+            //Todo: Report incident?
             exit();
         }
     }
 
     /**
      * Execute the console command.
+     *
+     * Same as the parent class, but I have added introductory and title text.
      *
      * @param  \Symfony\Component\Console\Input\InputInterface  $input
      * @param  \Symfony\Component\Console\Output\OutputInterface  $output
@@ -51,16 +60,20 @@ class PaceCommand extends Command
         $this->info('Copyright ' . date('Y') . ' ' . config('app.author'));
         $this->info('');
         $this->info($this->title);
+        $this->info('');
         return $this->laravel->call([$this, $method]);
     }
 
     /**
      * Kill with a message.
      *
+     * Kill the current command and display an error message.
+     *
      * @param $message
      */
     protected function kill($message){
         $this->error($message);
+        //Todo: Report?
         exit();
     }
 }

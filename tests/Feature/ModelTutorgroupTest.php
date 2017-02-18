@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Tutorgroup;
+use App\Models\Tutorgroup;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

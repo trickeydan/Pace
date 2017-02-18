@@ -2,20 +2,20 @@
 
 namespace Tests\Feature;
 
-use App\Account;
-use App\Administrator;
-use App\House;
-use App\Pupil;
-use App\PupilPoint;
-use App\PupilPointType;
-use App\Teacher;
-use App\Tutorgroup;
-use App\Year;
+use App\Models\Account;
+use App\Models\Administrator;
+use App\Models\House;
+use App\Models\Pupil;
+use App\Models\PupilPoint;
+use App\Models\PupilPointType;
+use App\Models\Teacher;
+use App\Models\Tutorgroup;
+use App\Models\Year;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\User;
+use App\Models\User;
 use Faker\Factory as Faker;
 
 class RelationshipTest extends TestCase

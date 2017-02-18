@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Configuration;
+use App\Models\Configuration;
 use Closure;
 
 class CheckSystemSetup

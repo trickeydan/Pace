@@ -3,9 +3,9 @@
 namespace App\Console\Commands\Import;
 
 use App\Console\PaceCommand;
-use App\Teacher;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\File;
-use League\Csv\Reader;
+use App\CSVReader as Reader;
 
 class TeacherImport extends PaceCommand
 {
@@ -48,6 +48,7 @@ class TeacherImport extends PaceCommand
      */
     public function handle()
     {
+        //Check the file exists
         if(!File::exists(storage_path('data/' . $this->file))) {
             $this->kill($this->file . ' does not exist. Please upload your .csv files to the storage/data directory.');
             //Todo: Report error
@@ -56,13 +57,14 @@ class TeacherImport extends PaceCommand
         //Todo Make checksum of file and compare against old.
         //Todo: Save checksum to db.
 
+        //Delete all teachers.
         $res = Teacher::getQuery()->delete();
         $this->info('Deleted ' . $res . ' teachers');
 
 
         $this->info('Beginning import.');
         $reader = Reader::createFromPath(storage_path('data/' . $this->file));
-        $count = $this->countRows($reader);
+        $count = Reader::countRows($reader);
         $this->info('Found ' . $count . ' rows');
         $header = ["Full Name","Work Email","Initials"];
 
@@ -91,15 +93,5 @@ class TeacherImport extends PaceCommand
         echo PHP_EOL;
         //Todo: Check teacher count matches file.
         //Todo: Report Success
-    }
-
-    private function countRows($reader){
-        //Todo: move this somewhere more appropriate. Perhaps extend reader.
-        //Todo: Remove duplicate.
-        $count = 0;
-        foreach($reader->fetchAll() as $index => $row){
-            $count++;
-        }
-        return $count;
     }
 }

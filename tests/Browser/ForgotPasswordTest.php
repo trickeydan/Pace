@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use Tests\Browser\Pages\ForgotPassword;
 use Tests\DuskTestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\User;
+use App\Models\User;
 
 class ForgotPasswordTest extends DuskTestCase
 {

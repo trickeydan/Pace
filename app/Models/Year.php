@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,6 +32,6 @@ class Year extends Model
      */
 
     public function tutorgroups(){
-        return $this->hasMany('App\Tutorgroup');
+        return $this->hasMany('App\Models\Tutorgroup');
     }
 }

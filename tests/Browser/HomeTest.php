@@ -5,7 +5,7 @@ namespace Tests\Browser;
 use Tests\Browser\Pages\Home;
 use Tests\DuskTestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\User;
+use App\Models\User;
 
 class HomeTest extends DuskTestCase
 {

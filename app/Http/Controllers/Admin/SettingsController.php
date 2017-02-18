@@ -30,6 +30,7 @@ class SettingsController extends Controller
         $system['PHP Memory Limit'] = ini_get('memory_limit') . 'B';
         $system['Total Disk Space'] = round(disk_total_space("/") / 1024 / 1024 / 1024) . 'GB';
         $system['Free Disk Space'] = round(disk_free_space("/") / 1024 / 1024 / 1024) . 'GB';
+        //Todo: clear this up. Perhaps a byteToGb function?
         return view('app.admin.settings.status',compact('version','system'));
     }
 }

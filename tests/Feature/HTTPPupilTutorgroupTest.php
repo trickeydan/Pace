@@ -2,14 +2,14 @@
 
 namespace Tests\Feature;
 
-use App\Tutorgroup;
+use App\Models\Tutorgroup;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\User;
-use App\Pupil;
-use App\Account;
+use App\Models\User;
+use App\Models\Pupil;
+use App\Models\Account;
 
 class HTTPPupilTutorgroupTest extends TestCase
 {

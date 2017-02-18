@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -8,7 +8,7 @@ class Teacher extends Account
 {
     /*
      * Fields in this model:
-     * + All fields on App\Account
+     * + All fields on App\Models\Account
      * + name - string - stores the name of the teacher.
      * + initials - string
      * + tutorgroup_id - integer
@@ -48,7 +48,7 @@ class Teacher extends Account
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function points(){
-        return $this->hasMany('App\PupilPoint');
+        return $this->hasMany('App\Models\PupilPoint');
     }
 
     /**
@@ -57,7 +57,7 @@ class Teacher extends Account
      * @return belongsTo
      */
     public function tutorgroup(){
-        return $this->belongsTo('App\Tutorgroup');
+        return $this->belongsTo('App\Models\Tutorgroup');
     }
 
     /**
@@ -78,6 +78,12 @@ class Teacher extends Account
         return route('teacher.setup');
     }
 
+    /**
+     * Validate and Format the data for import.
+     *
+     * @param $row
+     * @return mixed
+     */
     public static function validateData($row){
         //todo:validate data
         //Initials 3 chars etc
@@ -89,6 +95,15 @@ class Teacher extends Account
         return $row;
     }
 
+    /**
+     * Create a teacher from data for import
+     *
+     * if $makeuser is false, then it will not attach a user to the teacher.
+     *
+     * @param $row
+     * @param bool $makeuser
+     * @return mixed
+     */
     public static function createFromData($row,$makeuser = true){
         //"Full Name","Work Email","Initials"
         $teacher = self::create([

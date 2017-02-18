@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,7 +31,7 @@ class Tutorgroup extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function pupils(){
-        return $this->hasMany('App\Pupil');
+        return $this->hasMany('App\Models\Pupil');
     }
 
     /**
@@ -40,7 +40,7 @@ class Tutorgroup extends Model
      * @return House
      */
     public function house(){
-        return $this->belongsTo('App\House');
+        return $this->belongsTo('App\Models\House');
     }
 
     /**
@@ -50,7 +50,7 @@ class Tutorgroup extends Model
      */
 
     public function year(){
-        return $this->belongsTo('App\Year');
+        return $this->belongsTo('App\Models\Year');
     }
 
     /**
@@ -91,11 +91,26 @@ class Tutorgroup extends Model
         return $num.'th';
     }
 
+    /**
+     * Cache the points for the tutorgroup.
+     *
+     * @return bool
+     */
     public function cachePoints(){
         $this->currPoints = $this->pupils()->sum('currPoints');
-        $this->save();
+        return $this->save();
     }
 
+    /**
+     * Create a tutorgroup from data for import.
+     *
+     * Todo: Add validation
+     *
+     * @param $name
+     * @param $house
+     * @param $year
+     * @return mixed
+     */
     public static function createFromData($name,$house,$year){
 
         if(Year::whereName($year)->count() == 0){

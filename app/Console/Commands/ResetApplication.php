@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Configuration;
+use App\Models\Configuration;
 use App\Console\PaceCommand;
 
 class ResetApplication extends PaceCommand
@@ -45,11 +45,11 @@ class ResetApplication extends PaceCommand
     public function handle()
     {
         $this->info('This action will delete all data without recovery.');
-        $this->confirmContinue();
-        $this->requireGSP();
+        $this->confirmContinue(); // Ask the user if they would like to continue.
+        $this->requireGSP(); //Ask for and check the GSP
         $this->info('Resetting application.');
-        $this->callSilent('migrate:refresh');
-        Configuration::setup();
+        $this->callSilent('migrate:refresh'); // Reset the database.
+        Configuration::setup(); //Populate configuration values.
         $this->info('The application has been reset.');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\House;
+use App\Models\House;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

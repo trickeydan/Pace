@@ -20,13 +20,13 @@ Route::group(['middleware' => ['auth','account']],function (){
 
     // Main Routes - Pupils
 
-    Route::group(['middleware' => ['type:App\Pupil'],'prefix' => 'pupil'],function(){
+    Route::group(['middleware' => ['type:App\Models\Pupil'],'prefix' => 'pupil'],function(){
         Route::get('/', 'PupilController@index')->name('pupil.home');
         Route::get('/tutorgroup', 'PupilController@tutorgroup')->name('pupil.tutorgroup');
         Route::get('/house', 'PupilController@house')->name('pupil.house');
     });
 
-    Route::group(['middleware' => ['type:App\Teacher'],'prefix' => 'teacher'],function(){
+    Route::group(['middleware' => ['type:App\Models\Teacher'],'prefix' => 'teacher'],function(){
         Route::group(['middleware' => ['setupcheck']],function (){
             Route::get('/', 'TeacherController@index')->name('teacher.home');
         });
@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth','account']],function (){
         });
     });
 
-    Route::group(['middleware' => ['type:App\Administrator'], 'namespace' => 'Admin','prefix' => 'admin'],function(){
+    Route::group(['middleware' => ['type:App\Models\Administrator'], 'namespace' => 'Admin','prefix' => 'admin'],function(){
         Route::get('/', 'AdminController@index')->name('admin.home');
 
         Route::get('pupils', 'PupilController@index')->name('admin.pupils.index');

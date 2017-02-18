@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Teacher;
+use App\Models\Teacher;
 
 class TeacherController extends Controller
 {
@@ -37,4 +37,6 @@ class TeacherController extends Controller
     }
 
     //Todo: Add link/unlink tutorgroup/user account
+    //Todo: Add a display for if the teacher has a linked account.
+    //Todo: Display unlinked in red.
 }

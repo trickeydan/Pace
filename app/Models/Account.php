@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,9 +17,9 @@ class Account extends Model
      */
 
     // Define some constants for the account types.
-    const PUPIL = 'App\Pupil';
-    const TEACHER = 'App\Teacher';
-    const ADMINISTRATOR = 'App\Administrator';
+    const PUPIL = 'App\Models\Pupil';
+    const TEACHER = 'App\Models\Teacher';
+    const ADMINISTRATOR = 'App\Models\Administrator';
 
     /**
      * Return the user that this belongs to.
@@ -27,13 +27,14 @@ class Account extends Model
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function user(){
-        return $this->morphOne('App\User','accountable');
+        return $this->morphOne('App\Models\User','accountable');
     }
 
     /**
      * Return the class type of this account
      *
      * Todo: replace this with is_type(Account::PUPIL) etc
+     * Todo: This should be in the User?
      *
      * @return string
      */

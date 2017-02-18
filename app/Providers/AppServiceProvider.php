@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Account;
+use App\Models\Account;
 use App\System;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;

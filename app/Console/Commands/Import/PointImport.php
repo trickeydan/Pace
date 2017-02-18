@@ -3,10 +3,10 @@
 namespace App\Console\Commands\Import;
 
 use App\Console\PaceCommand;
-use App\PupilPoint;
-use App\PupilPointType;
+use App\Models\PupilPoint;
+use App\Models\PupilPointType;
 use Illuminate\Support\Facades\File;
-use League\Csv\Reader;
+use App\CSVReader as Reader;
 
 class PointImport extends PaceCommand
 {
@@ -68,8 +68,9 @@ class PointImport extends PaceCommand
 
         $this->info('Beginning import.');
         $reader = Reader::createFromPath(storage_path('data/' . $this->file));
-        $count = $this->countRows($reader);
+        $count = Reader::countRows($reader);
         $this->info('Found ' . $count . ' rows');
+
         $header = ["Adno","Type","Points","Date","Description","Staff Name"];
 
         $bar = $this->output->createProgressBar($count); //Create a symfony progress bar.
@@ -99,12 +100,5 @@ class PointImport extends PaceCommand
         //Todo: Report Success
     }
 
-    private function countRows($reader){
-        //Todo: move this somewhere more appropriate. Perhaps extend reader.
-        $count = 0;
-        foreach($reader->fetchAll() as $index => $row){
-            $count++;
-        }
-        return $count;
-    }
+
 }

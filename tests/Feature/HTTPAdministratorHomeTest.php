@@ -6,8 +6,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use App\Account;
-use App\User;
+use App\Models\Account;
+use App\Models\User;
 
 class HTTPAdministratorHomeTest extends TestCase
 {
