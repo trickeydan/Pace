@@ -10,6 +10,8 @@ class Administrator extends Account
      * + name - String - stores the name of the administrator.
      */
 
+    protected $fillable = ['name'];
+
     public function __toString()
     {
         return $this->name;

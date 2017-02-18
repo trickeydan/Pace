@@ -2,9 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Administrator;
 use App\Configuration;
 use App\Console\PaceCommand;
 use App\House;
+use App\User;
+use App\Account;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
@@ -59,6 +62,19 @@ class SetupApplication extends PaceCommand
         Configuration::set('general_password',bcrypt($gsp));
         $this->info('The general system password has now been set. This will be required for future command line maintenance.');
 
+        //Make administrators.
+        $this->info('An administrator account is required.');
+        $name = $this->ask('Admin Name: ');
+        $email = $this->ask('Admin Email: ');
+        $password = $this->secret('Admin Password: ');
+
+        $admin = Administrator::create(['name' => $name]);
+        User::create([
+            'accountable_type' => Account::ADMINISTRATOR,
+            'accountable_id' => $admin->id,
+            'email' => $email,
+            'password' => bcrypt($password),
+        ]);
 
         $this->info('We now need to setup the database.');
 
@@ -83,7 +99,7 @@ class SetupApplication extends PaceCommand
         $this->info('Importing points via script.');
         $this->call('pace:import:points');
 
-        //Make administrators.
+
 
         //Todo: Rollback on failure.
 
