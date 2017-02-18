@@ -77,9 +77,17 @@ class SetupApplication extends PaceCommand
         $this->info('Importing pupils via script.');
         $this->call('pace:import:pupils');
 
+        $this->info('Importing teachers via script.');
+        $this->call('pace:import:teachers');
+
+        $this->info('Importing points via script.');
+        $this->call('pace:import:points');
+
         //Make administrators.
 
         //Todo: Rollback on failure.
+
+        //Todo: Caching
 
         $this->info('Opening the system to web access.');
         Configuration::set('isSetup','true');

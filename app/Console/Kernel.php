@@ -2,7 +2,9 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Import\PointImport;
 use App\Console\Commands\Import\PupilImporter;
+use App\Console\Commands\Import\TeacherImport;
 use App\Console\Commands\ResetApplication;
 use App\Console\Commands\SetupApplication;
 use Illuminate\Console\Scheduling\Schedule;
@@ -20,6 +22,8 @@ class Kernel extends ConsoleKernel
         SetupApplication::class,
 
         PupilImporter::class,
+        TeacherImport::class,
+        PointImport::class,
     ];
 
     /**

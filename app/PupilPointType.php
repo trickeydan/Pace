@@ -11,6 +11,8 @@ class PupilPointType extends Model
      * + name - String - the name to display
      */
 
+    protected $fillable = ['name'];
+
     /**
      * Return a string representation of this model
      */
@@ -28,5 +30,9 @@ class PupilPointType extends Model
 
     public function points(){
         return $this->hasMany('App\PupilPoint');
+    }
+
+    public static function createFromData($name){
+        return self::create(['name' => $name]);
     }
 }

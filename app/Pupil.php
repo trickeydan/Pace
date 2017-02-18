@@ -134,9 +134,5 @@ class Pupil extends Account
                 //Todo: Check
             }
         }
-
-
-        //Todo: Create user
-        //Todo: Create tutorgroup, year, etc
     }
 }

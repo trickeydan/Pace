@@ -15,6 +15,8 @@ class Teacher extends Account
      * + hasSetup - boolean
      */
 
+    protected $fillable = ['name','initials'];
+
     protected $casts = [
       'hasSetup' => 'boolean'
     ];
@@ -74,5 +76,44 @@ class Teacher extends Account
      */
     public function getSetupUrl(){
         return route('teacher.setup');
+    }
+
+    public static function validateData($row){
+        //todo:validate data
+        //Initials 3 chars etc
+
+
+        //Format data
+        $row[0] = preg_replace("/[^a-zA-Z ]+/", "", $row[0]);
+        $row[2] = strtoupper(preg_replace("/[^a-zA-Z]+/", "", $row[2]));
+        return $row;
+    }
+
+    public static function createFromData($row,$makeuser = true){
+        //"Full Name","Work Email","Initials"
+        $teacher = self::create([
+            'name' => $row[0],
+            'initials' => $row[2],
+        ]);
+
+        if($makeuser){
+            if(User::whereEmail($row[1])->count() == 0){
+                $teacher->makeUser($row[1],$row[0]);
+                //Todo: Choose better passwords
+                //Todo: Email teachers?
+            }else{
+                $user = User::whereEmail($row[1])->first();
+
+                if($user->accountable_type != Account::TEACHER){
+                    throw \Exception;
+                    //Todo: Report failure
+                }else{
+                    $user->accountable_id = $teacher->id;
+                    $user->save();
+                    //Todo: Check
+                }
+            }
+        }
+        return $teacher;
     }
 }

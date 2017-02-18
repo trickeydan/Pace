@@ -76,7 +76,7 @@ class TeacherController extends Controller
             foreach($year->tutorgroups()->orderBy('name')->get() as $tg){
                 $group[$tg->id] = $tg->name;
             }
-            $tutorgroups['Year ' . $year->name] = $group;
+            $tutorgroups[$year->name] = $group;
         }
 
         return view('app.teachers.setup.two',compact('tutorgroups'));
