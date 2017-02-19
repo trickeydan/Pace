@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Exceptions\PaceException;
 use App\Models\Account;
 use App\System;
 use Illuminate\Support\ServiceProvider;
@@ -36,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
         view()->composer('*', function ($view) {
             if(Auth::check()){
                 $view->with('user',Auth::User()); // Make the user instance available to all views.
@@ -51,17 +53,17 @@ class AppServiceProvider extends ServiceProvider
                 //Todo: Also add similar check for teachers and tutorgroups
                 if(is_null($pupil->tutorgroup)) {
                     //Throw an error, the pupil has no tutorgroup.
-                    System::logError(System::ERROR_NULLMODEL,'Tutorgroup Missing');
+                    throw new PaceException($pupil,PaceException::NULL_TUTORGROUP);
                 }
 
                 if(is_null($pupil->tutorgroup->year)) {
                     //Throw an error, the pupil has no year.
-                    System::logError(System::ERROR_NULLMODEL,'Year Missing');
+                    throw new PaceException($pupil,PaceException::NULL_YEAR);
                 }
 
                 if(is_null($pupil->tutorgroup->house)) {
                     //Throw an error, the pupil has no year.
-                    System::logError(System::ERROR_NULLMODEL,'House Missing');
+                    throw new PaceException($pupil,PaceException::NULL_HOUSE);
                 }
 
 

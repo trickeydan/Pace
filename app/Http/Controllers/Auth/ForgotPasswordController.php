@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Http\Request;
@@ -55,7 +56,8 @@ class ForgotPasswordController extends Controller
         // "flash" data in the session to indicate to the developers the errors.
         $user = $this->broker()->getUser($credentials);
 
-        if (is_null($user)) {
+        //Todo: Remove loading accountable to reduce SQL load.
+        if (is_null($user) || $user->accountable->getType() != Account::PUPIL) {
             return Password::INVALID_USER;
         }
 

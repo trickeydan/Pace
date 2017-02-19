@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\System;
 use Illuminate\Database\Eloquent\Model;
 
-class Account extends Model
+class Account extends BaseModel
 {
     /**
      * This is a base class for any account.
@@ -90,6 +91,16 @@ class Account extends Model
      */
     public function getSetupUrl(){
         return $this->getHome();
+    }
+
+    /**
+     * Get the password to send to the user in a forgot password situation.
+     *
+     * @return mixed
+     */
+    public function getPasswordToEmail(){
+        System::warn();
+        return 'not available. Please contact system administrator.';
     }
 
 

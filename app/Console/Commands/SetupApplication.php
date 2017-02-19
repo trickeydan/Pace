@@ -110,5 +110,6 @@ class SetupApplication extends PaceCommand
         $this->info('Opening the system to web access.');
         Configuration::set('isSetup','true');
         $this->info('Setup is now complete.');
+        System::info();//App Setup
     }
 }

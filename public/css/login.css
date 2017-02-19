@@ -54,8 +54,11 @@
         text-decoration: none; }
   .login-dark .illustration {
     text-align: center;
-    padding: 15px 0 20px;
+    padding: 5px 0 5px;
     font-size: 100px;
-    color: #65162B; }
+    color: #65162B;
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+    /* Todo: Fix logo character being upside-down*/ }
 
 /*# sourceMappingURL=login.css.map */

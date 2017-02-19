@@ -4,11 +4,21 @@ namespace App\Models;
 
 use App\Notifications\sendPassword;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Authenticatable
+class User extends BaseModel implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract
 {
-    use Notifiable;
+    use Authenticatable, Authorizable, CanResetPassword, Notifiable;
+
+
     //Todo: All emails sent add to the log (except bulk for which only one is added).
 
     /**
@@ -51,8 +61,7 @@ class User extends Authenticatable
      */
 
     public function getPasswordToEmail(){
-        // Todo: Add a check to see if teacher or pupil. Then return adno or abort safe
-        return 'Not implemented';
+        return $this->accountable->getPasswordToEmail();
     }
 
     /**

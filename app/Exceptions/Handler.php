@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\System;
 
 class Handler extends ExceptionHandler
 {
@@ -32,6 +33,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if($exception instanceof PaceException){
+            System::report();
+        }
+
         parent::report($exception);
     }
 
@@ -44,9 +49,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        //Todo: Add custom logic here.
-        //Todo: Separate layouts for logged in / logged out.
+        $exception = $this->prepareException($exception);
+
+        if($this->isHttpException($exception)) {
+            return response()->view('errors.http',compact('exception'),$exception->getStatusCode());
+
+        }
+
         return parent::render($request, $exception);
+
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Exceptions\PaceException;
 use App\System;
 use Closure;
 
@@ -20,7 +21,7 @@ class UserHasAccount
     public function handle($request, Closure $next)
     {
         if(!$request->user()->accountable){
-            System::logError(System::ERROR_NOACCOUNT,$request->user());
+            throw new PaceException($request->user(),PaceException::USER_NO_ACCOUNT);
         }
         return $next($request);
     }

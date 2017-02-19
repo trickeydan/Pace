@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PupilPointType extends Model
+class PupilPointType extends BaseModel
 {
     /*
      * Fields in this model:

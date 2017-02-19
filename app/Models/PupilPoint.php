@@ -5,7 +5,7 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class PupilPoint extends Model
+class PupilPoint extends BaseModel
 {
     /*
      * Fields in this model:
@@ -93,7 +93,7 @@ class PupilPoint extends Model
         }
 
         if(Teacher::whereName($row[5])->count() == 0){
-            //Todo: Report error
+            System::warn();
             //$skip = true;
             $teacher = Teacher::createFromData([$row[5],'',''],false);
         }else{
@@ -101,7 +101,7 @@ class PupilPoint extends Model
         }
 
         if(Pupil::whereAdno($row[0])->count() == 0){
-            //Todo: Report error
+            System::warn();
             $skip = true;
         }else{
             $pupil = Pupil::whereAdno($row[0])->first();

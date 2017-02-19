@@ -84,8 +84,13 @@ $url_0: url(../img/login-background.jpg);
   }
   .illustration {
     text-align: center;
-    padding: 15px 0 20px;
+    padding: 5px 0 5px;
     font-size: 100px;
     color: #65162B;
+
+    //display: inline-block;
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+    /* Todo: Fix logo character being upside-down*/
   }
 }

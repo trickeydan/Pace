@@ -10,27 +10,17 @@ class System
     /**
      * This is a generic class to store system functions
      *
-     * Todo: Put the system error handler in a separate class
-     * Todo: Make several levels of error. e.g EXCEPTION, FATAL etc
      *
      */
 
-    // Define some constants for error types
-    // Todo: Find a better solution for this.
-    const ERROR_NULLMODEL = 'A null model was found.'; // Report a null model event.
-    const ERROR_NOACCOUNT = 'User has no account associated with it.'; // User doesn't have an account associated.
+    //Log Type Constants
 
-    /**
-     * Log a system error.
-     *
-     * @param $type
-     * @param $data
-     * @param bool $die
-     */
-    public static function logError($type,$data,$die = true){
-        //Todo: Make this store in database.
-        if($die) abort(500,$type);
-    }
+    public static function info(){}
+    public static function warn(){}
+    public static function fatal(){}
+
+    public static function upload(){} //UploadLogger Class?
+    public static function security(){} //Security
 
     /**
      * Get when the database was last updated.

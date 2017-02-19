@@ -19,11 +19,3 @@
    -moz-osx-font-smoothing: grayscale
 }
 .pace-logo:before{content:'\0041';}
-
-.upsidedown {
-    display: inline-block;
-    -webkit-transform: rotateX(180deg);
-    transform: rotateX(180deg);
-}
-
-/* Todo: Fix logo character being upside-down*/

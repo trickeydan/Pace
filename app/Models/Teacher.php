@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Teacher extends Account
+class Teacher extends BaseModel
 {
     /*
      * Fields in this model:
@@ -120,8 +120,7 @@ class Teacher extends Account
                 $user = User::whereEmail($row[1])->first();
 
                 if($user->accountable_type != Account::TEACHER){
-                    throw \Exception;
-                    //Todo: Report failure
+                    throw new PaceException($row,PaceException::INCONSISTENT_DATA);
                 }else{
                     $user->accountable_id = $teacher->id;
                     $user->save();

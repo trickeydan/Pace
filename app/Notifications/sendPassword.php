@@ -42,7 +42,7 @@ class sendPassword extends Notification
     {
         return (new MailMessage)
                     ->subject('Your Password')
-                    ->greeting('Hello, ' . $notifiable->name)
+                    ->greeting('Hello, ' . $notifiable->getName())
                     ->line('Your PACE password is: ' . $this->password);
     }
 

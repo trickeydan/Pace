@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Tutorgroup extends Model
+class Tutorgroup extends BaseModel
 {
     /*
      * Fields in this model:
@@ -121,8 +121,7 @@ class Tutorgroup extends Model
         }
 
         if(House::whereName($house)->count() == 0){
-            throw \Exception;
-            //Todo: Report failure
+            throw new PaceException($house,PaceException::INCONSISTENT_DATA);
         }else{
             $house = House::whereName($house)->first();
         }

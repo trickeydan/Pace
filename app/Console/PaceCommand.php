@@ -3,6 +3,7 @@
 namespace App\Console;
 
 
+use App\Exceptions\PaceException;
 use App\System;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -38,7 +39,7 @@ class PaceCommand extends Command
         $attempt = $this->secret('Please provide the general system password to continue.');
         if(!System::checkGeneralSystemPassword($attempt)){
             $this->error('Incorrect general system password');
-            //Todo: Report incident?
+            System::security();//Incorrect password
             exit();
         }
     }
@@ -61,6 +62,7 @@ class PaceCommand extends Command
         $this->info('');
         $this->info($this->title);
         $this->info('');
+
         return $this->laravel->call([$this, $method]);
     }
 
@@ -73,7 +75,5 @@ class PaceCommand extends Command
      */
     protected function kill($message){
         $this->error($message);
-        //Todo: Report?
-        exit();
     }
 }

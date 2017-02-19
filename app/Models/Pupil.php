@@ -3,6 +3,9 @@
 namespace App\Models;
 
 
+use App\Exceptions\PaceException;
+use App\System;
+
 class Pupil extends Account
 {
     /*
@@ -94,6 +97,15 @@ class Pupil extends Account
         return $this->save();
     }
 
+    /**
+     * Get the password to send to the user in a forgot password situation.
+     *
+     * @return mixed
+     */
+    public function getPasswordToEmail(){
+        return $this->adno;
+    }
+
 
     /**
      * Validate the data on import
@@ -112,14 +124,14 @@ class Pupil extends Account
             if(substr($row[0],0,2) == "00"){
                 $adno = substr($row[0],2,4);
             }else{
-                //Todo: Report bad adno
+                System::warn();
                 return false;
             }
 
         }elseif(strlen($row[0]) == 4){
             $adno = $row[0];
         }else{
-            //Todo: Report bad adno
+            System::warn();
             return false;
         }
 
@@ -168,8 +180,7 @@ class Pupil extends Account
             $user = User::whereEmail($row[1])->first();
 
             if($user->accountable_type != Account::PUPIL){
-                throw \Exception;
-                //Todo: Report failure
+                throw new PaceException($row,PaceException::HOUSE_NOT_SETUP);
             }else{
                 $user->accountable_id = $pupil->id;
                 $user->save();

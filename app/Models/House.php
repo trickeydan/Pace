@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class House extends Model
+class House extends BaseModel
 {
     /*
      * Fields in this model:

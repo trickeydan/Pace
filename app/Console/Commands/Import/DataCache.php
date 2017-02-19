@@ -5,6 +5,7 @@ namespace App\Console\Commands\Import;
 use App\Console\PaceCommand;
 use App\Models\Pupil;
 use App\Models\Tutorgroup;
+use App\System;
 
 class DataCache extends PaceCommand
 {
@@ -45,6 +46,7 @@ class DataCache extends PaceCommand
      */
     public function handle()
     {
+        System::upload();//Start Cache
         $this->info('Step 1 of 2: Cache Pupil data');
         $bar = $this->output->createProgressBar(Pupil::all()->count());
         foreach (Pupil::all() as $pupil){
@@ -62,7 +64,7 @@ class DataCache extends PaceCommand
         }
         $bar->finish();
         echo PHP_EOL;
-
+        System::upload();//End Cache
         $this->info('Cache complete.');
     }
 }

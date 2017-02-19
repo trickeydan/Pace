@@ -48,10 +48,11 @@ class TeacherImport extends PaceCommand
      */
     public function handle()
     {
+        System::upload();//Import started
         //Check the file exists
         if(!File::exists(storage_path('data/' . $this->file))) {
+            System::fatal();//Import failed
             $this->kill($this->file . ' does not exist. Please upload your .csv files to the storage/data directory.');
-            //Todo: Report error
         }
 
         //Todo Make checksum of file and compare against old.
@@ -73,14 +74,14 @@ class TeacherImport extends PaceCommand
         foreach($reader->fetchAll() as $index => $row){
             if($index == 0){
                 if($row != $header){
+                    System::fatal();//Import failed
                     $this->kill('File header not correct.');
-                    //Todo:Report error.
                 }
             }else{
                 $row = Teacher::validateData($row);
                 if($row == false){
+                    System::fatal();//Import failed
                     $this->warn('Failed to import row: ' . $index);
-                    //Todo: Report Failure
                 }else{
                     Teacher::createFromData($row);
 
@@ -92,6 +93,6 @@ class TeacherImport extends PaceCommand
         $bar->finish();
         echo PHP_EOL;
         //Todo: Check teacher count matches file.
-        //Todo: Report Success
+        System::upload();//Import success
     }
 }

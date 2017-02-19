@@ -1,64 +1,32 @@
-<!DOCTYPE html>
-<html>
+@extends('auth.layout')
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login | {{config('app.name')}}</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-        <link rel="stylesheet" href="{{asset('css/login.css')}}">
-        <link rel="stylesheet" href="{{asset('css/font.css')}}">
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
-    </head>
+@section('title','Login')
 
-    <body>
-        <div class="login-dark">
-            <form role="form" method="POST" action="{{ url('/login') }}">
-                <h2 class="sr-only">Login Form</h2>
-                {{ csrf_field() }}
-                <div class="illustration"><i class="pace-logo upsidedown"></i></div>
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                    <input class="form-control" id="email" required autofocus type="email" name="email" placeholder="Email" value="{{ old('email') }}" >
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
+@section('content')
+    <form role="form" method="POST" action="{{ url('/login') }}">
+        <div class="illustration"><i class="pace-logo upsidedown"></i></div>
+        {{ csrf_field() }}
+
+        <p class="text-center">Login</p>
+        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+            <input class="form-control" id="email" required autofocus type="email" name="email" placeholder="Email" value="{{ old('email') }}" >
+            @if ($errors->has('email'))
+                <div class="alert alert-danger">
+                    <strong>{{ $errors->first('email') }}</strong>
                 </div>
-                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                    <input class="form-control" id="password" type="password" name="password" required placeholder="Password">
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-primary btn-block" name="submit" type="submit">Log In</button>
-                </div><a href="{{ route('auth.password') }}" class="forgot">Forgot your password?</a></form>
+            @endif
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
-        <script>
-            window.addEventListener("load", function(){
-                window.cookieconsent.initialise({
-                    "palette": {
-                        "popup": {
-                            "background": "#252e39"
-                        },
-                        "button": {
-                            "background": "#14a7d0"
-                        }
-                    },
-                    "theme": "edgeless",
-                    "content": {
-                        "message": "KLBS PACE Points uses cookies to ensure you get the best experience "
-                    }
-                })});
-        </script>
-    </body>
 
-</html>
+        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+            <input class="form-control" id="password" type="password" name="password" required placeholder="Password">
+            @if ($errors->has('password'))
+                <div class="alert alert-danger">
+                    <strong>{{ $errors->first('password') }}</strong>
+                </div>
+            @endif
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" name="submit" type="submit">Log In</button>
+        </div><a href="{{ route('auth.password') }}" class="forgot">Forgot your password?</a>
+    </form>
+@endsection
