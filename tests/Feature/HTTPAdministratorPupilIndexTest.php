@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Models\User;
 use App\Models\Account;
+use App\Models\Administrator;
 
 class HTTPAdministratorPupilIndexTest extends TestCase
 {
@@ -17,9 +18,13 @@ class HTTPAdministratorPupilIndexTest extends TestCase
      * @return void
      */
 
-    public function testCanVisitPupilIndex(){
+    public function testCanVisitTeacherIndex(){
         $user = User::whereAccountableType(Account::ADMINISTRATOR)->first();
 
+        if(is_null($user)){
+            $admin = factory(Administrator::class)->create();
+            $user = $admin->makeUser('email@example.com','password',false);
+        }
 
         $response = $this->actingAs($user)
             ->get(route('admin.home'));

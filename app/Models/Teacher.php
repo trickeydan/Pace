@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Teacher extends BaseModel
+class Teacher extends Account
 {
     /*
      * Fields in this model:

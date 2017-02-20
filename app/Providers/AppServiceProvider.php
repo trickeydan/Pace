@@ -37,7 +37,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
         view()->composer('*', function ($view) {
             if(Auth::check()){
                 $view->with('user',Auth::User()); // Make the user instance available to all views.

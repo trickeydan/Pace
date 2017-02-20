@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\PaceException;
-use App\System;
 use Closure;
 
 class UserHasAccount

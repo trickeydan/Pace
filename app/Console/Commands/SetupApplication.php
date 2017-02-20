@@ -8,6 +8,7 @@ use App\Console\PaceCommand;
 use App\Models\House;
 use App\Models\User;
 use App\Models\Account;
+use App\System;
 
 class SetupApplication extends PaceCommand
 {

@@ -6,6 +6,7 @@ use App\Console\PaceCommand;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\File;
 use App\CSVReader as Reader;
+use App\System;
 
 class TeacherImport extends PaceCommand
 {
@@ -84,7 +85,6 @@ class TeacherImport extends PaceCommand
                     $this->warn('Failed to import row: ' . $index);
                 }else{
                     Teacher::createFromData($row);
-
                 }
 
                 $bar->advance();

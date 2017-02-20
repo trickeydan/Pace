@@ -18,9 +18,9 @@ class Account extends BaseModel
      */
 
     // Define some constants for the account types.
-    const PUPIL = 'App\Models\Pupil';
-    const TEACHER = 'App\Models\Teacher';
-    const ADMINISTRATOR = 'App\Models\Administrator';
+    const PUPIL = Pupil::class;
+    const TEACHER = Teacher::class;
+    const ADMINISTRATOR = Administrator::class;
 
     /**
      * Return the user that this belongs to.
@@ -112,12 +112,13 @@ class Account extends BaseModel
      *
      * @return User
      */
-    public function makeUser($email,$password){
+    public function makeUser($email,$password,$bool = true){
         $user = new User();
         $user->email = $email;
         $user->password = bcrypt($password);
         $user->accountable_type = $this->getType();
         $user->accountable_id = $this->id;
-        return $user->save();
+        if($bool) return $user->save();
+        return $user;
     }
 }

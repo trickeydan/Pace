@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Administrator;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -19,6 +20,11 @@ class HTTPAdministratorHomeTest extends TestCase
 
     public function testCanVisitAdminHomePage(){
         $user = User::whereAccountableType(Account::ADMINISTRATOR)->first();
+
+        if(is_null($user)){
+            $admin = factory(Administrator::class)->create();
+            $user = $admin->makeUser('email@example.com','password',false);
+        }
 
 
         $response = $this->actingAs($user)

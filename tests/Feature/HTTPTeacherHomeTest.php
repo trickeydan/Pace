@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Tutorgroup;
 use Illuminate\Validation\Rules\Unique;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -21,6 +22,7 @@ class HTTPTeacherHomeTest extends TestCase
     public function testCanVisitTeacherHomePage(){
         $user = User::whereAccountableType(Account::TEACHER)->first();
         $user->accountable->hasSetup = true;
+        $user->accountable->tutorgroup_id = Tutorgroup::first();
         $user->accountable->save();
 
         $response = $this->actingAs($user)

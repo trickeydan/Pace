@@ -4,19 +4,22 @@ namespace App\Models;
 
 use App\Notifications\sendPassword;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-
-class User extends BaseModel implements
-    AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class User extends Authenticatable
 {
-    use Authenticatable, Authorizable, CanResetPassword, Notifiable;
+    use Notifiable;
+
+    /**
+     * Get an identifier for this instance for use in debugging
+     *
+     * Return a base64 encoded string containing model type, id.
+     *
+     * @return string
+     */
+    public function getIdentifier(){
+        $identifier = get_class($this) . ':' . $this->id;
+        return base64_encode($identifier);
+    }
 
 
     //Todo: All emails sent add to the log (except bulk for which only one is added).

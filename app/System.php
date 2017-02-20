@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App\Models\Configuration;
 use Illuminate\Support\Facades\Hash;
 
 class System
@@ -21,6 +22,9 @@ class System
 
     public static function upload(){} //UploadLogger Class?
     public static function security(){} //Security
+    public static function success(){} //Security
+    public static function report(){} //Security
+
 
     /**
      * Get when the database was last updated.

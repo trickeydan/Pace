@@ -7,6 +7,7 @@ use App\Models\PupilPoint;
 use App\Models\PupilPointType;
 use Illuminate\Support\Facades\File;
 use App\CSVReader as Reader;
+use App\System;
 
 class PointImport extends PaceCommand
 {

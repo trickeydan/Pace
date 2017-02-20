@@ -6,6 +6,7 @@ use App\Console\PaceCommand;
 use App\Models\Pupil;
 use Illuminate\Support\Facades\File;
 use App\CSVReader as Reader;
+use App\System;
 
 class PupilImporter extends PaceCommand
 {
