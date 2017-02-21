@@ -44,6 +44,9 @@ Route::group(['middleware' => ['auth','account']],function (){
     Route::group(['middleware' => ['type:App\Models\Administrator'], 'namespace' => 'Admin','prefix' => 'admin'],function(){
         Route::get('/', 'AdminController@index')->name('admin.home');
 
+        Route::get('gsp','AccountController@checkGSPView')->name('admin.gsp');
+        Route::post('gsp','AccountController@checkGSPLogic')->name('admin.gsp');
+
         Route::get('pupils', 'PupilController@index')->name('admin.pupils.index');
         Route::get('pupils/{pupil}', 'PupilController@view')->name('admin.pupils.view');
 
@@ -52,6 +55,11 @@ Route::group(['middleware' => ['auth','account']],function (){
 
         Route::group(['prefix' => 'settings'],function(){
            Route::get('status','SettingsController@status')->name('admin.settings.status');
+
+           Route::get('administrators','AccountController@index')->name('admin.administrators.index');
+
+           Route::get('administrators/{administrator}/delete','AccountController@delete')->name('admin.administrators.delete');
+
         });
 
     });
