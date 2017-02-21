@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CheckDataIntegrity;
 use App\Console\Commands\Import\DataCache;
 use App\Console\Commands\Import\PointImport;
 use App\Console\Commands\Import\PupilImporter;
@@ -21,11 +22,14 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         ResetApplication::class,
         SetupApplication::class,
+        CheckDataIntegrity::class,
 
         PupilImporter::class,
         TeacherImport::class,
         PointImport::class,
         DataCache::class,
+
+
     ];
 
     /**
