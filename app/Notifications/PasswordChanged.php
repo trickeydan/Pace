@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class sendPassword extends Notification
+class PasswordChanged extends Notification
 {
     use Queueable;
 
@@ -16,9 +16,9 @@ class sendPassword extends Notification
      *
      * @return void
      */
-    public function __construct($password)
+    public function __construct()
     {
-        $this->password = $password;
+        //
     }
 
     /**
@@ -41,9 +41,10 @@ class sendPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('PACE Points Password')
-                    ->greeting('Hello, ' . $notifiable->getName())
-                    ->line('Your PACE password is: ' . $this->password);
+            ->subject('PACE Points Password Changed')
+            ->greeting('Hello, ' . $notifiable->getName())
+            ->line('Your password has been changed on ' . config('app.name'))
+            ->line('If this is unexpected, please contact the system administrator.');
     }
 
     /**

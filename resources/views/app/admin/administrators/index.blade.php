@@ -34,12 +34,13 @@
                 </ul>
             </div>
         @endif
-        <button type="button" class="btn btn-default">Create Administrator</button>
+        <a href="{{route('admin.administrators.create')}}"><button type="button" class="btn btn-default">Create Administrator</button></a>
         <div class="table-responsive">
             <table class="table">
                 <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Email</th>
                     <th>Options</th>
                 </tr>
                 </thead>
@@ -48,10 +49,11 @@
                     @foreach($admins as $admin)
                         <tr>
                             <td>{{$admin->name}}</td>
-                            @if($admin != $user->accountable)
+                            <td>{{$admin->user->email}}</td>
+                            @if($admin->id != $user->accountable->id)
                                 <td><a href="{{route('admin.administrators.delete',$admin->id)}}">Delete</a></td>
                             @else
-                                <td>Change My Password</td>
+                                <td><a href="{{route('admin.settings.password')}}">Change My Password</a></td>
                             @endif
                         </tr>
                     @endforeach

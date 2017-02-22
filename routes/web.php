@@ -16,7 +16,7 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 
 Route::group(['middleware' => ['auth','account']],function (){
 
-    Route::get('/',function(){})->name('home')->middleware('type:null'); //Redirect to correct home
+    Route::get('/',function(){abort(500);})->name('home')->middleware('type:null'); //Redirect to correct home
 
     // Main Routes - Pupils
 
@@ -56,9 +56,19 @@ Route::group(['middleware' => ['auth','account']],function (){
         Route::group(['prefix' => 'settings'],function(){
            Route::get('status','SettingsController@status')->name('admin.settings.status');
 
-           Route::get('administrators','AccountController@index')->name('admin.administrators.index');
 
-           Route::get('administrators/{administrator}/delete','AccountController@delete')->name('admin.administrators.delete');
+           Route::get('password','PasswordController@change')->name('admin.settings.password');
+           Route::post('password','PasswordController@changePost')->name('admin.settings.password');
+
+           Route::group(['prefix' => 'administrators'],function(){
+               Route::get('/','AccountController@index')->name('admin.administrators.index');
+               Route::get('{administrator}/delete','AccountController@delete')->name('admin.administrators.delete');
+
+               Route::get('create','AccountController@create')->name('admin.administrators.create');
+               Route::post('create','AccountController@createPost')->name('admin.administrators.create');
+           });
+
+
 
         });
 

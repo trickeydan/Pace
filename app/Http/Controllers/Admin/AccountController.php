@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CreateAdministratorRequest;
 use App\Models\Administrator;
+use App\Notifications\AdminNewAccount;
 use App\System;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -60,6 +62,36 @@ class AccountController extends Controller
         //Report to log
 
         return redirect(route('admin.administrators.index'))->with('success','Deleted Administrator.');
+    }
+
+    /**
+     * Show the form to create a new administrator.
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create(Request $request){
+        //Todo: Add middleware gsp check.
+
+        return view('app.admin.administrators.create');
+    }
+
+    /**
+     * Create a new administrator.
+     *
+     * @param CreateAdministratorRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function createPost(CreateAdministratorRequest $request){
+        $admin = Administrator::create($request->all());
+        $password = str_random(8);
+        $admin->makeUser($request->name,$password);
+
+        $admin->user->notify(new AdminNewAccount($password));
+
+
+
+        return redirect(route('admin.administrators.index'))->with('success','Created administrator. A password has been emailed to them.');
     }
 
     /**

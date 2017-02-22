@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class sendPassword extends Notification
+class AdminNewAccount extends Notification
 {
     use Queueable;
 
@@ -41,9 +41,13 @@ class sendPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('PACE Points Password')
+                    ->subject('PACE Points Account')
                     ->greeting('Hello, ' . $notifiable->getName())
-                    ->line('Your PACE password is: ' . $this->password);
+                    ->line('An administrator account has been created for you.')
+                    ->line('Your email is: ' . $notifiable->email) //Todo: Check if email exists, better way of passing it?
+                    ->line('Your password is: ' . $this->password)
+                    ->line('Please change your password for security.')
+                    ->action('Login',route('auth.login'));
     }
 
     /**
