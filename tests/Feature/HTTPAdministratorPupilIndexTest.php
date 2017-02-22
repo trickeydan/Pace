@@ -31,6 +31,5 @@ class HTTPAdministratorPupilIndexTest extends TestCase
 
 
         $response->assertStatus(200,'Could not visit admin pupil index.');
-        $user->delete();
     }
 }

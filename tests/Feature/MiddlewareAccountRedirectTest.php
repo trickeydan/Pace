@@ -23,6 +23,5 @@ class MiddlewareAccountRedirectTest extends TestCase
 
         $response->assertStatus(302,'No redirect when pupil accesses teacher resource'); //302 due to redirect.
         $response->assertHeader('location',route('pupil.home')); //
-        $user->delete();
     }
 }

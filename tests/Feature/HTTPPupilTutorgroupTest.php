@@ -28,6 +28,5 @@ class HTTPPupilTutorgroupTest extends TestCase
 
 
         $response->assertStatus(200,'Could not visit pupil tutorgroup page');
-        $user->delete();
     }
 }

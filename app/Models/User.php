@@ -91,5 +91,4 @@ class User extends Authenticatable
     public function accountable(){
         return $this->morphTo();
     }
-
 }

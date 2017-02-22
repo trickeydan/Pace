@@ -8,6 +8,7 @@ use App\Console\PaceCommand;
 use App\Models\House;
 use App\Models\User;
 use App\Models\Account;
+use App\Notifications\AdminNewAccount;
 use App\System;
 
 class SetupApplication extends PaceCommand
@@ -69,14 +70,14 @@ class SetupApplication extends PaceCommand
 
         //Create a new administrator
         $admin = Administrator::create(['name' => $name]);
-        User::create([
+        $user = User::create([
             'accountable_type' => Account::ADMINISTRATOR,
             'accountable_id' => $admin->id,
             'email' => $email,
             'password' => bcrypt($password),
         ]);
 
-        //Todo: Email administrator with welcome email.
+        $user->notify(new AdminNewAccount($password));
 
         $this->info('We now need to setup the database.');
 

@@ -26,6 +26,5 @@ class HTTPPupilHomeTest extends TestCase
 
 
         $response->assertStatus(200,'Could not visit pupil home page');
-        $user->delete();
     }
 }

@@ -13,7 +13,7 @@ class CheckDataIntegrity extends PaceCommand
      *
      * @var string
      */
-    protected $signature = 'pace:integrity';
+    protected $signature = 'pace:integrity {--quick}';
 
     /**
      * The console command description.
@@ -47,7 +47,13 @@ class CheckDataIntegrity extends PaceCommand
     {
         $this->info('Checking Integrity of Pupil Data');
         $found = [];
-        $bar = $this->output->createProgressBar(Pupil::all()->count() * 10);
+        if($this->option('quick')){
+            $this->info('Quick Mode. Hash checking disabled.');
+            $amount = 9;
+        }else{
+            $amount = 10;
+        }
+        $bar = $this->output->createProgressBar(Pupil::all()->count() * $amount);
         foreach(Pupil::all() as $pupil){
             $corrupt = false;
 
@@ -62,8 +68,7 @@ class CheckDataIntegrity extends PaceCommand
             $corrupt = $corrupt || is_null($pupil->tutorgroup); $bar->advance();
             $corrupt = $corrupt || is_null($pupil->user); $bar->advance();
 
-
-            $corrupt = $corrupt || Hash::check($pupil->user->password,bcrypt($pupil->adno)); $bar->advance();
+            if(!$this->option('quick')) { $corrupt = $corrupt || Hash::check($pupil->user->password,bcrypt($pupil->adno)); $bar->advance(); }
 
             $corrupt = $corrupt || $pupil->currPoints < 0; $bar->advance();
 
@@ -79,5 +84,6 @@ class CheckDataIntegrity extends PaceCommand
             //Todo: Report
             //Todo save issues somewhere.
         }
+        dd($found);
     }
 }

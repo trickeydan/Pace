@@ -24,6 +24,5 @@ class HTTPPupilHouseTest extends TestCase
             ->get(route('pupil.house'));
 
         $response->assertStatus(200,'Could not visit pupil house page');
-        $user->delete();
     }
 }

@@ -32,6 +32,5 @@ class HTTPAdministratorHomeTest extends TestCase
 
 
         $response->assertStatus(200,'Could not visit admin home page');
-        $user->delete();
     }
 }
