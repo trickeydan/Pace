@@ -17,11 +17,6 @@ class Administrator extends Account
      */
     protected $fillable = ['name'];
 
-    public function __toString()
-    {
-        return $this->name;
-    }
-
     /**
      * Get the home url for the administrator.
      *

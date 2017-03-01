@@ -20,7 +20,10 @@
                         Error {{$exception->getStatusCode()}}:
                         {{ \Illuminate\Http\Response::$statusTexts[$exception->getStatusCode()]}}
                     </h2>
-                    <p class="text-center">{{$exception->getMessage()}}</p>
+                    <h3 class="text-center">{{$exception->getMessage()}}</h3>
+                    @if(isset($exception->wentDownAt))
+                        <h3 class="text-center">Time offline so far: {{$exception->wentDownAt->diffForHumans(\Carbon\Carbon::now(),true)}}</h3>
+                    @endif
                     <p class="text-center">Please try again later or check you typed your link correctly. <br/> If you believe there has been an error, please contact the system administrator.</p>
                     @if($exception->getStatusCode() != 503)
                         <div class="buttons text-center"><a class="btn btn-primary" role="button" href="{{url()->previous()}}">Back to previous page</a></div>

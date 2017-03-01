@@ -1,7 +1,7 @@
 # Pace
 
 [![Build Status](https://travis-ci.org/trickeydan/Pace.svg?branch=develop)](https://travis-ci.org/trickeydan/Pace)
-
+[![Coverage Status](https://coveralls.io/repos/github/trickeydan/Pace/badge.svg?branch=develop)](https://coveralls.io/github/trickeydan/Pace?branch=develop)
 A system to manage 'PACE' points and House competitions for KLBS. Replaces v1.x.x
 
 Features include:
@@ -21,8 +21,13 @@ Test Account Details
 * Ensure these are removed before production.
 
 To contribute:
-* Please test Browser functionality before opening PR using `php artisan dusk`
+* <del>Please test Browser functionality before opening PR using `php artisan dusk` </del>
+* Dusk tests are broken on travis. To be fixed soon.
 * Standard code tests will be run by Travis CI
+
+Features to introduce before initial release
+* Laravel Dusk browser tests
+* Webhooks
 
 Features to be introduced after initial release
 * Upgrade to Bootstrap 4 once released.

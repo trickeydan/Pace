@@ -25,7 +25,6 @@ class AccountController extends Controller
      *
      * Also has search functionality for system consistency.
      *
-     * Todo: Combine code for search on indexes to reduce duplication
      *
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

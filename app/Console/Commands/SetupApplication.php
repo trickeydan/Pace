@@ -90,7 +90,11 @@ class SetupApplication extends PaceCommand
             $colour = strtoupper($this->ask('Colour for House #' . $i,'555555'));
             House::create(['name' => $name,'colour' => $colour]);
         }
-        //Todo: Add a check to see if the houses were created successfully.
+
+        if(House::all()->count() != $number){ //Check houses were created.
+            $this->kill('The houses could not be created');
+        }
+
         $this->info('Houses created.');
 
         $this->info('Importing pupils via script.');

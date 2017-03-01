@@ -57,9 +57,6 @@ class PointImport extends PaceCommand
             $this->kill($this->file . ' does not exist. Please upload your .csv files to the storage/data directory.');
         }
 
-        //Todo Make checksum of file and compare against old.
-        //Todo: Save checksum to db.
-
         //Delete any old points
         $res = PupilPoint::getQuery()->delete();
         $this->info('Deleted ' . $res . ' points');

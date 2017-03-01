@@ -41,6 +41,15 @@ class Teacher extends Account
         return route('teacher.home');
     }
 
+    /**
+     * Return a human-readable string for the class type.
+     *
+     * @return string
+     */
+    public function getTypeHuman()
+    {
+        return 'Teacher';
+    }
 
     /**
      * Get the points that this teacher has issued.

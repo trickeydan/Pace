@@ -5,7 +5,7 @@ namespace App\Models;
 use App\System;
 use Illuminate\Database\Eloquent\Model;
 
-class Account extends BaseModel
+abstract class Account extends BaseModel
 {
     /**
      * This is a base class for any account.
@@ -21,6 +21,16 @@ class Account extends BaseModel
     const PUPIL = Pupil::class;
     const TEACHER = Teacher::class;
     const ADMINISTRATOR = Administrator::class;
+
+    /**
+     * Return the string representation of this user.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * Return the user that this belongs to.
@@ -46,7 +56,7 @@ class Account extends BaseModel
     /**
      * Return the name of this account.
      *
-     * @return mixed
+     * @return string
      */
     public function getName(){
         return $this->name;
@@ -55,25 +65,18 @@ class Account extends BaseModel
     /**
      * Get a human-readable string for the account type
      *
-     * This is to be overrided, so will return the type.
      *
      * @return string
      */
-    public function getTypeHuman(){
-        return $this->getType();
-    }
+    abstract public function getTypeHuman();
 
 
     /**
      * Return the name of the home for this account.
      *
-     * Never actually used as all accounts should override this function.
-     *
      * @return string
      */
-    public function getHome(){
-        return '/';
-    }
+    abstract public function getHome();
 
     /**
      * Has this account been setup?
@@ -119,6 +122,7 @@ class Account extends BaseModel
         $user->accountable_type = $this->getType();
         $user->accountable_id = $this->id;
         if($bool) return $user->save();
+        $user->save();
         return $user;
     }
 }

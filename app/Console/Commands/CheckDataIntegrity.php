@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Console\PaceCommand;
 use App\Models\Pupil;
+use App\System;
 use Illuminate\Support\Facades\Hash;
 
 class CheckDataIntegrity extends PaceCommand
@@ -81,7 +82,7 @@ class CheckDataIntegrity extends PaceCommand
             $this->info('No problems found.');
         }else{
             $this->warn('Found ' . count($found) . ' issues.');
-            //Todo: Report
+            System::warn();
             //Todo save issues somewhere.
         }
         dd($found);

@@ -106,6 +106,16 @@ class Pupil extends Account
         return $this->adno;
     }
 
+    /**
+     * Return a human-readable string for the class type.
+     *
+     * @return string
+     */
+    public function getTypeHuman()
+    {
+        return 'Pupil';
+    }
+
 
     /**
      * Validate the data on import
