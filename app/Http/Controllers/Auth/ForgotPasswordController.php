@@ -57,7 +57,7 @@ class ForgotPasswordController extends Controller
         $user = $this->broker()->getUser($credentials);
 
         //Todo: Remove loading accountable to reduce SQL load.
-        if (is_null($user) || $user->accountable->getType() != Account::PUPIL) {
+        if (is_null($user) || $user->accountable_type != Account::PUPIL) {
             return Password::INVALID_USER;
         }
 

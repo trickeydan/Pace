@@ -5,6 +5,7 @@ namespace App\Models;
 
 use App\Exceptions\PaceException;
 use App\System;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class Pupil extends Account
 {
@@ -197,5 +198,29 @@ class Pupil extends Account
                 //Todo: Check
             }
         }
+    }
+
+    /**
+     * Check the data integrity of the pupil
+     *
+     * @return bool
+     */
+    public function checkIntegrity(){
+        $corrupt = false;
+
+        //Check database fields
+        $corrupt = $corrupt || is_null($this->forename);
+        $corrupt = $corrupt || is_null($this->surname);
+        $corrupt = $corrupt || is_null($this->currPoints);
+        $corrupt = $corrupt || is_null($this->adno);
+        $corrupt = $corrupt || is_null($this->tutorgroup_id);
+
+
+        $corrupt = $corrupt || is_null($this->tutorgroup);
+        $corrupt = $corrupt || is_null($this->user);
+
+        //Password check is in Main script
+
+        return $corrupt || $this->currPoints < 0;
     }
 }

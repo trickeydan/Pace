@@ -16,14 +16,14 @@ class System
 
     //Log Type Constants
 
-    public static function info(){}
-    public static function warn(){}
-    public static function fatal(){}
+    public static function info(){return true;}
+    public static function warn(){return true;}
+    public static function fatal(){return true;}
 
-    public static function upload(){} //UploadLogger Class?
-    public static function security(){} //Security
-    public static function success(){} //Security
-    public static function report(){} //Security
+    public static function upload(){return true;} //UploadLogger Class?
+    public static function security(){return true;} //Security
+    public static function success(){return true;} //Security
+    public static function report(){return true;} //Security
 
 
     /**

@@ -8,6 +8,7 @@ use App\System;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Carbon\Carbon;
 
 class PaceCommand extends Command
 {
@@ -75,5 +76,31 @@ class PaceCommand extends Command
      */
     protected function kill($message){
         $this->error($message);
+    }
+
+    /**
+     * Put up a maintenance message.
+     *
+     * @param $message
+     */
+    protected function down($message){
+        file_put_contents(
+            $this->laravel->storagePath().'/framework/down',
+            json_encode($this->getDownFilePayload($message), JSON_PRETTY_PRINT)
+        );
+    }
+
+    /**
+     * Get the payload to be placed in the "down" file.
+     *
+     * @return array
+     */
+    protected function getDownFilePayload($message)
+    {
+        return [
+            'time' => Carbon::now()->getTimestamp(),
+            'message' => $message,
+            'retry' => null,
+        ];
     }
 }

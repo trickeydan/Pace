@@ -124,4 +124,20 @@ class PupilPoint extends BaseModel
             'pupil_point_type_id' => $type->id,
         ]);
     }
+
+    /**
+     * Check the integrity of the data for this point
+     *
+     * @return bool
+     */
+    public function checkIntegrity(){
+        $corrupt = false;
+        $corrupt = $corrupt || is_null($this->pupil);
+        $corrupt = $corrupt || is_null($this->teacher);
+        $corrupt = $corrupt || is_null($this->type);
+        $corrupt = $corrupt || is_null($this->amount);
+        $corrupt = $corrupt || $this->amount < 0;
+        $corrupt = $corrupt || is_null($this->description);
+        return $corrupt;
+    }
 }

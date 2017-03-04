@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Console\PaceCommand;
 use App\Models\Pupil;
+use App\Models\PupilPoint;
 use App\System;
 use Illuminate\Support\Facades\Hash;
 
@@ -46,38 +47,19 @@ class CheckDataIntegrity extends PaceCommand
      */
     public function handle()
     {
-        $this->info('Checking Integrity of Pupil Data');
+        $this->info('Checking All Data');
+        $this->down('Checking data integrity.');
         $found = [];
-        if($this->option('quick')){
-            $this->info('Quick Mode. Hash checking disabled.');
-            $amount = 9;
-        }else{
-            $amount = 10;
-        }
-        $bar = $this->output->createProgressBar(Pupil::all()->count() * $amount);
-        foreach(Pupil::all() as $pupil){
-            $corrupt = false;
+        array_merge($found,$this->checkPupils());
+        array_merge($found,$this->checkPoints());
+        //Add teacher checks
+        //Add PointsType Check
+        //Add Admin Check
+        //Add TG Checks
+        //Add Year Checks
+        //Add House checks
+        //Add User checks
 
-            //Check database fields
-            $corrupt = $corrupt || is_null($pupil->forename); $bar->advance();
-            $corrupt = $corrupt || is_null($pupil->surname); $bar->advance();
-            $corrupt = $corrupt || is_null($pupil->currPoints); $bar->advance();
-            $corrupt = $corrupt || is_null($pupil->adno); $bar->advance();
-            $corrupt = $corrupt || is_null($pupil->tutorgroup_id); $bar->advance();
-
-
-            $corrupt = $corrupt || is_null($pupil->tutorgroup); $bar->advance();
-            $corrupt = $corrupt || is_null($pupil->user); $bar->advance();
-
-            if(!$this->option('quick')) { $corrupt = $corrupt || Hash::check($pupil->user->password,bcrypt($pupil->adno)); $bar->advance(); }
-
-            $corrupt = $corrupt || $pupil->currPoints < 0; $bar->advance();
-
-            if($corrupt) array_push($found,$pupil);
-            $bar->advance();
-        }
-        $bar->finish();
-        echo PHP_EOL;
         if(count($found) == 0){
             $this->info('No problems found.');
         }else{
@@ -85,6 +67,47 @@ class CheckDataIntegrity extends PaceCommand
             System::warn();
             //Todo save issues somewhere.
         }
-        dd($found);
+        $this->callSilent('up');
+    }
+
+    /**
+     * Check the integrity of the pupil data
+     *
+     * @return array
+     */
+    private function checkPupils(){
+        $found = [];
+        if($this->option('quick')) $this->info('Quick Mode. Hash checking disabled.');
+
+        $bar = $this->output->createProgressBar(Pupil::all()->count());
+        $this->info('Checking Integrity of Pupil Data');
+        foreach(Pupil::all() as $pupil){
+            $corrupt = $pupil->checkIntegrity($bar);
+            if(!$this->option('quick')) { $corrupt = $corrupt || Hash::check($pupil->user->password,bcrypt($pupil->adno)); $bar->advance(); }
+            if($corrupt) array_push($found,$pupil);
+            $bar->advance();
+        }
+        $bar->finish();
+        echo PHP_EOL;
+        return $found;
+    }
+
+    /**
+     * Check the integrity of the point data.
+     *
+     * @return array
+     */
+    public function checkPoints(){
+        $found = [];
+        $bar = $this->output->createProgressBar(PupilPoint::all()->count());
+        $this->info('Checking Integrity of PupilPoint Data');
+        foreach(PupilPoint::all() as $point){
+            $corrupt = $point->checkIntegrity();
+            if($corrupt) array_push($found,$point);
+            $bar->advance();
+        }
+        $bar->finish();
+        echo PHP_EOL;
+        return $found;
     }
 }

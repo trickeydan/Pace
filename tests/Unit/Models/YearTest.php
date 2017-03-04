@@ -51,7 +51,7 @@ class YearTest extends TestCase
      * Todo: Fix this test.
      *
      */
-    /*public function testToString(){
+    public function testToString(){
         $this->assertEquals((string)$this->year,$this->year->name);
-    }*/
+    }
 }

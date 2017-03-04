@@ -7,12 +7,12 @@
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('auth.login');
-Route::post('login', 'Auth\LoginController@login');
+Route::post('login', 'Auth\LoginController@login')->name('auth.login');
 Route::get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 // Password Reset Route
 Route::get('password/email', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('auth.password');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('auth.password');
 
 Route::group(['middleware' => ['auth','account']],function (){
 
