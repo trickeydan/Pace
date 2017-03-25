@@ -60,6 +60,8 @@ class Configuration extends BaseModel
      * @return mixed
      */
     public static function get($key){
-        return self::where('key','=',$key)->first()->value;
+        $res = self::where('key','=',$key)->first();
+        if(is_null($res)) return null;
+        return $res->value;
     }
 }

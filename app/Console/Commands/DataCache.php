@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\Import;
+namespace App\Console\Commands;
 
 use App\Console\PaceCommand;
 use App\Models\Pupil;

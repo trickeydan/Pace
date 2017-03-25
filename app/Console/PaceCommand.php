@@ -74,8 +74,9 @@ class PaceCommand extends Command
      *
      * @param $message
      */
-    protected function kill($message){
+    public function kill($message){
         $this->error($message);
+        die();
     }
 
     /**
@@ -102,5 +103,15 @@ class PaceCommand extends Command
             'message' => $message,
             'retry' => null,
         ];
+    }
+
+    /**
+     * Override protected property to get progressbar instance.
+     *
+     * @param $count
+     * @return mixed
+     */
+    public function createProgressBar($count){
+        return $this->output->createProgressBar($count);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
+use ReflectionClass;
 
 abstract class BaseModel extends Model
 {
@@ -17,5 +18,17 @@ abstract class BaseModel extends Model
     public function getIdentifier(){
         $identifier = get_class($this) . ':' . $this->id;
         return base64_encode($identifier);
+    }
+
+    /**
+     * Get the name of a constant from it's value
+     *
+     * @param $value
+     * @return null|string
+     */
+    public function getConstantNameFromValue($const_value){
+        $fooClass = new ReflectionClass ($this);
+        $constants = $fooClass->getConstants();
+        return array_search($const_value,$constants);
     }
 }

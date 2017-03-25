@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Configuration;
 use Closure;
+use Illuminate\Support\Facades\Schema;
 
 class CheckSystemSetup
 {
@@ -16,7 +17,7 @@ class CheckSystemSetup
      */
     public function handle($request, Closure $next)
     {
-        if(Configuration::get('isSetup') != 'true'){
+        if(!Schema::hasTable('configurations') || Configuration::get('isSetup') != 'true'){
             abort(503,'PACE Points has not been setup. Please run the setup command');
         }
 

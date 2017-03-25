@@ -3,12 +3,10 @@
 namespace App\Console;
 
 use App\Console\Commands\CheckDataIntegrity;
-use App\Console\Commands\Import\DataCache;
-use App\Console\Commands\Import\PointImport;
-use App\Console\Commands\Import\PupilImporter;
-use App\Console\Commands\Import\TeacherImport;
+use App\Console\Commands\DataCache;
 use App\Console\Commands\ResetApplication;
 use App\Console\Commands\SetupApplication;
+use App\Console\Commands\UploadData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,11 +22,9 @@ class Kernel extends ConsoleKernel
         SetupApplication::class,
         CheckDataIntegrity::class,
 
-        PupilImporter::class,
-        TeacherImport::class,
-        PointImport::class,
         DataCache::class,
 
+        UploadData::class,
 
     ];
 
