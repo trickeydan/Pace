@@ -68,7 +68,10 @@ Route::group(['middleware' => ['auth','account']],function (){
                Route::post('create','AccountController@createPost')->name('admin.administrators.create');
            });
 
-
+            Route::group(['prefix' => 'uploads'],function(){
+                Route::get('/','UploadController@index')->name('admin.uploads.index');
+                Route::get('{upload}','UploadController@view')->name('admin.uploads.view');
+            });
 
         });
 

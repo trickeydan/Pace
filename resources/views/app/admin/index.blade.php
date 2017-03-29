@@ -12,7 +12,7 @@
                         <h1 class="text-center">System Statistics</h1>
                         <ul class="list-group">
                             <li class="list-group-item"><span>Pupil uptake: x%</span></li>
-                            <li class="list-group-item"><span>Last successful upload: x/y/z</span></li>
+                            <li class="list-group-item"><span>Last successful upload: {{\App\System::lastSuccessfulUpload()}}</span></li>
                             <li class="list-group-item"><span>Time since last recorded error: 0 min</span></li>
                         </ul>
                     </div>

@@ -14,7 +14,7 @@ class Upload extends BaseModel
     const UPLOAD_FOUND_FILES = 1;
     const UPLOAD_MOVED_FILES = 2;
     const UPLOAD_CALCULATED_HASHES = 3;
-    const UPLOAD_VERIFED_HASHES = 4;
+    const UPLOAD_VERIFIED_HASHES = 4;
 
     const UPLOAD_IMPORTED_STAFF = 5;
     const UPLOAD_IMPORTED_PUPILS = 6;
@@ -32,17 +32,45 @@ class Upload extends BaseModel
     protected $fillable = ['status'];
 
     /**
-     * Upload constructor.
+     * Start Upload
      *
      * Adds a UUID to the object.
      * Sets the status to UPLOAD_START
      *
      */
-    public function __construct(){
+    public function start(){
         $this->uuid = uniqid();
         //Todo: Add check to ensure that uniqid is unique as it is not always.
         $this->save();
         $this->updateStatus(self::UPLOAD_START);
+    }
+
+    /**
+     * Get the relationship for the logs for this upload.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|UploadLog
+     */
+    public function logs(){
+        return $this->hasMany('App\Models\UploadLog');
+    }
+
+    /**
+     * Get a human-readable version of the upload string.
+     *
+     * @return null|string
+     */
+    public function getStatus(){
+        return self::getConstantNameFromValue($this->status);
+    }
+
+    /**
+     * Tell the framework which field to use for implicit route model binding.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 
     /**
@@ -52,15 +80,24 @@ class Upload extends BaseModel
      * @param string $message
      */
     public function updateStatus($status,$message = ''){
-        //Todo: Check if it is a valid status.
-        //Todo: Make UploadLog
+        $this->logs()->create([
+            'message' => $message,
+            'status'  => $status
+        ]);
         $this->status = $status;
         $this->save();
     }
 
+
+    /**
+     * Fail the upload.
+     *
+     * @param $message
+     *
+     * @return void
+     */
     public function fail($message){
         $this->updateStatus(self::UPLOAD_ERROR,$message);
-
     }
 
     /**
@@ -141,6 +178,8 @@ class Upload extends BaseModel
     }
 
     /**
+     * Import pupil data from the file
+     *
      * @param UploadData $command
      */
     public function importPupils($command){
@@ -178,6 +217,8 @@ class Upload extends BaseModel
     }
 
     /**
+     * Import point data from the file
+     *
      * @param UploadData $command
      */
     public function importPoints($command){

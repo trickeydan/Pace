@@ -42,6 +42,7 @@ class UploadData extends PaceCommand
     {
         //Todo: Check to see if the system has been setup
         $this->upload = new Upload();
+        $this->upload->start();
         $this->info('Upload ID: ' . $this->upload->uuid);
 
         if(!File::exists(storage_path('data/upload/pupils.csv')) ||
@@ -69,7 +70,11 @@ class UploadData extends PaceCommand
             $this->warn('This data has been imported before.');
             $answer = $this->ask('Do you wish to continue? (yes/no)','no');
             if($answer != 'yes') $this->failUpload('This is a repeat upload.');
+            $this->upload->updateStatus(Upload::UPLOAD_VERIFIED_HASHES,'Manually overrided.');
+        }else{
+            $this->upload->updateStatus(Upload::UPLOAD_VERIFIED_HASHES);
         }
+
 
         $this->upload->importStaff($this);
         $this->upload->updateStatus(Upload::UPLOAD_IMPORTED_STAFF);

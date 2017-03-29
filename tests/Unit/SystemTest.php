@@ -43,17 +43,6 @@ class SystemTest extends TestCase
     }
 
     /**
-     * Test the upload logger
-     *
-     * Todo: Update with proper logging
-     *
-     * @return void
-     */
-    public function testUpload(){
-        $this->assertTrue(System::upload());
-    }
-
-    /**
      * Test the security logger
      *
      * Todo: Update with proper logging
