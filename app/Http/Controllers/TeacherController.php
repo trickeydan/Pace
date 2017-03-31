@@ -73,7 +73,7 @@ class TeacherController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
         //$user->notify(new PasswordChanged());
-        System::info();//Password changed
+        //Todo: Add to log.
         //Todo: Notify Teacher of Password Change.
         $request->session()->flash('setup','yes');
         return redirect(route('teacher.setup.two')); //Redirect to stage two.

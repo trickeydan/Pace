@@ -101,11 +101,10 @@ class PupilTest extends TestCase
     /**
      * Check that points this week
      *
-     * Todo: Change when implemented.
      * @return void
      */
     public function testPointsThisWeek(){
-        $this->assertEquals($this->pupil->pointsThisWeek(),1);
+        $this->assertEquals($this->pupil->pointsThisWeek(),0);
     }
 
     /**

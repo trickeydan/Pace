@@ -94,7 +94,6 @@ class PupilPoint extends BaseModel
         }
 
         if(Teacher::whereName($row[5])->count() == 0){
-            System::warn();
             //$skip = true;
             $teacher = Teacher::createFromData([$row[5],'',''],false);
         }else{
@@ -102,7 +101,6 @@ class PupilPoint extends BaseModel
         }
 
         if(Pupil::whereAdno($row[0])->count() == 0){
-            System::warn();
             $skip = true;
         }else{
             $pupil = Pupil::whereAdno($row[0])->first();

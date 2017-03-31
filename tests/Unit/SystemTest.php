@@ -10,79 +10,14 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class SystemTest extends TestCase
 {
     /**
-     * Test the info logger
-     *
-     * Todo: Update with proper logging
-     *
-     * @return void
-     */
-    public function testInfo(){
-        $this->assertTrue(System::info());
-    }
-
-    /**
-     * Test the warn logger
-     *
-     * Todo: Update with proper logging
-     *
-     * @return void
-     */
-    public function testWarn(){
-        $this->assertTrue(System::warn());
-    }
-
-    /**
-     * Test the fatal logger
-     *
-     * Todo: Update with proper logging
-     *
-     * @return void
-     */
-    public function testFatal(){
-        $this->assertTrue(System::fatal());
-    }
-
-    /**
-     * Test the security logger
-     *
-     * Todo: Update with proper logging
-     *
-     * @return void
-     */
-    public function testSecurity(){
-        $this->assertTrue(System::security());
-    }
-
-    /**
-     * Test the success logger
-     *
-     * Todo: Update with proper logging
-     *
-     * @return void
-     */
-    public function testSuccess(){
-        $this->assertTrue(System::success());
-    }
-
-    /**
-     * Test the report logger
-     *
-     * Todo: Update with proper logging
-     *
-     * @return void
-     */
-    public function testReport(){
-        $this->assertTrue(System::report());
-    }
-
-    /**
      * Test the last updated function
      *
      * @return void
      */
     public function testLastUpdated(){
-        //Todo: Update this when function is done
-        $this->assertEquals('30/1/80',System::lastUpdated());
+        //Todo: Make a better test
+        $this->assertNotEquals('30/1/80',System::lastUpdated());
+        $this->assertNotNull(System::lastUpdated());
     }
 
     /**

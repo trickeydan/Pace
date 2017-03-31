@@ -31,7 +31,6 @@ class PasswordController extends Controller
         $user->password = bcrypt($request->password);
         $res = $user->save();
         if(!$res) {
-            System::fatal();
             return redirect(route('admin.settings.password'))->withErrors(['An error occurred.']);
         }
 

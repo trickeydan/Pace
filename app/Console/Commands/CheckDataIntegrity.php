@@ -64,7 +64,6 @@ class CheckDataIntegrity extends PaceCommand
             $this->info('No problems found.');
         }else{
             $this->warn('Found ' . count($found) . ' issues.');
-            System::warn();
             //Todo save issues somewhere.
         }
         $this->callSilent('up');

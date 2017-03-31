@@ -135,14 +135,12 @@ class Pupil extends Account
             if(substr($row[0],0,2) == "00"){
                 $adno = substr($row[0],2,4);
             }else{
-                System::warn();
                 return false;
             }
 
         }elseif(strlen($row[0]) == 4){
             $adno = $row[0];
         }else{
-            System::warn();
             return false;
         }
 

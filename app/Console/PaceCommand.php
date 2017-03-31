@@ -40,7 +40,6 @@ class PaceCommand extends Command
         $attempt = $this->secret('Please provide the general system password to continue.');
         if(!System::checkGeneralSystemPassword($attempt)){
             $this->error('Incorrect general system password');
-            System::security();//Incorrect password
             exit();
         }
     }

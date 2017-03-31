@@ -34,7 +34,7 @@ class Handler extends ExceptionHandler
     public function report(Exception $exception)
     {
         if($exception instanceof PaceException){
-            System::report();
+
         }
 
         parent::report($exception);

@@ -102,7 +102,6 @@ abstract class Account extends BaseModel
      * @return mixed
      */
     public function getPasswordToEmail(){
-        System::warn();
         return 'not available. Please contact system administrator.';
     }
 
