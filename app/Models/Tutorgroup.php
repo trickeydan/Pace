@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Exceptions\PaceException;
 use App\System;
+use Carbon\Carbon;
 
 class Tutorgroup extends BaseModel
 {
@@ -56,13 +57,21 @@ class Tutorgroup extends BaseModel
     }
 
     /**
+     * Get the points that the pupils in this tutorgroup have.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function points(){
+        return $this->hasManyThrough('App\Models\PupilPoint','App\Models\Pupil');
+    }
+
+    /**
      * Get the number of points obtained this week.
      *
      * @return int
      */
     public function pointsThisWeek(){
-        //Todo: Add query to do this.
-        return 1;
+        return $this->points()->where('date','>',Carbon::today()->subWeek())->sum('amount');
     }
 
     /**
@@ -71,8 +80,7 @@ class Tutorgroup extends BaseModel
      * @return int
      */
     public function getPosition(){
-        //Todo: Add this
-        return 1;
+       return $this->year->tutorgroups()->where('currPoints','>=',$this->currPoints)->count();
     }
 
     /**

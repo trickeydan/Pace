@@ -18,6 +18,7 @@
                     <ul class="list-group">
                         <li class="list-group-item"><span>Name: {{$pupil->getName()}}</span></li>
                         <li class="list-group-item"><span>Tutorgroup: {{$pupil->tutorgroup}}</span></li>
+                        <li class="list-group-item"><span>Email Address: {{$pupil->user->email}}</span></li>
                         <li class="list-group-item"><span>House: {{$pupil->tutorgroup->house}}</span></li>
                     </ul>
                 </div>

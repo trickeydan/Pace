@@ -7,23 +7,10 @@
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <div class="well">
-                        <h1 class="text-center">Statistics</h1>
-                        <ul class="list-group">
-                            <li class="list-group-item"><span>Not Implemented</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="well">
-                        <h1>Nothing here</h1>
-                    </div>
-                </div>
                 <div class="col-md-12">
                     <div class="well">
                         <h1 class="text-center">Competitions</h1>
-                        <p>NOT IMPLEMENTED</p>
+                        <p>This feature is not yet implemented.</p>
                     </div>
                 </div>
             </div>

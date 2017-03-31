@@ -6,27 +6,23 @@
         <h1 class="text-center">{{$pupil->tutorgroup}}</h1></div>
     <div>
         <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="well">
-                        <h1 class="text-center">Statistics</h1>
-                        <ul class="list-group">
-                            <li class="list-group-item"><span>Total number of points: {{$pupil->tutorgroup->currPoints}}</span></li>
-                            <li class="list-group-item"><span>Number of points this week: {{$pupil->tutorgroup->pointsThisWeek()}}</span></li>
-                            <li class="list-group-item"><span>Position in year: {{$pupil->tutorgroup->getOrdinalPosition()}}</span></li>
-                        </ul>
-                    </div>
+            <div class="row well">
+                <div class="col-md-6">
+                    <h1 class="text-center">Statistics</h1>
+                    <ul class="list-group">
+                        <li class="list-group-item"><span>Total number of points: {{$pupil->tutorgroup->currPoints}}</span></li>
+                        <li class="list-group-item"><span>Number of points this week: {{$pupil->tutorgroup->pointsThisWeek()}}</span></li>
+                        <li class="list-group-item"><span>Position in year: {{$pupil->tutorgroup->getOrdinalPosition()}}</span></li>
+                    </ul>
                 </div>
-                <div class="col-md-4">
-                    <div class="well">
-                        <div id="tg_chart"></div>
-                    </div>
+                <div class="col-md-6">
+                    <div id="tg_chart"></div>
                 </div>
+            </div>
+            <div class="row well">
                 <div class="col-md-12">
-                    <div class="well">
-                        <h1 class="text-center">Competitions</h1>
-                        <p>NOT IMPLEMENTED</p>
-                    </div>
+                    <h1 class="text-center">Competitions</h1>
+                    <p>This feature is not yet implemented.</p>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ namespace App;
 
 use App\Models\Configuration;
 use App\Models\Upload;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class System
@@ -33,14 +34,13 @@ class System
      * @return string
      */
     public static function lastUpdated(){
-        //Todo: Make this work using Uploads table
-        return '30/1/80';
+        return self::lastSuccessfulUpload()->diffForHumans();
     }
 
     /**
      * Get the time of the last successful upload.
      *
-     * @return string
+     * @return Carbon
      */
     public static function lastSuccessfulUpload(){
         return Upload::whereStatus(Upload::UPLOAD_SUCCESSFUL)->orderBy('created_at','DESC')->first()->created_at;

@@ -112,6 +112,7 @@ abstract class Account extends BaseModel
      *
      * @param $email
      * @param $password
+     * @parm $bool
      *
      * @return User
      */

@@ -5,6 +5,7 @@ namespace App\Models;
 
 use App\Exceptions\PaceException;
 use App\System;
+use Carbon\Carbon;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 class Pupil extends Account
@@ -74,8 +75,7 @@ class Pupil extends Account
      * @return int
      */
     public function pointsThisWeek(){
-        //Todo: Add query to do this.
-        return 1;
+        return $this->points()->where('date','>',Carbon::today()->subWeek())->sum('amount');
     }
 
     /**

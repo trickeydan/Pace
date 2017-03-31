@@ -37,6 +37,6 @@
         <nav class="text-center">
             {{$points->links()}}
         </nav>
-        <p class="text-muted text-center small">Last Updated on {{\App\System::lastUpdated()}}</p>
+        <p class="text-muted text-center small">Last Updated {{\App\System::lastUpdated()}}</p>
     </div>
 </div>
