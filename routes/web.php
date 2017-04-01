@@ -53,6 +53,31 @@ Route::group(['middleware' => ['auth','account']],function (){
         Route::get('teachers', 'TeacherController@index')->name('admin.teachers.index');
         Route::get('teachers/{teacher}', 'TeacherController@view')->name('admin.teachers.view');
 
+        Route::group(['prefix' => 'competitions','namespace' => 'Competitions'],function(){
+            Route::get('','CompetitionController@index')->name('admin.competitions.index');
+
+            Route::get('create','CompetitionController@create')->name('admin.competitions.create');
+            Route::post('','CompetitionController@store')->name('admin.competitions.store');
+
+            Route::get('{competition}','CompetitionController@show')->name('admin.competitions.show');
+
+            Route::get('{competition}/edit','CompetitionController@edit')->name('admin.competitions.edit');
+            Route::put('{competition}','CompetitionController@update')->name('admin.competitions.update');
+
+            Route::get('{competition}/delete','CompetitionController@delete')->name('admin.competitions.delete');
+
+            // Events
+
+            Route::group(['prefix' => '{competition}/events'],function(){
+
+               Route::get('',function(\App\Models\Competitions\Competition $comp){
+                  return redirect(route('admin.competitions.show',$comp->id));
+               });
+
+
+            });
+        });
+
         Route::group(['prefix' => 'settings'],function(){
            Route::get('status','SettingsController@status')->name('admin.settings.status');
 

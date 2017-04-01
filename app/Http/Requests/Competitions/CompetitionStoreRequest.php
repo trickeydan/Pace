@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Http\Requests\Competitions;
+
+use App\Models\Competitions\Competition;
+use Illuminate\Foundation\Http\FormRequest;
+
+class CompetitionStoreRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        $keys = array_keys(Competition::getValidContestants());
+        return [
+            'title' => 'required|min:5|unique:competitions,title',
+            'contestable_type' => 'required|in:' . implode(',',$keys),
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'A title is required',
+            'body.required'  => 'A message is required',
+        ];
+    }
+}

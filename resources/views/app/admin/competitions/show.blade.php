@@ -1,0 +1,74 @@
+@extends('app.layouts.app')
+
+@section('title','Competition: ' . $competition->title)
+@section('content')
+    <div class="container">
+        <h1 class="text-center">Competition: {{$competition->title}}</h1>
+        <p><a href="{{route('admin.competitions.index')}}">Back to competitions</a></p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well">
+                    <h1 class="text-center">Details</h1>
+                    <ul class="list-group">
+                        <li class="list-group-item"><span>Title: {{$competition->title}}</span></li>
+                        <li class="list-group-item"><span>Contestant Type: {{$competition->contestantTypeHuman()}}</span></li>
+                       {{-- @foreach($competition->contestants as $contestant)
+                            <li class="list-group-item"><span>{{$contestant}}</span></li>
+                        @endforeach--}}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="well">
+                    <h1 class="text-center">Actions</h1>
+                    <ul class="list-group">
+                        <li class="list-group-item disabled"><span>Add new event</span></li>
+                        <a href="{{route('admin.competitions.edit',$competition)}}"><li class="list-group-item"><span>Edit</span></li></a>
+                        <a href="{{route('admin.competitions.delete',$competition)}}"><li class="list-group-item"><span>Delete</span></li></a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="well">
+            <h1 class="text-center">Events</h1>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Winner</th>
+                        <th>Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if($events->count() > 0)
+                        @foreach($events as $event)
+                            <tr>
+                                <td>{{$event->title}}</td>
+                                <td>{{$log->getWinnerHuman()}}</td>
+                                <td>View Edit Delete</td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td>
+                                <p>There are no events.</p>
+                            </td>
+                        </tr>
+
+                    @endif
+                    </tbody>
+                </table>
+            </div>
+            <nav class="text-center">
+                {{$events->links()}}
+            </nav>
+        </div>
+    </div>
+
+@endsection
