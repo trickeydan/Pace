@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Competitions;
 
 use App\Http\Requests\Competitions\CompetitionStoreRequest;
 use App\Http\Requests\Competitions\CompetitionUpdateRequest;
+use App\Http\Requests\Competitions\CreateFormTwoRequest;
 use App\Models\Competitions\Competition;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -30,6 +31,11 @@ class CompetitionController extends Controller
         return view('app.admin.competitions.create',compact('types'));
     }
 
+    public function createTwo(CreateFormTwoRequest $request){
+        $list = call_user_func([$request->contestable_type,'getContestantList']); //We can do this because it is already validated.
+        return view('app.admin.competitions.createTwo',compact('request','list'));
+    }
+
     /**
      * Store the information in the request as a new competition.
      *
@@ -37,7 +43,28 @@ class CompetitionController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CompetitionStoreRequest $request){
+        $contestantArray = []; //Store valid contestants in here
+
+        //Validation of Contestant data.
+        for($i = 1; $i <= $request->contestant_amount;$i++){
+            if(!$request->has('contestant' . $i)){
+                return redirect(route('admin.competitions.create'))->withErrors('Please submit data for all contestants.');
+            }
+
+            $contestantQuery = call_user_func([$request->contestable_type,'find'],$request->get('contestant' . $i));
+            if(is_null($contestantQuery)){ //If it doesn't exist.
+                return redirect(route('admin.competitions.create'))->withErrors('Unable to find all contestants. Please try again.');
+            }
+            if(in_array($contestantQuery,$contestantArray)){
+                return redirect(route('admin.competitions.create'))->withErrors('You cannot have duplicated contestants.');
+            }
+            $contestantArray[count($contestantArray)] = $contestantQuery;
+        }
         $competition = Competition::create($request->all());
+
+        foreach($contestantArray as $contestant){
+            $competition->contestants()->attach($contestant);
+        }
         return redirect(route('admin.competitions.show',$competition->id));
     }
 
@@ -62,6 +89,13 @@ class CompetitionController extends Controller
         return view('app.admin.competitions.edit',compact('competition'));
     }
 
+    /**
+     * Update the title of the competition.
+     *
+     * @param CompetitionUpdateRequest $request
+     * @param Competition $competition
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function update(CompetitionUpdateRequest $request,Competition $competition){
         $competition->title = $request->title;
         if(!$competition->save()) return back()->withErrors('Couldn\'t update competition');

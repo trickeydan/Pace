@@ -2,18 +2,17 @@
 
 namespace App\Http\Requests\Competitions;
 
-use App\Models\Competitions\Competition;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
+use App\Models\Competitions\Competition;
 
-class CompetitionStoreRequest extends FormRequest
+class CreateFormTwoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize(Request $request)
+    public function authorize()
     {
         return true;
     }
@@ -33,11 +32,17 @@ class CompetitionStoreRequest extends FormRequest
         ];
     }
 
+    /**
+     * Get the messages to displau
+     *
+     * @return array
+     */
     public function messages()
     {
         return [
             'title.required' => 'A title is required',
-            'body.required'  => 'A message is required',
+            'contestable_type.required'  => 'Please provide a competition type.',
+            'contestable_type.in'  => 'Please provide a valid competition type.',
         ];
     }
 }

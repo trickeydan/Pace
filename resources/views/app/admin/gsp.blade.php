@@ -6,7 +6,7 @@
         <h1 class="text-center">General System Password</h1>
     </div>
     <div class="container">
-        <p class="text-center">You must provide the general system password to do the following action: {{session('actionname')}}<br/>All actions are logged.</p>
+        <p class="text-center">You must provide the general system password to do the following action: {{session('actionname') or 'Unknown Action'}}<br/>All actions are logged.</p>
         <div class="well">
             {!! Form::open(['role' => 'form', 'method' => 'post']) !!}
             @if (count($errors) > 0)

@@ -26,7 +26,9 @@ class PupilController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function tutorgroup(){
-        return view('app.pupils.tutorgroup');
+        $user  = Auth::User();
+        $competitions = $user->accountable->tutorgroup->competitions()->paginate(15);
+        return view('app.pupils.tutorgroup',compact('competitions'));
     }
 
     /**

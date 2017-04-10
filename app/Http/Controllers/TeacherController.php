@@ -90,15 +90,7 @@ class TeacherController extends Controller
         if(session('setup') != 'yes') return redirect(route('teacher.setup'));
         //Todo: This check can be forged. Change to something more secure.
 
-        $tutorgroups = [];
-
-        foreach (Year::orderBy('name')->get() as $year){
-            $group = [];
-            foreach($year->tutorgroups()->orderBy('name')->get() as $tg){
-                $group[$tg->id] = $tg->name;
-            }
-            $tutorgroups[$year->name] = $group;
-        }
+        $tutorgroups = Tutorgroup::getContestantList();
 
         return view('app.teachers.setup.two',compact('tutorgroups'));
     }

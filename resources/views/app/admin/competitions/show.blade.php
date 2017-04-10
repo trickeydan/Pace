@@ -15,9 +15,13 @@
                     <ul class="list-group">
                         <li class="list-group-item"><span>Title: {{$competition->title}}</span></li>
                         <li class="list-group-item"><span>Contestant Type: {{$competition->contestantTypeHuman()}}</span></li>
-                       {{-- @foreach($competition->contestants as $contestant)
-                            <li class="list-group-item"><span>{{$contestant}}</span></li>
-                        @endforeach--}}
+                        @if($competition->contestants()->count() > 0)
+                            @foreach($competition->contestants as $contestant)
+                                <li class="list-group-item"><span>{{$loop->iteration}}: {{$contestant}}</span></li>
+                            @endforeach
+                        @else
+                            <li class="list-group-item"><span>No contestants have been added yet.</span></li>
+                        @endif
                     </ul>
                 </div>
             </div>

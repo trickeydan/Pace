@@ -31,9 +31,40 @@ class Competition extends Model
         return self::getValidContestants()[$this->contestable_type];
     }
 
+
+    /**
+     * Get the relationship for the contestants, regardless of the type.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
     public function contestants(){
-        return ['N/I'];
+        if($this->contestable_type == Tutorgroup::class){
+            return $this->tutorgroups();
+        }else{
+            return $this->houses();
+        }
     }
+
+    /**
+     * The polymorphic relationship to Tutorgroups
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function tutorgroups(){
+        return $this->morphedByMany('App\Models\Tutorgroup','contestable');
+    }
+
+    /**
+     * The polymorphic relationship to houses
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function houses(){
+        return $this->morphedByMany('App\Models\House','contestable');
+    }
+
+
+
 
     /**
      * Get the events in this competition.
@@ -42,5 +73,14 @@ class Competition extends Model
      */
     public function events(){
         return $this->hasMany('App\Models\Competitions\Event');
+    }
+
+    /**
+     * Get the current winner
+     *
+     * @return string
+     */
+    public function currentWinner(){
+        return 'N/I';
     }
 }

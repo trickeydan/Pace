@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Competitions\Contestant;
 use Illuminate\Database\Eloquent\Model;
 
-class House extends BaseModel
+class House extends Contestant
 {
     /*
      * Fields in this model:
@@ -33,5 +34,19 @@ class House extends BaseModel
      */
     public function tutorgroups(){
         return $this->hasMany('App\Models\Tutorgroup');
+    }
+
+    /**
+     * Get a list of houses for use in contestant form.
+     *
+     * @return array
+     */
+    public static function getContestantList(){
+        $tutorgroups = [];
+
+        foreach (self::all() as $house){
+            $tutorgroups[$house->id] = $house->name;
+        }
+        return $tutorgroups;
     }
 }

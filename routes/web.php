@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth','account']],function (){
             Route::get('','CompetitionController@index')->name('admin.competitions.index');
 
             Route::get('create','CompetitionController@create')->name('admin.competitions.create');
+            Route::post('create/2','CompetitionController@createTwo')->name('admin.competitions.create.two');
             Route::post('','CompetitionController@store')->name('admin.competitions.store');
 
             Route::get('{competition}','CompetitionController@show')->name('admin.competitions.show');
@@ -68,14 +69,6 @@ Route::group(['middleware' => ['auth','account']],function (){
 
             // Events
 
-            Route::group(['prefix' => '{competition}/events'],function(){
-
-               Route::get('',function(\App\Models\Competitions\Competition $comp){
-                  return redirect(route('admin.competitions.show',$comp->id));
-               });
-
-
-            });
         });
 
         Route::group(['prefix' => 'settings'],function(){

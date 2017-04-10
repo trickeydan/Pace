@@ -22,7 +22,42 @@
             <div class="row well">
                 <div class="col-md-12">
                     <h1 class="text-center">Competitions</h1>
-                    <p>This feature is not yet implemented.</p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Current Winner</th>
+                                <th>Number of Events</th>
+                                <th>Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if($competitions->count() > 0)
+                                @foreach($competitions as $comp)
+                                    <tr>
+                                        <td>{{$comp->title}}</td>
+                                        <td>{{$comp->currentWinner()}}</td>
+                                        <td>{{$comp->events()->count()}}</td>
+                                        <td>
+                                            <a href="#">View</a>&nbsp;
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td>
+                                        <p>There are no competitions.</p>
+                                    </td>
+                                </tr>
+
+                            @endif
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav class="text-center">
+                        {{$competitions->links()}}
+                    </nav>
                 </div>
             </div>
         </div>

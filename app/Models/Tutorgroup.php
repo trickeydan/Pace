@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Competitions\Contestant;
 use Illuminate\Database\Eloquent\Model;
 use App\Exceptions\PaceException;
 use App\System;
 use Carbon\Carbon;
 
-class Tutorgroup extends BaseModel
+class Tutorgroup extends Contestant
 {
     /*
      * Fields in this model:
@@ -145,5 +146,23 @@ class Tutorgroup extends BaseModel
         $tg->save();
         //Todo: Check if saved.
         return $tg;
+    }
+
+    /**
+     * Get a list of tutorgroups for use in contestant form.
+     *
+     * @return array
+     */
+    public static function getContestantList(){
+        $tutorgroups = [];
+
+        foreach (Year::orderBy('name')->get() as $year){
+            $group = [];
+            foreach($year->tutorgroups()->orderBy('name')->get() as $tg){
+                $group[$tg->id] = $tg->name;
+            }
+            $tutorgroups[$year->name] = $group;
+        }
+        return $tutorgroups;
     }
 }

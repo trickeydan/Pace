@@ -9,7 +9,7 @@
         <div class="well">
             <a href="{{route('admin.competitions.index')}}">Back to Competitions</a>
             <p>Please enter the details for the new competition</p>
-            {!! Form::open(['role' => 'form', 'method' => 'post','route' => 'admin.competitions.store']) !!}
+            {!! Form::open(['role' => 'form', 'method' => 'post','route' => 'admin.competitions.create.two']) !!}
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>
@@ -27,8 +27,18 @@
                 {!! Form::label('contestable_type', 'Contestant Type') !!}
                 {!! Form::select('contestable_type',$types,['class' => 'form-control']) !!}
             </div>
+            <div class="form-group">
+                {!! Form::label('contestant_amount', 'Number of Contestants') !!}
+                {!! Form::number('contestant_amount',4,[
+                    'class' => 'form-control',
+                    'id'=> 'numbercontestants',
+                    'min' => '1',
+                    'max' => '20',
+                    'step' => '1',
+                ]) !!}
+            </div>
 
-            {!! Form::submit('Create Competition',['class' => 'btn btn-success']) !!}
+            {!! Form::submit('Next Step',['class' => 'btn btn-success']) !!}
 
 
             {!! Form::close() !!}
