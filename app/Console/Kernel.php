@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\CheckDataIntegrity;
 use App\Console\Commands\DataCache;
+use App\Console\Commands\GenerateTutorgroupCompetitions;
 use App\Console\Commands\ResetApplication;
 use App\Console\Commands\SetupApplication;
 use App\Console\Commands\UploadData;
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
         DataCache::class,
 
         UploadData::class,
+        GenerateTutorgroupCompetitions::class,
 
     ];
 
