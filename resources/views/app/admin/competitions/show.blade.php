@@ -29,7 +29,7 @@
                 <div class="well">
                     <h1 class="text-center">Actions</h1>
                     <ul class="list-group">
-                        <li class="list-group-item disabled"><span>Add new event</span></li>
+                        <a href="{{route('admin.competitions.events.create',$competition)}}"><li class="list-group-item"><span>Add new event</span></li></a>
                         <a href="{{route('admin.competitions.edit',$competition)}}"><li class="list-group-item"><span>Edit</span></li></a>
                         <a href="{{route('admin.competitions.delete',$competition)}}"><li class="list-group-item"><span>Delete</span></li></a>
                     </ul>
@@ -54,8 +54,11 @@
                         @foreach($events as $event)
                             <tr>
                                 <td>{{$event->title}}</td>
-                                <td>{{$log->getWinnerHuman()}}</td>
-                                <td>View Edit Delete</td>
+                                <td>{{$event->getWinnerHuman()}}</td>
+                                <td><a href="{{route('admin.competitions.events.show',[$competition,$event])}}">View</a>
+                                    Edit
+                                    <a href="{{route('admin.competitions.events.delete',[$competition,$event])}}">Delete</a>
+                                </td>
                             </tr>
                         @endforeach
                     @else

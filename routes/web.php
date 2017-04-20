@@ -69,6 +69,11 @@ Route::group(['middleware' => ['auth','account']],function (){
 
             // Events
 
+            Route::get('{competition}/events/create','EventController@create')->name('admin.competitions.events.create');
+            Route::post('{competition}/events/create','EventController@store')->name('admin.competitions.events.create');
+            Route::get('{competition}/events/{event}','EventController@show')->name('admin.competitions.events.show');
+            Route::get('{competition}/events/{event}/delete','EventController@delete')->name('admin.competitions.events.delete');
+
         });
 
         Route::group(['prefix' => 'settings'],function(){

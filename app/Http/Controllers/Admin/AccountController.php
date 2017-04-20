@@ -84,7 +84,7 @@ class AccountController extends Controller
     public function createPost(CreateAdministratorRequest $request){
         $admin = Administrator::create($request->all());
         $password = str_random(8);
-        $admin->makeUser($request->name,$password);
+        $admin->makeUser($request->email,$password);
 
         $admin->user->notify(new AdminNewAccount($password));
 

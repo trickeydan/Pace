@@ -18,5 +18,6 @@ return [
     'sent' => 'We have e-mailed your password!',
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that e-mail address.",
+    'notpupil' => 'Only pupils can use this utility. Please contact the system administrator.'
 
 ];

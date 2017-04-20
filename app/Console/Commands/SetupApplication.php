@@ -97,11 +97,12 @@ class SetupApplication extends PaceCommand
 
         $this->info('Houses created.');
 
+        $this->info('Opening the system to web access.');
+        Configuration::set('isSetup','true');
+
         $this->info('Uploading Data');
         $this->call('pace:upload');
 
-        $this->info('Opening the system to web access.');
-        Configuration::set('isSetup','true');
         $this->info('Setup is now complete.');
     }
 }

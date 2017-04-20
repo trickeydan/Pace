@@ -56,9 +56,8 @@ class ForgotPasswordController extends Controller
         // "flash" data in the session to indicate to the developers the errors.
         $user = $this->broker()->getUser($credentials);
 
-        //Todo: Remove loading accountable to reduce SQL load.
         if (is_null($user) || $user->accountable_type != Account::PUPIL) {
-            return Password::INVALID_USER;
+            return 'passwords.notpupil';
         }
 
         // Once we have the reset token, we are ready to send the message out to this

@@ -64,8 +64,6 @@ class Competition extends Model
     }
 
 
-
-
     /**
      * Get the events in this competition.
      *
@@ -82,5 +80,11 @@ class Competition extends Model
      */
     public function currentWinner(){
         return 'N/I';
+    }
+
+    public function delete()
+    {
+        $this->events()->delete();
+        return parent::delete();
     }
 }

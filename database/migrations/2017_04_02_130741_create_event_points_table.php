@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContestablesTable extends Migration
+class CreateEventPointsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateContestablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('contestables', function (Blueprint $table) {
+        Schema::create('event_points', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('competition_id');
+            $table->integer('event_id');
+            $table->integer('amount');
             $table->string('contestable_type');
             $table->integer('contestable_id');
             $table->timestamps();
@@ -29,6 +30,6 @@ class CreateContestablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contestables');
+        Schema::dropIfExists('event_points');
     }
 }

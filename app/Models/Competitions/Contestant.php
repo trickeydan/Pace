@@ -15,4 +15,13 @@ abstract class Contestant extends BaseModel
     public function competitions(){
         return $this->morphToMany('App\Models\Competitions\Competition','contestable');
     }
+
+    /**
+     * Get the relationship between the contestant and their event points.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function eventPoints(){
+        return $this->morphMany('App\Models\Competitions\EventPoint', 'contestable');
+    }
 }

@@ -69,7 +69,7 @@ class UploadData extends PaceCommand
         if(!$hashes_unique) {
             $this->warn('This data has been imported before.');
             $answer = $this->ask('Do you wish to continue? (yes/no)','no');
-            if($answer != 'yes') $this->failUpload('This is a repeat upload.');
+            if($answer != 'yes') $this->failUpload('This data has been uploaded before.');
             $this->upload->updateStatus(Upload::UPLOAD_VERIFIED_HASHES,'Manually overrided.');
         }else{
             $this->upload->updateStatus(Upload::UPLOAD_VERIFIED_HASHES);
