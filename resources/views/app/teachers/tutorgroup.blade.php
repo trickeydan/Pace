@@ -1,9 +1,9 @@
 @extends('app.layouts.app')
 
-@section('title',$pupil->tutorgroup)
+@section('title',$tutorgroup)
 @section('content')
     <div class="container">
-        <h1 class="text-center">{{$pupil->tutorgroup}}</h1>
+        <h1 class="text-center">{{$tutorgroup}}</h1>
     </div>
     <div>
         <div class="container">
@@ -11,9 +11,9 @@
                 <div class="col-md-6">
                     <h1 class="text-center">Statistics</h1>
                     <ul class="list-group">
-                        <li class="list-group-item"><span>Total number of points: {{$pupil->tutorgroup->currPoints}}</span></li>
-                        <li class="list-group-item"><span>Number of points this week: {{$pupil->tutorgroup->pointsThisWeek()}}</span></li>
-                        <li class="list-group-item"><span>Position in year: {{$pupil->tutorgroup->getOrdinalPosition()}}</span></li>
+                        <li class="list-group-item"><span>Total number of points: {{$tutorgroup->currPoints}}</span></li>
+                        <li class="list-group-item"><span>Number of points this week: {{$tutorgroup->pointsThisWeek()}}</span></li>
+                        <li class="list-group-item"><span>Position in year: {{$tutorgroup->getOrdinalPosition()}}</span></li>
                     </ul>
                 </div>
                 <div class="col-md-6">
@@ -41,7 +41,7 @@
                                         <td>{{$comp->getWinnerHuman()}}</td>
                                         <td>{{$comp->events()->count()}}</td>
                                         <td>
-                                            <a href="{{route('pupil.competition',$comp)}}">View</a>&nbsp;
+                                            <a href="{{route('teacher.competition',$comp)}}">View</a>&nbsp;
                                         </td>
                                     </tr>
                                 @endforeach
@@ -73,11 +73,11 @@
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                        ["House", "Points", { role: "style" } ],
-                        @foreach($pupil->tutorgroup->year->tutorgroups()->orderBy('house_id')->orderBy('name')->get() as $tg)
-                            ["{{$tg->name}}",{{$tg->currPoints}}, "{{$tg->house->colour}}"],
-                        @endforeach
-                    ]);
+                ["House", "Points", { role: "style" } ],
+                    @foreach($tutorgroup->year->tutorgroups()->orderBy('house_id')->orderBy('name')->get() as $tg)
+                ["{{$tg->name}}",{{$tg->currPoints}}, "{{$tg->house->colour}}"],
+                @endforeach
+            ]);
 
             var view = new google.visualization.DataView(data);
             view.setColumns([0, 1,
@@ -88,7 +88,7 @@
                 2]);
 
             var options = {
-                title: "Points By Tutor Group: {{$pupil->tutorgroup->year->name}}",
+                title: "Points By Tutor Group: {{$tutorgroup->year->name}}",
                 height: 400,
                 bar: {groupWidth: "95%"},
                 legend: { position: "none" },

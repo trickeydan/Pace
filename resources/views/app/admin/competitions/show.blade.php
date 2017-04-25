@@ -15,10 +15,13 @@
                     <ul class="list-group">
                         <li class="list-group-item"><span>Title: {{$competition->title}}</span></li>
                         <li class="list-group-item"><span>Contestant Type: {{$competition->contestantTypeHuman()}}</span></li>
+                        <li class="list-group-item"><span>Current Winner: {{$competition->getWinnerHuman()}}</span></li>
                         @if($competition->contestants()->count() > 0)
-                            @foreach($competition->contestants as $contestant)
-                                <li class="list-group-item"><span>{{$loop->iteration}}: {{$contestant}}</span></li>
-                            @endforeach
+                            <li class="list-group-item">
+                                @foreach($competition->contestants as $contestant)
+                                    <span>{{$contestant}}</span>
+                                @endforeach
+                            </li>
                         @else
                             <li class="list-group-item"><span>No contestants have been added yet.</span></li>
                         @endif
@@ -56,7 +59,6 @@
                                 <td>{{$event->title}}</td>
                                 <td>{{$event->getWinnerHuman()}}</td>
                                 <td><a href="{{route('admin.competitions.events.show',[$competition,$event])}}">View</a>
-                                    Edit
                                     <a href="{{route('admin.competitions.events.delete',[$competition,$event])}}">Delete</a>
                                 </td>
                             </tr>

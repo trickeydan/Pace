@@ -26,11 +26,24 @@ class Event extends Model
     }
 
     /**
+     * Get the winner of this event.
+     *
+     * @return Contestant
+     */
+    public function getWinner(){
+        $top = $this->eventPoints()->orderBy('amount','DESC')->first();
+        if($this->eventPoints()->whereAmount($top->amount)->count() > 1) return false;
+        return $top->contestable;
+    }
+
+    /**
      * Get a human representation of the current winner.
      *
      * @return string
      */
     public function getWinnerHuman(){
-        return 'N/I';
+        $winner = $this->getWinner();
+        if($winner === false) return "Draw";
+        return $winner->name;
     }
 }

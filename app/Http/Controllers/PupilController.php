@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Competitions\Competition;
+use App\Models\Competitions\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,11 +34,35 @@ class PupilController extends Controller
     }
 
     /**
+     * View a competition.
+     *
+     * @param Competition $competition
+     * @return \Illuminate\View\View
+     */
+    public function competition(Competition $competition){
+        $events = $competition->events()->paginate(15);
+        return view('app.pupils.competition',compact('competition','events'));
+    }
+
+    /**
+     * View an event
+     *
+     * @param Competition $competition
+     * @param Event $event
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function event(Competition $competition,Event $event){
+        return view('app.pupils.event',compact('competition','event'));
+    }
+
+    /**
      * Show the pupil's house information.
      *
      * @return \Illuminate\Http\Response
      */
     public function house(){
-        return view('app.pupils.house');
+        $user  = Auth::User();
+        $competitions = $user->accountable->tutorgroup->house->competitions()->paginate(15);
+        return view('app.pupils.house',compact('competitions'));
     }
 }

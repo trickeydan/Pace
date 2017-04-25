@@ -73,15 +73,52 @@ class Competition extends Model
         return $this->hasMany('App\Models\Competitions\Event');
     }
 
+    //Todo: Add winner caching.
+
     /**
-     * Get the current winner
+     * Get the current winner of the competition.
+     *
+     * @return bool|Contestant
+     */
+    public function getWinner(){
+        if($this->events()->count() == 0) return false;
+        $contestantarray = [];
+        foreach($this->events()->get() as $event){
+            foreach ($event->eventPoints as $ep){
+                if(isset($contestantarray[$ep->contestable->id])){
+                    $contestantarray[$ep->contestable->id] += $ep->amount;
+                }else{
+                    $contestantarray[$ep->contestable->id] = $ep->amount;
+                }
+
+            }
+        }
+        arsort($contestantarray);
+        //Todo: take into account the draw scenario
+        if($this->contestable_type == Tutorgroup::class){
+            return Tutorgroup::find(each($contestantarray)[0]);
+        }else{
+            return House::find(each($contestantarray)[0]);
+        }
+
+    }
+
+    /**
+     * Get a human representation of the current winner.
      *
      * @return string
      */
-    public function currentWinner(){
-        return 'N/I';
+    public function getWinnerHuman(){
+        $winner = $this->getWinner();
+        if($winner === false) return "Draw";
+        return $winner->name;
     }
 
+    /**
+     * Delete the competition and it's events.
+     *
+     * @return bool|null
+     */
     public function delete()
     {
         $this->events()->delete();

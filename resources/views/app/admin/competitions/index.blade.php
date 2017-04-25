@@ -24,7 +24,7 @@
                             <td>{{$comp->events()->count()}}</td>
                             <td>
                                 <a href="{{route('admin.competitions.show',$comp)}}">View</a>&nbsp;
-                                <a href="{{route('admin.competitions.delete',$comp)}}">Edit</a>&nbsp;
+                                <a href="{{route('admin.competitions.edit',$comp)}}">Edit</a>&nbsp;
                                 <a href="{{route('admin.competitions.delete',$comp)}}">Delete</a>
                             </td>
                         </tr>

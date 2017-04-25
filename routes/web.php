@@ -23,12 +23,18 @@ Route::group(['middleware' => ['auth','account']],function (){
     Route::group(['middleware' => ['type:App\Models\Pupil'],'prefix' => 'pupil'],function(){
         Route::get('/', 'PupilController@index')->name('pupil.home');
         Route::get('/tutorgroup', 'PupilController@tutorgroup')->name('pupil.tutorgroup');
+        Route::get('/competition/{competition}', 'PupilController@competition')->name('pupil.competition');
+        Route::get('/competition/{competition}/events/{event}', 'PupilController@event')->name('pupil.event');
         Route::get('/house', 'PupilController@house')->name('pupil.house');
     });
 
     Route::group(['middleware' => ['type:App\Models\Teacher'],'prefix' => 'teacher'],function(){
         Route::group(['middleware' => ['setupcheck']],function (){
             Route::get('/', 'TeacherController@index')->name('teacher.home');
+            Route::get('tutorgroup', 'TeacherController@viewTutorgroup')->name('teacher.tutorgroup');
+            Route::get('competition/{competition}', 'TeacherController@viewCompetition')->name('teacher.competition');
+            Route::get('/competition/{competition}/events/{event}', 'TeacherController@viewEvent')->name('teacher.event');
+
             Route::get('pupils/{pupil}', 'TeacherController@viewPupil')->name('teacher.pupils.view');
         });
 

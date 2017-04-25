@@ -4,25 +4,17 @@
 @section('content')
     <div class="container">
         <h1 class="text-center">{{$competition->title}} : {{$event->title}}</h1>
-        <p><a href="{{route('admin.competitions.show',$competition)}}">Back to {{$competition->title}}</a></p>
+        <p><a href="{{route('teacher.competition',$competition)}}">Back to {{$competition->title}}</a></p>
     </div>
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="well">
                     <h1 class="text-center">Details</h1>
                     <ul class="list-group">
                         <li class="list-group-item"><span>Title: {{$event->title}}</span></li>
                         <li class="list-group-item"><span>Winner: {{$event->getWinnerHuman()}}</span></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="well">
-                    <h1 class="text-center">Actions</h1>
-                    <ul class="list-group">
-                        <a href="{{route('admin.competitions.events.delete',[$competition,$event])}}"><li class="list-group-item"><span>Delete</span></li></a>
                     </ul>
                 </div>
             </div>

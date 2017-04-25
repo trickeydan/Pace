@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Competitions\Competition;
+use App\Models\Competitions\Event;
 use App\Models\Pupil;
 use App\Models\Tutorgroup;
 use App\Models\Year;
@@ -39,6 +41,40 @@ class TeacherController extends Controller
 
         $points = $pupil->points()->orderBy('date','DESC')->paginate(15);
         return view('app.teachers.pupil',compact('pupil','points'));
+    }
+
+    /**
+     * Display the tutorgroup that the teacher owns.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function viewTutorgroup(){
+        $user = Auth::User();
+        $tutorgroup = $user->accountable->tutorgroup;
+        $competitions = $tutorgroup->competitions()->paginate(15);
+        return view('app.teachers.tutorgroup',compact('competitions','tutorgroup'));
+    }
+
+    /**
+     * Display the chosen competition.
+     *
+     * @param Competition $competition
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function viewCompetition(Competition $competition){
+        $events = $competition->events()->paginate(15);
+        return view('app.teachers.competition',compact('competition','events'));
+    }
+
+    /**
+     * View an event.
+     *
+     * @param Competition $competition
+     * @param Event $event
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function viewEvent(Competition $competition, Event $event){
+        return view('app.teachers.event',compact('competition','event'));
     }
 
     /**
