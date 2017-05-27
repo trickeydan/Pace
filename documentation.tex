@@ -1,0 +1,112 @@
+\documentclass{article}
+
+\usepackage{listings}
+\usepackage{color}
+
+\lstset{ % General setup for the package
+	language=PHP,
+	basicstyle=\small\sffamily,
+	numbers=left,
+ 	numberstyle=\tiny,
+	frame=tb,
+	tabsize=4,
+	columns=fixed,
+	showstringspaces=false,
+	showtabs=false,
+	keepspaces,
+	commentstyle=\color{red},
+	keywordstyle=\color{blue}
+}
+
+
+\title{PACE 2.x - An Overview}
+\date{2017}
+\author{Dan Trickey}
+
+
+\begin{document}
+	
+\maketitle
+\pagenumbering{gobble}
+\newpage
+
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+
+\section{Introduction}
+PACE 2.x is a complete rewrite of the system and is not compatible with the old system. It has been written with future upgrades in consideration and is significantly better commented. I also have spent considerably more time on the database design to ensure reliability.
+
+\section{Technical Details}
+
+PACE 2.x is written in PHP and is based on the Laravel framework. The current framework version can be found in the Settings menu in the administrator area. 
+
+\subsection{System Requirements}
+
+At the time of writing, the system requires the following:
+
+\begin{itemize}
+	
+	\item Minimum 512MB of RAM (with swap) . Recommended 1GB+. 
+	\item A *nix based system with Apache and MySQL server. Ubuntu Server LTS Edition is best.
+	\item SFTP Upload for secure uploading of data.
+	\item xGB of free space.
+	\item PHP. Validated for 5.6.x, 7.0.x, 7.1.x. (Note that Laravel 5.5 requires PHP 7 or greater)
+	\item Composer Package manager
+	\item OpenSSL PHP Extension
+	\item PDO PHP Extension
+	\item Mbstring PHP Extension
+	\item Tokenizer PHP Extension
+	\item XML PHP Extension
+	\item An email service (i.e SMTP, mailgun)
+
+\end{itemize}
+
+\subsection{Prior Knowledge}
+In order to contribute to the system, you will need to have knowledge of PHP, or at the very least any C based language. You will need to understand object orientated programming, MVC (Model View Controller) frameworks, namespacing and relational databases. It will also be helpful if you have knowledge of unit testing (and the reasons for it), JSON-based APIs (for development of apps), REST, the HTTP protocol and common request types, GNU/Linux (for management), bash scripts, cron jobs, javascript, salting and hashing of passwords (bcrypt is used here) and Tex for documentation. You will also need knowledge of Git to be able to contribute to the repository.
+
+\subsection{Development Requirements}
+If you wish to develop for the system, the following is required:
+
+\begin{itemize}
+	\item PHP 5.6.x+, including the CLI extensions
+	\item A basic webserver with MySQL (i.e XAMPP for Windows, LAMP stack, WAMP etc)
+	\item Composer package manager
+	\item A text editor (i.e gedit, emacs, notepad, notepad++)
+	\item A sass compiler
+	\item Git
+\end{itemize}
+
+The following is not required, but is recommended:
+\begin{itemize}
+	\item Vagrant, with the laravel homestead box.
+	\item The above utilises virtualisation, so Intel VT-d extensions or AMD-V extensions.
+	\item GNU/Linux -  I prefer something based on Debian. However, any distro is better than Windows.
+	\item A proper PHP IDE. PHPStorm is excellent and can be obtained for free if you present academic ID.
+	\item A text editor with syntax highlighting, for example (Atom, Sublime text, notepad++)
+	\item Latex
+	\item A GUI for Git. There are several options for this, but I prefer GitKraken.
+\end{itemize}
+
+
+
+\subsection{Configuration}
+
+Most system configuration is done through the .env file:
+
+\lstinputlisting{.env.example}
+
+
+\section{Operation}
+This section will be completed later.
+
+\section{Updating}
+The project is now hosted on Github at https://github.com/trickeydan/Pace
+It is thus open source under the GPLv3 licence and anybody can contribute to it. I am the maintainer of the repository, meaning that all changes will have to be checked and approved by myself. All Pull Requests are subject to automatic testing using Travis CI and any PRs that fail to build will not be considered. Any new components must also use unit testing to ensure future reliability.
+The code on the server is automatically updated using a webhook on the repository. Thus, no direct changes can be made to the server files. Any changes will be automatically overwritten next time the repository is updated on the MASTER branch.
+
+\section{Future Support}
+This section will be completed later.
+
+\end{document}

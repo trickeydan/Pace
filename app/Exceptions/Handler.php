@@ -1,13 +1,11 @@
 <?php
 
-namespace Pace\Exceptions;
+namespace App\Exceptions;
 
 use Exception;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\System;
 
 class Handler extends ExceptionHandler
 {
@@ -17,10 +15,12 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        AuthorizationException::class,
-        HttpException::class,
-        ModelNotFoundException::class,
-        ValidationException::class,
+        \Illuminate\Auth\AuthenticationException::class,
+        \Illuminate\Auth\Access\AuthorizationException::class,
+        \Symfony\Component\HttpKernel\Exception\HttpException::class,
+        \Illuminate\Database\Eloquent\ModelNotFoundException::class,
+        \Illuminate\Session\TokenMismatchException::class,
+        \Illuminate\Validation\ValidationException::class,
     ];
 
     /**
@@ -28,53 +28,50 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $e
+     * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $e)
+    public function report(Exception $exception)
     {
-        parent::report($e);
+        if($exception instanceof PaceException){
+
+        }
+
+        parent::report($exception);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $e
+     * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $e)
+    public function render($request, Exception $exception)
     {
+        $exception = $this->prepareException($exception);
 
-        /*if ($e instanceof ModelNotFoundException){
-            abort(404);
-        }*/
-
-        if($this->isHttpException($e))
-        {
-            switch ($e->getStatusCode()) {
-                // not found
-                case 404:
-                    if($request->user() == null){
-                        return \Response::view('errors.404guest',array(),404);
-                    }else{
-                        return \Response::view('errors.404user',array('error' => '404'),404);
-                    }
-                    break;
-                default:
-                    return $this->renderHttpException($e);
-                    break;
-            }
-        }
-        else
-        {
-            if(env('APP_DEBUG')){
-                return parent::render($request, $e);
-            }else{
-                return \Response::view('errors.general',array());
-            }
-
+        if($this->isHttpException($exception)) {
+            return response()->view('errors.http',compact('exception'),$exception->getStatusCode());
 
         }
+
+        return parent::render($request, $exception);
+    }
+
+    /**
+     * Convert an authentication exception into an unauthenticated response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @return \Illuminate\Http\Response
+     */
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        return redirect()->guest('login');
     }
 }

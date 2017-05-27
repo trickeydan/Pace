@@ -1,32 +1,42 @@
 <?php
 
-namespace Pace\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Auth;
-use Pace\Http\Requests;
-use Pace\Http\Controllers\Controller;
-use Pace\User;
+use App\Http\Controllers\Controller;
+use App\Models\Teacher;
 
 class TeacherController extends Controller
 {
+    /**
+     * Show the index listing for the teachers.
+     *
+     * Only show search if there is a search query.
+     *
+     * @return View
+     */
     public function index(Request $request){
-        return view('teacher.tg.index',[
-            'user' => Auth::User(),
-            'request' => $request,
-        ]);
+        $search_query = $request->input('search_query','');
+
+        $builder = Teacher::where('name','LIKE','%' . $search_query . '%');
+
+        $builder->orWhere('initials','LIKE','%' . $search_query . '%');
+
+        $teachers = $builder->orderBy('name')->paginate(20);
+        return view('app.admin.teachers.index',compact('teachers'));
     }
 
-    public function pupil(User $user){
-        if(!$user->is_pupil())return redirect(route('teacher.tg'))->withErrors('That user is not a pupil!');
-       // if($user->tutorgroup_id != Auth::User()->tutorgroup_id)return redirect(route('teacher.tg'))->withErrors('That pupil isn\'t in your Tutor Group. Please contact the main office.' . $user->tutorgroup_id . '  ' . Auth::User()->tutorgroup_id);
+    /**
+     * Show the individual listing for the teacher.
+     *
+     * @return View
+     */
+    public function view(Teacher $teacher){
 
-        $points = \Pace\Point::where('user_id',$user->id)->orderBy('date','desc')->paginate(15);
-
-        return view('teacher.pupils.view',[
-            'pupil' => $user,
-            'points' => $points,
-        ]);
+        return view('app.admin.teachers.view',compact('teacher'));
     }
+
+    //Todo: Add link/unlink tutorgroup/user account
+    //Todo: Add a display for if the teacher has a linked account.
+    //Todo: Display unlinked in red.
 }

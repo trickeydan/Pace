@@ -1,35 +1,19 @@
 <?php
 
-namespace Pace\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\DB;
-use Pace\Http\Requests;
-use Pace\Http\Controllers\Controller;
-use Pace\Feedback;
-use Pace\ImportManager;
-use Pace\User;
-use Pace\Log;
-use Pace\UserType;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
-    public function home(){
-        return view('stats');
+    /**
+     * Show the admin dashboard.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        return view('app.admin.index');
     }
-
-    public function usage(){
-        $amountunique = DB::select('SELECT count( DISTINCT (`user_id`) ) AS `amount` FROM logs ')[0]->amount;
-        return view('admin.usage',[
-            'amountunique' => $amountunique,
-            'percentageunique' => round( ($amountunique *100) / UserType::pupil()->users()->count(),3),
-            'totalhits' => Log::all()->count(),
-            'hitstoday' => DB::table('logs')->select(DB::raw('*'))->whereRaw('Date(created_at) = CURDATE()')->count(),
-        ]);
-    }
-
-    /*public function info(){
-        return view('admin.info');
-    }*/
 }

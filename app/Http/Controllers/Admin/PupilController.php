@@ -1,57 +1,40 @@
 <?php
 
-namespace Pace\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin;
 
+use App\Models\Pupil;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Pace\Http\Requests\TutorGroupChangeRequest;
-use Pace\Http\Requests\PupilUpdateRequest;
-use Pace\Http\Requests\HouseChangeRequest;
-
-use Pace\Http\Requests;
-use Pace\Http\Controllers\Controller;
-use Pace\Tutorgroup;
-use Pace\User;
-use Pace\House;
-use Pace\UserType;
+use App\Http\Controllers\Controller;
 
 class PupilController extends Controller
 {
+    /**
+     * Show the index listing for the pupils.
+     *
+     * Only show search if there is a search query.
+     *
+     * @return View
+     */
     public function index(Request $request){
+        $search_query = $request->input('search_query','');
 
-        $pupils = UserType::pupil()->users()->orderBy('email','ASC')->paginate(30);
+        $builder = Pupil::where('surname','LIKE','%' . $search_query . '%');
 
-        return view('admin.pupils.index',[
-            'pupils' => $pupils,
-            'request' => $request,
-        ]);
+        $builder->orWhere('forename','LIKE','%' . $search_query . '%');
+        $builder->orWhere('adno','LIKE',$search_query);
+
+        $pupils = $builder->orderBy('surname')->orderBy('forename')->paginate(20);
+        return view('app.admin.pupils.index',compact('pupils'));
     }
 
-    public function search(Request $request){
-        $query =  $request->get('query');
-        if(User::whereId($query)->count() > 0){
-            $pupil = User::whereId($query)->first();
-            return redirect(route('admin.pupils.view',$pupil->email));
-        }elseif(User::whereEmail($query)->count() > 0){
-            $pupil = User::whereEmail($query)->first();
-            return redirect(route('admin.pupils.view',$pupil->email));
-        }elseif(User::whereEmail($query . '@klbschool.org.uk')->count() > 0){
-            $pupil = User::whereEmail($query . '@klbschool.org.uk')->first();
-            return redirect(route('admin.pupils.view',$pupil->email));
-        }
-        else {
-            return redirect(route('admin.pupils.index'))->withErrors('No Results found. Please check spelling')->with('lastquery',$query);
-        }
+    /**
+     * Show the individual listing for the pupil.
+     *
+     * @return View
+     */
+    public function view(Pupil $pupil){
+        $points = $pupil->points()->orderBy('date','DESC')->paginate(15); // Order the points and get the 15 appropriate to the page.
+        return view('app.admin.pupils.view',compact('pupil','points'));
     }
-
-    public function view(User $user){
-        if(!$user->is_pupil())return redirect(route('admin.pupils.index'))->withErrors('That user is not a pupil!');
-
-        $points = \Pace\Point::where('user_id',$user->id)->orderBy('date','desc')->paginate(15);
-
-        return view('admin.pupils.view',[
-            'pupil' => $user,
-            'points' => $points,
-        ]);
-    }
-
 }

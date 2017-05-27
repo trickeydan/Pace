@@ -1,16 +1,15 @@
 <?php
 
-namespace Pace\Console;
+namespace App\Console;
 
+use App\Console\Commands\CheckDataIntegrity;
+use App\Console\Commands\DataCache;
+use App\Console\Commands\GenerateTutorgroupCompetitions;
+use App\Console\Commands\ResetApplication;
+use App\Console\Commands\SetupApplication;
+use App\Console\Commands\UploadData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Pace\Console\Commands\EmailAll;
-use Pace\Console\Commands\EmptyDb;
-use Pace\Console\Commands\InitDb;
-use Pace\Console\Commands\UpdateCache;
-use Pace\Console\Commands\UpdatePoints;
-use Pace\Console\Commands\UpdatePupils;
-use Pace\Console\Commands\UpdateStaff;
 
 class Kernel extends ConsoleKernel
 {
@@ -20,14 +19,15 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        // Commands\Inspire::class,
-        UpdatePupils::class,
-        UpdateStaff::class,
-        UpdatePoints::class,
-        UpdateCache::class,
-        EmptyDb::class,
-        InitDb::class,
-        EmailAll::class,
+        ResetApplication::class,
+        SetupApplication::class,
+        CheckDataIntegrity::class,
+
+        DataCache::class,
+
+        UploadData::class,
+        GenerateTutorgroupCompetitions::class,
+
     ];
 
     /**
@@ -40,5 +40,15 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+    }
+
+    /**
+     * Register the Closure based commands for the application.
+     *
+     * @return void
+     */
+    protected function commands()
+    {
+        require base_path('routes/console.php');
     }
 }

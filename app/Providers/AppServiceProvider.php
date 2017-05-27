@@ -1,10 +1,15 @@
 <?php
 
-namespace Pace\Providers;
+namespace App\Providers;
 
-use Illuminate\Support\Facades\Validator;
+use App\Exceptions\PaceException;
+use App\Models\Account;
+use App\System;
 use Illuminate\Support\ServiceProvider;
-use Pace\User;
+use Illuminate\Support\Facades\Schema;
+use Laravel\Dusk\DuskServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,10 +20,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       /* Validator::extend('emailhash', function($attribute, $value, $parameters, $validator) {
-            $hash = hash('sha256',$value);
-            return User::whereEmailhash($hash)->count() == 0;
-        });*/
+        Schema::defaultStringLength(191);
+        if ($this->app->environment('local', 'testing')) {
+            $this->app->register(DuskServiceProvider::class);
+        }
+
+        Validator::extend('pwdcorrect', function($attribute, $value, $parameters, $validator) {
+            return Auth::validate(['email' => Auth::User()->email,'password' => $value]);
+        });
     }
 
     /**
@@ -28,6 +37,38 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        view()->composer('*', function ($view) {
+            if(Auth::check()){
+                $view->with('user',Auth::User()); // Make the user instance available to all views.
+            }
+
+            if(Auth::check() && Auth::user()->accountable->getType() == Account::PUPIL){
+
+                // Firstly, check for null models.
+
+                $pupil = Auth::User()->accountable;
+
+                // Todo: Move this somewhere else. Perhaps middleware. This will increase Teacher / Admin response times.
+                //Todo: Also add similar check for teachers and tutorgroups
+                if(is_null($pupil->tutorgroup)) {
+                    //Throw an error, the pupil has no tutorgroup.
+                    throw new PaceException($pupil,PaceException::NULL_TUTORGROUP);
+                }
+
+                if(is_null($pupil->tutorgroup->year)) {
+                    //Throw an error, the pupil has no year.
+                    throw new PaceException($pupil,PaceException::NULL_YEAR);
+                }
+
+                if(is_null($pupil->tutorgroup->house)) {
+                    //Throw an error, the pupil has no year.
+                    throw new PaceException($pupil,PaceException::NULL_HOUSE);
+                }
+
+
+                $view->with('pupil',$pupil); // Make the pupil instance available to all views.
+                //Todo: remove this, it is messy. Use $user->accountable instead.
+            }
+        });
     }
 }
