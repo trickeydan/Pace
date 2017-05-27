@@ -16,7 +16,7 @@ class AuthPagesTest extends TestCase
      *
      * @return void
      */
-    public function testLoginPage()
+   /* public function testLoginPage()
     {
         $response = $this->get(route('auth.login'));
         $response->assertStatus(200);
@@ -33,5 +33,5 @@ class AuthPagesTest extends TestCase
         $response->assertStatus(302);
         $response->assertHeader('location',route('auth.login'));
 
-    }
+    }*/
 }

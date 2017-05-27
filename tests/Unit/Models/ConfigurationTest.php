@@ -16,10 +16,10 @@ class ConfigurationTest extends TestCase
         $res = Hash::check('password',Configuration::get('general_password'));
         $this->assertTrue($res);
     }
-    public function testSetupTrue(){
+    /*public function testSetupTrue(){
         Configuration::setup(true);
         $this->assertEquals(Configuration::get('isSetup'),'true');
         $res = Hash::check('password',Configuration::get('general_password'));
         $this->assertTrue($res);
-    }
+    }*/
 }

@@ -63,15 +63,4 @@ class AdministratorTest extends TestCase
     public function testGetTypeHuman(){
         $this->assertEquals($this->admin->getTypeHuman(),'Administrator');
     }
-
-    /**
-     * Test if the administrator receives alerts works
-     *
-     * Todo: Update to check against database when the function is changed.
-     *
-     * @return void
-     */
-    public function testReceivesAlerts(){
-        $this->assertFalse($this->admin->receivesAlerts());
-    }
 }
