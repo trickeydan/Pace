@@ -43,6 +43,6 @@ class Administrator extends Account
      */
     public function receivesAlerts(){
         //Todo: Do this in the database.
-        return false;
+        return true;
     }
 }

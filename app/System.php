@@ -3,10 +3,14 @@
 namespace App;
 
 
+use App\Models\Account;
 use App\Models\Configuration;
 use App\Models\Upload;
+use App\Models\User;
+use App\Notifications\AdminNotification;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 
 class System
 {
@@ -35,6 +39,11 @@ class System
     }
 
 
+    /**
+     * Get the current RAM usage from the system.
+     *
+     * @return array
+     */
     public static function getRam(){
         $fh = fopen('/proc/meminfo','r');
         while ($line = fgets($fh)) {
@@ -58,5 +67,10 @@ class System
      */
     public static function checkGeneralSystemPassword($attempt){
         return Hash::check($attempt,Configuration::get('general_password'));
+    }
+
+    public static function notifyAdministrators($message){
+        $users = User::whereAccountableType(Account::ADMINISTRATOR)->get();
+        Notification::send($users,new AdminNotification($message));
     }
 }

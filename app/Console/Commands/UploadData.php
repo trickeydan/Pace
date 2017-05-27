@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Console\PaceCommand;
 use App\Models\Upload;
+use App\System;
 use Illuminate\Support\Facades\File;
 
 class UploadData extends PaceCommand
@@ -41,6 +42,9 @@ class UploadData extends PaceCommand
     public function handle()
     {
         //Todo: Check to see if the system has been setup
+
+        $this->down('Upload in progress.');
+
         $this->upload = new Upload();
         $this->upload->start();
         $this->info('Upload ID: ' . $this->upload->uuid);
@@ -90,6 +94,8 @@ class UploadData extends PaceCommand
 
         $this->upload->updateStatus(Upload::UPLOAD_SUCCESSFUL);
         $this->info('Upload complete.');
+        System::notifyAdministrators('An upload has completely successfully.');
+        $this->call('up');
     }
 
     /**
@@ -100,7 +106,7 @@ class UploadData extends PaceCommand
     public function failUpload($message){
         //Todo: Move the files back?
         $this->upload->updateStatus(Upload::UPLOAD_ERROR,$message);
-        //Todo: Email administrators about error.
+        System::notifyAdministrators('An upload has failed.');
         $this->kill($message);
     }
 }

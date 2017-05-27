@@ -20,6 +20,7 @@
                         <li class="list-group-item"><span>Tutorgroup: {{$pupil->tutorgroup}}</span></li>
                         <li class="list-group-item"><span>Email Address: {{$pupil->user->email}}</span></li>
                         <li class="list-group-item"><span>House: {{$pupil->tutorgroup->house}}</span></li>
+                        <li class="list-group-item"><span>Adno: {{$pupil->adno}}</span></li>
                     </ul>
                 </div>
             </div>
